@@ -1,5 +1,3 @@
-using System;
-
 namespace UMS.Web.Models
 {
     public class ErrorViewModel
