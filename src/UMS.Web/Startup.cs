@@ -34,6 +34,8 @@ namespace UMS.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAddMigration(env);
+
             app.UseExceptionHandling(env);
 
             app.UseHttpsRedirection();

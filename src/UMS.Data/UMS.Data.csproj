@@ -18,9 +18,9 @@
     </PackageReference>
   </ItemGroup>
 
-<ItemGroup>
-  <ProjectReference Include="..\UMS.Data.Common\UMS.Data.Common.csproj" />
-  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
-</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\UMS.Data.Common\UMS.Data.Common.csproj" />
+		<ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
+	</ItemGroup>
 
 </Project>
