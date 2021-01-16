@@ -15,6 +15,7 @@
             this.StartDate = DateTime.UtcNow;
             this.EndDate = DateTime.UtcNow.AddMonths(6);
             this.StudentsEnrolled = new HashSet<StudentCourse>();
+            this.Resources = new HashSet<Resource>();
         }
 
         public int Id { get; set; }
@@ -26,14 +27,18 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        [Required]
         public DateTime StartDate { get; set; }
 
+        [Required]
         public DateTime EndDate { get; set; }
 
-        [Column(TypeName = "decimal(18,4)")]
         [Range(MinPrice, MaxPrice)]
+        [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 
         public ICollection<StudentCourse> StudentsEnrolled { get; set; }
+
+        public ICollection<Resource> Resources { get; set; }
     }
 }

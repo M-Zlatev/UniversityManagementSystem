@@ -10,9 +10,15 @@
         public void Configure(EntityTypeBuilder<Student> student)
         {
             student
-                .HasOne(s => s.Address)
+                .HasOne(st => st.Address)
                 .WithOne(a => a.Student)
                 .HasForeignKey<Address>(a => a.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            student
+                .HasMany(st => st.Homeworks)
+                .WithOne(h => h.Student)
+                .HasForeignKey(h => h.StudentId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

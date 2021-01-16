@@ -23,9 +23,14 @@
 
         public DbSet<Student> Students { get; set; }
 
+        public DbSet<StudentCourse> StudentCourses { get; set; }
+
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+
+        public DbSet<Homework> Homeworks { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
             => builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
