@@ -1,10 +1,10 @@
 ﻿namespace UMS.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-    
+
     using Common.Enumerations;
     using static UMS.Data.Common.DataValidation.Resource;
-    
+
     public class Resource
     {
         public int Id { get; set; }

@@ -35,7 +35,6 @@
 
         public DbSet<Homework> Homeworks { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder builder)
             => builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
