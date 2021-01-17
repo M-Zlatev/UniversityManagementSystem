@@ -12,6 +12,7 @@
         public Student()
         {
             this.RegistrationDate = DateTime.UtcNow;
+            this.Teachers = new HashSet<TeacherStudent>();
             this.CourseEnrollments = new HashSet<StudentCourse>();
             this.Homeworks = new HashSet<Homework>();
         }
@@ -52,5 +53,7 @@
         public ICollection<StudentCourse> CourseEnrollments { get; set; }
 
         public ICollection<Homework> Homeworks { get; set; }
+
+        public ICollection<TeacherStudent> Teachers { get; set; }
     }
 }

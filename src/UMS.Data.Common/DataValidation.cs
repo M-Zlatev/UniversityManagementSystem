@@ -28,6 +28,12 @@
             public const int MaxPrice = 1000;
         }
 
+        public static class Teacher
+        {
+            public const int MaxNameLength = 50;
+            public const int MaxPhoneNumberLength = 20;
+        }
+
         public static class Student 
         {
             public const int MaxNameLength = 50;

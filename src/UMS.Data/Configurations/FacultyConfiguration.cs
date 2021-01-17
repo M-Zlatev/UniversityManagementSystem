@@ -15,6 +15,5 @@
                 .HasForeignKey(d => d.FacultyId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
-
     }
 }
