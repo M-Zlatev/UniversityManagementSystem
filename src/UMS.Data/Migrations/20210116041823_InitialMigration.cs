@@ -18,7 +18,7 @@
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,7 @@
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
                 },
                 constraints: table =>
                 {
@@ -53,7 +53,7 @@
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HasScholarship = table.Column<bool>(type: "bit", nullable: false),
-                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -68,7 +68,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    FacultyId = table.Column<int>(type: "int", nullable: true)
+                    FacultyId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -90,7 +90,7 @@
                     StreetName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Town = table.Column<string>(type: "nvarchar(85)", maxLength: 85, nullable: false),
                     Country = table.Column<string>(type: "nvarchar(56)", maxLength: 56, nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: true)
+                    StudentId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -108,7 +108,7 @@
                 columns: table => new
                 {
                     StudentId = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -135,7 +135,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true)
+                    DepartmentId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {

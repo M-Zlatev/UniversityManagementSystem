@@ -8,7 +8,6 @@
 
     using Data;
 
-
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseAddMigration(
@@ -31,7 +30,7 @@
         }
 
         public static IApplicationBuilder UseExceptionHandling(
-            this IApplicationBuilder app, 
+            this IApplicationBuilder app,
             IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,7 +53,7 @@
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                
+
                 endpoints.MapRazorPages();
             });
     }

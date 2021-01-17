@@ -47,6 +47,5 @@
         public ICollection<TeacherStudent> Students { get; set; }
 
         public ICollection<TeacherCourse> Courses { get; set; }
-
     }
 }

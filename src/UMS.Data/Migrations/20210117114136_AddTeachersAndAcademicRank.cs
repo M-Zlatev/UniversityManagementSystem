@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace UMS.Data.Migrations
+﻿namespace UMS.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddTeachersAndAcademicRank : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,7 +24,7 @@ namespace UMS.Data.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     AcademicDegree = table.Column<int>(type: "int", nullable: false),
-                    AcademicRank = table.Column<int>(type: "int", nullable: false)
+                    AcademicRank = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,7 @@ namespace UMS.Data.Migrations
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -60,7 +60,7 @@ namespace UMS.Data.Migrations
                 columns: table => new
                 {
                     TeacherId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

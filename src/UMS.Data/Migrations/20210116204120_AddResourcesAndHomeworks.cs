@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace UMS.Data.Migrations
+﻿namespace UMS.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddResourcesAndHomeworks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,7 +26,7 @@ namespace UMS.Data.Migrations
                     HomeworkType = table.Column<int>(type: "int", nullable: false),
                     AssignmentTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OpenForSubmissionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: true)
+                    StudentId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -47,7 +48,7 @@ namespace UMS.Data.Migrations
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     ResourceType = table.Column<int>(type: "int", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: true)
+                    CourseId = table.Column<int>(type: "int", nullable: true),
                 },
                 constraints: table =>
                 {

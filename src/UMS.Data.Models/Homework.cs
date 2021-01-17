@@ -24,10 +24,11 @@
 
         [Required]
         public DateTime AssignmentTime { get; set; }
-        
-        public DateTime OpenForSubmissionTime{ get; set; }
+
+        public DateTime OpenForSubmissionTime { get; set; }
 
         public int? StudentId { get; set; }
+
         public Student Student { get; set; }
     }
 }

@@ -14,14 +14,14 @@ namespace UMS.Web
     {
         private readonly IConfiguration configuration;
 
-        public Startup(IConfiguration configuration) 
+        public Startup(IConfiguration configuration)
             => this.configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddDbContext<UmsDbContext>(options => options
-                    .UseSqlServer(configuration.GetDefaultConnectionString()));
+                    .UseSqlServer(this.configuration.GetDefaultConnectionString()));
 
             services.AddDefaultIdentity<IdentityUser>(options => options
                         .SignIn.RequireConfirmedAccount = true)
