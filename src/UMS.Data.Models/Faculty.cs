@@ -22,6 +22,6 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
-        public ICollection<Department> Departments { get; set; }
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

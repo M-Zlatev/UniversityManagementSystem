@@ -20,7 +20,7 @@
         [MaxLength(MaxCountryNameLength)]
         public string Country { get; set; }
 
-        public int? StudentId { get; set; }
+        public int StudentId { get; set; }
 
         public Student Student { get; set; }
 

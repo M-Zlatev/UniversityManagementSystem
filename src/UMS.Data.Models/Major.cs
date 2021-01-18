@@ -27,8 +27,8 @@
 
         public Department Department { get; set; }
 
-        public ICollection<CourseMajor> Courses { get; set; }
+        public virtual ICollection<CourseMajor> Courses { get; set; }
 
-        public ICollection<StudentMajor> Students { get; set; }
+        public virtual ICollection<StudentMajor> Students { get; set; }
     }
 }

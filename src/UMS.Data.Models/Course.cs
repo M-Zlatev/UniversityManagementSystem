@@ -39,12 +39,12 @@
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 
-        public ICollection<CourseMajor> Majors { get; set; }
+        public virtual ICollection<CourseMajor> Majors { get; set; }
 
-        public ICollection<TeacherCourse> Teachers { get; set; }
+        public virtual ICollection<TeacherCourse> Teachers { get; set; }
 
-        public ICollection<StudentCourse> StudentsEnrolled { get; set; }
+        public virtual ICollection<StudentCourse> StudentsEnrolled { get; set; }
 
-        public ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
     }
 }

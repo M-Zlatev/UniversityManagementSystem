@@ -51,12 +51,12 @@
 
         public DateTime RegistrationDate { get; set; }
 
-        public ICollection<StudentMajor> Majors { get; set; }
+        public virtual ICollection<StudentMajor> Majors { get; set; }
 
-        public ICollection<StudentCourse> CourseEnrollments { get; set; }
+        public virtual ICollection<StudentCourse> CourseEnrollments { get; set; }
 
-        public ICollection<TeacherStudent> Teachers { get; set; }
+        public virtual ICollection<TeacherStudent> Teachers { get; set; }
 
-        public ICollection<Homework> Homeworks { get; set; }
+        public virtual ICollection<Homework> Homeworks { get; set; }
     }
 }

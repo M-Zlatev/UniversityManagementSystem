@@ -26,6 +26,6 @@
 
         public Faculty Faculty { get; set; }
 
-        public ICollection<Major> Majors { get; set; }
+        public virtual ICollection<Major> Majors { get; set; }
     }
 }
