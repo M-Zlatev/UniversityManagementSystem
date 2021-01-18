@@ -14,6 +14,7 @@
         {
             this.StartDate = DateTime.UtcNow;
             this.EndDate = DateTime.UtcNow.AddMonths(6);
+            this.Majors = new HashSet<CourseMajor>();
             this.Teachers = new HashSet<TeacherCourse>();
             this.StudentsEnrolled = new HashSet<StudentCourse>();
             this.Resources = new HashSet<Resource>();
@@ -37,6 +38,8 @@
         [Range(MinPrice, MaxPrice)]
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
+
+        public ICollection<CourseMajor> Majors { get; set; }
 
         public ICollection<TeacherCourse> Teachers { get; set; }
 

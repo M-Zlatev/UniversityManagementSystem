@@ -10,7 +10,7 @@
 
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseAddMigration(
+        public static IApplicationBuilder UseApplyMigration(
             this IApplicationBuilder app,
             IWebHostEnvironment env)
         {
