@@ -2,11 +2,12 @@
 {
     using System.Reflection;
 
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
     using Models;
 
-    public class UmsDbContext : DbContext
+    public class UmsDbContext : IdentityDbContext
     {
         public UmsDbContext(DbContextOptions<UmsDbContext> options)
             : base(options)
@@ -40,6 +41,9 @@
         public DbSet<Homework> Homeworks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
-            => builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
     }
 }

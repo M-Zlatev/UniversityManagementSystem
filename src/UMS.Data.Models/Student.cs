@@ -5,6 +5,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
+    using Common.Enumerations;
     using static UMS.Data.Common.DataValidation.Student;
 
     public class Student
@@ -36,6 +37,8 @@
         public int UniformCivilNumber { get; set; }
 
         public DateTime? DateofBirth { get; set; }
+
+        public Gender Gender { get; set; }
 
         [Required]
         public Address Address { get; set; }

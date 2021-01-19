@@ -23,9 +23,8 @@ namespace UMS.Web
                 .AddDbContext<UmsDbContext>(options => options
                     .UseSqlServer(this.configuration.GetDefaultConnectionString()));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options
-                        .SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<UmsDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<UmsDbContext>();
 
             services.AddControllersWithViews();
             services.AddDatabaseDeveloperPageExceptionFilter();
