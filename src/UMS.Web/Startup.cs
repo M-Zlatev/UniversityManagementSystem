@@ -25,7 +25,8 @@ namespace UMS.Web
                     .UseSqlServer(this.configuration.GetDefaultConnectionString()));
 
             services
-                .AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
+                .AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
+                .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<UmsDbContext>();
 
             services.AddControllersWithViews();

@@ -1,18 +1,23 @@
 ﻿namespace UMS.Data.Models
 {
     using System;
-    using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Identity;
 
-    public class User : IdentityUser
+    using Common.Models;
+
+    public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
-        public User()
+        public ApplicationRole()
+            : this(null)
+        {
+        }
+
+        public ApplicationRole(string name)
+            : base(name)
         {
             this.Id = Guid.NewGuid().ToString();
         }
-
-        public int MyProperty { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
