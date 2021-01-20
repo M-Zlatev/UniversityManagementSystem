@@ -7,6 +7,13 @@
 
     public class User : IdentityUser
     {
+        public User()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public int MyProperty { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }

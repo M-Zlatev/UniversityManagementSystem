@@ -8,6 +8,7 @@ namespace UMS.Web
     using Microsoft.Extensions.DependencyInjection;
 
     using Data;
+    using Data.Models;
     using Infrastructure;
 
     public class Startup
@@ -23,7 +24,8 @@ namespace UMS.Web
                 .AddDbContext<UmsDbContext>(options => options
                     .UseSqlServer(this.configuration.GetDefaultConnectionString()));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services
+                .AddDefaultIdentity<IdentityUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddEntityFrameworkStores<UmsDbContext>();
 
             services.AddControllersWithViews();
