@@ -1,10 +1,12 @@
 ﻿namespace UMS.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
-    using static UMS.Data.Common.DataValidation.Address;
+    using Common.Models;
+    using static Common.DataValidation.Address;
 
-    public class Address
+    public class Address : BaseModel
     {
         public int Id { get; set; }
 

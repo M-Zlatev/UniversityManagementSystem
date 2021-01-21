@@ -34,7 +34,7 @@
             public const int MaxPhoneNumberLength = 20;
         }
 
-        public static class Student 
+        public static class Student
         {
             public const int MaxNameLength = 50;
             public const int MaxUCNLength = 10;

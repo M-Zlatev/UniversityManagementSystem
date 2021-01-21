@@ -5,9 +5,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using static UMS.Data.Common.DataValidation.Homework;
+    using Common.Models;
+    using static Common.DataValidation.Homework;
 
-    public class Homework
+    public class Homework : BaseDeletableModel
     {
         public Homework()
         {

@@ -4,9 +4,10 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using static UMS.Data.Common.DataValidation.Faculty;
+    using Common.Models;
+    using static Common.DataValidation.Faculty;
 
-    public class Faculty
+    public class Faculty : BaseModel
     {
         public Faculty()
         {

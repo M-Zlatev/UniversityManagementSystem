@@ -6,9 +6,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using static UMS.Data.Common.DataValidation.Course;
+    using Common.Models;
+    using static Common.DataValidation.Course;
 
-    public class Course
+    public class Course : BaseDeletableModel
     {
         public Course()
         {

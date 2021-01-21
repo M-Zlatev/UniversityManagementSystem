@@ -1,13 +1,15 @@
 ﻿namespace UMS.Data.Models
 {
+    using System;
     using System.Collections.Generic;
 
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using static UMS.Data.Common.DataValidation.Teacher;
+    using Common.Models;
+    using static Common.DataValidation.Teacher;
 
-    public class Teacher
+    public class Teacher : BaseDeletableModel
     {
         public Teacher()
         {

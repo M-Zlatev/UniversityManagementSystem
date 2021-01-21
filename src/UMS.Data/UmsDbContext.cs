@@ -3,8 +3,12 @@
     using System;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Claims;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
     using Common.Models;
@@ -12,9 +16,14 @@
 
     public class UmsDbContext : IdentityDbContext<ApplicationUser>
     {
-        public UmsDbContext(DbContextOptions<UmsDbContext> options)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public UmsDbContext(
+            DbContextOptions<UmsDbContext> options,
+            IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public DbSet<Faculty> Faculties { get; set; }
@@ -43,19 +52,35 @@
 
         public DbSet<Homework> Homeworks { get; set; }
 
+        public override int SaveChanges() => this.SaveChanges(true);
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            this.ApplyAuditInfoRules();
+            this.AddTimestamps();
             return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+            => this.SaveChangesAsync(true, cancellationToken);
+
+        public override Task<int> SaveChangesAsync(
+             bool acceptAllChangesOnSuccess,
+             CancellationToken cancellationToken = default)
+        {
+            this.AddTimestamps();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Needed for Identity models configuration
             base.OnModelCreating(builder);
+
+            // Applies configurations
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        private void ApplyAuditInfoRules()
+        private void AddTimestamps()
         {
             var changedEntries = this.ChangeTracker
                 .Entries()
@@ -63,16 +88,25 @@
                     e.Entity is IAuditInfo &&
                     (e.State == EntityState.Added || e.State == EntityState.Modified));
 
+            var userId = this.httpContextAccessor.HttpContext.User
+                .FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var currentUsername = !string.IsNullOrEmpty(userId)
+                     ? userId
+                     : "Anonymous";
+
             foreach (var entry in changedEntries)
             {
                 var entity = (IAuditInfo)entry.Entity;
                 if (entry.State == EntityState.Added && entity.CreatedOn == default)
                 {
                     entity.CreatedOn = DateTime.UtcNow;
+                    entity.CreatedBy = currentUsername;
                 }
                 else
                 {
                     entity.ModifiedOn = DateTime.UtcNow;
+                    entity.ModifiedBy = currentUsername;
                 }
             }
         }

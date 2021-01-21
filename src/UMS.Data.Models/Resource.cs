@@ -1,11 +1,13 @@
 ﻿namespace UMS.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
+    using UMS.Data.Common.Models;
     using static UMS.Data.Common.DataValidation.Resource;
 
-    public class Resource
+    public class Resource : BaseDeletableModel
     {
         public int Id { get; set; }
 

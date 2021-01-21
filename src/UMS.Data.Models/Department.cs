@@ -4,9 +4,10 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using static UMS.Data.Common.DataValidation.Department;
+    using Common.Models;
+    using static Common.DataValidation.Department;
 
-    public class Department
+    public class Department : BaseModel
     {
         public Department()
         {

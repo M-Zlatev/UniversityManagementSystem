@@ -4,9 +4,10 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using static UMS.Data.Common.DataValidation.Major;
+    using Common.Models;
+    using static Common.DataValidation.Major;
 
-    public class Major
+    public class Major : BaseDeletableModel
     {
         public Major()
         {
