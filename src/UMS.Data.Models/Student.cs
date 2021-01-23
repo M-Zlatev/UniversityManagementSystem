@@ -45,10 +45,11 @@
         public Address Address { get; set; }
 
         [Required]
-        [MaxLength(MaxPhoneNumberLength)]
+        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
         [Required]
+        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
         public string Email { get; set; }
 
         public bool HasScholarship { get; set; }

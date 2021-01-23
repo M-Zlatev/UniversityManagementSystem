@@ -4,6 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
+    using Common.Enumerations;
     using Common.Models;
     using static Common.DataValidation.Major;
 
@@ -23,6 +24,11 @@
 
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
+
+        public MajorType MajorType { get; set; }
+
+        [Range(MinRangeInYears, MaxRangeInYears)]
+        public double Duration { get; set; }
 
         public int DepartmentId { get; set; }
 

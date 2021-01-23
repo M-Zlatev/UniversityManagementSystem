@@ -22,6 +22,10 @@
         [MaxLength(MaxCountryNameLength)]
         public string Country { get; set; }
 
+        public int FacultyId { get; set; }
+
+        public Faculty Faculty { get; set; }
+
         public int StudentId { get; set; }
 
         public Student Student { get; set; }

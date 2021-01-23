@@ -23,6 +23,21 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        [Required]
+        public Address Address { get; set; }
+
+        [Required]
+        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
+        public string Email { get; set; }
+
+        [Required]
+        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Range(MinFaxNumberLength, MaxFaxNumberLength)]
+        public string Fax { get; set; }
+
         public virtual ICollection<Department> Departments { get; set; }
     }
 }

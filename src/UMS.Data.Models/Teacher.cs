@@ -33,10 +33,11 @@
         public Gender Gender { get; set; }
 
         [Required]
+        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
         public string Email { get; set; }
 
         [Required]
-        [MaxLength(MaxPhoneNumberLength)]
+        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
         [Required]

@@ -14,6 +14,12 @@
                 .WithOne(d => d.Faculty)
                 .HasForeignKey(d => d.FacultyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            faculty
+                .HasOne(f => f.Address)
+                .WithOne(a => a.Faculty)
+                .HasForeignKey<Address>(a => a.FacultyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
