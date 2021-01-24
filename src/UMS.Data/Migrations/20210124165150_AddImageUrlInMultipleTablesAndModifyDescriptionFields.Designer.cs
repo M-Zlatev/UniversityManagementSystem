@@ -5,13 +5,15 @@ namespace UMS.Data.Migrations
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Migrations;
 
     using UMS.Data;
 
     [DbContext(typeof(UmsDbContext))]
-    partial class UmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210124165150_AddImageUrlInMultipleTablesAndModifyDescriptionFields")]
+    partial class AddImageUrlInMultipleTablesAndModifyDescriptionFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

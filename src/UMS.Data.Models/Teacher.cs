@@ -49,6 +49,8 @@
         [Required]
         public AcademicRank AcademicRank { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public virtual ICollection<TeacherStudent> Students { get; set; }
 
         public virtual ICollection<TeacherCourse> Courses { get; set; }

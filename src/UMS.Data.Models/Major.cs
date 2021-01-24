@@ -30,6 +30,8 @@
         [Range(MinRangeInYears, MaxRangeInYears)]
         public double Duration { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int DepartmentId { get; set; }
 
         public Department Department { get; set; }

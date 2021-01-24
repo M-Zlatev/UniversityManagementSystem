@@ -5,7 +5,7 @@
         public static class Faculty
         {
             public const int MaxNameLength = 70;
-            public const int MaxDescriptionLength = 400;
+            public const int MaxDescriptionLength = 1000;
             public const int MinPhoneNumberLength = 4;
             public const int MaxPhoneNumberLength = 25;
             public const int MinEmailAddressLength = 3;
@@ -17,7 +17,7 @@
         public static class Department
         {
             public const int MaxNameLength = 60;
-            public const int MaxDescriptionLength = 300;
+            public const int MaxDescriptionLength = 1000;
             public const int MinPhoneNumberLength = 4;
             public const int MaxPhoneNumberLength = 25;
             public const int MinEmailAddressLength = 3;
@@ -29,7 +29,7 @@
         public static class Major
         {
             public const int MaxNameLength = 50;
-            public const int MaxDescriptionLength = 250;
+            public const int MaxDescriptionLength = 800;
             public const int MinRangeInYears = 1;
             public const int MaxRangeInYears = 10;
         }
@@ -37,7 +37,7 @@
         public static class Course
         {
             public const int MaxNameLength = 50;
-            public const int MaxDescriptionLength = 200;
+            public const int MaxDescriptionLength = 800;
             public const int MinPrice = 100;
             public const int MaxPrice = 1000;
         }

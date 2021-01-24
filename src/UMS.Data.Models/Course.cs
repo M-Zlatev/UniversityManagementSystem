@@ -40,6 +40,8 @@
         [Column(TypeName = "decimal(18,4)")]
         public decimal Price { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public virtual ICollection<CourseMajor> Majors { get; set; }
 
         public virtual ICollection<TeacherCourse> Teachers { get; set; }

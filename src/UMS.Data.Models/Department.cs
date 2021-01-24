@@ -35,6 +35,8 @@
         [Range(MinFaxNumberLength, MaxFaxNumberLength)]
         public string Fax { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int FacultyId { get; set; }
 
         public Faculty Faculty { get; set; }

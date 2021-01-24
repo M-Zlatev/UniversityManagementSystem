@@ -38,6 +38,8 @@
         [Range(MinFaxNumberLength, MaxFaxNumberLength)]
         public string Fax { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public virtual ICollection<Department> Departments { get; set; }
     }
 }
