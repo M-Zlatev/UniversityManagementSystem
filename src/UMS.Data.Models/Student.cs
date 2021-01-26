@@ -42,7 +42,7 @@
         public Gender Gender { get; set; }
 
         [Required]
-        public Address Address { get; set; }
+        public StudentAddress Address { get; set; }
 
         [Required]
         [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]

@@ -7,6 +7,7 @@
     using Microsoft.Extensions.Hosting;
 
     using Data;
+    using Data.Seeding;
 
     public static class ApplicationBuilderExtensions
     {
@@ -17,13 +18,21 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope
-                    .ServiceProvider
-                        .GetRequiredService<UmsDbContext>();
+                                    .ServiceProvider
+                                        .GetRequiredService<UmsDbContext>();
 
                 if (env.IsDevelopment())
                 {
-                    dbContext.Database.Migrate();
+                    dbContext
+                        .Database
+                            .Migrate();
                 }
+
+                // Seed data on application startup
+                new ApplicationDbContextSeeder()
+                    .SeedAsync(dbContext, serviceScope.ServiceProvider)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             return app;

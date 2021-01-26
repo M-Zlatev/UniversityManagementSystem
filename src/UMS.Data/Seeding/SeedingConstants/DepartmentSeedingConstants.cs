@@ -262,5 +262,53 @@
             public const string PhoneNumber = "+359-2 128 028";
             public const string Fax = "2 222 2828";
         }
+
+        // Faculty of Theology's Philosophy and Psychology
+        public static class DepartmentOfPhilosophy
+        {
+            public const string Name = "Department of Philosophy";
+            public const string Description = "";
+            public const string Email = "philosophy@university.department.com";
+            public const string PhoneNumber = "+359-2 129 029";
+            public const string Fax = "2 222 2929";
+        }
+
+        public static class DepartmentOfPsychology
+        {
+            public const string Name = "Department of Psychology";
+            public const string Description = "";
+            public const string Email = "psychology@university.department.com";
+            public const string PhoneNumber = "+359-2 130 030";
+            public const string Fax = "2 222 3030";
+        }
+
+        // Faculty of Physics and Chemistry
+        public static class DepartmentOfPhysics
+        {
+            public const string Name = "Department of Physics";
+            public const string Description = "";
+            public const string Email = "physics@university.department.com";
+            public const string PhoneNumber = "+359-2 131 031";
+            public const string Fax = "2 222 3131";
+        }
+
+        public static class DepartmentOfChemistry
+        {
+            public const string Name = "Department of Chemistry";
+            public const string Description = "";
+            public const string Email = "chemistry@university.department.com";
+            public const string PhoneNumber = "+359-2 132 032";
+            public const string Fax = "2 222 3232";
+        }
+
+        // Faculty of Economy's Department
+        public static class DepartmentOfEconomy
+        {
+            public const string Name = "Department of Economy";
+            public const string Description = "";
+            public const string Email = "economy@university.department.com";
+            public const string PhoneNumber = "+359-2 133 033";
+            public const string Fax = "2 222 3333";
+        }
     }
 }

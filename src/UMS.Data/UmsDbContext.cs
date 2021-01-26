@@ -28,6 +28,8 @@
 
         public DbSet<Faculty> Faculties { get; set; }
 
+        public DbSet<FacultyAddress> FacultyAddresses { get; set; }
+
         public DbSet<Department> Departments { get; set; }
 
         public DbSet<Major> Majors { get; set; }
@@ -38,15 +40,17 @@
 
         public DbSet<Teacher> Teachers { get; set; }
 
+        public DbSet<TeacherAddress> TeacherAddresses { get; set; }
+
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
 
         public DbSet<Student> Students { get; set; }
 
+        public DbSet<StudentAddress> StudentAddresses { get; set; }
+
         public DbSet<StudentCourse> StudentCourses { get; set; }
 
         public DbSet<StudentMajor> StudentMajors { get; set; }
-
-        public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
 
@@ -56,7 +60,7 @@
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            this.AddTimestamps();
+            //this.AddTimestamps();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
@@ -67,7 +71,7 @@
              bool acceptAllChangesOnSuccess,
              CancellationToken cancellationToken = default)
         {
-            this.AddTimestamps();
+            //this.AddTimestamps();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 

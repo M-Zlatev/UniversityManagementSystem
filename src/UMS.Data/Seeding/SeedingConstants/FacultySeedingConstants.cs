@@ -88,7 +88,7 @@
 
         public static class FacultyOfTheology
         {
-            public const string Name = "The Faculty of Theology";
+            public const string Name = "Faculty of Theology";
             public const string Description = "The Faculty of Theology prepares students for duties requiring expertise in religions, worldviews and values. We engage in high-quality academic research and teaching in historical, conceptual and cultural questions involving religion and theology. Our thematic fields of research and teaching include historical theology, global religion, as well as religion and society. We are an international academic community, unaffiliated with any particular religion or belief.";
             public const string AddressStreetName = "Luyben Karavelov №72";
             public const string AddressTownName = "Sofia";
@@ -98,10 +98,10 @@
             public const string Fax = "2 111 7272";
         }
 
-        public static class FacultyOfPhilosophy
+        public static class FacultyOfPhilosophyAndPsychology
         {
-            public const string Name = "Faculty of Philosophy";
-            public const string Description = "The Faculty of Philosophy offers graduate and undergraduate study programmes in philosophy as well as complementary courses within Social Sciences and Humanities departments.";
+            public const string Name = "Faculty of Philosophy and Psychology";
+            public const string Description = "The Faculty of Philosophy and Psychology offers graduate and undergraduate study programmes in philosophy as well as complementary courses within Social Sciences and Humanities departments.";
             public const string AddressStreetName = "Dimcho Debelyanov №86";
             public const string AddressTownName = "Sofia";
             public const string AddressCountryName = "Bulgaria";

@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    public abstract class BaseModel : IAuditInfo
+    public abstract class BaseAuditInfoModel : IAuditInfo
     {
         public DateTime CreatedOn { get; set; }
 

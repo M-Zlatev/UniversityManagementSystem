@@ -12,7 +12,7 @@
             student
                 .HasOne(st => st.Address)
                 .WithOne(a => a.Student)
-                .HasForeignKey<Address>(a => a.StudentId)
+                .HasForeignKey<StudentAddress>(a => a.StudentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             student

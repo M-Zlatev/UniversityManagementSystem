@@ -7,7 +7,7 @@
     using Common.Models;
     using static Common.DataValidation.Faculty;
 
-    public class Faculty : BaseModel
+    public class Faculty : BaseAuditInfoModel
     {
         public Faculty()
         {
@@ -24,7 +24,7 @@
         public string Description { get; set; }
 
         [Required]
-        public Address Address { get; set; }
+        public FacultyAddress Address { get; set; }
 
         [Required]
         [Range(MinEmailAddressLength, MaxEmailAdressLength)]

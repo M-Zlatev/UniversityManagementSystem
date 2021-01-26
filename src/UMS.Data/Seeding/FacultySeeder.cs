@@ -43,7 +43,7 @@
 
                     (FacultyOfTheology.Name, FacultyOfTheology.Description, FacultyOfTheology.AddressStreetName, FacultyOfTheology.AddressTownName, FacultyOfTheology.AddressCountryName, FacultyOfTheology.Email, FacultyOfTheology.PhoneNumber, FacultyOfTheology.Fax),
 
-                    (FacultyOfPhilosophy.Name, FacultyOfPhilosophy.Description, FacultyOfPhilosophy.AddressStreetName, FacultyOfPhilosophy.AddressTownName, FacultyOfPhilosophy.AddressCountryName, FacultyOfPhilosophy.Email, FacultyOfPhilosophy.PhoneNumber, FacultyOfPhilosophy.Fax),
+                    (FacultyOfPhilosophyAndPsychology.Name, FacultyOfPhilosophyAndPsychology.Description, FacultyOfPhilosophyAndPsychology.AddressStreetName, FacultyOfPhilosophyAndPsychology.AddressTownName, FacultyOfPhilosophyAndPsychology.AddressCountryName, FacultyOfPhilosophyAndPsychology.Email, FacultyOfPhilosophyAndPsychology.PhoneNumber, FacultyOfPhilosophyAndPsychology.Fax),
 
                     (FacultyOfPhysicsAndChemistry.Name, FacultyOfPhysicsAndChemistry.Description, FacultyOfPhysicsAndChemistry.AddressStreetName, FacultyOfPhysicsAndChemistry.AddressTownName, FacultyOfPhysicsAndChemistry.AddressCountryName, FacultyOfPhysicsAndChemistry.Email, FacultyOfPhysicsAndChemistry.PhoneNumber, FacultyOfPhysicsAndChemistry.Fax),
 
@@ -52,7 +52,7 @@
 
             foreach (var faculty in faculties)
             {
-                Address facultyAddress = new Address()
+                FacultyAddress facultyAddress = new FacultyAddress()
                 {
                     StreetName = faculty.AddressStreetName,
                     Town = faculty.AddressTownName,

@@ -7,7 +7,7 @@
     using Common.Models;
     using static Common.DataValidation.Department;
 
-    public class Department : BaseModel
+    public class Department : BaseAuditInfoModel
     {
         public Department()
         {

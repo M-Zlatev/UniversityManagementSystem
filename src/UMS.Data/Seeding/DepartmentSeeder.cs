@@ -82,10 +82,29 @@
                 (DepartmentOfTheology.Name, DepartmentOfTheology.Description, DepartmentOfTheology.Email, DepartmentOfTheology.PhoneNumber, DepartmentOfTheology.Fax),
 
                 (DepartmentOfReligion.Name, DepartmentOfReligion.Description, DepartmentOfReligion.Email, DepartmentOfReligion.PhoneNumber, DepartmentOfReligion.Fax),
+
+                // Faculty of Philosophy's Departments
+                (DepartmentOfPhilosophy.Name, DepartmentOfPhilosophy.Description, DepartmentOfPhilosophy.Email, DepartmentOfPhilosophy.PhoneNumber, DepartmentOfPhilosophy.Fax),
+
+                (DepartmentOfPsychology.Name, DepartmentOfPsychology.Description, DepartmentOfPsychology.Email, DepartmentOfPsychology.PhoneNumber, DepartmentOfPsychology.Fax),
+
+                // Faculty of Physics and Chemistry
+                (DepartmentOfPhysics.Name, DepartmentOfPhysics.Description, DepartmentOfPhysics.Email, DepartmentOfPhysics.PhoneNumber, DepartmentOfPhysics.Fax),
+
+                (DepartmentOfChemistry.Name, DepartmentOfChemistry.Description, DepartmentOfChemistry.Email, DepartmentOfChemistry.PhoneNumber, DepartmentOfChemistry.Fax),
+
+                // Faculty of Economy
+                (DepartmentOfChemistry.Name, DepartmentOfChemistry.Description, DepartmentOfChemistry.Email, DepartmentOfChemistry.PhoneNumber, DepartmentOfChemistry.Fax),
             };
+
+            int tempId = 0;
+            int facultyId = 0;
 
             foreach (var department in departments)
             {
+                tempId++;
+
+                facultyId = FindFacultyId(tempId, facultyId);
 
                 await dbContext.Departments.AddAsync(new Department
                 {
@@ -94,8 +113,59 @@
                     Email = department.Email,
                     PhoneNumber = department.PhoneNumber,
                     Fax = department.Fax,
+                    FacultyId = facultyId,
                 });
             }
+        }
+
+        private static int FindFacultyId(int tempId, int facultyId)
+        {
+            if (tempId >= 1 && tempId <= 3)
+            {
+                facultyId = 1;
+            }
+            else if (tempId > 4 && tempId <= 7)
+            {
+                facultyId = 2;
+            }
+            else if (tempId > 8 && tempId <= 11)
+            {
+                facultyId = 3;
+            }
+            else if (tempId > 11 && tempId <= 14)
+            {
+                facultyId = 4;
+            }
+            else if (tempId > 14 && tempId <= 21)
+            {
+                facultyId = 5;
+            }
+            else if (tempId > 21 && tempId <= 24)
+            {
+                facultyId = 6;
+            }
+            else if (tempId > 24 && tempId <= 26)
+            {
+                facultyId = 7;
+            }
+            else if (tempId > 26 && tempId <= 28)
+            {
+                facultyId = 8;
+            }
+            else if (tempId > 28 && tempId <= 30)
+            {
+                facultyId = 9;
+            }
+            else if (tempId > 30 && tempId <= 32)
+            {
+                facultyId = 10;
+            }
+            else if (tempId == 33)
+            {
+                facultyId = 11;
+            }
+
+            return facultyId;
         }
     }
 }

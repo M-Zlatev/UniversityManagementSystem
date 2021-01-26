@@ -2,7 +2,7 @@
 {
     using System;
 
-    public abstract class BaseDeletableModel : BaseModel, IDeletableEntity
+    public abstract class BaseDeletableModel : BaseAuditInfoModel, IDeletableEntity
     {
         public bool IsDeleted { get; set; }
 

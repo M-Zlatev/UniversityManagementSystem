@@ -18,7 +18,7 @@
             faculty
                 .HasOne(f => f.Address)
                 .WithOne(a => a.Faculty)
-                .HasForeignKey<Address>(a => a.FacultyId)
+                .HasForeignKey<FacultyAddress>(a => a.FacultyId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

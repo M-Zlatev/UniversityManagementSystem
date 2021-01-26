@@ -41,7 +41,7 @@
         public string PhoneNumber { get; set; }
 
         [Required]
-        public Address Address { get; set; }
+        public TeacherAddress Address { get; set; }
 
         [Required]
         public AcademicDegree AcademicDegree { get; set; }

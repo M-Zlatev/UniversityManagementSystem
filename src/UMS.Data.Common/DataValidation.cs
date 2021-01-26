@@ -64,8 +64,10 @@
         public static class Address
         {
             public const int MaxStreetNameLength = 100;
+            public const int MaxDistrictNameLength = 70;
             public const int MaxTownNameLength = 85;
             public const int MaxCountryNameLength = 56;
+            public const int MaxPostalCodeLength = 12;
         }
 
         public static class Homework
