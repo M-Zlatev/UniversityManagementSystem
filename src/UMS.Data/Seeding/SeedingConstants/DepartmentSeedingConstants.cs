@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Seeding.SeedingConstants.DepartmentSeedingConstants
+﻿namespace UMS.Data.Seeding.SeedingConstants
 {
     public class DepartmentSeedingConstants
     {
@@ -10,15 +10,17 @@
             public const string Email = "art-and-design@university.department.com";
             public const string PhoneNumber = "+359-2 101 001";
             public const string Fax = "2 222 0101";
+            public const int FacultyId = 1;
         }
 
         public static class DepartmentOfAppliedArts
         {
             public const string Name = "Department of Applied arts";
-            public const string Description = "The applied arts are all the arts that apply design and decoration to everyday and essentially practical objects in order to make them aesthetically pleasing.[1] The term is used in distinction to the fine arts, which are those that produce objects with no practical use, whose only purpose is to be beautiful or stimulate the intellect in some way. In practice, the two often overlap. Applied arts largely overlaps with decorative arts, and the modern making of applied art is usually called design.";
+            public const string Description = "The applied arts are all the arts that apply design and decoration to everyday and essentially practical objects in order to make them aesthetically pleasing. The term is used in distinction to the fine arts, which are those that produce objects with no practical use, whose only purpose is to be beautiful or stimulate the intellect in some way. In practice, the two often overlap. Applied arts largely overlaps with decorative arts, and the modern making of applied art is usually called design.";
             public const string Email = "applied-arts@university.department.com";
             public const string PhoneNumber = "+359-2 102 002";
             public const string Fax = "2 222 0202";
+            public const int FacultyId = 1;
         }
 
         public static class DepartmentOfTheaterAndFilm
@@ -28,6 +30,7 @@
             public const string Email = "theater-and-film@university.department.com";
             public const string PhoneNumber = "+359-2 103 003";
             public const string Fax = "2 222 0303";
+            public const int FacultyId = 1;
         }
 
         // Faculty of Law's deparments
@@ -38,6 +41,7 @@
             public const string Email = "private-law@university.department.com";
             public const string PhoneNumber = "+359-2 104 004";
             public const string Fax = "2 222 0404";
+            public const int FacultyId = 2;
         }
 
         public static class DepartmentOfPublicLaw
@@ -47,6 +51,7 @@
             public const string Email = "public-law@university.department.com";
             public const string PhoneNumber = "+359-2 105 005";
             public const string Fax = "2 222 0505";
+            public const int FacultyId = 2;
         }
 
         public static class DepartmentOfCriminalLaw
@@ -56,6 +61,7 @@
             public const string Email = "criminal-law@university.department.com";
             public const string PhoneNumber = "+359-2 106 006";
             public const string Fax = "2 222 0606";
+            public const int FacultyId = 2;
         }
 
         public static class DepartmentOfInternationalLaw
@@ -65,6 +71,7 @@
             public const string Email = "international-law@university.department.com";
             public const string PhoneNumber = "+359-2 107 007";
             public const string Fax = "2 222 0707";
+            public const int FacultyId = 2;
         }
 
         // Faculty Of Medical Science's Departments
@@ -76,6 +83,7 @@
             public const string Email = "medicine@university.department.com";
             public const string PhoneNumber = "+359-2 108 008";
             public const string Fax = "2 222 0808";
+            public const int FacultyId = 3;
         }
 
         public static class DepartmentOfDentalMedicine
@@ -85,6 +93,7 @@
             public const string Email = "dental-medicine@university.department.com";
             public const string PhoneNumber = "+359-2 109 009";
             public const string Fax = "2 222 0909";
+            public const int FacultyId = 3;
         }
 
         public static class DepartmentOfPharmacy
@@ -94,6 +103,7 @@
             public const string Email = "pharmacy@university.department.com";
             public const string PhoneNumber = "+359-2 110 010";
             public const string Fax = "2 222 1010";
+            public const int FacultyId = 3;
         }
 
         public static class DepartmentOfPublicHealth
@@ -103,6 +113,7 @@
             public const string Email = "public-health@university.department.com";
             public const string PhoneNumber = "+359-2 111 011";
             public const string Fax = "2 222 1111";
+            public const int FacultyId = 3;
         }
 
         // Faculty of Social Science's departments
@@ -113,6 +124,7 @@
             public const string Email = "anthropology@university.department.com";
             public const string PhoneNumber = "+359-2 112 012";
             public const string Fax = "2 222 1212";
+            public const int FacultyId = 4;
         }
 
         public static class DepartmentOfPsychologicalSciences
@@ -122,6 +134,7 @@
             public const string Email = "psychological-sciences@university.department.com";
             public const string PhoneNumber = "+359-2 113 013";
             public const string Fax = "2 222 1313";
+            public const int FacultyId = 4;
         }
 
         public static class DepartmentOfSociology
@@ -131,6 +144,7 @@
             public const string Email = "sociology@university.department.com";
             public const string PhoneNumber = "+359-2 114 014";
             public const string Fax = "2 222 1414";
+            public const int FacultyId = 4;
         }
 
         // Faculty Of Philology's Departments
@@ -141,6 +155,7 @@
             public const string Email = "romance-languages@university.department.com";
             public const string PhoneNumber = "+359-2 115 015";
             public const string Fax = "2 222 1515";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfGermanicLanguages
@@ -150,6 +165,7 @@
             public const string Email = "germanic-languages@university.department.com";
             public const string PhoneNumber = "+359-2 116 016";
             public const string Fax = "2 222 1616";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfSlavicLanguages
@@ -159,6 +175,7 @@
             public const string Email = "slavic-languages@university.department.com";
             public const string PhoneNumber = "+359-2 117 017";
             public const string Fax = "2 222 1717";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfAsianLanguages
@@ -168,6 +185,7 @@
             public const string Email = "asian-languages@university.department.com";
             public const string PhoneNumber = "+359-2 118 018";
             public const string Fax = "2 222 1818";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfAfricanLanguages
@@ -177,6 +195,7 @@
             public const string Email = "african-languages@university.department.com";
             public const string PhoneNumber = "+359-2 119 019";
             public const string Fax = "2 222 1919";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfIsolateLanguages
@@ -186,6 +205,7 @@
             public const string Email = "isolate-languages@university.department.com";
             public const string PhoneNumber = "+359-2 120 020";
             public const string Fax = "2 222 2020";
+            public const int FacultyId = 5;
         }
 
         public static class DepartmentOfDeadLanguages
@@ -195,6 +215,7 @@
             public const string Email = "d-languages@university.department.com";
             public const string PhoneNumber = "+359-2 121 021";
             public const string Fax = "2 222 2121";
+            public const int FacultyId = 5;
         }
 
         // Faculty of History's Departments
@@ -205,6 +226,7 @@
             public const string Email = "general-history@university.department.com";
             public const string PhoneNumber = "+359-2 122 022";
             public const string Fax = "2 222 2222";
+            public const int FacultyId = 6;
         }
 
         public static class DepartmentOfArcheology
@@ -214,6 +236,7 @@
             public const string Email = "archeology@university.department.com";
             public const string PhoneNumber = "+359-2 123 023";
             public const string Fax = "2 222 2323";
+            public const int FacultyId = 6;
         }
 
         public static class DepartmentOfEthnology
@@ -223,6 +246,7 @@
             public const string Email = "ethnology@university.department.com";
             public const string PhoneNumber = "+359-2 124 024";
             public const string Fax = "2 222 2424";
+            public const int FacultyId = 6;
         }
 
         // Faculty Of Mathematics And Informatics' Departments
@@ -233,6 +257,7 @@
             public const string Email = "mathematics@university.department.com";
             public const string PhoneNumber = "+359-2 125 025";
             public const string Fax = "2 222 2525";
+            public const int FacultyId = 7;
         }
 
         public static class DepartmentOfInformatics
@@ -242,6 +267,7 @@
             public const string Email = "informatics@university.department.com";
             public const string PhoneNumber = "+359-2 124 024";
             public const string Fax = "2 222 2626";
+            public const int FacultyId = 7;
         }
 
         // Faculty of Theology's Departments
@@ -252,6 +278,7 @@
             public const string Email = "theology@university.department.com";
             public const string PhoneNumber = "+359-2 127 027";
             public const string Fax = "2 222 2727";
+            public const int FacultyId = 8;
         }
 
         public static class DepartmentOfReligion
@@ -261,6 +288,7 @@
             public const string Email = "religion@university.department.com";
             public const string PhoneNumber = "+359-2 128 028";
             public const string Fax = "2 222 2828";
+            public const int FacultyId = 8;
         }
 
         // Faculty of Theology's Philosophy and Psychology
@@ -271,6 +299,7 @@
             public const string Email = "philosophy@university.department.com";
             public const string PhoneNumber = "+359-2 129 029";
             public const string Fax = "2 222 2929";
+            public const int FacultyId = 9;
         }
 
         public static class DepartmentOfPsychology
@@ -280,6 +309,7 @@
             public const string Email = "psychology@university.department.com";
             public const string PhoneNumber = "+359-2 130 030";
             public const string Fax = "2 222 3030";
+            public const int FacultyId = 9;
         }
 
         // Faculty of Physics and Chemistry
@@ -290,6 +320,7 @@
             public const string Email = "physics@university.department.com";
             public const string PhoneNumber = "+359-2 131 031";
             public const string Fax = "2 222 3131";
+            public const int FacultyId = 10;
         }
 
         public static class DepartmentOfChemistry
@@ -299,6 +330,7 @@
             public const string Email = "chemistry@university.department.com";
             public const string PhoneNumber = "+359-2 132 032";
             public const string Fax = "2 222 3232";
+            public const int FacultyId = 10;
         }
 
         // Faculty of Economy's Department
@@ -309,6 +341,7 @@
             public const string Email = "economy@university.department.com";
             public const string PhoneNumber = "+359-2 133 033";
             public const string Fax = "2 222 3333";
+            public const int FacultyId = 11;
         }
     }
 }

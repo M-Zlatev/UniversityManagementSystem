@@ -2,8 +2,9 @@
 {
     public enum MajorType
     {
-        BachelorsDegree = 0,
-        MastersDegree = 1,
-        Doctorate = 2,
+        NotSpecified = 0,
+        BachelorsDegree = 1,
+        MastersDegree = 2,
+        Doctorate = 3,
     }
 }

@@ -27,6 +27,7 @@
             {
                 new FacultySeeder(),
                 new DepartmentSeeder(),
+                new MajorSeeder(),
             };
 
             foreach (var seeder in seeders)
