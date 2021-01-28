@@ -28,6 +28,7 @@
                 new FacultySeeder(),
                 new DepartmentSeeder(),
                 new MajorSeeder(),
+                new CourseSeeder(),
             };
 
             foreach (var seeder in seeders)

@@ -153,6 +153,36 @@
             public const int DepartmentId = 24;
         }
 
+        // Department of Germanic Languages
+        public static class EnglishPhilology
+        {
+            public const string Name = "EnglishPhilology";
+            public const double Duration = 6;
+            public const int DepartmentId = 26;
+        }
+
+        public static class GermanPhilology
+        {
+            public const string Name = "German Philology";
+            public const double Duration = 6;
+            public const int DepartmentId = 26;
+        }
+
+        public static class NorthGermanicPhilology
+        {
+            public const string Name = "North German Philology (Scandinavian languages)";
+            public const double Duration = 6;
+            public const int DepartmentId = 26;
+        }
+
+        // Department of Dead Languages
+        public static class AncientLanguages
+        {
+            public const string Name = "Ancient languages";
+            public const double Duration = 6;
+            public const int DepartmentId = 31;
+        }
+
         // Department of Archeology
         public static class Archeology
         {

@@ -10,6 +10,8 @@ namespace UMS.Web
     using Data;
     using Data.Models;
     using Infrastructure;
+    using Services.Data.Contracts;
+    using Services.Data.Implementations;
 
     public class Startup
     {
@@ -28,6 +30,8 @@ namespace UMS.Web
                 .AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<UmsDbContext>();
+
+            services.AddTransient<IFacultyService, FacultyService>();
 
             services.AddControllersWithViews();
             services.AddDatabaseDeveloperPageExceptionFilter();

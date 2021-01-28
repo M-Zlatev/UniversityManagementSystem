@@ -54,6 +54,14 @@
                 // Department of Sociology
                 (Sociology.Name, Sociology.Duration, Sociology.DepartmentId),
 
+                // Department of Germanic Langugages
+                (EnglishPhilology.Name, EnglishPhilology.Duration, EnglishPhilology.DepartmentId),
+                (GermanPhilology.Name, GermanPhilology.Duration, GermanPhilology.DepartmentId),
+                (NorthGermanicPhilology.Name, NorthGermanicPhilology.Duration, NorthGermanicPhilology.DepartmentId),
+
+                // Department of Dead languages
+                (AncientLanguages.Name, AncientLanguages.Duration, AncientLanguages.DepartmentId),
+
                 // Department of Archeology
                 (Archeology.Name, Archeology.Duration, Archeology.DepartmentId),
 
