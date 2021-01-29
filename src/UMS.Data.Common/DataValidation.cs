@@ -63,10 +63,15 @@
 
         public static class Address
         {
+            public const int MinStreetNameLength = 1;
             public const int MaxStreetNameLength = 100;
+            public const int MinDistrictNameLength = 1;
             public const int MaxDistrictNameLength = 70;
+            public const int MinTownNameLength = 1;
             public const int MaxTownNameLength = 85;
+            public const int MinCountryNameLength = 4;
             public const int MaxCountryNameLength = 56;
+            public const int MinPostalCodeLength = 2;
             public const int MaxPostalCodeLength = 12;
         }
 

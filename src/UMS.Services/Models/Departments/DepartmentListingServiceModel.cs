@@ -1,4 +1,4 @@
-﻿namespace UMS.Services
+﻿namespace UMS.Services.Models.Departments
 {
     public class DepartmentListingServiceModel
     {

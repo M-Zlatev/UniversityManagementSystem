@@ -32,15 +32,15 @@ namespace UMS.Web
                 .AddEntityFrameworkStores<UmsDbContext>();
 
             services.AddTransient<IFacultyService, FacultyService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IMajorService, MajorService>();
 
-            services.AddControllersWithViews();
-            services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddRazorPages();
+            services.AddMVC();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseApplyMigration(env);
+            app.UseDataSeeding(env);
 
             app.UseExceptionHandling(env);
 

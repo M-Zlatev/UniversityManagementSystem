@@ -11,7 +11,7 @@
 
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseApplyMigration(
+        public static IApplicationBuilder UseDataSeeding(
             this IApplicationBuilder app,
             IWebHostEnvironment env)
         {
