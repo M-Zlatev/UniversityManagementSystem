@@ -33,18 +33,13 @@ namespace UMS.Web
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<UmsDbContext>();
 
-            // Register AutoMapper
-            services.AddAutoMapper(
-                typeof(IFacultyService).Assembly,
-                typeof(IDepartmentService).Assembly,
-                typeof(IMajorService).Assembly,
-                typeof(HomeController).Assembly);
+            // Automatically register Transient / Singleton / Scoped services
+            services.AddConventionalService();
 
-            services.AddTransient<IFacultyService, FacultyService>();
-            services.AddTransient<IDepartmentService, DepartmentService>();
-            services.AddTransient<IMajorService, MajorService>();
+            // Automatically register AutoMapper
+            services.AddAutoMapper(this.GetType());
 
-            services.AddMVC();
+            services.AddAdditionalMvc();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

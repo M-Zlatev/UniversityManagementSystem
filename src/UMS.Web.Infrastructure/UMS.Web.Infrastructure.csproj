@@ -28,6 +28,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
+		<ProjectReference Include="..\UMS.Services.Mapping\UMS.Services.Mapping.csproj" />
 	</ItemGroup>
 	
 </Project>

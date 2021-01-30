@@ -1,10 +1,12 @@
 ﻿namespace UMS.Services.Data.Models.Majors
 {
-    using System.ComponentModel.DataAnnotations;
+    using AutoMapper;
 
     using UMS.Data.Common.Enumerations;
+    using UMS.Data.Models;
+    using Mapping;
 
-    public class MajorDetailsServiceModel
+    public class MajorDetailsServiceModel : IMapFrom<Major>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -17,5 +19,12 @@
         public double Duration { get; set; }
 
         public string BelongsToDepartment { get; set; }
+
+        public void RegisterMappings(IProfileExpression profile)
+        {
+            profile
+                .CreateMap<Major, MajorDetailsServiceModel>()
+                .ForMember(m => m.BelongsToDepartment, cfg => cfg.MapFrom(m => m.Department.Name));
+        }
     }
 }

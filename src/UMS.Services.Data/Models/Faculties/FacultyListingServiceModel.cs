@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.Faculties
 {
-    public class FacultyListingServiceModel
+    using UMS.Data.Models;
+    using Mapping;
+
+    public class FacultyListingServiceModel : IMapFrom<Faculty>
     {
         public int Id { get; set; }
 

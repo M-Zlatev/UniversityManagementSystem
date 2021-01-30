@@ -3,10 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Common;
     using Data.Models.Departments;
     using UMS.Data.Models;
 
-    public interface IDepartmentService
+    public interface IDepartmentService : ITransientService
     {
         public Task<IEnumerable<DepartmentListingServiceModel>> All(int page);
 

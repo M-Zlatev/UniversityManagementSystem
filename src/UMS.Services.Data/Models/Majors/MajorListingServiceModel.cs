@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.Majors
 {
-    public class MajorListingServiceModel
+    using UMS.Data.Models;
+    using Mapping;
+
+    public class MajorListingServiceModel : IMapFrom<Major>
     {
         public int Id { get; set; }
 

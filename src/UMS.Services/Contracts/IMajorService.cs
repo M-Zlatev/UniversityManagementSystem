@@ -3,11 +3,12 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Common;
     using Data.Models;
     using Data.Models.Majors;
     using UMS.Data.Common.Enumerations;
 
-    public interface IMajorService
+    public interface IMajorService : ITransientService
     {
         public Task<IEnumerable<MajorListingServiceModel>> All(int page);
 

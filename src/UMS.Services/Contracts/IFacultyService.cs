@@ -3,10 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Common;
     using Data.Models;
     using Data.Models.Faculties;
 
-    public interface IFacultyService
+    public interface IFacultyService : ITransientService
     {
         public Task<IEnumerable<FacultyListingServiceModel>> All(int page);
 
