@@ -1,5 +1,6 @@
 namespace UMS.Web
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -7,11 +8,12 @@ namespace UMS.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using Controllers;
     using Data;
     using Data.Models;
     using Infrastructure;
-    using Services.Data.Contracts;
-    using Services.Data.Implementations;
+    using Services.Contracts;
+    using Services.Implementations;
 
     public class Startup
     {
@@ -30,6 +32,13 @@ namespace UMS.Web
                 .AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<UmsDbContext>();
+
+            // Register AutoMapper
+            services.AddAutoMapper(
+                typeof(IFacultyService).Assembly,
+                typeof(IDepartmentService).Assembly,
+                typeof(IMajorService).Assembly,
+                typeof(HomeController).Assembly);
 
             services.AddTransient<IFacultyService, FacultyService>();
             services.AddTransient<IDepartmentService, DepartmentService>();

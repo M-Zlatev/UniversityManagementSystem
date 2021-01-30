@@ -1,11 +1,11 @@
-﻿namespace UMS.Services.Data.Contracts
+﻿namespace UMS.Services.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models.Majors;
+    using Data.Models;
+    using Data.Models.Majors;
     using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
 
     public interface IMajorService
     {

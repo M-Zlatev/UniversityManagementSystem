@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Models.Faculties
+﻿namespace UMS.Services.Data.Models.Faculties
 {
     using UMS.Data.Models;
 

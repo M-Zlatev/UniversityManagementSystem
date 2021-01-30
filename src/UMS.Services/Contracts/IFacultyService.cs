@@ -1,10 +1,10 @@
-﻿namespace UMS.Services.Data.Contracts
+﻿namespace UMS.Services.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models.Faculties;
-    using UMS.Data.Models;
+    using Data.Models;
+    using Data.Models.Faculties;
 
     public interface IFacultyService
     {

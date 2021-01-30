@@ -25,6 +25,7 @@
 	  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
 	  <ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
 	  <ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
+	  <ProjectReference Include="..\UMS.Services\UMS.Services.csproj" />
 	</ItemGroup>
 
 </Project>

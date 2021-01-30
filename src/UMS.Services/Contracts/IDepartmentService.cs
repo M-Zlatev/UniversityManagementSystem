@@ -1,9 +1,9 @@
-﻿namespace UMS.Services.Data.Contracts
+﻿namespace UMS.Services.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Models.Departments;
+    using Data.Models.Departments;
     using UMS.Data.Models;
 
     public interface IDepartmentService

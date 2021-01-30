@@ -7,7 +7,7 @@
 
     using Infrastructure;
     using Models.Department;
-    using Services.Data.Contracts;
+    using Services.Contracts;
 
     public class DepartmentController : Controller
     {

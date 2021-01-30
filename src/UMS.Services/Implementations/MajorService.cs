@@ -1,52 +1,44 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
-    using Models.Majors;
+    using Data.Models.Majors;
     using UMS.Data;
-    using UMS.Data.Models;
     using UMS.Data.Common.Enumerations;
+    using UMS.Data.Models;
 
     public class MajorService : IMajorService
     {
         private const int MajorPageSize = 10;
 
         private readonly UmsDbContext data;
+        private readonly IMapper mapper;
 
-        public MajorService(UmsDbContext data)
-            => this.data = data;
+        public MajorService(UmsDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public async Task<IEnumerable<MajorListingServiceModel>> All(int page)
             => await this.data
                 .Majors
                 .Skip((page - 1) * MajorPageSize)
                 .Take(MajorPageSize)
-                .Select(m => new MajorListingServiceModel
-                {
-                    Id = m.Id,
-                    MajorName = m.Name,
-                    Description = m.Description,
-                    BelongsToDepartment = m.Department.Name,
-                })
+                .ProjectTo<MajorListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<MajorDetailsServiceModel> Details(int id)
             => await this.data.Majors
                 .Where(m => m.Id == id)
-                .Select(m => new MajorDetailsServiceModel
-                {
-                    Id = m.Id,
-                    Name = m.Name,
-                    Description = m.Description,
-                    MajorType = m.MajorType,
-                    Duration = m.Duration,
-                    BelongsToDepartment = m.Department.Name,
-                })
+                .ProjectTo<MajorDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

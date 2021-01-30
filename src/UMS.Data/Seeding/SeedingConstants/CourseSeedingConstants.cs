@@ -6,7 +6,7 @@
         {
             public const string Name = "Art history";
             public const int CourseId = 1;
-            public const int MajorId = 13;
+            public const int MajorId = 11;
         }
     }
 }

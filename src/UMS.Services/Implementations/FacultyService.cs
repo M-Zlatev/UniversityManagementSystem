@@ -1,53 +1,43 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
-    using Models.Faculties;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Services.Data.Models.Faculties;
 
     public class FacultyService : IFacultyService
     {
         private const int FacultyPageSize = 10;
 
         private readonly UmsDbContext data;
+        private readonly IMapper mapper;
 
-        public FacultyService(UmsDbContext data)
-            => this.data = data;
+        public FacultyService(UmsDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public async Task<IEnumerable<FacultyListingServiceModel>> All(int page)
             => await this.data
                 .Faculties
                 .Skip((page - 1) * FacultyPageSize)
                 .Take(FacultyPageSize)
-                .Select(f => new FacultyListingServiceModel
-                {
-                    Id = f.Id,
-                    FacultyName = f.Name,
-                    Description = f.Description,
-                })
+                .ProjectTo<FacultyListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<FacultyDetailsServiceModel> Details(int id)
             => await this.data.Faculties
                 .Where(f => f.Id == id)
-                .Select(f => new FacultyDetailsServiceModel
-                {
-                    Id = f.Id,
-                    Name = f.Name,
-                    Description = f.Description,
-                    AddressStreetName = f.Address.StreetName,
-                    AddressTownName = f.Address.Town,
-                    AddressCountryName = f.Address.Country,
-                    Email = f.Email,
-                    PhoneNumber = f.PhoneNumber,
-                    Fax = f.Fax,
-                })
+                .ProjectTo<FacultyDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

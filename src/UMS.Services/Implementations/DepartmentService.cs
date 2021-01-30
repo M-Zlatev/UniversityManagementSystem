@@ -1,13 +1,15 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
-    using Models.Departments;
+    using Data.Models.Departments;
     using UMS.Data;
     using UMS.Data.Models;
 
@@ -16,36 +18,26 @@
         private const int DepartmentPageSize = 10;
 
         private readonly UmsDbContext data;
+        private readonly IMapper mapper;
 
-        public DepartmentService(UmsDbContext data)
-            => this.data = data;
+        public DepartmentService(UmsDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public async Task<IEnumerable<DepartmentListingServiceModel>> All(int page)
             => await this.data
                 .Departments
                 .Skip((page - 1) * DepartmentPageSize)
                 .Take(DepartmentPageSize)
-                .Select(d => new DepartmentListingServiceModel
-                {
-                    Id = d.Id,
-                    DepartmentName = d.Description,
-                    BelongsToFaculty = d.Faculty.Name,
-                })
+                .ProjectTo<DepartmentListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
         public async Task<DepartmentDetailsServiceModel> Details(int id)
             => await this.data.Departments
                 .Where(d => d.Id == id)
-                .Select(d => new DepartmentDetailsServiceModel
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    Description = d.Description,
-                    Email = d.Email,
-                    PhoneNumber = d.PhoneNumber,
-                    Fax = d.Fax,
-                    BelongsToFaculty = d.Faculty.Name,
-                })
+                .ProjectTo<DepartmentDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

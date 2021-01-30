@@ -8,7 +8,7 @@
 
     using Infrastructure;
     using Models.Faculty;
-    using Services.Data.Contracts;
+    using Services.Contracts;
 
     public class FacultyController : Controller
     {

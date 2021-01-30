@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Models.Majors
+﻿namespace UMS.Services.Data.Models.Majors
 {
     public class MajorListingServiceModel
     {
@@ -7,7 +7,5 @@
         public string MajorName { get; set; }
 
         public string Description { get; set; }
-
-        public string BelongsToDepartment { get; set; }
     }
 }

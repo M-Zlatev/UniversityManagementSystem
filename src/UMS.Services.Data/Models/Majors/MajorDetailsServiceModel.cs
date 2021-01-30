@@ -1,8 +1,8 @@
-﻿namespace UMS.Services.Models.Majors
+﻿namespace UMS.Services.Data.Models.Majors
 {
     using System.ComponentModel.DataAnnotations;
 
-    using Data.Common.Enumerations;
+    using UMS.Data.Common.Enumerations;
 
     public class MajorDetailsServiceModel
     {
