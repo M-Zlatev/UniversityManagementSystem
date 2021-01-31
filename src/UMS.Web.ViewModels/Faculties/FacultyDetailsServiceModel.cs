@@ -1,9 +1,9 @@
-﻿namespace UMS.Services.Data.Models.Faculties
+﻿namespace UMS.Web.ViewModels
 {
     using AutoMapper;
 
     using UMS.Data.Models;
-    using Mapping;
+    using Services.Mapping;
 
     public class FacultyDetailsServiceModel : IMapFrom<Faculty>, IMapExplicitly
     {

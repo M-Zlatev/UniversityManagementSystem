@@ -7,7 +7,7 @@
 
     using Infrastructure;
     using Models.Major;
-    using Services.Contracts;
+    using Services.Data.Contracts;
 
     public class MajorController : Controller
     {

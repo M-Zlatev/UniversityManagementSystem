@@ -1,17 +1,16 @@
-﻿namespace UMS.Services.Contracts
+﻿namespace UMS.Services.Data.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Common;
-    using Data.Models.Departments;
     using UMS.Data.Models;
+    using UMS.Common;
 
     public interface IDepartmentService : ITransientService
     {
-        public Task<IEnumerable<DepartmentListingServiceModel>> All(int page);
+        public Task<IEnumerable<IListModel>> All(int page);
 
-        public Task<DepartmentDetailsServiceModel> Details(int id);
+        public Task<IListModel> Details(int id);
 
         Task<bool> Exists(int id);
 

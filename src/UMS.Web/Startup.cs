@@ -12,8 +12,9 @@ namespace UMS.Web
     using Data;
     using Data.Models;
     using Infrastructure;
-    using Services.Contracts;
-    using Services.Implementations;
+    using Services.Data.Contracts;
+    using Services.Data.Implementations;
+    using UMS.Services.Mapping;
 
     public class Startup
     {
@@ -34,7 +35,7 @@ namespace UMS.Web
                 .AddEntityFrameworkStores<UmsDbContext>();
 
             // Automatically register Transient / Singleton / Scoped services
-            services.AddConventionalService();
+            services.AddConventionalServices();
 
             // Automatically register AutoMapper
             services.AddAutoMapper(this.GetType());

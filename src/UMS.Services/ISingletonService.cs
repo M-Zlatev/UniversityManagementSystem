@@ -1,4 +1,4 @@
-﻿namespace UMS.Common
+﻿namespace UMS.Services
 {
     public interface ISingletonService
     {

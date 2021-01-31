@@ -1,18 +1,16 @@
-﻿namespace UMS.Services.Contracts
+﻿namespace UMS.Services.Data.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Common;
-    using Data.Models;
-    using Data.Models.Majors;
+    using UMS.Common;
     using UMS.Data.Common.Enumerations;
 
     public interface IMajorService : ITransientService
     {
-        public Task<IEnumerable<MajorListingServiceModel>> All(int page);
+        public Task<IEnumerable<IListModel>> All(int page);
 
-        public Task<MajorDetailsServiceModel> Details(int id);
+        public Task<IListModel> Details(int id);
 
         Task<bool> Exists(int id);
 

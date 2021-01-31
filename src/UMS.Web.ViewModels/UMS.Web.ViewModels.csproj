@@ -14,10 +14,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
+	  <ProjectReference Include="..\UMS.Services.Mapping\UMS.Services.Mapping.csproj" />
+	  <ProjectReference Include="..\UMS.Services\UMS.Services.csproj" />
 	</ItemGroup>
 	
 </Project>

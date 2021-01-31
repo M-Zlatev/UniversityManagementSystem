@@ -5,18 +5,19 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Common;
+    using UMS.Services;
+    using UMS.Services.Data;
 
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddConventionalService(
+        public static IServiceCollection AddConventionalServices(
             this IServiceCollection services)
         {
-            var serviceInterfaceType = typeof(ITransientService);
+            var transientInterfaceType = typeof(ITransientService);
             var singletonInterfaceType = typeof(ISingletonService);
             var scopedInterfaceType = typeof(IScopedService);
 
-            var types = serviceInterfaceType
+            var types = transientInterfaceType
                 .Assembly
                 .GetExportedTypes()
                 .Where(t => t.IsClass && !t.IsAbstract)
@@ -29,7 +30,7 @@
 
             foreach (var type in types)
             {
-                if (serviceInterfaceType.IsAssignableFrom(type.Service))
+                if (transientInterfaceType.IsAssignableFrom(type.Service))
                 {
                     services.AddTransient(type.Service, type.Implementation);
                 }

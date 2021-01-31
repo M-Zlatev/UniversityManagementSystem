@@ -1,10 +1,10 @@
-﻿namespace UMS.Services.Data.Models.Majors
+﻿namespace UMS.Web.ViewModels
 {
     using AutoMapper;
 
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
-    using Mapping;
+    using Services.Mapping;
 
     public class MajorDetailsServiceModel : IMapFrom<Major>, IMapExplicitly
     {
