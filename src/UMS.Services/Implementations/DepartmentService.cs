@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,9 +9,9 @@
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
+    using Data.Models.Departments;
     using UMS.Data;
     using UMS.Data.Models;
-    using UMS.Common;
 
     public class DepartmentService : IDepartmentService
     {
@@ -26,18 +26,18 @@
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<IListModel>> All(int page)
+        public async Task<IEnumerable<DepartmentListingServiceModel>> All(int page)
             => await this.data
                 .Departments
                 .Skip((page - 1) * DepartmentPageSize)
                 .Take(DepartmentPageSize)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<DepartmentListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
-        public async Task<IListModel> Details(int id)
+        public async Task<DepartmentDetailsServiceModel> Details(int id)
             => await this.data.Departments
                 .Where(d => d.Id == id)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<DepartmentDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

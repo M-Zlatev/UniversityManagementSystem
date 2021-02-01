@@ -1,9 +1,9 @@
-﻿namespace UMS.Web.ViewModels
+﻿namespace UMS.Services.Data.Models.Departments
 {
     using AutoMapper;
 
-    using Data.Models;
-    using Services.Mapping;
+    using UMS.Data.Models;
+    using Mapping;
 
     public class DepartmentDetailsServiceModel : IMapFrom<Department>, IMapExplicitly
     {

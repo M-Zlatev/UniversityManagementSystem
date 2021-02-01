@@ -1,11 +1,9 @@
-﻿namespace UMS.Web.Infrastructure
+﻿namespace UMS.Services.Mapping
 {
     using System;
     using System.Linq;
 
     using AutoMapper;
-
-    using Services.Mapping;
 
     public class AutoMapperConfig : Profile
     {

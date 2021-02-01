@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,9 +9,9 @@
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
+    using Data.Models.Faculties;
     using UMS.Data;
     using UMS.Data.Models;
-    using UMS.Common;
 
     public class FacultyService : IFacultyService
     {
@@ -26,18 +26,18 @@
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<IListModel>> All(int page)
+        public async Task<IEnumerable<FacultyListingServiceModel>> All(int page)
             => await this.data
                 .Faculties
                 .Skip((page - 1) * FacultyPageSize)
                 .Take(FacultyPageSize)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<FacultyListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
-        public async Task<IListModel> Details(int id)
+        public async Task<FacultyDetailsServiceModel> Details(int id)
             => await this.data.Faculties
                 .Where(f => f.Id == id)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<FacultyDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

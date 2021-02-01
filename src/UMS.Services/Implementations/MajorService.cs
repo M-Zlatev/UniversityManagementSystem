@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Data.Implementations
+﻿namespace UMS.Services.Implementations
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,10 +9,10 @@
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
+    using Data.Models.Majors;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
-    using UMS.Common;
 
     public class MajorService : IMajorService
     {
@@ -27,18 +27,18 @@
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<IListModel>> All(int page)
+        public async Task<IEnumerable<MajorListingServiceModel>> All(int page)
             => await this.data
                 .Majors
                 .Skip((page - 1) * MajorPageSize)
                 .Take(MajorPageSize)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<MajorListingServiceModel>(this.mapper.ConfigurationProvider)
                 .ToListAsync();
 
-        public async Task<IListModel> Details(int id)
+        public async Task<MajorDetailsServiceModel> Details(int id)
             => await this.data.Majors
                 .Where(m => m.Id == id)
-                .ProjectTo<IListModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<MajorDetailsServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)

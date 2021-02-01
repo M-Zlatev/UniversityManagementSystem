@@ -1,21 +1,29 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure;
     using Models.Faculty;
-    using Services.Data.Contracts;
+    using Services.Data.Models.Faculties;
+    using Services.Contracts;
+    using ViewModels;
 
     public class FacultyController : Controller
     {
         private readonly IFacultyService faculties;
+        private readonly IMapper mapper;
 
-        public FacultyController(IFacultyService faculties)
-            => this.faculties = faculties;
+        public FacultyController(IFacultyService faculties, IMapper mapper)
+        {
+            this.faculties = faculties;
+            this.mapper = mapper;
+        }
 
         public async Task<IActionResult> Index(int page = 1)
             => this.Ok(await this.faculties.All(page));
