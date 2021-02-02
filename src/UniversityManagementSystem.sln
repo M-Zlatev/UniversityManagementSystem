@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UMS.Web.ViewModels", "UMS.W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UMS.Common", "UMS.Common\UMS.Common.csproj", "{0389D80B-C671-4F02-87FA-3B33FCB7F5FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UMS.Services.Mapping", "UMS.Services.Mapping\UMS.Services.Mapping.csproj", "{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,10 +69,6 @@ Global
 		{0389D80B-C671-4F02-87FA-3B33FCB7F5FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0389D80B-C671-4F02-87FA-3B33FCB7F5FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0389D80B-C671-4F02-87FA-3B33FCB7F5FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,7 +82,6 @@ Global
 		{5B541BC5-4587-449B-BB1D-7A40029F33D0} = {E7C1581D-9BEE-4483-A3FA-BADDB6A81A39}
 		{29F5CC08-19BE-434C-9F07-87168443A74D} = {E7C1581D-9BEE-4483-A3FA-BADDB6A81A39}
 		{0791D162-4837-435B-97E4-9607444123F7} = {E7C1581D-9BEE-4483-A3FA-BADDB6A81A39}
-		{70609B8D-D6F7-4E3B-8EA6-17B1FA22D76E} = {D3E59A93-57F4-4EF7-B9BC-BD93165ED0B8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57766CCE-E6B6-4F96-A468-87882C0BD70C}

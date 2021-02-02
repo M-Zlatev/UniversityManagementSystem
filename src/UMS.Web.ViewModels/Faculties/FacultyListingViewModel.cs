@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels
 {
     using UMS.Data.Models;
-    using UMS.Services.Mapping;
+    using UMS.Common.Mapping;
 
     public class FacultyListingViewModel : IMapFrom<Faculty>
     {

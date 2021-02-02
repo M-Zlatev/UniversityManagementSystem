@@ -8,16 +8,34 @@
     using Infrastructure;
     using Models.Department;
     using Services.Contracts;
+    using ViewModels;
+    using ViewModels.Departments;
 
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentService departments;
+        private readonly IDepartmentService departmentService;
 
         public DepartmentController(IDepartmentService departments)
-            => this.departments = departments;
+            => this.departmentService = departments;
 
-        public async Task<IActionResult> Index()
-            => this.Ok(await this.departments.All(1));
+        public IActionResult Index(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int DepartmentsPerPage = 10;
+
+            var viewModel = new DepartmentGetAllViewModel
+            {
+                ItemsPerPage = DepartmentsPerPage,
+                PageNumber = id,
+                GetAllDepartmentViewModel = this.departmentService.GetAll<DepartmentListingViewModel>(id, DepartmentsPerPage),
+            };
+
+            return this.View(viewModel);
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -29,7 +47,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var departmentId = await this.departments.Create(
+                var departmentId = await this.departmentService.Create(
                     model.Name, model.Description, model.Email, model.PhoneNumber, model.Fax, model.BelongsToFaculty, this.User.GetUserId());
 
                 return this.RedirectToAction(nameof(this.Details), new { id = departmentId });
@@ -42,7 +60,7 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await this.departments.Exists(id))
+            if (!await this.departmentService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -54,14 +72,14 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id, DepartmentFormModel model)
         {
-            if (!await this.departments.Exists(id))
+            if (!await this.departmentService.Exists(id))
             {
                 return this.NotFound();
             }
 
             if (this.ModelState.IsValid)
             {
-                await this.departments.Edit(id, model.Name, model.Description, model.Email, model.PhoneNumber, model.Fax);
+                await this.departmentService.Edit(id, model.Name, model.Description, model.Email, model.PhoneNumber, model.Fax);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
@@ -71,21 +89,21 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var faculty = await this.departments.Details(id);
+            //var faculty = await this.departmentService.Details(id);
 
-            if (this.departments == null)
+            if (this.departmentService == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(this.departments);
+            return this.View(this.departmentService);
         }
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await this.departments.Exists(id))
+            if (!await this.departmentService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -97,12 +115,12 @@
         [Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            if (!await this.departments.Exists(id))
+            if (!await this.departmentService.Exists(id))
             {
                 return this.NotFound();
             }
 
-            await this.departments.Delete(id);
+            await this.departmentService.Delete(id);
 
             return this.Redirect(nameof(this.Index));
         }

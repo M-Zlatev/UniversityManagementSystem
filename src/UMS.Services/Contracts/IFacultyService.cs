@@ -3,13 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Models.Faculties;
-
     public interface IFacultyService : ITransientService
     {
-        public Task<IEnumerable<FacultyListingServiceModel>> All(int page);
+        public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage);
 
-        public Task<FacultyDetailsServiceModel> Details(int id);
+        //public Task<FacultyDetailsServiceModel> Details(int id);
 
         Task<bool> Exists(int id);
 

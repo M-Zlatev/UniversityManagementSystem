@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels
 {
-    public class MajorListingViewModel
+    using Common.Mapping;
+    using Data.Models;
+
+    public class MajorListingViewModel : IMapFrom<Major>
     {
         public int Id { get; set; }
 

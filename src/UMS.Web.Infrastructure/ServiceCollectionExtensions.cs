@@ -6,7 +6,6 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using UMS.Services;
-    using UMS.Services.Data;
 
     public static class ServiceCollectionExtensions
     {

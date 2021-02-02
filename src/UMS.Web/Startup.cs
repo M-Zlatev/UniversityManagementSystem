@@ -1,5 +1,7 @@
 namespace UMS.Web
 {
+    using System.Reflection;
+
     using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -8,15 +10,15 @@ namespace UMS.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using Common.Mapping;
     using Controllers;
     using Data;
     using Data.Models;
     using Infrastructure;
-    using Services.Data;
+    using Models;
     using Services.Contracts;
     using Services.Implementations;
-    using Services.Mapping;
-    using UMS.Web.ViewModels;
+    using ViewModels;
 
     public class Startup
     {
@@ -39,14 +41,13 @@ namespace UMS.Web
             // Automatically register Transient / Singleton / Scoped services
             services.AddConventionalServices();
 
-            // Automatically register mappings
-            services.AddAutoMapper(typeof(AutoMapperConfig));
-
             services.AddAdditionalMvc();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorsViewModel).GetTypeInfo().Assembly);
+
             app.UseDataSeeding(env);
 
             app.UseExceptionHandling(env);

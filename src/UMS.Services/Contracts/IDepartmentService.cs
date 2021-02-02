@@ -4,13 +4,12 @@
     using System.Threading.Tasks;
 
     using Data.Models;
-    using Data.Models.Departments;
 
     public interface IDepartmentService : ITransientService
     {
-        public Task<IEnumerable<DepartmentListingServiceModel>> All(int page);
+        public IEnumerable<T> GetAll<T>(int page, int departmentsPerPage);
 
-        public Task<DepartmentDetailsServiceModel> Details(int id);
+        //public Task<DepartmentDetailsServiceModel> Details(int id);
 
         Task<bool> Exists(int id);
 

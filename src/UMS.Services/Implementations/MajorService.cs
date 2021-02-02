@@ -8,8 +8,8 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
+    using Common.Mapping;
     using Contracts;
-    using Data.Models.Majors;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
@@ -19,27 +19,26 @@
         private const int MajorPageSize = 10;
 
         private readonly UmsDbContext data;
-        private readonly IMapper mapper;
 
-        public MajorService(UmsDbContext data, IMapper mapper)
+        public MajorService(UmsDbContext data)
         {
             this.data = data;
-            this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<MajorListingServiceModel>> All(int page)
-            => await this.data
-                .Majors
-                .Skip((page - 1) * MajorPageSize)
-                .Take(MajorPageSize)
-                .ProjectTo<MajorListingServiceModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
+        public IEnumerable<T> GetAll<T>(int page, int majorsPerPage = MajorPageSize)
+            => this.data
+             .Majors
+             .OrderBy(m => m.Id)
+             .Skip((page - 1) * majorsPerPage)
+             .Take(majorsPerPage)
+             .To<T>()
+             .ToList();
 
-        public async Task<MajorDetailsServiceModel> Details(int id)
-            => await this.data.Majors
-                .Where(m => m.Id == id)
-                .ProjectTo<MajorDetailsServiceModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+        //public async Task<MajorDetailsServiceModel> Details(int id)
+        //    => await this.data.Majors
+        //        .Where(m => m.Id == id)
+        //        .ProjectTo<MajorDetailsServiceModel>(this.mapper.ConfigurationProvider)
+        //        .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)
             => await this.data.Majors.AnyAsync(m => m.Id == id);

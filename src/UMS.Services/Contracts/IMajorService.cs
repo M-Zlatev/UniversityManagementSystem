@@ -3,14 +3,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Models.Majors;
     using UMS.Data.Common.Enumerations;
 
     public interface IMajorService : ITransientService
     {
-        public Task<IEnumerable<MajorListingServiceModel>> All(int page);
+        public IEnumerable<T> GetAll<T>(int page, int majorsPerPage);
 
-        public Task<MajorDetailsServiceModel> Details(int id);
+        //public Task<MajorDetailsServiceModel> Details(int id);
 
         Task<bool> Exists(int id);
 

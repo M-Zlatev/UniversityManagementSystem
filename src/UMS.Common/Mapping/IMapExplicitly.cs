@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Mapping
+﻿namespace UMS.Common.Mapping
 {
     using AutoMapper;
 

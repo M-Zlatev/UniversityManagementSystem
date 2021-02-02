@@ -1,6 +1,6 @@
-﻿namespace UMS.Web.Models
+﻿namespace UMS.Web.ViewModels
 {
-    public class ErrorViewModel
+    public class ErrorsViewModel
     {
         public string RequestId { get; set; }
 

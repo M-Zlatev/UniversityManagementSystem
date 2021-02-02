@@ -8,8 +8,8 @@
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
+    using Common.Mapping;
     using Contracts;
-    using Data.Models.Departments;
     using UMS.Data;
     using UMS.Data.Models;
 
@@ -18,27 +18,26 @@
         private const int DepartmentPageSize = 10;
 
         private readonly UmsDbContext data;
-        private readonly IMapper mapper;
 
-        public DepartmentService(UmsDbContext data, IMapper mapper)
+        public DepartmentService(UmsDbContext data)
         {
             this.data = data;
-            this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<DepartmentListingServiceModel>> All(int page)
-            => await this.data
-                .Departments
-                .Skip((page - 1) * DepartmentPageSize)
-                .Take(DepartmentPageSize)
-                .ProjectTo<DepartmentListingServiceModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
+        public IEnumerable<T> GetAll<T>(int page, int departmentsPerPage = DepartmentPageSize)
+            => this.data
+             .Departments
+             .OrderBy(d => d.Id)
+             .Skip((page - 1) * departmentsPerPage)
+             .Take(departmentsPerPage)
+             .To<T>()
+             .ToList();
 
-        public async Task<DepartmentDetailsServiceModel> Details(int id)
-            => await this.data.Departments
-                .Where(d => d.Id == id)
-                .ProjectTo<DepartmentDetailsServiceModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+        //public async Task<DepartmentDetailsServiceModel> Details(int id)
+        //    => await this.data.Departments
+        //        .Where(d => d.Id == id)
+        //        .ProjectTo<DepartmentDetailsServiceModel>(this.mapper.ConfigurationProvider)
+        //        .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)
             => await this.data.Departments.AnyAsync(d => d.Id == id);

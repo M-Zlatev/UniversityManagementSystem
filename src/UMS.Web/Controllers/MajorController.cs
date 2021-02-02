@@ -8,16 +8,34 @@
     using Infrastructure;
     using Models.Major;
     using Services.Contracts;
+    using ViewModels;
+    using ViewModels.Majors;
 
     public class MajorController : Controller
     {
-        private readonly IMajorService majors;
+        private readonly IMajorService majorService;
 
         public MajorController(IMajorService majors)
-            => this.majors = majors;
+            => this.majorService = majors;
 
-        public async Task<IActionResult> Index()
-            => this.Ok(await this.majors.All(1));
+        public IActionResult Index(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int MajorsPerPage = 10;
+
+            var viewModel = new MajorGetAllViewModel
+            {
+                ItemsPerPage = MajorsPerPage,
+                PageNumber = id,
+                GetAllMajorViewModel = this.majorService.GetAll<MajorListingViewModel>(id, MajorsPerPage),
+            };
+
+            return this.View(viewModel);
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -29,7 +47,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var majorId = await this.majors.Create(
+                var majorId = await this.majorService.Create(
                     model.Name, model.Description, model.MajorType, model.Duration, model.BelongsToDepartment, this.User.GetUserId());
 
                 return this.RedirectToAction(nameof(this.Details), new { id = majorId });
@@ -42,7 +60,7 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await this.majors.Exists(id))
+            if (!await this.majorService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -54,14 +72,14 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id, MajorFormModel model)
         {
-            if (!await this.majors.Exists(id))
+            if (!await this.majorService.Exists(id))
             {
                 return this.NotFound();
             }
 
             if (this.ModelState.IsValid)
             {
-                await this.majors.Edit(id, model.Name, model.Description, model.MajorType, model.Duration, model.BelongsToDepartment);
+                await this.majorService.Edit(id, model.Name, model.Description, model.MajorType, model.Duration, model.BelongsToDepartment);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
@@ -71,21 +89,21 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var faculty = await this.majors.Details(id);
+            //var faculty = await this.majors.Details(id);
 
-            if (this.majors == null)
+            if (this.majorService == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(this.majors);
+            return this.View(this.majorService);
         }
 
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await this.majors.Exists(id))
+            if (!await this.majorService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -97,12 +115,12 @@
         [Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            if (!await this.majors.Exists(id))
+            if (!await this.majorService.Exists(id))
             {
                 return this.NotFound();
             }
 
-            await this.majors.Delete(id);
+            await this.majorService.Delete(id);
 
             return this.Redirect(nameof(this.Index));
         }

@@ -9,7 +9,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
-    using Data.Models.Faculties;
+    using Common.Mapping;
     using UMS.Data;
     using UMS.Data.Models;
 
@@ -18,27 +18,26 @@
         private const int FacultyPageSize = 10;
 
         private readonly UmsDbContext data;
-        private readonly IMapper mapper;
 
-        public FacultyService(UmsDbContext data, IMapper mapper)
+        public FacultyService(UmsDbContext data)
         {
             this.data = data;
-            this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<FacultyListingServiceModel>> All(int page)
-            => await this.data
-                .Faculties
-                .Skip((page - 1) * FacultyPageSize)
-                .Take(FacultyPageSize)
-                .ProjectTo<FacultyListingServiceModel>(this.mapper.ConfigurationProvider)
-                .ToListAsync();
+        public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage = FacultyPageSize)
+            => this.data
+             .Faculties
+             .OrderBy(f => f.Id)
+             .Skip((page - 1) * facultiesPerPage)
+             .Take(facultiesPerPage)
+             .To<T>()
+             .ToList();
 
-        public async Task<FacultyDetailsServiceModel> Details(int id)
-            => await this.data.Faculties
-                .Where(f => f.Id == id)
-                .ProjectTo<FacultyDetailsServiceModel>(this.mapper.ConfigurationProvider)
-                .FirstOrDefaultAsync();
+        //public async Task<FacultyDetailsServiceModel> Details(int id)
+        //    => await this.data.Faculties
+        //        .Where(f => f.Id == id)
+        //        .ProjectTo<FacultyDetailsServiceModel>(this.mapper.ConfigurationProvider)
+        //        .FirstOrDefaultAsync();
 
         public async Task<bool> Exists(int id)
             => await this.data.Faculties.AnyAsync(f => f.Id == id);

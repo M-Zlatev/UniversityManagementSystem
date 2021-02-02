@@ -1,6 +1,11 @@
 ﻿namespace UMS.Web.ViewModels
 {
-    public class DepartmentDetailsViewModel
+    using AutoMapper;
+
+    using Common.Mapping;
+    using Data.Models;
+
+    public class DepartmentDetailsViewModel : IMapFrom<Department>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -15,5 +20,12 @@
         public string Fax { get; set; }
 
         public string BelongsToFaculty { get; set; }
+
+        public void RegisterMappings(IProfileExpression profile)
+        {
+            profile
+                .CreateMap<Department, DepartmentDetailsViewModel>()
+                .ForMember(d => d.BelongsToFaculty, cfg => cfg.MapFrom(d => d.Faculty.Name));
+        }
     }
 }
