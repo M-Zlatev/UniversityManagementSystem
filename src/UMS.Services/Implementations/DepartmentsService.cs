@@ -13,13 +13,13 @@
     using UMS.Data;
     using UMS.Data.Models;
 
-    public class DepartmentService : IDepartmentService
+    public class DepartmentsService : IDepartmentsService
     {
         private const int DepartmentPageSize = 10;
 
         private readonly UmsDbContext data;
 
-        public DepartmentService(UmsDbContext data)
+        public DepartmentsService(UmsDbContext data)
         {
             this.data = data;
         }
@@ -33,11 +33,15 @@
              .To<T>()
              .ToList();
 
-        //public async Task<DepartmentDetailsServiceModel> Details(int id)
-        //    => await this.data.Departments
-        //        .Where(d => d.Id == id)
-        //        .ProjectTo<DepartmentDetailsServiceModel>(this.mapper.ConfigurationProvider)
-        //        .FirstOrDefaultAsync();
+        public T GetDetails<T>(int id)
+            => this.data
+                .Departments
+                .Where(d => d.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+        public int GetCount()
+            => this.data.Departments.Count();
 
         public async Task<bool> Exists(int id)
             => await this.data.Departments.AnyAsync(d => d.Id == id);

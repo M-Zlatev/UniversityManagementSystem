@@ -14,13 +14,13 @@
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
 
-    public class MajorService : IMajorService
+    public class MajorsService : IMajorsService
     {
         private const int MajorPageSize = 10;
 
         private readonly UmsDbContext data;
 
-        public MajorService(UmsDbContext data)
+        public MajorsService(UmsDbContext data)
         {
             this.data = data;
         }
@@ -34,11 +34,15 @@
              .To<T>()
              .ToList();
 
-        //public async Task<MajorDetailsServiceModel> Details(int id)
-        //    => await this.data.Majors
-        //        .Where(m => m.Id == id)
-        //        .ProjectTo<MajorDetailsServiceModel>(this.mapper.ConfigurationProvider)
-        //        .FirstOrDefaultAsync();
+        public T GetDetails<T>(int id)
+            => this.data
+                .Majors
+                .Where(m => m.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+        public int GetCount()
+            => this.data.Majors.Count();
 
         public async Task<bool> Exists(int id)
             => await this.data.Majors.AnyAsync(m => m.Id == id);

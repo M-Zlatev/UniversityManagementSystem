@@ -5,11 +5,11 @@
 
     using UMS.Data.Common.Enumerations;
 
-    public interface IMajorService : ITransientService
+    public interface IMajorsService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int page, int majorsPerPage);
 
-        //public Task<MajorDetailsServiceModel> Details(int id);
+        public T GetDetails<T>(int id);
 
         Task<bool> Exists(int id);
 

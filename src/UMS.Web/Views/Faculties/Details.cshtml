@@ -1,0 +1,17 @@
+﻿@model UMS.Web.ViewModels.FacultyDetailsViewModel
+@{
+    this.ViewData["Title"] = "Details for Faculty";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div>
+    <p style="white-space: pre-line"><b>Faculty name: </b>@Model.Name</p>
+    <p style="white-space: pre-line"><b>Faculty description: </b>@Model.Description</p>
+    <p style="white-space: pre-line"><b>Faculty adress description: </b>@Model.AddressStreetName</p> 
+    <p style="white-space: pre-line"><b>Faculty address town: </b>@Model.AddressTownName</p>
+    <p style="white-space: pre-line"><b>Faculty address country: </b>@Model.AddressCountryName</p> 
+    <p style="white-space: pre-line"><b>Faculty email: </b>@Model.Email</p>
+    <p style="white-space: pre-line"><b>Faculty phone number: </b>@Model.PhoneNumber</p>
+    <p style="white-space: pre-line"><b>Faculty fax: </b>@Model.Fax</p>
+</div>

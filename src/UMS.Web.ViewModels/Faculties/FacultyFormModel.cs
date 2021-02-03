@@ -1,4 +1,4 @@
-﻿namespace UMS.Web.Models.Faculty
+﻿namespace UMS.Web.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 

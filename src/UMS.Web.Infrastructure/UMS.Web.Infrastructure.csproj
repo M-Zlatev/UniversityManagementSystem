@@ -30,6 +30,7 @@
 		<ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
 		<ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
 		<ProjectReference Include="..\UMS.Services\UMS.Services.csproj" />
+		<ProjectReference Include="..\UMS.Web.ViewModels\UMS.Web.ViewModels.csproj" />
 	</ItemGroup>
 	
 </Project>

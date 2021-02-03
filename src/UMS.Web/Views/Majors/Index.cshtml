@@ -1,0 +1,21 @@
+﻿@model UMS.Web.ViewModels.Majors.MajorGetAllViewModel
+@{
+    this.ViewData["Title"] = "All Majors, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var major in this.Model.GetAllMajorViewModel)
+    {
+        @major.Id @:&nbsp;
+        @major.Name @:&nbsp;
+        @major.Description
+        <br />
+    }
+</div>
+<hr />

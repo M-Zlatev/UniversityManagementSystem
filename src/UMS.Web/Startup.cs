@@ -1,8 +1,5 @@
 namespace UMS.Web
 {
-    using System.Reflection;
-
-    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -15,7 +12,6 @@ namespace UMS.Web
     using Data;
     using Data.Models;
     using Infrastructure;
-    using Models;
     using Services.Contracts;
     using Services.Implementations;
     using ViewModels;
@@ -46,7 +42,7 @@ namespace UMS.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorsViewModel).GetTypeInfo().Assembly);
+            app.UseAutoMapper(env);
 
             app.UseDataSeeding(env);
 

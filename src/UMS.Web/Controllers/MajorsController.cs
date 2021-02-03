@@ -6,16 +6,15 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure;
-    using Models.Major;
     using Services.Contracts;
     using ViewModels;
     using ViewModels.Majors;
 
-    public class MajorController : Controller
+    public class MajorsController : Controller
     {
-        private readonly IMajorService majorService;
+        private readonly IMajorsService majorService;
 
-        public MajorController(IMajorService majors)
+        public MajorsController(IMajorsService majors)
             => this.majorService = majors;
 
         public IActionResult Index(int id = 1)
@@ -34,6 +33,17 @@
                 GetAllMajorViewModel = this.majorService.GetAll<MajorListingViewModel>(id, MajorsPerPage),
             };
 
+            return this.View(viewModel);
+        }
+
+        public IActionResult Details(int id)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = this.majorService.GetDetails<MajorDetailsViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -85,18 +95,6 @@
             }
 
             return this.View(model);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            //var faculty = await this.majors.Details(id);
-
-            if (this.majorService == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(this.majorService);
         }
 
         [HttpGet]

@@ -11,16 +11,15 @@
 
     using Data.Models;
     using Infrastructure;
-    using Models.Faculty;
     using Services.Contracts;
     using ViewModels;
     using ViewModels.Faculties;
 
-    public class FacultyController : Controller
+    public class FacultiesController : Controller
     {
-        private readonly IFacultyService facultyService;
+        private readonly IFacultiesService facultyService;
 
-        public FacultyController(IFacultyService faculties)
+        public FacultiesController(IFacultiesService faculties)
         {
             this.facultyService = faculties;
         }
@@ -44,6 +43,17 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Details(int id)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = this.facultyService.GetDetails<FacultyDetailsViewModel>(id);
+            return this.View(viewModel);
+        }
+
         [HttpGet]
         public IActionResult Create()
             => this.View();
@@ -57,7 +67,7 @@
                 var facultyId = await this.facultyService.Create(
                     model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax, this.User.GetUserId());
 
-                //return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
+                return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
             }
 
             return this.View(model);
@@ -88,23 +98,11 @@
             {
                 await this.facultyService.Edit(id, model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax);
 
-                //return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
             return this.View(model);
         }
-
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    var faculty = await this.faculties.Details(id);
-
-        //    if (this.faculties == null)
-        //    {
-        //        return this.NotFound();
-        //    }
-
-        //    return this.View(this.faculties);
-        //}
 
         [HttpGet]
         [Authorize]

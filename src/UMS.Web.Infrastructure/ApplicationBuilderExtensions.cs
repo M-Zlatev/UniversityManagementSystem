@@ -1,16 +1,29 @@
 ﻿namespace UMS.Web.Infrastructure
 {
+    using System.Reflection;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using Common.Mapping;
     using Data;
     using Data.Seeding;
+    using ViewModels;
 
     public static class ApplicationBuilderExtensions
     {
+        public static IApplicationBuilder UseAutoMapper(
+            this IApplicationBuilder app,
+            IWebHostEnvironment env)
+        {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            return app;
+        }
+
         public static IApplicationBuilder UseDataSeeding(
             this IApplicationBuilder app,
             IWebHostEnvironment env)

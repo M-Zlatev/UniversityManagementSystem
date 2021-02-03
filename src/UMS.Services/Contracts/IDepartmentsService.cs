@@ -5,11 +5,11 @@
 
     using Data.Models;
 
-    public interface IDepartmentService : ITransientService
+    public interface IDepartmentsService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int page, int departmentsPerPage);
 
-        //public Task<DepartmentDetailsServiceModel> Details(int id);
+        public T GetDetails<T>(int id);
 
         Task<bool> Exists(int id);
 

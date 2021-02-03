@@ -6,16 +6,15 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure;
-    using Models.Department;
     using Services.Contracts;
     using ViewModels;
     using ViewModels.Departments;
 
-    public class DepartmentController : Controller
+    public class DepartmentsController : Controller
     {
-        private readonly IDepartmentService departmentService;
+        private readonly IDepartmentsService departmentService;
 
-        public DepartmentController(IDepartmentService departments)
+        public DepartmentsController(IDepartmentsService departments)
             => this.departmentService = departments;
 
         public IActionResult Index(int id = 1)
@@ -34,6 +33,17 @@
                 GetAllDepartmentViewModel = this.departmentService.GetAll<DepartmentListingViewModel>(id, DepartmentsPerPage),
             };
 
+            return this.View(viewModel);
+        }
+
+        public IActionResult Details(int id)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            var viewModel = this.departmentService.GetDetails<DepartmentDetailsViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -85,18 +95,6 @@
             }
 
             return this.View(model);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            //var faculty = await this.departmentService.Details(id);
-
-            if (this.departmentService == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(this.departmentService);
         }
 
         [HttpGet]

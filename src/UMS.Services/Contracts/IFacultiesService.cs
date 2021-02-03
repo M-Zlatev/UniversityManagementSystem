@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IFacultyService : ITransientService
+    public interface IFacultiesService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage);
 
-        //public Task<FacultyDetailsServiceModel> Details(int id);
+        public T GetDetails<T>(int id);
 
         Task<bool> Exists(int id);
 
