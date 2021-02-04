@@ -37,7 +37,7 @@
         public static class DepartmentOfPrivateLaw
         {
             public const string Name = "Department of Private Law";
-            public const string Description = "";
+            public const string Description = "The Department of Private Law is home to academics focused on a broad range of specialist areas, including land law and land redistribution, customary law, the law of contract, the law of succession, family law, comparative law and the nature of the legal systems, the fundamentals of the law of delict, and the jurisprudential and historical context of private law.";
             public const string Email = "private-law@university.department.com";
             public const string PhoneNumber = "+359-2 104 004";
             public const string Fax = "2 222 0404";
@@ -47,7 +47,7 @@
         public static class DepartmentOfPublicLaw
         {
             public const string Name = "Department of Public Law";
-            public const string Description = "";
+            public const string Description = "Public Law is the field of law focused on the relationship between individuals and government. Engaged in research and teaching in an exciting range of key public law areas, staff in the Department of Public Law are also members of Faculty research units.Areas of expertise in the Department include (amongst other areas) Law & Society; Constitutional Law; Criminal Justice; Criminology; Human Rights; Governance & the Judiciary; Refugee Rights; Land issues; Access to Case Law; Administrative Law; and Marine & Environmental Law.";
             public const string Email = "public-law@university.department.com";
             public const string PhoneNumber = "+359-2 105 005";
             public const string Fax = "2 222 0505";
@@ -57,7 +57,7 @@
         public static class DepartmentOfCriminalLaw
         {
             public const string Name = "Department of Criminal Law";
-            public const string Description = "";
+            public const string Description = "The Department of Criminal Law seeks to prepare students for the study and practice of substantive criminal law and the law of evidence and procedure through the examination of a broad selection of topics which cover the more significant aspects of the subject.";
             public const string Email = "criminal-law@university.department.com";
             public const string PhoneNumber = "+359-2 106 006";
             public const string Fax = "2 222 0606";
@@ -67,7 +67,7 @@
         public static class DepartmentOfInternationalLaw
         {
             public const string Name = "Department of International Law";
-            public const string Description = "";
+            public const string Description = "The International Law Department monitors and examines the development of international law and its institutions, the codification of international law, the system and development of international universal and regional organisations, and the legal aspects of integration into and operation within such organisations.";
             public const string Email = "international-law@university.department.com";
             public const string PhoneNumber = "+359-2 107 007";
             public const string Fax = "2 222 0707";
@@ -75,11 +75,10 @@
         }
 
         // Faculty Of Medical Science's Departments
-
         public static class DepartmentOfMedicine
         {
             public const string Name = "Department of Medicine";
-            public const string Description = "";
+            public const string Description = "The educational mission of the Department of Medicine is to provide excellent broad-based clinical training in a scholarly environment for future academic leaders. We provide clinical training in all of the disciplines of internal medicine. With respect to our educational mission, Department of Medicine trainees include medical students, graduate students, interns, residents, clinical and research fellows, and postdoctoral fellows.";
             public const string Email = "medicine@university.department.com";
             public const string PhoneNumber = "+359-2 108 008";
             public const string Fax = "2 222 0808";
@@ -89,7 +88,7 @@
         public static class DepartmentOfDentalMedicine
         {
             public const string Name = "Department of Dental Medicine";
-            public const string Description = "";
+            public const string Description = "The Department of Dental Medicine prepares doctors in Dental Medicine, in the educational and qualification degree\"Master\" who are capable of successful implementing in real social environment the acquired knowledge and skills for the protection, restoration and strengthening of dental health of the population, i.e. the mission the Department is targeted at the social needs of the population.";
             public const string Email = "dental-medicine@university.department.com";
             public const string PhoneNumber = "+359-2 109 009";
             public const string Fax = "2 222 0909";
@@ -99,7 +98,7 @@
         public static class DepartmentOfPharmacy
         {
             public const string Name = "Department of Pharmacy";
-            public const string Description = "";
+            public const string Description = "The Department of Pharmacy Practice within our university provides professional educational opportunities for undergraduate, graduate and postgraduate students and practitioners to enable them to practice pharmaceutical care, adapt to changing professional roles, use new technologies, assume leadership roles in a dynamic health-care environment and contribute new knowledge to the profession.In addition to their teaching and research, Pharmacy Practice faculty members serve as mentors to student both through the Pharm.D and residency programs.";
             public const string Email = "pharmacy@university.department.com";
             public const string PhoneNumber = "+359-2 110 010";
             public const string Fax = "2 222 1010";
@@ -109,7 +108,7 @@
         public static class DepartmentOfPublicHealth
         {
             public const string Name = "Department of Public Health";
-            public const string Description = "";
+            public const string Description = "Department of Public Health promotes the health and well-being of all residents by ensuring access to high-quality public health and healthcare services, and by focusing on prevention, wellness, and health equity in all people.";
             public const string Email = "public-health@university.department.com";
             public const string PhoneNumber = "+359-2 111 011";
             public const string Fax = "2 222 1111";
@@ -222,7 +221,7 @@
         public static class DepartmentOfGeneralHistory
         {
             public const string Name = "Department of General history";
-            public const string Description = "";
+            public const string Description = "The department holds accreditation for all three levels of study – Bachelor’s, Master’s and Doctoral. As part of its teaching activities, the department offers students of history, as well as other related fields, lectures and seminars in general history from ancient times until today. In research, members of the department focus on examining the important periods of the political, economic, social and cultural history of Europe, and in specific periods also on the history of other regions (Russian and Caucasian history, Byzantine history).";
             public const string Email = "general-history@university.department.com";
             public const string PhoneNumber = "+359-2 122 022";
             public const string Fax = "2 222 2222";
@@ -232,7 +231,7 @@
         public static class DepartmentOfArcheology
         {
             public const string Name = "Department of Archeology";
-            public const string Description = "";
+            public const string Description = "Department of Archeology's primary focus is to give the students a broad range of expertise in archaeological method and theory including key areas of archaeometry, digital technology, archaeozoology, lithics and ceramics analysis. It offers its students the human past in its entirety, from the origins of our species to events of yesterday.";
             public const string Email = "archeology@university.department.com";
             public const string PhoneNumber = "+359-2 123 023";
             public const string Fax = "2 222 2323";
@@ -242,7 +241,7 @@
         public static class DepartmentOfEthnology
         {
             public const string Name = "Department of Ethnology";
-            public const string Description = "the study of the characteristics of different peoples and the differences and relationships between them.";
+            public const string Description = "The Department of Ethnology give its students the general study of the everyday life of people. Everyday life and its routines are thought to reflect profound, both short- and long-term, cultural structures and thought patterns. Ethnologists study, among other things, a wide range of temporal strata, continua and revolutions, as well as contemporary cultural processes. Research may be focused on work, hobbies, objects or places. They may be examined from the perspective of ethnicity, gender or age, as well as in the dimensions of the past, the present and, in part, the future.";
             public const string Email = "ethnology@university.department.com";
             public const string PhoneNumber = "+359-2 124 024";
             public const string Fax = "2 222 2424";
@@ -253,7 +252,7 @@
         public static class DepartmentOfMathematics
         {
             public const string Name = "Department of Mathematics";
-            public const string Description = "";
+            public const string Description = "The Department of Mathematics offers study programs in mathematical sciences at the bachelor's, master's and Ph.D. levels, and we are also very active in mathematics education. Our department members conduct research in a wide range of theoretical and applied mathematics, including statistics and computational mathematics.";
             public const string Email = "mathematics@university.department.com";
             public const string PhoneNumber = "+359-2 125 025";
             public const string Fax = "2 222 2525";
@@ -263,7 +262,7 @@
         public static class DepartmentOfInformatics
         {
             public const string Name = "Department of Informatics";
-            public const string Description = "";
+            public const string Description = "Department of Informatics give its students a deep knowledge in science behind any software - from computer programs, mobile apps and games, to major IT systems, databases and web portals.";
             public const string Email = "informatics@university.department.com";
             public const string PhoneNumber = "+359-2 124 024";
             public const string Fax = "2 222 2626";
@@ -274,7 +273,7 @@
         public static class DepartmentOfTheology
         {
             public const string Name = "Department of Theology";
-            public const string Description = "";
+            public const string Description = "The Theology department provides students with the knowledge and skills necessary for reasoned reflection on their own values, faith, and tradition, as well as on the religious forces that shape our society and world. The department’s five primary areas of research include biblical studies, historical theology/history of christianity, comparative theology, systematic theology, and theological ethics.";
             public const string Email = "theology@university.department.com";
             public const string PhoneNumber = "+359-2 127 027";
             public const string Fax = "2 222 2727";
@@ -284,7 +283,7 @@
         public static class DepartmentOfReligion
         {
             public const string Name = "Department of Religion";
-            public const string Description = "";
+            public const string Description = "Department of Religion's members conduct research and offer courses in major religious traditions in the world. Our department includes anthropologists, historians, literary scholars, and philosophers – all devoted to understanding the impact that religion has had and continues to have in human society.";
             public const string Email = "religion@university.department.com";
             public const string PhoneNumber = "+359-2 128 028";
             public const string Fax = "2 222 2828";
@@ -295,7 +294,7 @@
         public static class DepartmentOfPhilosophy
         {
             public const string Name = "Department of Philosophy";
-            public const string Description = "";
+            public const string Description = "Department of Philosophy give its students a deep study of the characteristics of different peoples and the differences and relationships between them.";
             public const string Email = "philosophy@university.department.com";
             public const string PhoneNumber = "+359-2 129 029";
             public const string Fax = "2 222 2929";
@@ -305,7 +304,7 @@
         public static class DepartmentOfPsychology
         {
             public const string Name = "Department of Psychology";
-            public const string Description = "";
+            public const string Description = "The Department of Psychology provides a range of BPS accredited undergraduate(BSc) and postgraduate taught(MSc) degree programmes in psychology, including a fully accredited doctorate in clinical psychology(DClinPsychol). Students at all levels benefit from immersion in a world-leading research intensive environment.Our philosophy is to provide a research-connected student experience combining active learning and authentic assessment.";
             public const string Email = "psychology@university.department.com";
             public const string PhoneNumber = "+359-2 130 030";
             public const string Fax = "2 222 3030";
@@ -316,7 +315,7 @@
         public static class DepartmentOfPhysics
         {
             public const string Name = "Department of Physics";
-            public const string Description = "";
+            public const string Description = "Our department seeks to provide an outstanding and distinctive education to our undergraduate and graduate students, while also maintaining a broad, vibrant research program as we attempt to answer some of the most fundamental questions in nature.";
             public const string Email = "physics@university.department.com";
             public const string PhoneNumber = "+359-2 131 031";
             public const string Fax = "2 222 3131";
@@ -326,7 +325,7 @@
         public static class DepartmentOfChemistry
         {
             public const string Name = "Department of Chemistry";
-            public const string Description = "";
+            public const string Description = "The students in our Department explore a broad range of atomic and molecular systems, create new forms of matter, and develop experimental and theoretical tools to understand and control the behavior of electrons, atoms, molecules and materials – to the benefit of science and society. Some of our research groups focus on core aspects of physical and synthetic chemistry, while others explore open questions at the interface with materials science, energy science, catalysis, neuroscience, chemical biology, and biophysics. We are dedicated to developing the next generation of scholars in the chemical sciences and building an inclusive learning environment.";
             public const string Email = "chemistry@university.department.com";
             public const string PhoneNumber = "+359-2 132 032";
             public const string Fax = "2 222 3232";
@@ -337,7 +336,7 @@
         public static class DepartmentOfEconomy
         {
             public const string Name = "Department of Economy";
-            public const string Description = "";
+            public const string Description = "Department of Economy plays an integral role in formulating and delivering economic development policy related to economic strategy, regulation, innovation, higher education, enterprise policy, energy, telecoms, and tourism. The department also has responsibility for ensuring a modern regulatory framework to support business and protect consumers.";
             public const string Email = "economy@university.department.com";
             public const string PhoneNumber = "+359-2 133 033";
             public const string Fax = "2 222 3333";

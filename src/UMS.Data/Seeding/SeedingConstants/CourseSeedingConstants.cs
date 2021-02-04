@@ -16,6 +16,10 @@
             public const int MajorId = 11;
         }
 
-
+        //Algebra.
+        //Geometry.
+        //Trigonometry.
+        //Calculus.
+        //Statistics and Probability.
     }
 }

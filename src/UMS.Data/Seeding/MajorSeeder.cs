@@ -7,6 +7,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
+    using Common.Enumerations;
     using Models;
     using Factories;
     using static SeedingConstants.MajorSeedingConstants;
@@ -24,12 +25,12 @@
             var majors = majorFactory.CreateEntities();
 
             // necessary cast for data manipulation in the AddAsyncMajorsInDb method below
-            var majorsAfterCast = (List<(string Name, double Duration, int DepartmentId)>)majors;
+            var majorsAfterCast = (List<(string Name, double Duration, MajorType MajorDegreeType, int DepartmentId)>)majors;
 
             await AddAsyncMajorsInDb(dbContext, majorsAfterCast);
         }
 
-        private static async Task AddAsyncMajorsInDb(UmsDbContext dbContext, List<(string Name, double Duration, int DepartmentId)> majorsAfterCast)
+        private static async Task AddAsyncMajorsInDb(UmsDbContext dbContext, List<(string Name, double Duration, MajorType MajorDegreeType, int DepartmentId)> majorsAfterCast)
         {
             foreach (var major in majorsAfterCast)
             {
@@ -37,6 +38,7 @@
                 {
                     Name = major.Name,
                     Duration = major.Duration,
+                    MajorType = major.MajorDegreeType,
                     DepartmentId = major.DepartmentId,
                 });
             }

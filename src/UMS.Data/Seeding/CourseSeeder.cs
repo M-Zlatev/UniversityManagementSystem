@@ -34,7 +34,6 @@
             {
                 var course = new Course()
                 {
-                    Id = currentCourse.CourseId,
                     Name = currentCourse.Name,
                 };
 
