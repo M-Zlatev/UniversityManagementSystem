@@ -23,18 +23,19 @@
             var courses = courseFactory.CreateEntities();
 
             // necessary cast for data manipulation in the AddAsyncCoursesInDb method below
-            var coursesAfterCast = (List<(string Name, int CourseId, int MajorId)>)courses;
+            var coursesAfterCast = (List<(string Name, decimal Price, int MajorId)>)courses;
 
             await AddAsyncCoursesInDb(dbContext, coursesAfterCast);
         }
 
-        private static async Task AddAsyncCoursesInDb(UmsDbContext dbContext, List<(string Name, int CourseId, int MajorId)> courses)
+        private static async Task AddAsyncCoursesInDb(UmsDbContext dbContext, List<(string Name, decimal Price, int MajorId)> courses)
         {
             foreach (var currentCourse in courses)
             {
                 var course = new Course()
                 {
                     Name = currentCourse.Name,
+                    Price = currentCourse.Price,
                 };
 
                 await dbContext.Courses.AddAsync(course);
@@ -43,12 +44,14 @@
                     .Where(m => m.Id == currentCourse.MajorId)
                     .FirstOrDefault();
 
+                var currentCourseId = course.Id;
+
                 await dbContext.CourseMajors.AddAsync(new CourseMajor
                 {
                     Major = major,
                     MajorId = currentCourse.MajorId,
                     Course = course,
-                    CourseId = currentCourse.CourseId,
+                    CourseId = currentCourseId,
                 });
             }
         }
