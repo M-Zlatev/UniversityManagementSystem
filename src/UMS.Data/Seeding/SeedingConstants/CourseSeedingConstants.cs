@@ -947,14 +947,112 @@
         }
 
         // Marketing
+        public static class Advertising
+        {
+            public const string Name = "Advertising";
+            public const decimal Price = 459;
+            public const int MajorId = 66;
+        }
+
+        public static class Branding
+        {
+            public const string Name = "Branding";
+            public const decimal Price = 467;
+            public const int MajorId = 66;
+        }
+
+        public static class MobileMarket
+        {
+            public const string Name = "MobileMarket";
+            public const decimal Price = 443;
+            public const int MajorId = 66;
+        }
+
         // Master in Applied Arts
+        public static class AppliedArtsScience
+        {
+            public const string Name = "Applied Arts science";
+            public const decimal Price = 443;
+            public const int MajorId = 67;
+        }
+
         // Master in Performing Arts
+        public static class PerformingArtsScience
+        {
+            public const string Name = "Performing Arts science";
+            public const decimal Price = 443;
+            public const int MajorId = 68;
+        }
+
         // Civil Law
+        public static class CustodyDisputes
+        {
+            public const string Name = "Custody disputes";
+            public const decimal Price = 530;
+            public const int MajorId = 69;
+        }
+
+        public static class PropertyDamage
+        {
+            public const string Name = "Property damage";
+            public const decimal Price = 530;
+            public const int MajorId = 69;
+        }
+
         // Labour Law
+        public static class IndividualLabourLaw
+        {
+            public const string Name = "Individual labour law";
+            public const decimal Price = 680;
+            public const int MajorId = 70;
+        }
+
+        public static class CollectiveLabourLaw
+        {
+            public const string Name = "Collective labour law";
+            public const decimal Price = 680;
+            public const int MajorId = 70;
+        }
+
+        public static class InternationalLabourLaw
+        {
+            public const string Name = "International labour law";
+            public const decimal Price = 680;
+            public const int MajorId = 70;
+        }
+
         // Corporation Law
+        public static class CompanyLawTheory
+        {
+            public const string Name = "Company law theory";
+            public const decimal Price = 702;
+            public const int MajorId = 71;
+        }
+
         // Competition Law
+        public static class CompetitionLawTheory
+        {
+            public const string Name = "Competition law theory";
+            public const decimal Price = 653;
+            public const int MajorId = 72;
+        }
+
         // Master in Private Law
+        public static class PrivateLawStudies
+        {
+            public const string Name = "Private Law studies";
+            public const decimal Price = 966;
+            public const int MajorId = 73;
+        }
+
         // Administrative Law
+        public static class LawAndLegalPrinciples
+        {
+            public const string Name = "Law and legal principles";
+            public const decimal Price = 966;
+            public const int MajorId = 74;
+        }
+
         // Performing Arts
         public static class Dance
         {

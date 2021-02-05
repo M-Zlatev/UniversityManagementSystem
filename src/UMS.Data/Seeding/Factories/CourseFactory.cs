@@ -267,22 +267,36 @@
                 (Sculpture.Name, Sculpture.Price, Sculpture.MajorId),
 
                 // Marketing
+                (Advertising.Name, Advertising.Price, Advertising.MajorId),
+                (Branding.Name, Branding.Price, Branding.MajorId),
+                (MobileMarket.Name, MobileMarket.Price, MobileMarket.MajorId),
 
                 // Master in Applied Arts
+                (AppliedArtsScience.Name, AppliedArtsScience.Price, AppliedArtsScience.MajorId),
 
                 // Master in Performing Arts
+                (PerformingArtsScience.Name, PerformingArtsScience.Price, PerformingArtsScience.MajorId),
 
                 // Civil Law
+                (CustodyDisputes.Name, CustodyDisputes.Price, CustodyDisputes.MajorId),
+                (PropertyDamage.Name, PropertyDamage.Price, PropertyDamage.MajorId),
 
                 // Labour Law
+                (IndividualLabourLaw.Name, IndividualLabourLaw.Price, IndividualLabourLaw.MajorId),
+                (CollectiveLabourLaw.Name, CollectiveLabourLaw.Price, CollectiveLabourLaw.MajorId),
+                (InternationalLabourLaw.Name, InternationalLabourLaw.Price, InternationalLabourLaw.MajorId),
 
                 // Corporation Law
+                (CompanyLawTheory.Name, CompanyLawTheory.Price, CompanyLawTheory.MajorId),
 
                 // Competition Law
+                (CompetitionLawTheory.Name, CompetitionLawTheory.Price, CompetitionLawTheory.MajorId),
 
                 // Master in Private Law
+                (PrivateLawStudies.Name, PrivateLawStudies.Price, PrivateLawStudies.MajorId),
 
                 // Administrative Law
+                (LawAndLegalPrinciples.Name, LawAndLegalPrinciples.Price, LawAndLegalPrinciples.MajorId),
 
                 // Performing Arts
                 (Dance.Name, Dance.Price, Dance.MajorId),
