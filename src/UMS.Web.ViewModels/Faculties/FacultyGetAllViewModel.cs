@@ -4,6 +4,6 @@
 
     public class FacultyGetAllViewModel : PagingViewModel
     {
-        public IEnumerable<FacultyListingViewModel> GetAllFacultyViewModel { get; set; }
+        public IEnumerable<FacultyListingViewModel> Faculties { get; set; }
     }
 }

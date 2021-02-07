@@ -1,27 +1,22 @@
 ﻿namespace UMS.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
-    using System.Linq;
 
-    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Data.Models;
     using Infrastructure;
     using Services.Contracts;
     using ViewModels;
-    using ViewModels.Faculties;
+    using ViewModels.Teachers;
 
-    public class FacultiesController : Controller
+    public class TeachersController : Controller
     {
-        private readonly IFacultiesService facultyService;
+        private readonly ITeachersService teachersService;
 
-        public FacultiesController(IFacultiesService faculties)
+        public TeachersController(ITeachersService teachersService)
         {
-            this.facultyService = faculties;
+            this.teachersService = teachersService;
         }
 
         public IActionResult Index(int id = 1)
@@ -31,13 +26,13 @@
                 return this.NotFound();
             }
 
-            const int FacultyPerPage = 10;
+            const int TeachersPerPage = 10;
 
-            var viewModel = new FacultyGetAllViewModel
+            var viewModel = new TeacherGetAllViewModel
             {
-                ItemsPerPage = FacultyPerPage,
+                ItemsPerPage = TeachersPerPage,
                 PageNumber = id,
-                Faculties = this.facultyService.GetAll<FacultyListingViewModel>(id, FacultyPerPage),
+                Teachers = this.teachersService.GetAll<TeacherListingViewModel>(id, TeachersPerPage),
             };
 
             return this.View(viewModel);
@@ -50,7 +45,7 @@
                 return this.NotFound();
             }
 
-            var viewModel = this.facultyService.GetDetails<FacultyDetailsViewModel>(id);
+            var viewModel = this.teachersService.GetDetails<TeacherDetailsViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -60,14 +55,13 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(FacultyFormModel model)
+        public async Task<IActionResult> Create(TeacherFormModel model)
         {
             if (this.ModelState.IsValid)
             {
-                var facultyId = await this.facultyService.Create(
-                    model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax, this.User.GetUserId());
+                var studentId = await this.teachersService.Create(model.FirstName, model.MiddleName, model.LastName, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.PhoneNumber, model.Email, model.ImageUrl, this.User.GetUserId());
 
-                return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
+                return this.RedirectToAction(nameof(this.Details), new { id = studentId });
             }
 
             return this.View(model);
@@ -77,7 +71,7 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.teachersService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -87,16 +81,16 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, FacultyFormModel model)
+        public async Task<IActionResult> Edit(int id, TeacherFormModel model)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.teachersService.Exists(id))
             {
                 return this.NotFound();
             }
 
             if (this.ModelState.IsValid)
             {
-                await this.facultyService.Edit(id, model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax);
+                await this.teachersService.Edit(id, model.FirstName, model.MiddleName, model.LastName, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.PhoneNumber, model.Email, model.ImageUrl);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
@@ -108,7 +102,7 @@
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.teachersService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -120,12 +114,12 @@
         [Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.teachersService.Exists(id))
             {
                 return this.NotFound();
             }
 
-            await this.facultyService.Delete(id);
+            await this.teachersService.Delete(id);
 
             return this.Redirect(nameof(this.Index));
         }

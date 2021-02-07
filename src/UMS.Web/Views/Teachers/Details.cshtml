@@ -1,0 +1,24 @@
+﻿@model UMS.Web.ViewModels.Teachers.TeacherDetailsViewModel;
+@{
+    this.ViewData["Title"] = "Details for Teacher: ";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+@{
+    var address = $"{Model.AddressStreetName}, {Model.AddressTownName}, {Model.AddressCountryName}, {Model.AddressContinentName}";
+
+    <div>
+        <p style="white-space: pre-line"><b>First name: </b>@Model.FirstName</p>
+        <p style="white-space: pre-line"><b>Middle name: </b>@Model.MiddleName</p>
+        <p style="white-space: pre-line"><b>Last name: </b>@Model.LastName</p>
+        <p style="white-space: pre-line"><b>Gender: </b>@Model.Gender</p>
+        <p style="white-space: pre-line"><b>Street: </b>@Model.AddressStreetName</p>
+        <p style="white-space: pre-line"><b>Town: </b>@Model.AddressTownName</p>
+        <p style="white-space: pre-line"><b>District: </b>@Model.AddressDistrictName</p>
+        <p style="white-space: pre-line"><b>Country: </b>@Model.AddressCountryName</p>
+        <p style="white-space: pre-line"><b>Continent: </b>@Model.AddressContinentName</p>
+        <p style="white-space: pre-line"><b>Phone number: </b>@Model.PhoneNumber</p>
+        <p style="white-space: pre-line"><b>Email: </b>@Model.Email</p>
+    </div>
+}

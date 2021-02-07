@@ -10,7 +10,7 @@
 <h1>@this.ViewData["Title"]</h1>
 
 <div class="row">
-    @foreach (var major in this.Model.GetAllMajorViewModel)
+    @foreach (var major in this.Model.Majors)
     {
         @major.Id @:&nbsp;
         @major.Name @:&nbsp;

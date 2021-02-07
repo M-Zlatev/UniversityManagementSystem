@@ -1,0 +1,21 @@
+﻿@model UMS.Web.ViewModels.Courses.CourseGetAllViewModel;
+@{
+    this.ViewData["Title"] = "All Courses, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var course in this.Model.Courses)
+    {
+        @course.Id @:&nbsp;
+        @course.Name @:&nbsp;
+        @course.Description
+        <br />
+    }
+</div>
+<hr />

@@ -1,0 +1,22 @@
+﻿@model UMS.Web.ViewModels.Teachers.TeacherGetAllViewModel;
+@{
+    this.ViewData["Title"] = "All Teachers, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var teacher in this.Model.Teachers)
+    {
+        @teacher.Id @:&nbsp;
+        @teacher.FirstName @:&nbsp;
+        @teacher.LastName @:&nbsp;
+        @teacher.Email
+        <br />
+    }
+</div>
+<hr />

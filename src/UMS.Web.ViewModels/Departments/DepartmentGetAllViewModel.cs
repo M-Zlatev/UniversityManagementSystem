@@ -4,6 +4,6 @@
 
     public class DepartmentGetAllViewModel : PagingViewModel
     {
-        public IEnumerable<DepartmentListingViewModel> GetAllDepartmentViewModel { get; set; }
+        public IEnumerable<DepartmentListingViewModel> Departments { get; set; }
     }
 }

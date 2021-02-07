@@ -1,28 +1,21 @@
 ﻿namespace UMS.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
-    using System.Linq;
 
-    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Data.Models;
     using Infrastructure;
     using Services.Contracts;
     using ViewModels;
-    using ViewModels.Faculties;
+    using ViewModels.Courses;
 
-    public class FacultiesController : Controller
+    public class CoursesController : Controller
     {
-        private readonly IFacultiesService facultyService;
+        private readonly ICoursesService coursesService;
 
-        public FacultiesController(IFacultiesService faculties)
-        {
-            this.facultyService = faculties;
-        }
+        public CoursesController(ICoursesService coursesService)
+            => this.coursesService = coursesService;
 
         public IActionResult Index(int id = 1)
         {
@@ -31,13 +24,13 @@
                 return this.NotFound();
             }
 
-            const int FacultyPerPage = 10;
+            const int CoursesPerPage = 20;
 
-            var viewModel = new FacultyGetAllViewModel
+            var viewModel = new CourseGetAllViewModel
             {
-                ItemsPerPage = FacultyPerPage,
+                ItemsPerPage = CoursesPerPage,
                 PageNumber = id,
-                Faculties = this.facultyService.GetAll<FacultyListingViewModel>(id, FacultyPerPage),
+                Courses = this.coursesService.GetAll<CourseListingViewModel>(id, CoursesPerPage),
             };
 
             return this.View(viewModel);
@@ -50,24 +43,24 @@
                 return this.NotFound();
             }
 
-            var viewModel = this.facultyService.GetDetails<FacultyDetailsViewModel>(id);
+            var viewModel = this.coursesService.GetDetails<CourseDetailsViewModel>(id);
             return this.View(viewModel);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int id)
             => this.View();
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(FacultyFormModel model)
+        public async Task<IActionResult> Create(CourseFormModel model)
         {
             if (this.ModelState.IsValid)
             {
-                var facultyId = await this.facultyService.Create(
-                    model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax, this.User.GetUserId());
+                var courseId = await this.coursesService.Create(
+                    model.Name, model.Description, model.StartDate, model.EndDate, model.Price, model.BelongsToMajor, this.User.GetUserId());
 
-                return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
+                return this.RedirectToAction(nameof(this.Details), new { id = courseId });
             }
 
             return this.View(model);
@@ -77,7 +70,7 @@
         [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.coursesService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -87,16 +80,16 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, FacultyFormModel model)
+        public async Task<IActionResult> Edit(int id, CourseFormModel model)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.coursesService.Exists(id))
             {
                 return this.NotFound();
             }
 
             if (this.ModelState.IsValid)
             {
-                await this.facultyService.Edit(id, model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax);
+                await this.coursesService.Edit(id, model.Name, model.Description, model.StartDate, model.EndDate, model.Price, model.BelongsToMajor);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
@@ -108,7 +101,7 @@
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.coursesService.Exists(id))
             {
                 return this.NotFound();
             }
@@ -120,12 +113,12 @@
         [Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            if (!await this.facultyService.Exists(id))
+            if (!await this.coursesService.Exists(id))
             {
                 return this.NotFound();
             }
 
-            await this.facultyService.Delete(id);
+            await this.coursesService.Delete(id);
 
             return this.Redirect(nameof(this.Index));
         }

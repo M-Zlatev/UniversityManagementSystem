@@ -30,7 +30,7 @@
             {
                 ItemsPerPage = MajorsPerPage,
                 PageNumber = id,
-                GetAllMajorViewModel = this.majorService.GetAll<MajorListingViewModel>(id, MajorsPerPage),
+                Majors = this.majorService.GetAll<MajorListingViewModel>(id, MajorsPerPage),
             };
 
             return this.View(viewModel);

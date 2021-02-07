@@ -30,7 +30,7 @@
             {
                 ItemsPerPage = DepartmentsPerPage,
                 PageNumber = id,
-                GetAllDepartmentViewModel = this.departmentService.GetAll<DepartmentListingViewModel>(id, DepartmentsPerPage),
+                Departments = this.departmentService.GetAll<DepartmentListingViewModel>(id, DepartmentsPerPage),
             };
 
             return this.View(viewModel);

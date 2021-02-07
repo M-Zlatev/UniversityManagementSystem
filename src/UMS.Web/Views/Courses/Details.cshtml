@@ -1,0 +1,19 @@
+﻿@model UMS.Web.ViewModels.Courses.CourseDetailsViewModel;
+@{
+    string courseName = Model.Name;
+    this.ViewData["Title"] = "Details for Course: ";
+}
+
+<h1>@this.ViewData["Title"] :@courseName</h1>
+
+@{
+    decimal euroConversionRate = 1.95583M;
+    var sumInEuro = (Model.Price / euroConversionRate).ToString("f2");
+<div>
+    <p style="white-space: pre-line"><b>Course name: </b>@Model.Name</p>
+    <p style="white-space: pre-line"><b>Course start date: </b>@Model.StartDate.ToShortDateString()</p>
+    <p style="white-space: pre-line"><b>Course end date: </b>@Model.EndDate.ToShortDateString()</p>
+    <p style="white-space: pre-line"><b>Course price: </b>@Model.Price.ToString("c") / €@sumInEuro</p>
+    <p style="white-space: pre-line"><b>Major: </b>@Model.BelongsToMajor</p>
+</div>
+    }

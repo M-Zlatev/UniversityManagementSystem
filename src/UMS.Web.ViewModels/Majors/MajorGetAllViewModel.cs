@@ -4,6 +4,6 @@
 
     public class MajorGetAllViewModel : PagingViewModel
     {
-        public IEnumerable<MajorListingViewModel> GetAllMajorViewModel { get; set; }
+        public IEnumerable<MajorListingViewModel> Majors { get; set; }
     }
 }
