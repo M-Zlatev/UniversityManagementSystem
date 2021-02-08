@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models;
+    using Services.Data.Models.DepartmentsParametersModels;
 
     public interface IDepartmentsService : ITransientService
     {
@@ -13,9 +14,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string name, string description, string email, string phoneNumber, string fax, string belongsToFaculty, string userId);
+        Task<int> Create(DepartmentCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string name, string description, string email, string phoneNumber, string fax);
+        Task<bool> Edit(DepartmentEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

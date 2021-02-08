@@ -8,10 +8,11 @@
     using Microsoft.EntityFrameworkCore;
 
     using Common.Mapping;
-    using Data;
-    using Data.Common.Enumerations;
-    using Data.Models;
     using Services.Contracts;
+    using Services.Data.Models.StudentsParametersModels;
+    using UMS.Data;
+    using UMS.Data.Common.Enumerations;
+    using UMS.Data.Models;
 
     public class StudentsService : IStudentsService
     {
@@ -46,34 +47,34 @@
         public async Task<bool> Exists(int id)
             => await this.data.Students.AnyAsync(s => s.Id == id);
 
-        public async Task<int> Create(string firstName, string middleName, string lastName, int uniformCivilNumber, DateTime dateOfBirth, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string majorName, string phoneNumber, string email, string imageUrl, bool hasScholarship, string userId)
+        public async Task<int> Create(StudentCreateParametersModel model)
         {
             var major = this.data
                         .Majors
-                        .Where(m => m.Name == majorName)
+                        .Where(m => m.Name == model.MajorName)
                         .FirstOrDefault();
 
             var studentAddress = new StudentAddress()
             {
-                StreetName = streetName,
-                Town = streetName,
-                District = districtName,
-                Country = townName,
+                StreetName = model.AddressStreetName,
+                Town = model.AddressTownName,
+                District = model.AddressDistrictName,
+                Country = model.AddressCountryName,
             };
 
             var student = new Student()
             {
-                FirstName = firstName,
-                MiddleName = middleName,
-                LastName = lastName,
-                UniformCivilNumber = uniformCivilNumber,
-                DateofBirth = dateOfBirth,
-                Gender = gender,
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                UniformCivilNumber = model.UniformCivilNumber,
+                DateofBirth = model.DateOfBirth,
+                Gender = model.Gender,
                 Address = studentAddress,
-                PhoneNumber = phoneNumber,
-                Email = email,
-                ImageUrl = imageUrl,
-                HasScholarship = hasScholarship,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                ImageUrl = model.ImageUrl,
+                HasScholarship = model.HasScholarship,
             };
 
             this.data.Add(student);
@@ -96,29 +97,29 @@
             return student.Id;
         }
 
-        public async Task<bool> Edit(int id, string firstName, string middleName, string lastName, int uniformCivilNumber, DateTime dateOfBirth, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string major, string phoneNumber, string email, string imageUrl, bool hasScholarship)
+        public async Task<bool> Edit(StudentEditParametersModel model)
         {
-            var student = await this.data.Students.FindAsync(id);
+            var student = await this.data.Students.FindAsync(model.Id);
 
             if (student == null)
             {
                 return false;
             }
 
-            student.FirstName = firstName;
-            student.MiddleName = middleName;
-            student.LastName = lastName;
-            student.UniformCivilNumber = uniformCivilNumber;
-            student.DateofBirth = dateOfBirth;
-            student.Gender = gender;
-            student.Address.StreetName = streetName;
-            student.Address.Town = townName;
-            student.Address.District = districtName;
-            student.Address.Country = countryName;
-            student.PhoneNumber = phoneNumber;
-            student.Email = email;
-            student.ImageUrl = imageUrl;
-            student.HasScholarship = hasScholarship;
+            student.FirstName = model.FirstName;
+            student.MiddleName = model.MiddleName;
+            student.LastName = model.LastName;
+            student.UniformCivilNumber = model.UniformCivilNumber;
+            student.DateofBirth = model.DateOfBirth;
+            student.Gender = model.Gender;
+            student.Address.StreetName = model.AddressStreetName;
+            student.Address.Town = model.AddressTownName;
+            student.Address.District = model.AddressDistrictName;
+            student.Address.Country = model.AddressCountryName;
+            student.PhoneNumber = model.PhoneNumber;
+            student.Email = model.Email;
+            student.ImageUrl = model.ImageUrl;
+            student.HasScholarship = model.HasScholarship;
 
             await this.data.SaveChangesAsync();
 

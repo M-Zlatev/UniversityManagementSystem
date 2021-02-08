@@ -10,6 +10,7 @@
 
     using Common.Mapping;
     using Contracts;
+    using UMS.Services.Data.Models.MajorsParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
@@ -47,20 +48,20 @@
         public async Task<bool> Exists(int id)
             => await this.data.Majors.AnyAsync(m => m.Id == id);
 
-        public async Task<int> Create(string name, string description, MajorType majorType, double duration, string belongsToDepartment, string userId)
+        public async Task<int> Create(MajorCreateParametersModel model)
         {
             var departmentId = this.data
                 .Departments
-                .Where(d => d.Name == belongsToDepartment)
+                .Where(d => d.Name == model.BelongsToDepartment)
                 .Select(d => d.Id)
                 .FirstOrDefault();
 
             var major = new Major
             {
-                Name = name,
-                Description = description,
-                MajorType = majorType,
-                Duration = duration,
+                Name = model.Name,
+                Description = model.Description,
+                MajorType = model.MajorType,
+                Duration = model.Duration,
                 DepartmentId = departmentId,
             };
 
@@ -71,9 +72,9 @@
             return major.Id;
         }
 
-        public async Task<bool> Edit(int id, string name, string description, MajorType majorType, double duration, string belongsToDepartment)
+        public async Task<bool> Edit(MajorEditParametersModel model)
         {
-            var major = await this.data.Majors.FindAsync(id);
+            var major = await this.data.Majors.FindAsync(model.Id);
 
             if (major == null)
             {
@@ -82,14 +83,14 @@
 
             var departmentId = this.data
                 .Departments
-                .Where(d => d.Name == belongsToDepartment)
+                .Where(d => d.Name == model.BelongsToDepartment)
                 .Select(d => d.Id)
                 .FirstOrDefault();
 
-            major.Name = name;
-            major.Description = description;
-            major.MajorType = majorType;
-            major.Duration = duration;
+            major.Name = model.Name;
+            major.Description = model.Description;
+            major.MajorType = model.MajorType;
+            major.Duration = model.Duration;
             major.DepartmentId = departmentId;
 
             await this.data.SaveChangesAsync();

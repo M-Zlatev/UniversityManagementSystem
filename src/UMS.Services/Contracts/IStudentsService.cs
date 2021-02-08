@@ -4,7 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Common.Enumerations;
+    using UMS.Data.Common.Enumerations;
+    using Services.Data.Models.StudentsParametersModels;
 
     public interface IStudentsService : ITransientService
     {
@@ -14,9 +15,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string firstName, string middleName, string lastName, int uniformCivilNumber, DateTime dateOfBirth, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string major, string phoneNumber, string email, string imageUrl, bool hasScholarship, string userId);
+        Task<int> Create(StudentCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string firstName, string middleName, string lastName, int uniformCivilNumber, DateTime dateOfBirth, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string major, string phoneNumber, string email, string imageUrl, bool hasScholarship);
+        Task<bool> Edit(StudentEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

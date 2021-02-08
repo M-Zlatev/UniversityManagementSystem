@@ -10,6 +10,7 @@
 
     using Common.Mapping;
     using Contracts;
+    using Services.Data.Models.DepartmentsParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
 
@@ -46,21 +47,21 @@
         public async Task<bool> Exists(int id)
             => await this.data.Departments.AnyAsync(d => d.Id == id);
 
-        public async Task<int> Create(string name, string description, string email, string phoneNumber, string fax, string belongsToFaculty, string userId)
+        public async Task<int> Create(DepartmentCreateParametersModel model)
         {
             var facultyId = this.data
                 .Faculties
-                .Where(f => f.Name == belongsToFaculty)
+                .Where(f => f.Name == model.BelongsToFaculty)
                 .Select(f => f.Id)
                 .FirstOrDefault();
 
             var department = new Department
             {
-                Name = name,
-                Description = description,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Fax = fax,
+                Name = model.Name,
+                Description = model.Description,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Fax = model.Fax,
                 FacultyId = facultyId,
             };
 
@@ -71,20 +72,20 @@
             return department.Id;
         }
 
-        public async Task<bool> Edit(int id, string name, string description, string email, string phoneNumber, string fax)
+        public async Task<bool> Edit(DepartmentEditParametersModel model)
         {
-            var department = await this.data.Departments.FindAsync(id);
+            var department = await this.data.Departments.FindAsync(model.Id);
 
             if (department == null)
             {
                 return false;
             }
 
-            department.Name = name;
-            department.Description = description;
-            department.Email = email;
-            department.PhoneNumber = phoneNumber;
-            department.Fax = fax;
+            department.Name = model.Name;
+            department.Description = model.Description;
+            department.Email = model.Email;
+            department.PhoneNumber = model.PhoneNumber;
+            department.Fax = model.Fax;
 
             await this.data.SaveChangesAsync();
 

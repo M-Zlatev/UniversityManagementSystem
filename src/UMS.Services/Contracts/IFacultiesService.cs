@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Services.Data.Models.FacultiesParametersModels;
+
     public interface IFacultiesService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage);
@@ -11,9 +13,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string name, string description, string streetName, string townName, string countryName, string email, string phoneNumber, string fax, string userId);
+        Task<int> Create(FacultyCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string name, string description, string streetName, string townName, string countryName, string email, string phoneNumber, string fax);
+        Task<bool> Edit(FacultyEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

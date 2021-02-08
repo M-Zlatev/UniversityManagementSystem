@@ -8,10 +8,11 @@
     using Microsoft.EntityFrameworkCore;
 
     using Common.Mapping;
-    using Data;
-    using Data.Common.Enumerations;
-    using Data.Models;
     using Services.Contracts;
+    using Services.Data.Models.TeachersParametersModels;
+    using UMS.Data;
+    using UMS.Data.Common.Enumerations;
+    using UMS.Data.Models;
 
     public class TeachersService : ITeachersService
     {
@@ -46,26 +47,26 @@
         public async Task<bool> Exists(int id)
             => await this.data.Teachers.AnyAsync(t => t.Id == id);
 
-        public async Task<int> Create(string firstName, string middleName, string lastName, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string phoneNumber, string email, string imageUrl, string userId)
+        public async Task<int> Create(TeacherCreateParametersModel model)
         {
             var teacherAddress = new TeacherAddress()
             {
-                StreetName = streetName,
-                Town = streetName,
-                District = districtName,
-                Country = townName,
+                StreetName = model.AddressStreetName,
+                Town = model.AddressTownName,
+                District = model.AddressDistrictName,
+                Country = model.AddressCountryName,
             };
 
             var teacher = new Teacher()
             {
-                FirstName = firstName,
-                MiddleName = middleName,
-                LastName = lastName,
-                Gender = gender,
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                Gender = model.Gender,
                 Address = teacherAddress,
-                PhoneNumber = phoneNumber,
-                Email = email,
-                ImageUrl = imageUrl,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                ImageUrl = model.ImageUrl,
             };
 
             this.data.Add(teacher);
@@ -75,26 +76,26 @@
             return teacher.Id;
         }
 
-        public async Task<bool> Edit(int id, string firstName, string middleName, string lastName, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string phoneNumber, string email, string imageUrl)
+        public async Task<bool> Edit(TeacherEditParametersModel model)
         {
-            var teacher = await this.data.Teachers.FindAsync(id);
+            var teacher = await this.data.Teachers.FindAsync(model.Id);
 
             if (teacher == null)
             {
                 return false;
             }
 
-            teacher.FirstName = firstName;
-            teacher.MiddleName = middleName;
-            teacher.LastName = lastName;
-            teacher.Gender = gender;
-            teacher.Address.StreetName = streetName;
-            teacher.Address.Town = townName;
-            teacher.Address.District = districtName;
-            teacher.Address.Country = countryName;
-            teacher.PhoneNumber = phoneNumber;
-            teacher.Email = email;
-            teacher.ImageUrl = imageUrl;
+            teacher.FirstName = model.FirstName;
+            teacher.MiddleName = model.MiddleName;
+            teacher.LastName = model.LastName;
+            teacher.Gender = model.Gender;
+            teacher.Address.StreetName = model.AddressStreetName;
+            teacher.Address.Town = model.AddressTownName;
+            teacher.Address.District = model.AddressDistrictName;
+            teacher.Address.Country = model.AddressCountryName;
+            teacher.PhoneNumber = model.PhoneNumber;
+            teacher.Email = model.Email;
+            teacher.ImageUrl = model.ImageUrl;
 
             await this.data.SaveChangesAsync();
 

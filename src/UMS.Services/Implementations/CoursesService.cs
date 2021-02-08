@@ -9,8 +9,9 @@
 
     using Common.Mapping;
     using Contracts;
-    using Data;
-    using Data.Models;
+    using Services.Data.Models.CoursesParametersModels;
+    using UMS.Data;
+    using UMS.Data.Models;
 
     public class CoursesService : ICoursesService
     {
@@ -45,22 +46,22 @@
         public async Task<bool> Exists(int id)
             => await this.data.Courses.AnyAsync(c => c.Id == id);
 
-        public async Task<int> Create(string name, string description, DateTime startDate, DateTime endDate, decimal price, string belongsToMajor, string userId)
+        public async Task<int> Create(CourseCreateParametersModel model)
         {
-            CheckDate(startDate, endDate);
+            CheckDate(model.StartDate, model.EndDate);
 
             var major = this.data
                 .Majors
-                .Where(m => m.Name == belongsToMajor)
+                .Where(m => m.Name == model.BelongsToMajor)
                 .FirstOrDefault();
 
             var course = new Course()
             {
-                Name = name,
-                Description = description,
-                StartDate = startDate,
-                EndDate = endDate,
-                Price = price,
+                Name = model.Name,
+                Description = model.Description,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                Price = model.Price,
             };
 
             var courseMajor = new CourseMajor()
@@ -79,22 +80,22 @@
             return course.Id;
         }
 
-        public async Task<bool> Edit(int id, string name, string description, DateTime startDate, DateTime endDate, decimal price, string belongsToMajor)
+        public async Task<bool> Edit(CourseEditParametersModel model)
         {
-            var course = await this.data.Courses.FindAsync(id);
+            var course = await this.data.Courses.FindAsync(model.Id);
 
             if (course == null)
             {
                 return false;
             }
 
-            CheckDate(startDate, endDate);
+            CheckDate(model.StartDate, model.EndDate);
 
-            course.Name = name;
-            course.Description = description;
-            course.StartDate = startDate;
-            course.EndDate = endDate;
-            course.Price = price;
+            course.Name = model.Name;
+            course.Description = model.Description;
+            course.StartDate = model.StartDate;
+            course.EndDate = model.EndDate;
+            course.Price = model.Price;
 
             await this.data.SaveChangesAsync();
 

@@ -3,7 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Common.Enumerations;
+    using Services.Data.Models.TeachersParametersModels;
+    using UMS.Data.Common.Enumerations;
 
     public interface ITeachersService : ITransientService
     {
@@ -13,9 +14,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string firstName, string middleName, string lastName, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string phoneNumber, string email, string imageUrl, string userId);
+        Task<int> Create(TeacherCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string firstName, string middleName, string lastName, Gender gender, string streetName, string townName, string districtName, string countryName, string continentName, string phoneNumber, string email, string imageUrl);
+        Task<bool> Edit(TeacherEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

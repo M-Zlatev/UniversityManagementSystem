@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Services.Data.Models.CoursesParametersModels;
+
     public interface ICoursesService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int id, int coursesPerPage);
@@ -12,9 +14,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string name, string description, DateTime startDate, DateTime endDate, decimal price, string belongsToMajor, string userId);
+        Task<int> Create(CourseCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string name, string description, DateTime startDate, DateTime endDate, decimal price, string belongsToMajor);
+        Task<bool> Edit(CourseEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

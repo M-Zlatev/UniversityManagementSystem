@@ -12,6 +12,7 @@
     using Common.Mapping;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Services.Data.Models.FacultiesParametersModels;
 
     public class FacultiesService : IFacultiesService
     {
@@ -46,23 +47,23 @@
         public async Task<bool> Exists(int id)
             => await this.data.Faculties.AnyAsync(f => f.Id == id);
 
-        public async Task<int> Create(string name, string description, string addressStreetName, string addressTownName, string addressCountryName, string email, string phoneNumber, string fax, string userId)
+        public async Task<int> Create(FacultyCreateParametersModel model)
         {
             var facultyAddress = new FacultyAddress()
             {
-                StreetName = addressStreetName,
-                Town = addressTownName,
-                Country = addressCountryName,
+                StreetName = model.AddressStreetName,
+                Town = model.AddressTownName,
+                Country = model.AddressCountryName,
             };
 
             var faculty = new Faculty
             {
-                Name = name,
-                Description = description,
+                Name = model.Name,
+                Description = model.Description,
                 Address = facultyAddress,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Fax = fax,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Fax = model.Fax,
             };
 
             this.data.Add(faculty);
@@ -72,23 +73,23 @@
             return faculty.Id;
         }
 
-        public async Task<bool> Edit(int id, string name, string description, string streetName, string townName, string countryName, string email, string phoneNumber, string fax)
+        public async Task<bool> Edit(FacultyEditParametersModel model)
         {
-            var faculty = await this.data.Faculties.FindAsync(id);
+            var faculty = await this.data.Faculties.FindAsync(model.Id);
 
             if (faculty == null)
             {
                 return false;
             }
 
-            faculty.Name = name;
-            faculty.Description = description;
-            faculty.Address.StreetName = streetName;
-            faculty.Address.Town = townName;
-            faculty.Address.Country = countryName;
-            faculty.Email = email;
-            faculty.PhoneNumber = phoneNumber;
-            faculty.Fax = fax;
+            faculty.Name = model.Name;
+            faculty.Description = model.Description;
+            faculty.Address.StreetName = model.StreetName;
+            faculty.Address.Town = model.TownName;
+            faculty.Address.Country = model.CountryName;
+            faculty.Email = model.Email;
+            faculty.PhoneNumber = model.PhoneNumber;
+            faculty.Fax = model.Fax;
 
             await this.data.SaveChangesAsync();
 

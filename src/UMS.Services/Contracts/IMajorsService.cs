@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using UMS.Data.Common.Enumerations;
+    using UMS.Services.Data.Models.MajorsParametersModels;
 
     public interface IMajorsService : ITransientService
     {
@@ -13,9 +14,9 @@
 
         Task<bool> Exists(int id);
 
-        Task<int> Create(string name, string description, MajorType majorType, double duration, string belongsToDepartment, string userId);
+        Task<int> Create(MajorCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string name, string description, MajorType majorType, double duration, string belongsToDepartment);
+        Task<bool> Edit(MajorEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }
