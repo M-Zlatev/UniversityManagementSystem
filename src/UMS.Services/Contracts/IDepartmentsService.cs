@@ -16,7 +16,7 @@
 
         Task<int> Create(DepartmentCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(DepartmentEditParametersModel editParametersModel);
+        Task<bool> Edit(int id, DepartmentEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

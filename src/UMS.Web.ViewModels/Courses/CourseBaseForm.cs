@@ -7,10 +7,8 @@
 
     using static Data.Common.DataValidation.Course;
 
-    public class CourseFormModel
+    public abstract class CourseBaseForm
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(MaxNameLength)]
         public string Name { get; set; }

@@ -76,9 +76,9 @@
             return teacher.Id;
         }
 
-        public async Task<bool> Edit(TeacherEditParametersModel model)
+        public async Task<bool> Edit(int id, TeacherEditParametersModel model)
         {
-            var teacher = await this.data.Teachers.FindAsync(model.Id);
+            var teacher = await this.data.Teachers.FindAsync(id);
 
             if (teacher == null)
             {

@@ -5,10 +5,8 @@
     using UMS.Data.Common.Enumerations;
     using static Data.Common.DataValidation.Major;
 
-    public class MajorFormModel
+    public abstract class MajorBaseForm
     {
-        public int Id { get; set; }
-
         [Required]
         [MaxLength(MaxNameLength)]
         public string Name { get; set; }

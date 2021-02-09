@@ -2,9 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.Common.DataValidation.Department;
+    using static Data.Common.DataValidation.Address;
+    using static Data.Common.DataValidation.Faculty;
 
-    public class DepartmentFormModel
+    public abstract class FacultyBaseForm
     {
         [Required]
         [MaxLength(MaxNameLength)]
@@ -12,6 +13,15 @@
 
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
+
+        [Range(MinStreetNameLength, MaxStreetNameLength)]
+        public string AddressStreetName { get; set; }
+
+        [Range(MinTownNameLength, MaxTownNameLength)]
+        public string AddressTownName { get; set; }
+
+        [Range(MinCountryNameLength, MaxCountryNameLength)]
+        public string AddressCountryName { get; set; }
 
         [Range(MinEmailAddressLength, MaxEmailAdressLength)]
         public string Email { get; set; }
@@ -21,7 +31,5 @@
 
         [Range(MinFaxNumberLength, MaxFaxNumberLength)]
         public string Fax { get; set; }
-
-        public string BelongsToFaculty { get; set; }
     }
 }

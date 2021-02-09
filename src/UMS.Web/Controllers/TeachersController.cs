@@ -6,7 +6,9 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure;
+    using Common.Mapping;
     using Services.Contracts;
+    using Services.Data.Models.TeachersParametersModels;
     using ViewModels;
     using ViewModels.Teachers;
 
@@ -55,16 +57,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(TeacherFormModel model)
+        public async Task<IActionResult> Create(CreateTeacherInputForm teacherInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var studentId = await this.teachersService.Create(model.FirstName, model.MiddleName, model.LastName, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.PhoneNumber, model.Email, model.ImageUrl, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<TeacherCreateParametersModel>(teacherInputForm);
+                var studentId = await this.teachersService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = studentId });
             }
 
-            return this.View(model);
+            return this.View(teacherInputForm);
         }
 
         [HttpGet]
@@ -81,7 +84,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, TeacherFormModel model)
+        public async Task<IActionResult> Edit(int id, EditTeacherInputForm teacherInputForm)
         {
             if (!await this.teachersService.Exists(id))
             {
@@ -90,12 +93,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.teachersService.Edit(id, model.FirstName, model.MiddleName, model.LastName, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.PhoneNumber, model.Email, model.ImageUrl);
+                var parameters = AutoMapperConfig.MapperInstance.Map<TeacherEditParametersModel>(teacherInputForm);
+                await this.teachersService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(teacherInputForm);
         }
 
         [HttpGet]

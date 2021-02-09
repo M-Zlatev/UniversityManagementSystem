@@ -5,8 +5,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Common.Mapping;
     using Infrastructure;
     using Services.Contracts;
+    using Services.Data.Models.DepartmentsParametersModels;
     using ViewModels;
     using ViewModels.Departments;
 
@@ -53,17 +55,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(DepartmentFormModel model)
+        public async Task<IActionResult> Create(CreateDepartmentInputForm departmentFormInput)
         {
             if (this.ModelState.IsValid)
             {
-                var departmentId = await this.departmentService.Create(
-                    model.Name, model.Description, model.Email, model.PhoneNumber, model.Fax, model.BelongsToFaculty, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentCreateParametersModel>(departmentFormInput);
+                var departmentId = await this.departmentService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = departmentId });
             }
 
-            return this.View(model);
+            return this.View(departmentFormInput);
         }
 
         [HttpGet]
@@ -80,7 +82,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, DepartmentFormModel model)
+        public async Task<IActionResult> Edit(int id, EditDepartmentInputForm departmentFormInput)
         {
             if (!await this.departmentService.Exists(id))
             {
@@ -89,12 +91,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.departmentService.Edit(id, model.Name, model.Description, model.Email, model.PhoneNumber, model.Fax);
+                var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentEditParametersModel>(departmentFormInput);
+                await this.departmentService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(departmentFormInput);
         }
 
         [HttpGet]

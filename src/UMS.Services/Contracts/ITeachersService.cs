@@ -16,7 +16,7 @@
 
         Task<int> Create(TeacherCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(TeacherEditParametersModel editParametersModel);
+        Task<bool> Edit(int id, TeacherEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

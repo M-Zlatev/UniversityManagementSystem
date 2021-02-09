@@ -72,9 +72,9 @@
             return department.Id;
         }
 
-        public async Task<bool> Edit(DepartmentEditParametersModel model)
+        public async Task<bool> Edit(int id, DepartmentEditParametersModel model)
         {
-            var department = await this.data.Departments.FindAsync(model.Id);
+            var department = await this.data.Departments.FindAsync(id);
 
             if (department == null)
             {

@@ -80,9 +80,9 @@
             return course.Id;
         }
 
-        public async Task<bool> Edit(CourseEditParametersModel model)
+        public async Task<bool> Edit(int id, CourseEditParametersModel model)
         {
-            var course = await this.data.Courses.FindAsync(model.Id);
+            var course = await this.data.Courses.FindAsync(id);
 
             if (course == null)
             {

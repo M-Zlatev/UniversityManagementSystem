@@ -5,8 +5,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Common.Mapping;
     using Infrastructure;
     using Services.Contracts;
+    using Services.Data.Models.CoursesParametersModels;
     using ViewModels;
     using ViewModels.Courses;
 
@@ -53,17 +55,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CourseFormModel model)
+        public async Task<IActionResult> Create(CreateCourseInputForm courseInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var courseId = await this.coursesService.Create(
-                    model.Name, model.Description, model.StartDate, model.EndDate, model.Price, model.BelongsToMajor, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<CourseCreateParametersModel>(courseInputForm);
+                var courseId = await this.coursesService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = courseId });
             }
 
-            return this.View(model);
+            return this.View(courseInputForm);
         }
 
         [HttpGet]
@@ -80,7 +82,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, CourseFormModel model)
+        public async Task<IActionResult> Edit(int id, EditCourseInputForm courseInputForm)
         {
             if (!await this.coursesService.Exists(id))
             {
@@ -89,12 +91,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.coursesService.Edit(id, model.Name, model.Description, model.StartDate, model.EndDate, model.Price, model.BelongsToMajor);
+                var parameters = AutoMapperConfig.MapperInstance.Map<CourseEditParametersModel>(courseInputForm);
+                await this.coursesService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(courseInputForm);
         }
 
         [HttpGet]

@@ -51,9 +51,9 @@
         {
             var facultyAddress = new FacultyAddress()
             {
-                StreetName = model.AddressStreetName,
-                Town = model.AddressTownName,
-                Country = model.AddressCountryName,
+                StreetName = model.StreetName,
+                Town = model.TownName,
+                Country = model.CountryName,
             };
 
             var faculty = new Faculty
@@ -73,9 +73,9 @@
             return faculty.Id;
         }
 
-        public async Task<bool> Edit(FacultyEditParametersModel model)
+        public async Task<bool> Edit(int id, FacultyEditParametersModel model)
         {
-            var faculty = await this.data.Faculties.FindAsync(model.Id);
+            var faculty = await this.data.Faculties.FindAsync(id);
 
             if (faculty == null)
             {

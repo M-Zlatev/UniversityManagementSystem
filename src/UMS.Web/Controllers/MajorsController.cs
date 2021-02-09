@@ -5,8 +5,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Common.Mapping;
     using Infrastructure;
     using Services.Contracts;
+    using Services.Data.Models.MajorsParametersModels;
+    using Services.Implementations;
     using ViewModels;
     using ViewModels.Majors;
 
@@ -53,17 +56,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(MajorFormModel model)
+        public async Task<IActionResult> Create(CreateMajorInputForm majorInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var majorId = await this.majorService.Create(
-                    model.Name, model.Description, model.MajorType, model.Duration, model.BelongsToDepartment, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<MajorCreateParametersModel>(majorInputForm);
+                var majorId = await this.majorService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = majorId });
             }
 
-            return this.View(model);
+            return this.View(majorInputForm);
         }
 
         [HttpGet]
@@ -80,7 +83,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, MajorFormModel model)
+        public async Task<IActionResult> Edit(int id, EditMajorInputForm majorInputForm)
         {
             if (!await this.majorService.Exists(id))
             {
@@ -89,12 +92,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.majorService.Edit(id, model.Name, model.Description, model.MajorType, model.Duration, model.BelongsToDepartment);
+                var parameters = AutoMapperConfig.MapperInstance.Map<MajorEditParametersModel>(majorInputForm);
+                await this.majorService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(majorInputForm);
         }
 
         [HttpGet]

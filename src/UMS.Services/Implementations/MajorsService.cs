@@ -72,9 +72,9 @@
             return major.Id;
         }
 
-        public async Task<bool> Edit(MajorEditParametersModel model)
+        public async Task<bool> Edit(int id, MajorEditParametersModel model)
         {
-            var major = await this.data.Majors.FindAsync(model.Id);
+            var major = await this.data.Majors.FindAsync(id);
 
             if (major == null)
             {

@@ -9,9 +9,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Common.Mapping;
     using Data.Models;
     using Infrastructure;
     using Services.Contracts;
+    using Services.Data.Models.StudentsParametersModels;
     using ViewModels;
     using ViewModels.Students;
 
@@ -60,16 +62,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(StudentFormModel model)
+        public async Task<IActionResult> Create(CreateStudentInputForm studentInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var studentId = await this.studentService.Create(model.FirstName, model.MiddleName, model.LastName, model.UniformCivilNumber, model.DateOfBirth, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.MajorName, model.PhoneNumber, model.Email, model.ImageUrl, model.HasScholarship, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<StudentCreateParametersModel>(studentInputForm);
+                var studentId = await this.studentService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = studentId });
             }
 
-            return this.View(model);
+            return this.View(studentInputForm);
         }
 
         [HttpGet]
@@ -86,7 +89,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, StudentFormModel model)
+        public async Task<IActionResult> Edit(int id, EditStudentInputForm studentInputForm)
         {
             if (!await this.studentService.Exists(id))
             {
@@ -95,12 +98,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.studentService.Edit(id, model.FirstName, model.MiddleName, model.LastName, model.UniformCivilNumber, model.DateOfBirth, model.Gender, model.AddressStreetName, model.AddressTownName, model.AddressDistrictName, model.AddressCountryName, model.AddressContinentName, model.MajorName, model.PhoneNumber, model.Email, model.ImageUrl, model.HasScholarship);
+                var parameters = AutoMapperConfig.MapperInstance.Map<StudentEditParametersModel>(studentInputForm);
+                await this.studentService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(studentInputForm);
         }
 
         [HttpGet]

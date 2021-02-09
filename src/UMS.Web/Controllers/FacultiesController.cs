@@ -9,9 +9,11 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    using Common.Mapping;
     using Data.Models;
     using Infrastructure;
     using Services.Contracts;
+    using Services.Data.Models.FacultiesParametersModels;
     using ViewModels;
     using ViewModels.Faculties;
 
@@ -60,17 +62,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(FacultyFormModel model)
+        public async Task<IActionResult> Create(CreateFacultyInputForm facultyInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var facultyId = await this.facultyService.Create(
-                    model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax, this.User.GetUserId());
+                var parameters = AutoMapperConfig.MapperInstance.Map<FacultyCreateParametersModel>(facultyInputForm);
+                var facultyId = await this.facultyService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
             }
 
-            return this.View(model);
+            return this.View(facultyInputForm);
         }
 
         [HttpGet]
@@ -87,7 +89,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, FacultyFormModel model)
+        public async Task<IActionResult> Edit(int id, EditFacultyInputForm facultyInputForm)
         {
             if (!await this.facultyService.Exists(id))
             {
@@ -96,12 +98,13 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.facultyService.Edit(id, model.Name, model.Description, model.AddressStreetName, model.AddressTownName, model.AddressCountryName, model.Email, model.PhoneNumber, model.Fax);
+                var parameters = AutoMapperConfig.MapperInstance.Map<FacultyEditParametersModel>(facultyInputForm);
+                await this.facultyService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.Details), new { id });
             }
 
-            return this.View(model);
+            return this.View(facultyInputForm);
         }
 
         [HttpGet]

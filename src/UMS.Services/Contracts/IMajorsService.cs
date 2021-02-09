@@ -16,7 +16,7 @@
 
         Task<int> Create(MajorCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(MajorEditParametersModel editParametersModel);
+        Task<bool> Edit(int id, MajorEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }
