@@ -31,6 +31,7 @@
             var viewModel = new CourseGetAllViewModel
             {
                 ItemsPerPage = CoursesPerPage,
+                Count = this.coursesService.GetCount(),
                 PageNumber = id,
                 Courses = this.coursesService.GetAll<CourseListingViewModel>(id, CoursesPerPage),
             };

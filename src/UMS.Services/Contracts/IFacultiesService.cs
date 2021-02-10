@@ -13,6 +13,8 @@
 
         Task<bool> Exists(int id);
 
+        int GetCount();
+
         Task<int> Create(FacultyCreateParametersModel createParametersModel);
 
         Task<bool> Edit(int id, FacultyEditParametersModel editParametersModel);

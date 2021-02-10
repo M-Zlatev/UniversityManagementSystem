@@ -33,6 +33,7 @@
             var viewModel = new TeacherGetAllViewModel
             {
                 ItemsPerPage = TeachersPerPage,
+                Count = this.teachersService.GetCount(),
                 PageNumber = id,
                 Teachers = this.teachersService.GetAll<TeacherListingViewModel>(id, TeachersPerPage),
             };

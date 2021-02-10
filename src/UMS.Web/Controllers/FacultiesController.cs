@@ -38,6 +38,7 @@
             var viewModel = new FacultyGetAllViewModel
             {
                 ItemsPerPage = FacultyPerPage,
+                Count = this.facultyService.GetCount(),
                 PageNumber = id,
                 Faculties = this.facultyService.GetAll<FacultyListingViewModel>(id, FacultyPerPage),
             };

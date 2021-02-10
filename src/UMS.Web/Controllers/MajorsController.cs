@@ -32,6 +32,7 @@
             var viewModel = new MajorGetAllViewModel
             {
                 ItemsPerPage = MajorsPerPage,
+                Count = this.majorService.GetCount(),
                 PageNumber = id,
                 Majors = this.majorService.GetAll<MajorListingViewModel>(id, MajorsPerPage),
             };

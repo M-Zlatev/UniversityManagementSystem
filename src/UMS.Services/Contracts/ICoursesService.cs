@@ -14,6 +14,8 @@
 
         Task<bool> Exists(int id);
 
+        int GetCount();
+
         Task<int> Create(CourseCreateParametersModel createParametersModel);
 
         Task<bool> Edit(int id, CourseEditParametersModel editParametersModel);

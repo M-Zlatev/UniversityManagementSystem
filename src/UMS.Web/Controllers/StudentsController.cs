@@ -38,6 +38,7 @@
             var viewModel = new StudentGetAllViewModel
             {
                 ItemsPerPage = StudentsPerPage,
+                Count = this.studentService.GetCount(),
                 PageNumber = id,
                 Students = this.studentService.GetAll<StudentListingViewModel>(id, StudentsPerPage),
             };

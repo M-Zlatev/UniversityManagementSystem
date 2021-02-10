@@ -31,6 +31,7 @@
             var viewModel = new DepartmentGetAllViewModel
             {
                 ItemsPerPage = DepartmentsPerPage,
+                Count = this.departmentService.GetCount(),
                 PageNumber = id,
                 Departments = this.departmentService.GetAll<DepartmentListingViewModel>(id, DepartmentsPerPage),
             };
