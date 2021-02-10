@@ -20,7 +20,7 @@
         public MajorsController(IMajorsService majors)
             => this.majorService = majors;
 
-        public IActionResult Index(int id = 1)
+        public IActionResult All(int id = 1)
         {
             if (id <= 0)
             {
@@ -40,14 +40,14 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult ById(int id)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var viewModel = this.majorService.GetDetails<MajorDetailsViewModel>(id);
+            var viewModel = this.majorService.GetDetailsById<MajorGetDetailsByIdViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -64,7 +64,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<MajorCreateParametersModel>(majorInputForm);
                 var majorId = await this.majorService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id = majorId });
+                return this.RedirectToAction(nameof(this.ById), new { id = majorId });
             }
 
             return this.View(majorInputForm);
@@ -96,7 +96,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<MajorEditParametersModel>(majorInputForm);
                 await this.majorService.Edit(id, parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             return this.View(majorInputForm);
@@ -125,7 +125,7 @@
 
             await this.majorService.Delete(id);
 
-            return this.Redirect(nameof(this.Index));
+            return this.Redirect(nameof(this.All));
         }
     }
 }

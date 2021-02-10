@@ -8,7 +8,7 @@
     using Common.Mapping;
     using Data.Models;
 
-    public class CourseDetailsViewModel : IMapFrom<Course>, IMapExplicitly
+    public class CourseGetDetailsByIdViewModel : IMapFrom<Course>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -27,7 +27,7 @@
         public void RegisterMappings(IProfileExpression profile)
         {
             profile
-               .CreateMap<Course, CourseDetailsViewModel>()
+               .CreateMap<Course, CourseGetDetailsByIdViewModel>()
                .ForMember(c => c.BelongsToMajor, cfg => cfg.MapFrom(
                    c => c.Majors
                             .Select(cm => cm.Major.Name)

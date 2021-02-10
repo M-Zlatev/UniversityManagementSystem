@@ -19,7 +19,7 @@
         public DepartmentsController(IDepartmentsService departments)
             => this.departmentService = departments;
 
-        public IActionResult Index(int id = 1)
+        public IActionResult All(int id = 1)
         {
             if (id <= 0)
             {
@@ -39,14 +39,14 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult ById(int id)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var viewModel = this.departmentService.GetDetails<DepartmentDetailsViewModel>(id);
+            var viewModel = this.departmentService.GetDetailsById<DepartmentGetDetailsByIdViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -63,7 +63,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentCreateParametersModel>(departmentFormInput);
                 var departmentId = await this.departmentService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id = departmentId });
+                return this.RedirectToAction(nameof(this.ById), new { id = departmentId });
             }
 
             return this.View(departmentFormInput);
@@ -95,7 +95,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentEditParametersModel>(departmentFormInput);
                 await this.departmentService.Edit(id, parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             return this.View(departmentFormInput);
@@ -124,7 +124,7 @@
 
             await this.departmentService.Delete(id);
 
-            return this.Redirect(nameof(this.Index));
+            return this.Redirect(nameof(this.All));
         }
     }
 }

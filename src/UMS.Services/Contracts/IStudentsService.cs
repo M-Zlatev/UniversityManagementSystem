@@ -11,7 +11,7 @@
     {
         public IEnumerable<T> GetAll<T>(int id, int studentsPerPage);
 
-        public T GetDetails<T>(int id);
+        public T GetDetailsById<T>(int id);
 
         Task<bool> Exists(int id);
 

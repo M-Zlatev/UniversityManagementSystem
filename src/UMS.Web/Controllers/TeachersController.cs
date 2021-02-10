@@ -21,7 +21,7 @@
             this.teachersService = teachersService;
         }
 
-        public IActionResult Index(int id = 1)
+        public IActionResult All(int id = 1)
         {
             if (id <= 0)
             {
@@ -41,14 +41,14 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult ById(int id)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var viewModel = this.teachersService.GetDetails<TeacherDetailsViewModel>(id);
+            var viewModel = this.teachersService.GetDetailsById<TeacherGetDetailsByIdViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -65,7 +65,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<TeacherCreateParametersModel>(teacherInputForm);
                 var studentId = await this.teachersService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id = studentId });
+                return this.RedirectToAction(nameof(this.ById), new { id = studentId });
             }
 
             return this.View(teacherInputForm);
@@ -97,7 +97,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<TeacherEditParametersModel>(teacherInputForm);
                 await this.teachersService.Edit(id, parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             return this.View(teacherInputForm);
@@ -126,7 +126,7 @@
 
             await this.teachersService.Delete(id);
 
-            return this.Redirect(nameof(this.Index));
+            return this.Redirect(nameof(this.All));
         }
     }
 }

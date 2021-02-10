@@ -5,7 +5,7 @@
     using Common.Mapping;
     using Data.Models;
 
-    public class DepartmentDetailsViewModel : IMapFrom<Department>, IMapExplicitly
+    public class DepartmentGetDetailsByIdViewModel : IMapFrom<Department>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -24,7 +24,7 @@
         public void RegisterMappings(IProfileExpression profile)
         {
             profile
-                .CreateMap<Department, DepartmentDetailsViewModel>()
+                .CreateMap<Department, DepartmentGetDetailsByIdViewModel>()
                 .ForMember(d => d.BelongsToFaculty, cfg => cfg.MapFrom(d => d.Faculty.Name));
         }
     }

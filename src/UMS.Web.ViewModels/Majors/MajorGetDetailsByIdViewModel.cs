@@ -6,7 +6,7 @@
     using Data.Common.Enumerations;
     using Data.Models;
 
-    public class MajorDetailsViewModel : IMapFrom<Major>, IMapExplicitly
+    public class MajorGetDetailsByIdViewModel : IMapFrom<Major>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -23,7 +23,7 @@
         public void RegisterMappings(IProfileExpression profile)
         {
             profile
-                .CreateMap<Major, MajorDetailsViewModel>()
+                .CreateMap<Major, MajorGetDetailsByIdViewModel>()
                 .ForMember(m => m.BelongsToDepartment, cfg => cfg.MapFrom(m => m.Department.Name));
         }
     }

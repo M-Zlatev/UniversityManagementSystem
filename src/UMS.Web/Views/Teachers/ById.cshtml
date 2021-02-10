@@ -1,28 +1,17 @@
-﻿@model UMS.Web.ViewModels.Students.StudentDetailsViewModel;
+﻿@model UMS.Web.ViewModels.Teachers.TeacherGetDetailsByIdViewModel;
 @{
-    this.ViewData["Title"] = "Details for Student: ";
+    this.ViewData["Title"] = "Details for Teacher: ";
 }
 
 <h1>@this.ViewData["Title"]</h1>
 
 @{
-    var scholarship = Model.HasScholarship ? "Yes" : "No";
     var address = $"{Model.AddressStreetName}, {Model.AddressTownName}, {Model.AddressCountryName}, {Model.AddressContinentName}";
-    
-    var birthDate = Model.DateofBirth.HasValue ? Model.DateofBirth.Value.ToShortDateString() : "Not specified";
-    
-    var age = DateTime.UtcNow.Year - Model.DateofBirth.Value.Year;
-
-    var condition = (DateTime.UtcNow.Month == Model.DateofBirth.Value.Month && DateTime.UtcNow.Day < Model.DateofBirth.Value.Day);
-    age = condition ? age : --age;
 
     <div>
         <p style="white-space: pre-line"><b>First name: </b>@Model.FirstName</p>
         <p style="white-space: pre-line"><b>Middle name: </b>@Model.MiddleName</p>
         <p style="white-space: pre-line"><b>Last name: </b>@Model.LastName</p>
-        <p style="white-space: pre-line"><b>Uniform civil number: </b>@Model.UniformCivilNumber</p>
-        <p style="white-space: pre-line"><b>Date of Birth: </b>@birthDate</p>
-        <p style="white-space: pre-line"><b>Age: </b>@age</p>
         <p style="white-space: pre-line"><b>Gender: </b>@Model.Gender</p>
         <p style="white-space: pre-line"><b>Street: </b>@Model.AddressStreetName</p>
         <p style="white-space: pre-line"><b>Town: </b>@Model.AddressTownName</p>
@@ -31,7 +20,5 @@
         <p style="white-space: pre-line"><b>Continent: </b>@Model.AddressContinentName</p>
         <p style="white-space: pre-line"><b>Phone number: </b>@Model.PhoneNumber</p>
         <p style="white-space: pre-line"><b>Email: </b>@Model.Email</p>
-        <p style="white-space: pre-line"><b>Scholarship: </b>@scholarship</p>
-        <p style="white-space: pre-line"><b>Major</b>@Model.InMajor</p>
     </div>
 }

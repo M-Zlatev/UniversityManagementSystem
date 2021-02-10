@@ -1,4 +1,4 @@
-﻿namespace UMS.Web.ViewModels.Teachers
+﻿namespace UMS.Web.ViewModels.Students
 {
     using System;
 
@@ -8,7 +8,7 @@
     using Data.Common.Enumerations;
     using Data.Models;
 
-    public class TeacherDetailsViewModel : IMapFrom<Teacher>, IMapExplicitly
+    public class StudentGetDetailsByIdViewModel : IMapFrom<Student>, IMapExplicitly
     {
         public int Id { get; set; }
 
@@ -17,6 +17,10 @@
         public string MiddleName { get; set; }
 
         public string LastName { get; set; }
+
+        public int UniformCivilNumber { get; set; }
+
+        public DateTime? DateofBirth { get; set; }
 
         public Gender Gender { get; set; }
 
@@ -30,25 +34,25 @@
 
         public string AddressContinentName { get; set; }
 
-        public AcademicDegree AcademicDegree { get; set; }
-
-        public AcademicRank AcademicRank { get; set; }
-
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
 
         public string ImageUrl { get; set; }
 
+        public bool HasScholarship { get; set; }
+
+        public string InMajor { get; set; }
+
         public void RegisterMappings(IProfileExpression profile)
         {
             profile
-                 .CreateMap<Teacher, TeacherDetailsViewModel>()
-                 .ForMember(t => t.AddressStreetName, cfg => cfg.MapFrom(s => s.Address.StreetName))
-                 .ForMember(t => t.AddressTownName, cfg => cfg.MapFrom(s => s.Address.Town))
-                 .ForMember(t => t.AddressDistrictName, cfg => cfg.MapFrom(s => s.Address.District))
-                 .ForMember(t => t.AddressCountryName, cfg => cfg.MapFrom(s => s.Address.Country))
-                 .ForMember(t => t.AddressContinentName, cfg => cfg.MapFrom(s => s.Address.Continent));
+                .CreateMap<Student, StudentGetDetailsByIdViewModel>()
+                .ForMember(s => s.AddressStreetName, cfg => cfg.MapFrom(s => s.Address.StreetName))
+                .ForMember(s => s.AddressTownName, cfg => cfg.MapFrom(s => s.Address.Town))
+                .ForMember(s => s.AddressDistrictName, cfg => cfg.MapFrom(s => s.Address.District))
+                .ForMember(s => s.AddressCountryName, cfg => cfg.MapFrom(s => s.Address.Country))
+                .ForMember(s => s.AddressContinentName, cfg => cfg.MapFrom(s => s.Address.Continent));
         }
     }
 }

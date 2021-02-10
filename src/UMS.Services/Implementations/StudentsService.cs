@@ -34,7 +34,7 @@
                 .To<T>()
                 .ToList();
 
-        public T GetDetails<T>(int id)
+        public T GetDetailsById<T>(int id)
             => this.data
                 .Students
                 .Where(s => s.Id == id)

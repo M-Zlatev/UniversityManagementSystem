@@ -19,7 +19,7 @@
         public CoursesController(ICoursesService coursesService)
             => this.coursesService = coursesService;
 
-        public IActionResult Index(int id = 1)
+        public IActionResult All(int id = 1)
         {
             if (id <= 0)
             {
@@ -39,14 +39,14 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult ById(int id)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var viewModel = this.coursesService.GetDetails<CourseDetailsViewModel>(id);
+            var viewModel = this.coursesService.GetDetailsById<CourseGetDetailsByIdViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -63,7 +63,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<CourseCreateParametersModel>(courseInputForm);
                 var courseId = await this.coursesService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id = courseId });
+                return this.RedirectToAction(nameof(this.ById), new { id = courseId });
             }
 
             return this.View(courseInputForm);
@@ -95,7 +95,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<CourseEditParametersModel>(courseInputForm);
                 await this.coursesService.Edit(id, parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             return this.View(courseInputForm);
@@ -124,7 +124,7 @@
 
             await this.coursesService.Delete(id);
 
-            return this.Redirect(nameof(this.Index));
+            return this.Redirect(nameof(this.All));
         }
     }
 }

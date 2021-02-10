@@ -26,7 +26,7 @@
             this.facultyService = faculties;
         }
 
-        public IActionResult Index(int id = 1)
+        public IActionResult All(int id = 1)
         {
             if (id <= 0)
             {
@@ -46,14 +46,14 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult ById(int id)
         {
             if (id <= 0)
             {
                 return this.NotFound();
             }
 
-            var viewModel = this.facultyService.GetDetails<FacultyDetailsViewModel>(id);
+            var viewModel = this.facultyService.GetDetailsById<FacultyGetDetailsByIdViewModel>(id);
             return this.View(viewModel);
         }
 
@@ -70,7 +70,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<FacultyCreateParametersModel>(facultyInputForm);
                 var facultyId = await this.facultyService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id = facultyId });
+                return this.RedirectToAction(nameof(this.ById), new { id = facultyId });
             }
 
             return this.View(facultyInputForm);
@@ -102,7 +102,7 @@
                 var parameters = AutoMapperConfig.MapperInstance.Map<FacultyEditParametersModel>(facultyInputForm);
                 await this.facultyService.Edit(id, parameters);
 
-                return this.RedirectToAction(nameof(this.Details), new { id });
+                return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
             return this.View(facultyInputForm);
@@ -131,7 +131,7 @@
 
             await this.facultyService.Delete(id);
 
-            return this.Redirect(nameof(this.Index));
+            return this.Redirect(nameof(this.All));
         }
     }
 }
