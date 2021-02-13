@@ -10,6 +10,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Homeworks\**" />
+	  <Compile Remove="Resources\**" />
+	  <EmbeddedResource Remove="Homeworks\**" />
+	  <EmbeddedResource Remove="Resources\**" />
+	  <None Remove="Homeworks\**" />
+	  <None Remove="Resources\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<AdditionalFiles Include="..\stylecop.json" />
 	</ItemGroup>
 
