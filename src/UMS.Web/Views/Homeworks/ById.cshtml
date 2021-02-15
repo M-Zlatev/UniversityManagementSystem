@@ -1,0 +1,14 @@
+﻿@model UMS.Web.ViewModels.Homeworks.HomeworkGetDetailsByIdViewModel
+@{
+    this.ViewData["Title"] = "Details for homework";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div>
+    <p style="white-space: pre-line"><b>Homework content: </b>@Model.Content</p>
+    <p style="white-space: pre-line"><b>Homework type: </b>@Model.HomeworkType</p>
+    <p style="white-space: pre-line"><b>Homework assignment time: </b>@Model.AssignmentTime.ToShortDateString()</p>
+    <p style="white-space: pre-line"><b>Homework open for submission time: </b>@Model.OpenForSubmissionTime.ToShortDateString()</p>
+    <p style="white-space: pre-line"><b>Homework is done by: </b>@Model.DoneByStudent</p>
+</div>

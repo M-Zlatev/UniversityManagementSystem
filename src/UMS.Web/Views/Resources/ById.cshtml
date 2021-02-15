@@ -1,0 +1,14 @@
+﻿@model UMS.Web.ViewModels.Resources.ResourceGetDetailsByIdViewModel;
+@{
+    string resourceName = Model.Name;
+    this.ViewData["Title"] = "Details for Resource: ";
+}
+
+<h1>@this.ViewData["Title"] :@resourceName</h1>
+
+<div>
+    <p style="white-space: pre-line"><b>Resource name: </b>@Model.Name</p>
+    <p style="white-space: pre-line"><b>Resource type: </b>@Model.ResourceType</p>
+    <p style="white-space: pre-line"><b>Resource url: </b>@Model.Url</p>
+    <p style="white-space: pre-line"><b>Resource in course: </b>@Model.BelongsToCourse</p>
+</div>

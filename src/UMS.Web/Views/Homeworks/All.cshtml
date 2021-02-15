@@ -1,0 +1,21 @@
+﻿@model UMS.Web.ViewModels.Homeworks.HomeworkGetAllViewModel
+@{
+    this.ViewData["Title"] = "All Homeworks, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div class="row">
+    @foreach (var homework in this.Model.Homeworks)
+    {
+        @homework.HomeworkType @:&nbsp;
+        @homework.DoneByStudent
+        <br />
+    }
+</div>
+<hr />
+<partial name="_PagingPartial" model="@Model" />
