@@ -5,13 +5,15 @@ namespace UMS.Data.Migrations
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Migrations;
 
     using UMS.Data;
 
     [DbContext(typeof(UmsDbContext))]
-    partial class UmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210217202121_AddGradeInStudentCourse")]
+    partial class AddGradeInStudentCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

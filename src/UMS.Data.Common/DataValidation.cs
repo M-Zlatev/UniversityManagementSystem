@@ -40,6 +40,8 @@
             public const int MaxDescriptionLength = 800;
             public const int MinPrice = 100;
             public const int MaxPrice = 1000;
+            public const int MinGrade = 2;
+            public const int MaxGrade = 6;
         }
 
         public static class Teacher
