@@ -11,19 +11,9 @@
     using Common.Mapping;
     using Data;
     using Data.Seeding;
-    using ViewModels;
 
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseAutoMapper(
-            this IApplicationBuilder app,
-            IWebHostEnvironment env)
-        {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
-            return app;
-        }
-
         public static IApplicationBuilder UseDataSeeding(
             this IApplicationBuilder app,
             IWebHostEnvironment env)

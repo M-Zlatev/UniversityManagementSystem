@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Services.Data.Models.FacultiesParametersModels;
+    using Data.Models.FacultiesParametersModels;
 
     public interface IFacultiesService : ITransientService
     {

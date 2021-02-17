@@ -35,23 +35,17 @@ namespace UMS.Web
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<UmsDbContext>();
 
-            services.Configure<CookiePolicyOptions>(
-                options =>
-                {
-                    options.CheckConsentNeeded = context => true;
-                    options.MinimumSameSitePolicy = SameSiteMode.None;
-                });
-
             // Automatically register Transient / Singleton / Scoped services
             services.AddConventionalServices();
 
+            services.AddAutoMapper();
+
             services.AddAdditionalMvc();
+            services.AddCookiePolicy();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseAutoMapper(env);
-
             app.UseDataSeeding(env);
 
             app.UseExceptionHandling(env);

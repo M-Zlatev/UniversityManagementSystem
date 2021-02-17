@@ -1,11 +1,16 @@
 ﻿namespace UMS.Web.Infrastructure
 {
     using System.Linq;
+    using System.Reflection;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
 
-    using UMS.Services;
+    using Common.Mapping;
+    using Services;
+    using Web.ViewModels;
 
     public static class ServiceCollectionExtensions
     {
@@ -54,6 +59,25 @@
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddRazorPages();
+
+            return services;
+        }
+
+        public static IServiceCollection AddAutoMapper(this IServiceCollection services)
+        {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            return services;
+        }
+
+        public static IServiceCollection AddCookiePolicy(this IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    options.CheckConsentNeeded = context => true;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
+                });
 
             return services;
         }

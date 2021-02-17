@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Data.Models.StudentsParametersModels;
     using UMS.Data.Common.Enumerations;
-    using Services.Data.Models.StudentsParametersModels;
 
     public interface IStudentsService : ITransientService
     {

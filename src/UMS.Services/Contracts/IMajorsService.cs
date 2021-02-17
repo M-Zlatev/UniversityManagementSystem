@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using Data.Models.MajorsParametersModels;
     using UMS.Data.Common.Enumerations;
-    using UMS.Services.Data.Models.MajorsParametersModels;
 
     public interface IMajorsService : ITransientService
     {

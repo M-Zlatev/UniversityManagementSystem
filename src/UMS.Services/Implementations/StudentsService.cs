@@ -8,8 +8,8 @@
     using Microsoft.EntityFrameworkCore;
 
     using Common.Mapping;
-    using Services.Contracts;
-    using Services.Data.Models.StudentsParametersModels;
+    using Contracts;
+    using Data.Models.StudentsParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;

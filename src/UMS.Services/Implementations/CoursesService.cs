@@ -9,7 +9,7 @@
 
     using Common.Mapping;
     using Contracts;
-    using Services.Data.Models.CoursesParametersModels;
+    using Data.Models.CoursesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
 

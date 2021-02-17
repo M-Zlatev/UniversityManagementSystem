@@ -10,9 +10,9 @@
 
     using Contracts;
     using Common.Mapping;
+    using Data.Models.FacultiesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
-    using UMS.Services.Data.Models.FacultiesParametersModels;
 
     public class FacultiesService : IFacultiesService
     {

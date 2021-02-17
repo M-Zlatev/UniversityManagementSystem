@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Services.Data.Models.TeachersParametersModels;
+    using Data.Models.TeachersParametersModels;
     using UMS.Data.Common.Enumerations;
 
     public interface ITeachersService : ITransientService

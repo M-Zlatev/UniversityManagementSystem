@@ -1,4 +1,4 @@
-﻿namespace UMS.Data
+﻿namespace UMS.Web.Infrastructure
 {
     using Microsoft.AspNetCore.Identity;
 

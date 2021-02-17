@@ -10,7 +10,7 @@
 
     using Common.Mapping;
     using Contracts;
-    using UMS.Services.Data.Models.MajorsParametersModels;
+    using Data.Models.MajorsParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;

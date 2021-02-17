@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Services.Data.Models.CoursesParametersModels;
+    using Data.Models.CoursesParametersModels;
 
     public interface ICoursesService : ITransientService
     {

@@ -7,10 +7,10 @@
     using Microsoft.EntityFrameworkCore;
 
     using Common.Mapping;
+    using Contracts;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
-    using UMS.Services.Contracts;
 
     public class ResourcesService : IResourcesService
     {

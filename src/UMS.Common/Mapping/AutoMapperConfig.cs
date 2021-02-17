@@ -8,7 +8,7 @@
     using AutoMapper;
     using AutoMapper.Configuration;
 
-    using UMS.Common.Mapping;
+    using Common.Mapping;
 
     public static class AutoMapperConfig
     {

@@ -10,7 +10,7 @@
 
     using Common.Mapping;
     using Contracts;
-    using Services.Data.Models.DepartmentsParametersModels;
+    using Data.Models.DepartmentsParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
 

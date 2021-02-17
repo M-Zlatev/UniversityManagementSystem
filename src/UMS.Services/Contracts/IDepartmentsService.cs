@@ -3,8 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Data.Models;
-    using Services.Data.Models.DepartmentsParametersModels;
+    using Data.Models.DepartmentsParametersModels;
 
     public interface IDepartmentsService : ITransientService
     {
