@@ -10,7 +10,7 @@
 
     using Common.Mapping;
     using Services;
-    using Web.ViewModels;
+    using ViewModels;
 
     public static class ServiceCollectionExtensions
     {
