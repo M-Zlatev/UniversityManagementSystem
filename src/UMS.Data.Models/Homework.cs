@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using Common.Models;
+    using Common.Contracts;
     using static Common.DataValidation.Homework;
 
     public class Homework : BaseDeletableModel

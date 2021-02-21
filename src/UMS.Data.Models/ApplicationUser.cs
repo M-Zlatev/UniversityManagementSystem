@@ -5,7 +5,7 @@
 
     using Microsoft.AspNetCore.Identity;
 
-    using Common.Models;
+    using Common.Contracts;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

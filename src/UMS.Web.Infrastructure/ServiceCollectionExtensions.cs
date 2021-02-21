@@ -9,6 +9,7 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using Common.Mapping;
+    using Data.Repositories;
     using Services;
     using ViewModels;
 
@@ -47,6 +48,9 @@
                     services.AddScoped(type.Service, type.Implementation);
                 }
             }
+
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
 
             return services;
         }

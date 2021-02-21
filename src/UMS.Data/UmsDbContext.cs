@@ -11,19 +11,20 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Models;
+    using Common.Contracts;
+    using Infrastructure;
     using Models;
 
-    public class UmsDbContext : IdentityDbContext<ApplicationUser>
+    public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
+        private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
+            typeof(UmsDbContext).GetMethod(
+                nameof(SetIsDeletedQueryFilter),
+                BindingFlags.NonPublic | BindingFlags.Static);
 
-        public UmsDbContext(
-            DbContextOptions<UmsDbContext> options,
-            IHttpContextAccessor httpContextAccessor)
+        public UmsDbContext(DbContextOptions<UmsDbContext> options)
             : base(options)
         {
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         public DbSet<Faculty> Faculties { get; set; }
@@ -60,7 +61,7 @@
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
-            //this.AddTimestamps();
+            this.ApplyAuditInfoRules();
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
@@ -71,7 +72,7 @@
              bool acceptAllChangesOnSuccess,
              CancellationToken cancellationToken = default)
         {
-            //this.AddTimestamps();
+            this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
@@ -82,22 +83,42 @@
 
             // Applies configurations
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            EntityIndexesConfiguration.Configure(builder);
+
+            var entityTypes = builder.Model.GetEntityTypes().ToList();
+
+            // Set global query filter for not deleted entities only
+            var deletableEntityTypes = entityTypes
+                .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
+            foreach (var deletableEntityType in deletableEntityTypes)
+            {
+                var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
+                method.Invoke(null, new object[] { builder });
+            }
+
+            // Disable cascade delete
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
 
-        private void AddTimestamps()
+        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
+            where T : class, IDeletableEntity
+        {
+            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+        }
+
+        private void ApplyAuditInfoRules()
         {
             var changedEntries = this.ChangeTracker
-                .Entries()
-                .Where(e =>
-                    e.Entity is IAuditInfo &&
-                    (e.State == EntityState.Added || e.State == EntityState.Modified));
-
-            var userId = this.httpContextAccessor.HttpContext.User
-                .FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            var currentUsername = !string.IsNullOrEmpty(userId)
-                     ? userId
-                     : "Anonymous";
+                 .Entries()
+                 .Where(e =>
+                     e.Entity is IAuditInfo &&
+                     (e.State == EntityState.Added || e.State == EntityState.Modified));
 
             foreach (var entry in changedEntries)
             {
@@ -105,12 +126,10 @@
                 if (entry.State == EntityState.Added && entity.CreatedOn == default)
                 {
                     entity.CreatedOn = DateTime.UtcNow;
-                    entity.CreatedBy = currentUsername;
                 }
                 else
                 {
                     entity.ModifiedOn = DateTime.UtcNow;
-                    entity.ModifiedBy = currentUsername;
                 }
             }
         }

@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using UMS.Data.Common.Models;
+    using UMS.Data.Common.Contracts;
     using static UMS.Data.Common.DataValidation.Resource;
 
     public class Resource : BaseDeletableModel

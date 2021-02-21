@@ -10,6 +10,7 @@
 
     using Contracts;
     using Common.Mapping;
+    using UMS.Data.Common.Contracts;
     using Data.Models.FacultiesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;

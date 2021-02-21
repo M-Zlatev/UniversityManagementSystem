@@ -6,7 +6,7 @@
 
     using Common;
     using Common.Enumerations;
-    using Common.Models;
+    using Common.Contracts;
     using static Common.DataValidation.Address;
 
     public class TeacherAddress : BaseAuditInfoModel, IAddress

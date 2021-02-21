@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Common.Models
+﻿namespace UMS.Data.Common.Contracts
 {
     using System;
 

@@ -4,7 +4,7 @@
 
     using Microsoft.AspNetCore.Identity;
 
-    using Common.Models;
+    using Common.Contracts;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

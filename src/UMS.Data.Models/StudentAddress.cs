@@ -4,7 +4,7 @@
 
     using Common;
     using Common.Enumerations;
-    using Data.Common.Models;
+    using Data.Common.Contracts;
     using static Common.DataValidation.Address;
 
     public class StudentAddress : BaseAuditInfoModel, IAddress

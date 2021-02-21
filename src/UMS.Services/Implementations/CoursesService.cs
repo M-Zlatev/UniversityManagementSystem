@@ -12,6 +12,7 @@
     using Data.Models.CoursesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class CoursesService : ICoursesService
     {
@@ -19,14 +20,16 @@
 
         private readonly UmsDbContext data;
 
-        public CoursesService(UmsDbContext dbContext)
+        private readonly IDeletableEntityRepository<Course> coursesRepository;
+
+        public CoursesService(UmsDbContext dbContext, IDeletableEntityRepository<Course> coursesRepository)
         {
             this.data = dbContext;
+            this.coursesRepository = coursesRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int coursesPerPage = CoursesPageSize)
-            => this.data
-            .Courses
+            => this.coursesRepository.AllAsNoTracking()
             .OrderBy(c => c.Id)
             .Skip((page - 1) * coursesPerPage)
             .Take(coursesPerPage)
@@ -34,17 +37,16 @@
             .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-            .Courses
+            => this.coursesRepository.AllAsNoTracking()
             .Where(c => c.Id == id)
             .To<T>()
             .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Courses.Count();
+            => this.coursesRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Courses.AnyAsync(c => c.Id == id);
+            => await this.coursesRepository.All().AnyAsync(c => c.Id == id);
 
         public async Task<int> Create(CourseCreateParametersModel model)
         {

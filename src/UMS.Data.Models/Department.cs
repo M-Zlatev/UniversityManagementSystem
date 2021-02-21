@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using Common.Models;
+    using Common.Contracts;
     using static Common.DataValidation.Department;
 
     public class Department : BaseAuditInfoModel
