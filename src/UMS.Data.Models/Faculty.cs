@@ -7,7 +7,7 @@
     using Common.Contracts;
     using static Common.DataValidation.Faculty;
 
-    public class Faculty : BaseAuditInfoModel
+    public class Faculty : BaseDeletableModel
     {
         public Faculty()
         {

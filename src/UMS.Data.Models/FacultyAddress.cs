@@ -7,7 +7,7 @@
     using Common.Contracts;
     using static Common.DataValidation.Address;
 
-    public class FacultyAddress : BaseAuditInfoModel, IAddress
+    public class FacultyAddress : BaseDeletableModel, IAddress
     {
         public int Id { get; set; }
 

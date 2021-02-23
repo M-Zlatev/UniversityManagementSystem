@@ -9,7 +9,7 @@
     using Common.Contracts;
     using static Common.DataValidation.Address;
 
-    public class TeacherAddress : BaseAuditInfoModel, IAddress
+    public class TeacherAddress : BaseDeletableModel, IAddress
     {
         public int Id { get; set; }
 

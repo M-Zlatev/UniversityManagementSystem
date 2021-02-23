@@ -14,21 +14,19 @@
     using Data.Models.FacultiesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class FacultiesService : IFacultiesService
     {
         private const int FacultyPageSize = 10;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Faculty> facultyRepository;
 
-        public FacultiesService(UmsDbContext data)
-        {
-            this.data = data;
-        }
+        public FacultiesService(IDeletableEntityRepository<Faculty> facultyRepository)
+            => this.facultyRepository = facultyRepository;
 
         public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage = FacultyPageSize)
-            => this.data
-             .Faculties
+            => this.facultyRepository.AllAsNoTracking()
              .OrderBy(f => f.Id)
              .Skip((page - 1) * facultiesPerPage)
              .Take(facultiesPerPage)
@@ -36,17 +34,16 @@
              .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-                .Faculties
+            => this.facultyRepository.AllAsNoTracking()
                 .Where(f => f.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Faculties.Count();
+            => this.facultyRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Faculties.AnyAsync(f => f.Id == id);
+            => await this.facultyRepository.All().AnyAsync(f => f.Id == id);
 
         public async Task<int> Create(FacultyCreateParametersModel model)
         {
@@ -67,16 +64,16 @@
                 Fax = model.Fax,
             };
 
-            this.data.Add(faculty);
+            await this.facultyRepository.AddAsync(faculty);
 
-            await this.data.SaveChangesAsync();
+            await this.facultyRepository.SaveChangesAsync();
 
             return faculty.Id;
         }
 
         public async Task<bool> Edit(int id, FacultyEditParametersModel model)
         {
-            var faculty = await this.data.Faculties.FindAsync(id);
+            var faculty = this.facultyRepository.All().FirstOrDefault(f => f.Id == id);
 
             if (faculty == null)
             {
@@ -92,23 +89,23 @@
             faculty.PhoneNumber = model.PhoneNumber;
             faculty.Fax = model.Fax;
 
-            await this.data.SaveChangesAsync();
+            await this.facultyRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var faculty = this.data.Faculties.FindAsync(id);
+            var faculty = this.facultyRepository.All().FirstOrDefault(f => f.Id == id);
 
             if (faculty == null)
             {
                 return false;
             }
 
-            this.data.Remove(faculty);
+            this.facultyRepository.Delete(faculty);
 
-            await this.data.SaveChangesAsync();
+            await this.facultyRepository.SaveChangesAsync();
 
             return true;
         }

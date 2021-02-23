@@ -61,7 +61,7 @@
             => this.View();
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateFacultyInputForm facultyInputForm)
         {
             if (this.ModelState.IsValid)

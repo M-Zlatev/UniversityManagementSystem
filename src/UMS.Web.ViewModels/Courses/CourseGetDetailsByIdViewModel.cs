@@ -5,8 +5,8 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
-    using Data.Models;
+    using UMS.Common.Mapping;
+    using UMS.Data.Models;
 
     public class CourseGetDetailsByIdViewModel : IMapFrom<Course>, IMapExplicitly
     {

@@ -1,6 +1,8 @@
 ﻿namespace UMS.Data.Models
 {
-    public class TeacherStudent
+    using Common.Contracts;
+
+    public class TeacherStudent : BaseDeletableModel
     {
         public int TeacherId { get; set; }
 

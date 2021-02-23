@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.FacultiesParametersModels
 {
-    public class FacultyCreateParametersModel : FacultyBaseParametersModel
+    using Common.Mapping;
+    using Web.ViewModels.Faculties;
+
+    public class FacultyCreateParametersModel : FacultyBaseParametersModel, IMapFrom<CreateFacultyInputForm>
     {
         public string UserId { get; set; }
     }

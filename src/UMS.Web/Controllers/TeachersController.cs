@@ -63,9 +63,9 @@
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<TeacherCreateParametersModel>(teacherInputForm);
-                var studentId = await this.teachersService.Create(parameters);
+                var teacherId = await this.teachersService.Create(parameters);
 
-                return this.RedirectToAction(nameof(this.ById), new { id = studentId });
+                return this.RedirectToAction(nameof(this.ById), new { id = teacherId });
             }
 
             return this.View(teacherInputForm);

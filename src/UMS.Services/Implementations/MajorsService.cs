@@ -14,21 +14,25 @@
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class MajorsService : IMajorsService
     {
         private const int MajorPageSize = 10;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Major> majorRepository;
+        private readonly IDeletableEntityRepository<Department> departmentRepository;
 
-        public MajorsService(UmsDbContext data)
+        public MajorsService(
+            IDeletableEntityRepository<Major> majorRepository,
+            IDeletableEntityRepository<Department> departmentRepository)
         {
-            this.data = data;
+            this.majorRepository = majorRepository;
+            this.departmentRepository = departmentRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int majorsPerPage = MajorPageSize)
-            => this.data
-             .Majors
+            => this.majorRepository.AllAsNoTracking()
              .OrderBy(m => m.Id)
              .Skip((page - 1) * majorsPerPage)
              .Take(majorsPerPage)
@@ -36,22 +40,20 @@
              .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-                .Majors
+            => this.majorRepository.AllAsNoTracking()
                 .Where(m => m.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Majors.Count();
+            => this.majorRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Majors.AnyAsync(m => m.Id == id);
+            => await this.majorRepository.All().AnyAsync(m => m.Id == id);
 
         public async Task<int> Create(MajorCreateParametersModel model)
         {
-            var departmentId = this.data
-                .Departments
+            var departmentId = this.departmentRepository.AllAsNoTracking()
                 .Where(d => d.Name == model.BelongsToDepartment)
                 .Select(d => d.Id)
                 .FirstOrDefault();
@@ -65,24 +67,23 @@
                 DepartmentId = departmentId,
             };
 
-            this.data.Add(major);
+            await this.majorRepository.AddAsync(major);
 
-            await this.data.SaveChangesAsync();
+            await this.majorRepository.SaveChangesAsync();
 
             return major.Id;
         }
 
         public async Task<bool> Edit(int id, MajorEditParametersModel model)
         {
-            var major = await this.data.Majors.FindAsync(id);
+            var major = this.majorRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (major == null)
             {
                 return false;
             }
 
-            var departmentId = this.data
-                .Departments
+            var departmentId = this.departmentRepository.All()
                 .Where(d => d.Name == model.BelongsToDepartment)
                 .Select(d => d.Id)
                 .FirstOrDefault();
@@ -93,23 +94,23 @@
             major.Duration = model.Duration;
             major.DepartmentId = departmentId;
 
-            await this.data.SaveChangesAsync();
+            await this.majorRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var major = this.data.Majors.FindAsync(id);
+            var major = this.majorRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (major == null)
             {
                 return false;
             }
 
-            this.data.Remove(major);
+            this.majorRepository.Delete(major);
 
-            await this.data.SaveChangesAsync();
+            await this.majorRepository.SaveChangesAsync();
 
             return true;
         }

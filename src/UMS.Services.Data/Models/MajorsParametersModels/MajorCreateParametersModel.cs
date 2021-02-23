@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.MajorsParametersModels
 {
-    public class MajorCreateParametersModel : MajorBaseParametersModel
+    using Common.Mapping;
+    using Web.ViewModels.Majors;
+
+    public class MajorCreateParametersModel : MajorBaseParametersModel, IMapFrom<CreateMajorInputForm>
     {
         public string UserId { get; set; }
     }

@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.DepartmentsParametersModels
 {
-    public class DepartmentCreateParametersModel : DepartmentBaseParametersModel
+    using Common.Mapping;
+    using Web.ViewModels.Departments;
+
+    public class DepartmentCreateParametersModel : DepartmentBaseParametersModel, IMapFrom<CreateDepartmentInputForm>
     {
         public string UserId { get; set; }
     }

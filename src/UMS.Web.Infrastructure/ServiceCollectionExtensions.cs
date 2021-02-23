@@ -11,7 +11,9 @@
     using Common.Mapping;
     using Data.Repositories;
     using Services;
+    using Services.Data.Models.CoursesParametersModels;
     using ViewModels;
+    using ViewModels.Courses;
 
     public static class ServiceCollectionExtensions
     {
@@ -69,7 +71,9 @@
 
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(CourseCreateParametersModel).GetTypeInfo().Assembly);
 
             return services;
         }

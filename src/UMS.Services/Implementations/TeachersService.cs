@@ -13,21 +13,19 @@
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class TeachersService : ITeachersService
     {
         private const int TeachersPageSize = 20;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Teacher> teacherRepository;
 
-        public TeachersService(UmsDbContext dbContext)
-        {
-            this.data = dbContext;
-        }
+        public TeachersService(IDeletableEntityRepository<Teacher> teacherRepository)
+            => this.teacherRepository = teacherRepository;
 
         public IEnumerable<T> GetAll<T>(int page, int teachersPerPage)
-            => this.data
-                .Teachers
+            => this.teacherRepository.AllAsNoTracking()
                 .OrderBy(t => t.Id)
                 .Skip((page - 1) * TeachersPageSize)
                 .Take(TeachersPageSize)
@@ -35,17 +33,16 @@
                 .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-                .Teachers
+            => this.teacherRepository.AllAsNoTracking()
                 .Where(t => t.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Teachers.Count();
+            => this.teacherRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Teachers.AnyAsync(t => t.Id == id);
+            => await this.teacherRepository.All().AnyAsync(t => t.Id == id);
 
         public async Task<int> Create(TeacherCreateParametersModel model)
         {
@@ -69,16 +66,15 @@
                 ImageUrl = model.ImageUrl,
             };
 
-            this.data.Add(teacher);
-
-            await this.data.SaveChangesAsync();
+            await this.teacherRepository.AddAsync(teacher);
+            await this.teacherRepository.SaveChangesAsync();
 
             return teacher.Id;
         }
 
         public async Task<bool> Edit(int id, TeacherEditParametersModel model)
         {
-            var teacher = await this.data.Teachers.FindAsync(id);
+            var teacher = this.teacherRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (teacher == null)
             {
@@ -97,23 +93,23 @@
             teacher.Email = model.Email;
             teacher.ImageUrl = model.ImageUrl;
 
-            await this.data.SaveChangesAsync();
+            await this.teacherRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var teacher = this.data.Teachers.FindAsync(id);
+            var teacher = this.teacherRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (teacher == null)
             {
                 return false;
             }
 
-            this.data.Remove(teacher);
+            this.teacherRepository.Delete(teacher);
 
-            await this.data.SaveChangesAsync();
+            await this.teacherRepository.SaveChangesAsync();
 
             return true;
         }

@@ -12,14 +12,16 @@
 
         public T GetDetailsById<T>(int id);
 
+        Task<int> CreateAsync(CourseCreateParametersModel createParametersModel);
+
+        Task<bool> EditAsync(int id, CourseEditParametersModel editParametersModel);
+
+        Task<bool> DeleteAsync(int id);
+
         Task<bool> Exists(int id);
 
         int GetCount();
 
-        Task<int> Create(CourseCreateParametersModel createParametersModel);
-
-        Task<bool> Edit(int id, CourseEditParametersModel editParametersModel);
-
-        Task<bool> Delete(int id);
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

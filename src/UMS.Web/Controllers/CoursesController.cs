@@ -2,6 +2,8 @@
 {
     using System.Threading.Tasks;
 
+    using AutoMapper;
+    using AutoMapper.Configuration;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +19,9 @@
         private readonly ICoursesService coursesService;
 
         public CoursesController(ICoursesService coursesService)
-            => this.coursesService = coursesService;
+        {
+            this.coursesService = coursesService;
+        }
 
         public IActionResult All(int id = 1)
         {
@@ -51,22 +55,43 @@
         }
 
         [HttpGet]
-        public IActionResult Create(int id)
-            => this.View();
+        public IActionResult Create()
+        {
+            var viewModel = new CreateCourseInputForm();
+            viewModel.MajorItems = this.coursesService.GetAllAsKeyValuePairs();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateCourseInputForm courseInputForm)
         {
             if (this.ModelState.IsValid)
             {
+                courseInputForm.MajorItems = this.coursesService.GetAllAsKeyValuePairs();
+
                 var parameters = AutoMapperConfig.MapperInstance.Map<CourseCreateParametersModel>(courseInputForm);
-                var courseId = await this.coursesService.Create(parameters);
+
+                var courseId = await this.coursesService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = courseId });
             }
 
             return this.View(courseInputForm);
+        }
+
+        private static void CreateMapProccessing()
+        {
+            var config = new MapperConfigurationExpression();
+            config.CreateProfile(
+                "ExplicitProfile",
+                configuration =>
+                {
+                    config.CreateMap<CreateCourseInputForm, CourseCreateParametersModel>();
+                });
+
+            AutoMapperConfig.MapperInstance = new Mapper(new MapperConfiguration(config));
         }
 
         [HttpGet]
@@ -93,7 +118,7 @@
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<CourseEditParametersModel>(courseInputForm);
-                await this.coursesService.Edit(id, parameters);
+                await this.coursesService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -122,7 +147,7 @@
                 return this.NotFound();
             }
 
-            await this.coursesService.Delete(id);
+            await this.coursesService.DeleteAsync(id);
 
             return this.Redirect(nameof(this.All));
         }

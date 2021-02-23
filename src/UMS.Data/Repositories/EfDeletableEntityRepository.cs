@@ -7,7 +7,6 @@
     using Microsoft.EntityFrameworkCore;
 
     using Common.Contracts;
-    using Repositories;
     using Infrastructure;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>

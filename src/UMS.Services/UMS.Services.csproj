@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>net5.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
@@ -25,6 +25,7 @@
 	  <ProjectReference Include="..\UMS.Data.Common\UMS.Data.Common.csproj" />
 	  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
 	  <ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
+	  <ProjectReference Include="..\UMS.Web.ViewModels\UMS.Web.ViewModels.csproj" />
 	</ItemGroup>
 
 </Project>

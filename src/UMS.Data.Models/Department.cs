@@ -7,7 +7,7 @@
     using Common.Contracts;
     using static Common.DataValidation.Department;
 
-    public class Department : BaseAuditInfoModel
+    public class Department : BaseDeletableModel
     {
         public Department()
         {

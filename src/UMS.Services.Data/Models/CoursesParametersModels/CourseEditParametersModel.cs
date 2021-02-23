@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.CoursesParametersModels
 {
-    public class CourseEditParametersModel : CourseBaseParametersModel
+    using Common.Mapping;
+    using Web.ViewModels.Courses;
+
+    public class CourseEditParametersModel : CourseBaseParametersModel, IMapFrom<EditCourseInputForm>
     {
         public int Id { get; set; }
     }

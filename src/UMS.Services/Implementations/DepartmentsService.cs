@@ -13,21 +13,25 @@
     using Data.Models.DepartmentsParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class DepartmentsService : IDepartmentsService
     {
         private const int DepartmentPageSize = 10;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Department> departmentRepository;
+        private readonly IDeletableEntityRepository<Faculty> facultyRepository;
 
-        public DepartmentsService(UmsDbContext data)
+        public DepartmentsService(
+            IDeletableEntityRepository<Department> departmentRepository,
+            IDeletableEntityRepository<Faculty> facultyRepository)
         {
-            this.data = data;
+            this.departmentRepository = departmentRepository;
+            this.facultyRepository = facultyRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int departmentsPerPage = DepartmentPageSize)
-            => this.data
-             .Departments
+            => this.departmentRepository.AllAsNoTracking()
              .OrderBy(d => d.Id)
              .Skip((page - 1) * departmentsPerPage)
              .Take(departmentsPerPage)
@@ -35,22 +39,20 @@
              .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-                .Departments
+            => this.departmentRepository.AllAsNoTracking()
                 .Where(d => d.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Departments.Count();
+            => this.departmentRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Departments.AnyAsync(d => d.Id == id);
+            => await this.departmentRepository.All().AnyAsync(d => d.Id == id);
 
         public async Task<int> Create(DepartmentCreateParametersModel model)
         {
-            var facultyId = this.data
-                .Faculties
+            var facultyId = this.facultyRepository.AllAsNoTracking()
                 .Where(f => f.Name == model.BelongsToFaculty)
                 .Select(f => f.Id)
                 .FirstOrDefault();
@@ -65,16 +67,15 @@
                 FacultyId = facultyId,
             };
 
-            this.data.Add(department);
-
-            await this.data.SaveChangesAsync();
+            await this.departmentRepository.AddAsync(department);
+            await this.departmentRepository.SaveChangesAsync();
 
             return department.Id;
         }
 
         public async Task<bool> Edit(int id, DepartmentEditParametersModel model)
         {
-            var department = await this.data.Departments.FindAsync(id);
+            var department = this.departmentRepository.All().FirstOrDefault(d => d.Id == id);
 
             if (department == null)
             {
@@ -87,23 +88,23 @@
             department.PhoneNumber = model.PhoneNumber;
             department.Fax = model.Fax;
 
-            await this.data.SaveChangesAsync();
+            await this.departmentRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var department = this.data.Departments.FindAsync(id);
+            var department = this.departmentRepository.AllAsNoTracking().FirstOrDefault(d => d.Id == id);
 
             if (department == null)
             {
                 return false;
             }
 
-            this.data.Remove(department);
+            this.departmentRepository.Delete(department);
 
-            await this.data.SaveChangesAsync();
+            await this.departmentRepository.SaveChangesAsync();
 
             return true;
         }

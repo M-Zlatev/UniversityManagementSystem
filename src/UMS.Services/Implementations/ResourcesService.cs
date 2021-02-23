@@ -11,19 +11,26 @@
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class ResourcesService : IResourcesService
     {
         private const int ResourcesPageSize = 10;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Resource> resourceRepository;
+        private readonly IDeletableEntityRepository<Course> courseRepository;
 
-        public ResourcesService(UmsDbContext dbContext)
-            => this.data = dbContext;
+        public ResourcesService(
+            UmsDbContext dbContext,
+            IDeletableEntityRepository<Resource> resourceRepository,
+            IDeletableEntityRepository<Course> courseRepository)
+        {
+            this.resourceRepository = resourceRepository;
+            this.courseRepository = courseRepository;
+        }
 
         public IEnumerable<T> GetAll<T>(int page, int resourcesPerPage = ResourcesPageSize)
-            => this.data
-            .Resources
+            => this.resourceRepository.AllAsNoTracking()
             .OrderBy(r => r.Id)
             .Skip((page - 1) * resourcesPerPage)
             .Take(resourcesPerPage)
@@ -31,17 +38,16 @@
             .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-            .Resources
+            => this.resourceRepository.AllAsNoTracking()
             .Where(r => r.Id == id)
             .To<T>()
             .FirstOrDefault();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Resources.AnyAsync(r => r.Id == id);
+            => await this.resourceRepository.All().AnyAsync(r => r.Id == id);
 
         public int GetCount()
-            => this.data.Resources.Count();
+            => this.resourceRepository.All().Count();
 
         public async Task<int> Create(string name, ResourceType resourceType, string url, string belongToCourse)
         {
@@ -55,16 +61,16 @@
                 CourseId = courseId,
             };
 
-            this.data.Resources.Add(resource);
+            await this.resourceRepository.AddAsync(resource);
 
-            await this.data.SaveChangesAsync();
+            await this.resourceRepository.SaveChangesAsync();
 
             return resource.Id;
         }
 
         public async Task<bool> Edit(int id, string name, ResourceType resourceType, string url, string belongToCourse)
         {
-            var resource = await this.data.Resources.FindAsync(id);
+            var resource = this.resourceRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (resource == null)
             {
@@ -78,31 +84,30 @@
             resource.Url = url;
             resource.CourseId = courseId;
 
-            await this.data.SaveChangesAsync();
+            await this.resourceRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var resource = this.data.Resources.FindAsync(id);
+            var resource = this.resourceRepository.All().FirstOrDefault(m => m.Id == id);
 
             if (resource == null)
             {
                 return false;
             }
 
-            this.data.Remove(resource);
+            this.resourceRepository.Delete(resource);
 
-            await this.data.SaveChangesAsync();
+            await this.resourceRepository.SaveChangesAsync();
 
             return true;
         }
 
         private int FindCourseIdByCourseName(string belongToCourse)
         {
-            return this.data
-                .Courses
+            return this.courseRepository.All()
                 .Where(c => c.Name == belongToCourse)
                 .Select(c => c.Id)
                 .FirstOrDefault();

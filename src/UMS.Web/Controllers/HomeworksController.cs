@@ -59,9 +59,9 @@
         {
             if (this.ModelState.IsValid)
             {
-                var courseId = await this.homeworksService.Create(inputForm.Content, inputForm.HomeworkType, inputForm.AssignmentTime, inputForm.OpenForSubmissionTime, inputForm.UserId);
+                var homeworkId = await this.homeworksService.Create(inputForm.Content, inputForm.HomeworkType, inputForm.AssignmentTime, inputForm.OpenForSubmissionTime, inputForm.UserId);
 
-                return this.RedirectToAction(nameof(this.ById), new { id = courseId });
+                return this.RedirectToAction(nameof(this.ById), new { id = homeworkId });
             }
 
             return this.View(inputForm);

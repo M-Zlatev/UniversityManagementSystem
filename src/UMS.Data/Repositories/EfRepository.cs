@@ -6,8 +6,6 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Repositories;
-
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {

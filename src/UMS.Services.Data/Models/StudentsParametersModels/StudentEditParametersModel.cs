@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.StudentsParametersModels
 {
-    public class StudentEditParametersModel : StudentBaseParametersModel
+    using Common.Mapping;
+    using Web.ViewModels.Students;
+
+    public class StudentEditParametersModel : StudentBaseParametersModel, IMapFrom<EditStudentInputForm>
     {
         public int Id { get; set; }
     }

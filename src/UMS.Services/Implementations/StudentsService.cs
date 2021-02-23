@@ -13,21 +13,28 @@
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class StudentsService : IStudentsService
     {
         private const int StudentsPageSize = 20;
 
-        private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Student> studentRepository;
+        private readonly IDeletableEntityRepository<StudentMajor> studentMajorsRepository;
+        private readonly IDeletableEntityRepository<Major> majorRepository;
 
-        public StudentsService(UmsDbContext dbContext)
+        public StudentsService(
+            IDeletableEntityRepository<Student> studentRepository,
+            IDeletableEntityRepository<StudentMajor> studentMajorsRepository,
+            IDeletableEntityRepository<Major> majorRepository)
         {
-            this.data = dbContext;
+            this.studentRepository = studentRepository;
+            this.studentMajorsRepository = studentMajorsRepository;
+            this.majorRepository = majorRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int studentsPerPage)
-            => this.data
-                .Students
+            => this.studentRepository.AllAsNoTracking()
                 .OrderBy(s => s.Id)
                 .Skip((page - 1) * StudentsPageSize)
                 .Take(StudentsPageSize)
@@ -35,22 +42,20 @@
                 .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-                .Students
+            => this.studentRepository.AllAsNoTracking()
                 .Where(s => s.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
         public int GetCount()
-            => this.data.Students.Count();
+            => this.studentRepository.All().Count();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Students.AnyAsync(s => s.Id == id);
+            => await this.studentRepository.All().AnyAsync(d => d.Id == id);
 
         public async Task<int> Create(StudentCreateParametersModel model)
         {
-            var major = this.data
-                        .Majors
+            var major = this.majorRepository.AllAsNoTracking()
                         .Where(m => m.Name == model.MajorName)
                         .FirstOrDefault();
 
@@ -77,7 +82,7 @@
                 HasScholarship = model.HasScholarship,
             };
 
-            this.data.Add(student);
+            await this.studentRepository.AddAsync(student);
 
             if (major != null)
             {
@@ -89,17 +94,17 @@
                     MajorId = major.Id,
                 };
 
-                this.data.Add(studentMajor);
+                await this.studentMajorsRepository.AddAsync(studentMajor);
             }
 
-            await this.data.SaveChangesAsync();
+            await this.studentRepository.SaveChangesAsync();
 
             return student.Id;
         }
 
         public async Task<bool> Edit(int id, StudentEditParametersModel model)
         {
-            var student = await this.data.Students.FindAsync(id);
+            var student = this.studentRepository.All().FirstOrDefault(st => st.Id == id);
 
             if (student == null)
             {
@@ -121,23 +126,23 @@
             student.ImageUrl = model.ImageUrl;
             student.HasScholarship = model.HasScholarship;
 
-            await this.data.SaveChangesAsync();
+            await this.studentRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var student = this.data.Students.FindAsync(id);
+            var student = this.studentRepository.All().FirstOrDefault(st => st.Id == id);
 
             if (student == null)
             {
                 return false;
             }
 
-            this.data.Remove(student);
+            this.studentRepository.Delete(student);
 
-            await this.data.SaveChangesAsync();
+            await this.studentRepository.SaveChangesAsync();
 
             return true;
         }

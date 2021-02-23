@@ -12,19 +12,26 @@
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
+    using UMS.Data.Repositories;
 
     public class HomeworksService : IHomeworksService
     {
         private const int HomeworksPageSize = 10;
 
         private readonly UmsDbContext data;
+        private readonly IDeletableEntityRepository<Homework> homeworkRepository;
+        private readonly IDeletableEntityRepository<Student> studentRepository;
 
-        public HomeworksService(UmsDbContext dbContext)
-            => this.data = dbContext;
+        public HomeworksService(
+            IDeletableEntityRepository<Homework> homeworkRepository,
+            IDeletableEntityRepository<Student> studentRepository)
+        {
+            this.homeworkRepository = homeworkRepository;
+            this.studentRepository = studentRepository;
+        }
 
         public IEnumerable<T> GetAll<T>(int page, int homeworksPerPage = HomeworksPageSize)
-            => this.data
-            .Homeworks
+            => this.homeworkRepository.AllAsNoTracking()
             .OrderBy(h => h.Id)
             .Skip((page - 1) * homeworksPerPage)
             .Take(homeworksPerPage)
@@ -32,22 +39,20 @@
             .ToList();
 
         public T GetDetailsById<T>(int id)
-            => this.data
-            .Homeworks
+            => this.homeworkRepository.AllAsNoTracking()
             .Where(h => h.Id == id)
             .To<T>()
             .FirstOrDefault();
 
         public async Task<bool> Exists(int id)
-            => await this.data.Homeworks.AnyAsync(h => h.Id == id);
+            => await this.homeworkRepository.All().AnyAsync(h => h.Id == id);
 
         public int GetCount()
-            => this.data.Homeworks.Count();
+            => this.homeworkRepository.All().Count();
 
         public async Task<int> Create(string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime, string doneByStudent)
         {
-            var studentId = this.data
-                .Students
+            var studentId = this.studentRepository.AllAsNoTracking()
                 .Where(s => s.FirstName == doneByStudent)
                 .Select(s => s.Id)
                 .FirstOrDefault();
@@ -63,23 +68,23 @@
                 StudentId = studentId,
             };
 
-            var student = this.data
-                .Students
+            var student = this.studentRepository.AllAsNoTracking()
                 .Where(s => s.FirstName == doneByStudent)
                 .FirstOrDefault();
 
             student.Homeworks.Add(homework);
 
-            this.data.Homeworks.Add(homework);
+            await this.homeworkRepository.AddAsync(homework);
 
-            await this.data.SaveChangesAsync();
+            await this.homeworkRepository.SaveChangesAsync();
+            await this.studentRepository.SaveChangesAsync();
 
             return homework.Id;
         }
 
         public async Task<bool> Edit(int id, string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime)
         {
-            var homework = await this.data.Homeworks.FindAsync(id);
+            var homework = this.homeworkRepository.All().FirstOrDefault(h => h.Id == id);
 
             if (homework == null)
             {
@@ -93,23 +98,23 @@
             homework.AssignmentTime = assignmentTime;
             homework.OpenForSubmissionTime = openForSubmissionTime;
 
-            await this.data.SaveChangesAsync();
+            await this.homeworkRepository.SaveChangesAsync();
 
             return true;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var homework = this.data.Homeworks.FindAsync(id);
+            var homework = this.homeworkRepository.All().FirstOrDefault(h => h.Id == id);
 
             if (homework == null)
             {
                 return false;
             }
 
-            this.data.Remove(homework);
+            this.homeworkRepository.Delete(homework);
 
-            await this.data.SaveChangesAsync();
+            await this.homeworkRepository.SaveChangesAsync();
 
             return true;
         }

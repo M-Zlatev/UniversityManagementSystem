@@ -8,13 +8,22 @@
     using AutoMapper;
     using AutoMapper.Configuration;
 
-    using Common.Mapping;
-
     public static class AutoMapperConfig
     {
         private static bool initialized;
 
         public static IMapper MapperInstance { get; set; }
+
+        public static IMapperConfigurationExpression ConfigurationExpression { get; set; }
+
+        public static bool Initialized
+        {
+            get => initialized;
+            set
+            {
+                Initialized = initialized;
+            }
+        }
 
         public static void RegisterMappings(params Assembly[] assemblies)
         {

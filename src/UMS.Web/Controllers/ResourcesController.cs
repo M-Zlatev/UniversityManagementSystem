@@ -60,9 +60,9 @@
         {
             if (this.ModelState.IsValid)
             {
-                var courseId = await this.resourcesService.Create(inputForm.Name, inputForm.ResourceType, inputForm.Url, inputForm.BelongToCourse);
+                var resourceId = await this.resourcesService.Create(inputForm.Name, inputForm.ResourceType, inputForm.Url, inputForm.BelongToCourse);
 
-                return this.RedirectToAction(nameof(this.ById), new { id = courseId });
+                return this.RedirectToAction(nameof(this.ById), new { id = resourceId });
             }
 
             return this.View(inputForm);
