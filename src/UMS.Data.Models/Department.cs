@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Department;
 
     public class Department : BaseDeletableModel

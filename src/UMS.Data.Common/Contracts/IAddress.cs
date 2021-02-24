@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Common.Contracts
+﻿namespace UMS.Data.Common
 {
     using UMS.Data.Common.Enumerations;
 

@@ -11,20 +11,21 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
+    using Common.Implementations;
     using Common.Contracts;
     using Infrastructure;
     using Models;
 
-    public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class UmsDbContext : IdentityDbContext<ApplicationUser>
     {
-        private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
-            typeof(UmsDbContext).GetMethod(
-                nameof(SetIsDeletedQueryFilter),
-                BindingFlags.NonPublic | BindingFlags.Static);
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public UmsDbContext(DbContextOptions<UmsDbContext> options)
+        public UmsDbContext(
+            DbContextOptions<UmsDbContext> options,
+            IHttpContextAccessor httpContextAccessor)
             : base(options)
         {
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public DbSet<Faculty> Faculties { get; set; }
@@ -65,12 +66,12 @@
             return base.SaveChanges(acceptAllChangesOnSuccess);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-            => this.SaveChangesAsync(true, cancellationToken);
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+            this.SaveChangesAsync(true, cancellationToken);
 
         public override Task<int> SaveChangesAsync(
-             bool acceptAllChangesOnSuccess,
-             CancellationToken cancellationToken = default)
+            bool acceptAllChangesOnSuccess,
+            CancellationToken cancellationToken = default)
         {
             this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
@@ -87,38 +88,15 @@
             EntityIndexesConfiguration.Configure(builder);
 
             var entityTypes = builder.Model.GetEntityTypes().ToList();
-
-            // Set global query filter for not deleted entities only
-            var deletableEntityTypes = entityTypes
-                .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
-            foreach (var deletableEntityType in deletableEntityTypes)
-            {
-                var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
-                method.Invoke(null, new object[] { builder });
-            }
-
-            // Disable cascade delete
-            var foreignKeys = entityTypes
-                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
-            foreach (var foreignKey in foreignKeys)
-            {
-                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
-            }
-        }
-
-        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
-            where T : class, IDeletableEntity
-        {
-            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         private void ApplyAuditInfoRules()
         {
             var changedEntries = this.ChangeTracker
-                 .Entries()
-                 .Where(e =>
-                     e.Entity is IAuditInfo &&
-                     (e.State == EntityState.Added || e.State == EntityState.Modified));
+                .Entries()
+                .Where(e =>
+                    e.Entity is IAuditInfo &&
+                    (e.State == EntityState.Added || e.State == EntityState.Modified));
 
             foreach (var entry in changedEntries)
             {

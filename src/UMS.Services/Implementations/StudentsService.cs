@@ -20,12 +20,12 @@
         private const int StudentsPageSize = 20;
 
         private readonly IDeletableEntityRepository<Student> studentRepository;
-        private readonly IDeletableEntityRepository<StudentMajor> studentMajorsRepository;
+        private readonly IRepository<StudentMajor> studentMajorsRepository;
         private readonly IDeletableEntityRepository<Major> majorRepository;
 
         public StudentsService(
             IDeletableEntityRepository<Student> studentRepository,
-            IDeletableEntityRepository<StudentMajor> studentMajorsRepository,
+            IRepository<StudentMajor> studentMajorsRepository,
             IDeletableEntityRepository<Major> majorRepository)
         {
             this.studentRepository = studentRepository;

@@ -17,12 +17,12 @@
     {
         private const int ResourcesPageSize = 10;
 
-        private readonly IDeletableEntityRepository<Resource> resourceRepository;
+        private readonly IRepository<Resource> resourceRepository;
         private readonly IDeletableEntityRepository<Course> courseRepository;
 
         public ResourcesService(
             UmsDbContext dbContext,
-            IDeletableEntityRepository<Resource> resourceRepository,
+            IRepository<Resource> resourceRepository,
             IDeletableEntityRepository<Course> courseRepository)
         {
             this.resourceRepository = resourceRepository;

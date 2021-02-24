@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Teacher;
 
     public class Teacher : BaseDeletableModel

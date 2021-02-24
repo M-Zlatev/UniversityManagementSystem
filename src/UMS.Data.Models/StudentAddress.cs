@@ -4,10 +4,10 @@
 
     using Common;
     using Common.Enumerations;
-    using Data.Common.Contracts;
+    using Data.Common.Implementations;
     using static Common.DataValidation.Address;
 
-    public class StudentAddress : BaseDeletableModel, IAddress
+    public class StudentAddress
     {
         public int Id { get; set; }
 

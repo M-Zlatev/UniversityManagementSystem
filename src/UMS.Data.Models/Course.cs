@@ -6,7 +6,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Course;
 
     public class Course : BaseDeletableModel

@@ -1,8 +1,6 @@
 ﻿namespace UMS.Data.Models
 {
-    using Common.Contracts;
-
-    public class CourseMajor : BaseDeletableModel
+    public class CourseMajor
     {
         public int CourseId { get; set; }
 

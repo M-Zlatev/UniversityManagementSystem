@@ -18,12 +18,11 @@
     {
         private const int HomeworksPageSize = 10;
 
-        private readonly UmsDbContext data;
-        private readonly IDeletableEntityRepository<Homework> homeworkRepository;
+        private readonly IRepository<Homework> homeworkRepository;
         private readonly IDeletableEntityRepository<Student> studentRepository;
 
         public HomeworksService(
-            IDeletableEntityRepository<Homework> homeworkRepository,
+            IRepository<Homework> homeworkRepository,
             IDeletableEntityRepository<Student> studentRepository)
         {
             this.homeworkRepository = homeworkRepository;

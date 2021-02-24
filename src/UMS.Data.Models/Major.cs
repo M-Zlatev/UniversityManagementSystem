@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Major;
 
     public class Major : BaseDeletableModel

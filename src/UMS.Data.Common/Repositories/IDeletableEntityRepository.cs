@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Common.Contracts;
+    using UMS.Data.Common.Contracts;
 
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity

@@ -4,10 +4,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using UMS.Data.Common.Contracts;
+    using UMS.Data.Common.Implementations;
     using static UMS.Data.Common.DataValidation.Resource;
 
-    public class Resource : BaseDeletableModel
+    public class Resource : BaseAuditInfoModel
     {
         public int Id { get; set; }
 

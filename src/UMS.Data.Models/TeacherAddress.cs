@@ -6,10 +6,10 @@
 
     using Common;
     using Common.Enumerations;
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Address;
 
-    public class TeacherAddress : BaseDeletableModel, IAddress
+    public class TeacherAddress : BaseAuditInfoModel, IAddress
     {
         public int Id { get; set; }
 

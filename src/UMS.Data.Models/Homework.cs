@@ -5,10 +5,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Enumerations;
-    using Common.Contracts;
+    using Common.Implementations;
     using static Common.DataValidation.Homework;
 
-    public class Homework : BaseDeletableModel
+    public class Homework : BaseAuditInfoModel
     {
         public Homework()
         {
