@@ -16,16 +16,11 @@
     using Infrastructure;
     using Models;
 
-    public class UmsDbContext : IdentityDbContext<ApplicationUser>
+    public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-
-        public UmsDbContext(
-            DbContextOptions<UmsDbContext> options,
-            IHttpContextAccessor httpContextAccessor)
+        public UmsDbContext(DbContextOptions<UmsDbContext> options)
             : base(options)
         {
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         public DbSet<Faculty> Faculties { get; set; }
@@ -86,8 +81,6 @@
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             EntityIndexesConfiguration.Configure(builder);
-
-            var entityTypes = builder.Model.GetEntityTypes().ToList();
         }
 
         private void ApplyAuditInfoRules()

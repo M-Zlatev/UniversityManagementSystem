@@ -25,8 +25,10 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        [Required]
         public MajorType MajorType { get; set; }
 
+        [Required]
         [Range(MinRangeInYears, MaxRangeInYears)]
         public double Duration { get; set; }
 

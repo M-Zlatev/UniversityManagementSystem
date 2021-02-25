@@ -1,5 +1,5 @@
 ﻿@model UMS.Web.ViewModels.Faculties.CreateFacultyInputForm
-@{ 
+@{
     this.ViewData["Title"] = "Add new faculty";
 }
 
@@ -17,6 +17,35 @@
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-
+    <div class="form-group">
+        <label asp-for="AddressStreetName"></label>
+        <input asp-for="AddressStreetName" class="form-control" rows="5" />
+        <span asp-validation-for="AddressStreetName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressTownName"></label>
+        <input asp-for="AddressTownName" class="form-control" rows="5" />
+        <span asp-validation-for="AddressTownName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressCountryName"></label>
+        <input asp-for="AddressCountryName" class="form-control" rows="5" />
+        <span asp-validation-for="AddressCountryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" rows="5" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" rows="5" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Fax"></label>
+        <input asp-for="Fax" class="form-control" rows="5" />
+        <span asp-validation-for="Fax" class="text-danger"></span>
+    </div>
     <input type="submit" class="btn btn-primary" />
 </form>

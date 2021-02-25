@@ -49,9 +49,12 @@
         {
             var facultyAddress = new FacultyAddress()
             {
-                StreetName = model.StreetName,
-                Town = model.TownName,
-                Country = model.CountryName,
+                StreetName = model.AddressStreetName,
+                District = model.AddressDistrictName,
+                Town = model.AddressTownName,
+                PostalCode = model.AddressPostalCode,
+                Country = model.AddressCountryName,
+                Continent = model.Continent,
             };
 
             var faculty = new Faculty
@@ -82,9 +85,12 @@
 
             faculty.Name = model.Name;
             faculty.Description = model.Description;
-            faculty.Address.StreetName = model.StreetName;
-            faculty.Address.Town = model.TownName;
-            faculty.Address.Country = model.CountryName;
+            faculty.Address.StreetName = model.AddressStreetName;
+            faculty.Address.District = model.AddressDistrictName;
+            faculty.Address.Town = model.AddressTownName;
+            faculty.Address.PostalCode = model.AddressPostalCode;
+            faculty.Address.Country = model.AddressCountryName;
+            faculty.Address.Continent = model.Continent;
             faculty.Email = model.Email;
             faculty.PhoneNumber = model.PhoneNumber;
             faculty.Fax = model.Fax;

@@ -6,6 +6,7 @@
 
     using Data.Common.Enumerations;
     using Data.Models;
+    using static Data.Common.DataValidation.Address;
     using static Data.Common.DataValidation.Teacher;
 
     public abstract class TeacherBaseForm
@@ -21,6 +22,26 @@
         [MaxLength(MaxNameLength)]
         public string LastName { get; set; }
 
+        [Required]
+        [StringLength(MaxStreetNameLength, MinimumLength = MinStreetNameLength)]
+        public string AddressStreetName { get; set; }
+
+        [MaxLength(MaxDistrictNameLength)]
+        public string AddressDistrictName { get; set; }
+
+        [Required]
+        [StringLength(MaxTownNameLength, MinimumLength = MinTownNameLength)]
+        public string AddressTownName { get; set; }
+
+        [StringLength(MaxPostalCodeLength, MinimumLength = MinPostalCodeLength)]
+        public string AddressPostalCode { get; set; }
+
+        [Required]
+        [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
+        public string AddressCountryName { get; set; }
+
+        public Continent Continent { get; set; }
+
         public Gender Gender { get; set; }
 
         [Required]
@@ -30,18 +51,6 @@
         [Required]
         [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
         public string PhoneNumber { get; set; }
-
-        public string AddressStreetName { get; set; }
-
-        [Required]
-        public string AddressTownName { get; set; }
-
-        public string AddressDistrictName { get; set; }
-
-        [Required]
-        public string AddressCountryName { get; set; }
-
-        public string AddressContinentName { get; set; }
 
         [Required]
         public AcademicDegree AcademicDegree { get; set; }

@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Data.Common.Enumerations;
     using static Data.Common.DataValidation.Address;
     using static Data.Common.DataValidation.Faculty;
 
@@ -14,22 +15,36 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
-        [Range(MinStreetNameLength, MaxStreetNameLength)]
+        [Required]
+        [StringLength(MaxStreetNameLength, MinimumLength = MinStreetNameLength)]
         public string AddressStreetName { get; set; }
 
-        [Range(MinTownNameLength, MaxTownNameLength)]
+        [MaxLength(MaxDistrictNameLength)]
+        public string AddressDistrictName { get; set; }
+
+        [Required]
+        [StringLength(MaxTownNameLength, MinimumLength = MinTownNameLength)]
         public string AddressTownName { get; set; }
 
-        [Range(MinCountryNameLength, MaxCountryNameLength)]
+        [StringLength(MaxPostalCodeLength, MinimumLength = MinPostalCodeLength)]
+        public string AddressPostalCode { get; set; }
+
+        [Required]
+        [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
         public string AddressCountryName { get; set; }
 
-        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
+        public Continent Continent { get; set; }
+
+        [Required]
+        [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
         public string Email { get; set; }
 
-        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
+        [Required]
+        [StringLength(MaxPhoneNumberLength, MinimumLength = MinPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
-        [Range(MinFaxNumberLength, MaxFaxNumberLength)]
+        [Required]
+        [StringLength(MaxFaxNumberLength, MinimumLength = MinFaxNumberLength)]
         public string Fax { get; set; }
     }
 }

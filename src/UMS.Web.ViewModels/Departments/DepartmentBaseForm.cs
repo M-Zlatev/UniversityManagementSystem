@@ -13,13 +13,16 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
-        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
+        [Required]
+        [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
         public string Email { get; set; }
 
-        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
+        [Required]
+        [StringLength(MaxPhoneNumberLength, MinimumLength = MinPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
-        [Range(MinFaxNumberLength, MaxFaxNumberLength)]
+        [Required]
+        [StringLength(MaxFaxNumberLength, MinimumLength = MinFaxNumberLength)]
         public string Fax { get; set; }
 
         public string BelongsToFaculty { get; set; }

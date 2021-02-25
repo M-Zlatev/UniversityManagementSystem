@@ -4,10 +4,10 @@
     {
         public int CourseId { get; set; }
 
-        public Course Course { get; set; }
+        public virtual Course Course { get; set; }
 
         public int MajorId { get; set; }
 
-        public Major Major { get; set; }
+        public virtual Major Major { get; set; }
     }
 }

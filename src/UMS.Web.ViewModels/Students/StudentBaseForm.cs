@@ -6,6 +6,7 @@
 
     using Data.Common.Enumerations;
     using Data.Models;
+    using static Data.Common.DataValidation.Address;
     using static Data.Common.DataValidation.Student;
 
     public abstract class StudentBaseForm
@@ -29,29 +30,39 @@
 
         public Gender Gender { get; set; }
 
+        [Required]
+        [StringLength(MaxStreetNameLength, MinimumLength = MinStreetNameLength)]
         public string AddressStreetName { get; set; }
 
-        [Required]
-        public string AddressTownName { get; set; }
-
+        [MaxLength(MaxDistrictNameLength)]
         public string AddressDistrictName { get; set; }
 
         [Required]
-        public string AddressCountryName { get; set; }
+        [StringLength(MaxTownNameLength, MinimumLength = MinTownNameLength)]
+        public string AddressTownName { get; set; }
 
-        public string AddressContinentName { get; set; }
+        [StringLength(MaxPostalCodeLength, MinimumLength = MinPostalCodeLength)]
+        public string AddressPostalCode { get; set; }
 
         [Required]
-        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
+        [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
+        public string AddressCountryName { get; set; }
+
+        public Continent Continent { get; set; }
+
+        [Required]
+        [StringLength(MaxPhoneNumberLength, MinimumLength = MinPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
         [Required]
-        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
+        [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
         public string Email { get; set; }
 
         public string ImageUrl { get; set; }
 
         public bool HasScholarship { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
 
         public string MajorName { get; set; }
     }

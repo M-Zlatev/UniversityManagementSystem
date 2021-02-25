@@ -16,8 +16,10 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
+        [Required]
         public DateTime StartDate { get; set; }
 
+        [Required]
         public DateTime EndDate { get; set; }
 
         [Required]

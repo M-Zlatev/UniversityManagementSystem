@@ -4,31 +4,29 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using Common;
     using Common.Enumerations;
-    using Common.Implementations;
     using static Common.DataValidation.Address;
 
-    public class TeacherAddress : BaseAuditInfoModel, IAddress
+    public class TeacherAddress
     {
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(MaxStreetNameLength)]
+        [StringLength(MaxStreetNameLength, MinimumLength = MinStreetNameLength)]
         public string StreetName { get; set; }
 
         [MaxLength(MaxDistrictNameLength)]
         public string District { get; set; }
 
         [Required]
-        [MaxLength(MaxTownNameLength)]
+        [StringLength(MaxTownNameLength, MinimumLength = MinTownNameLength)]
         public string Town { get; set; }
 
-        [MaxLength(MaxPostalCodeLength)]
+        [StringLength(MaxPostalCodeLength, MinimumLength = MinPostalCodeLength)]
         public string PostalCode { get; set; }
 
         [Required]
-        [MaxLength(MaxCountryNameLength)]
+        [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
         public string Country { get; set; }
 
         public Continent Continent { get; set; }
