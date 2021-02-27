@@ -55,7 +55,7 @@
 
         public async Task<int> Create(StudentCreateParametersModel model)
         {
-            var major = this.majorRepository.AllAsNoTracking()
+            var major = this.majorRepository.All()
                         .Where(m => m.Name == model.MajorName)
                         .FirstOrDefault();
 

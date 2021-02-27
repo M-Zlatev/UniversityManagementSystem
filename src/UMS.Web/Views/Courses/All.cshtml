@@ -1,22 +1,51 @@
-﻿@model UMS.Web.ViewModels.Courses.CourseGetAllViewModel;
+﻿@model UMS.Web.ViewModels.Courses.CourseGetAllViewModel
 @{
     this.ViewData["Title"] = "All Courses, page " + Model.PageNumber;
 }
 
 @if (this.TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-success">@this.TempData["Message"]</div>}
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
 
-<h1>@this.ViewData["Title"]</h1>
-
-<div class="row">
-    @foreach (var course in this.Model.Courses)
-    {
-        @course.Id @:&nbsp;
-        @course.Name @:&nbsp;
-        @course.Description
-        <br />
-    }
+<div>
+    <h2 class="float-left">@this.ViewData["Title"]</h2>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary float-right">Back to Home page</a>
+    <a asp-action="Create" class="btn btn-primary float-right" style="margin-right:1.2%">Create new course</a>
 </div>
-<hr />
+
+<br />
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Id")
+            </th>
+            <th>
+                @Html.DisplayName("Course name")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model.Courses)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => course.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => course.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = course.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "ById", new { id = course.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = course.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <partial name="_PagingPartial" model="@Model" />

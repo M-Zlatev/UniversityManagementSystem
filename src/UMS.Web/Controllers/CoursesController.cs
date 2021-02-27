@@ -81,21 +81,8 @@
             return this.View(courseInputForm);
         }
 
-        private static void CreateMapProccessing()
-        {
-            var config = new MapperConfigurationExpression();
-            config.CreateProfile(
-                "ExplicitProfile",
-                configuration =>
-                {
-                    config.CreateMap<CreateCourseInputForm, CourseCreateParametersModel>();
-                });
-
-            AutoMapperConfig.MapperInstance = new Mapper(new MapperConfiguration(config));
-        }
-
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.coursesService.Exists(id))
@@ -103,11 +90,12 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.coursesService.GetDetailsById<CourseEditParametersModel>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditCourseInputForm courseInputForm)
         {
             if (!await this.coursesService.Exists(id))
@@ -127,7 +115,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.coursesService.Exists(id))
@@ -139,7 +127,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.coursesService.Exists(id))

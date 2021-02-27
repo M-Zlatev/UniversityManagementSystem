@@ -51,7 +51,7 @@
         {
             CheckIfUserEnterDate(model.StartDate, model.EndDate);
 
-            var major = this.majorsRepository.AllAsNoTracking()
+            var major = this.majorsRepository.All()
                 .Where(m => m.Id == model.MajorId)
                 .FirstOrDefault();
 

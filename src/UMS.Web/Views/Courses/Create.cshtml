@@ -1,5 +1,5 @@
 ﻿@model UMS.Web.ViewModels.Courses.CreateCourseInputForm
-@{ 
+@{
     this.ViewData["Title"] = "Add new course";
     var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key));
 }
@@ -39,5 +39,8 @@
         <span asp-validation-for="MajorId" class="text-danger"></span>
     </div>
 
-    <input type="submit" class="btn btn-primary" />
+    <div>
+        <input type="submit" value="Create" class="btn btn-success" />
+        <a asp-action="All" class="btn btn-info">Back to all courses</a>
+    </div>
 </form>

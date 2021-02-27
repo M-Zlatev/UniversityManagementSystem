@@ -1,0 +1,40 @@
+﻿@model UMS.Web.ViewModels.Majors.CreateMajorInputForm
+@{
+    this.ViewData["Title"] = "Add new major";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MajorType"></label>
+        <input asp-for="MajorType" class="form-control" rows="5" />
+        <span asp-validation-for="MajorType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Duration"></label>
+        <input asp-for="Duration" class="form-control" rows="5" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BelongsToDepartment"></label>
+        <input asp-for="BelongsToDepartment" class="form-control" rows="5" />
+        <span asp-validation-for="BelongsToDepartment" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Create" class="btn btn-success" />
+        <a asp-action="All" class="btn btn-info">Back to all majors</a>
+    </div>
+</form>

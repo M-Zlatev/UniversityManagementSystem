@@ -55,7 +55,7 @@
             => this.View();
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateDepartmentInputForm departmentFormInput)
         {
             if (this.ModelState.IsValid)
@@ -70,7 +70,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.departmentService.Exists(id))
@@ -82,7 +82,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditDepartmentInputForm departmentFormInput)
         {
             if (!await this.departmentService.Exists(id))
@@ -102,7 +102,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.departmentService.Exists(id))
@@ -114,7 +114,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.departmentService.Exists(id))

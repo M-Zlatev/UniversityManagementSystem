@@ -5,17 +5,48 @@
 
 @if (this.TempData.ContainsKey("Message"))
 {
-    <div class="alert alert-success">@this.TempData["Message"]</div>}
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
 
-<h1>@this.ViewData["Title"]</h1>
-
-<div class="row">
-    @foreach (var faculty in this.Model.Faculties)
-    {
-        @faculty.Id @:&nbsp;
-        @faculty.Name
-        <br />
-    }
+<div>
+    <h2 class="float-left">@this.ViewData["Title"]</h2>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary float-right">Back to Home page</a>
+    <a asp-action="Create" class="btn btn-primary float-right" style="margin-right:1.2%">Create new faculty</a>
 </div>
+
+<br />
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Id")
+            </th>
+            <th>
+                @Html.DisplayName("Faculty name")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var faculty in Model.Faculties)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => faculty.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => faculty.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = faculty.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "ById", new { id = faculty.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = faculty.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <hr />
 <partial name="_PagingPartial" model="@Model" />

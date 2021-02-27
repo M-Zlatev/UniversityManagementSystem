@@ -51,7 +51,7 @@
 
         public async Task<int> Create(string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime, string doneByStudent)
         {
-            var studentId = this.studentRepository.AllAsNoTracking()
+            var studentId = this.studentRepository.All()
                 .Where(s => s.FirstName == doneByStudent)
                 .Select(s => s.Id)
                 .FirstOrDefault();

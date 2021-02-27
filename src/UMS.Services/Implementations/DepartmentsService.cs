@@ -52,7 +52,7 @@
 
         public async Task<int> Create(DepartmentCreateParametersModel model)
         {
-            var facultyId = this.facultyRepository.AllAsNoTracking()
+            var facultyId = this.facultyRepository.All()
                 .Where(f => f.Name == model.BelongsToFaculty)
                 .Select(f => f.Id)
                 .FirstOrDefault();
