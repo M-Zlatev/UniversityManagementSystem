@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels.Faculties
 {
-    public class EditFacultyInputForm : FacultyBaseForm
+    using Common.Mapping;
+    using Data.Models;
+
+    public class EditFacultyInputForm : FacultyBaseForm, IMapFrom<Faculty>
     {
         public int Id { get; set; }
     }

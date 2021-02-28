@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels.Courses
 {
-    public class EditCourseInputForm : CourseBaseForm
+    using Common.Mapping;
+    using Data.Models;
+
+    public class EditCourseInputForm : CourseBaseForm, IMapFrom<Course>
     {
         public int Id { get; set; }
     }

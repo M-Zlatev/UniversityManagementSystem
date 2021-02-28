@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels.Students
 {
-    public class EditStudentInputForm : StudentBaseForm
+    using Common.Mapping;
+    using Data.Models;
+
+    public class EditStudentInputForm : StudentBaseForm, IMapFrom<Student>
     {
         public int Id { get; set; }
     }

@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Repositories;
     using Data.Models;
     using Infrastructure;
     using Services.Contracts;
@@ -18,6 +19,7 @@
 
     public class FacultiesController : Controller
     {
+        private readonly IDeletableEntityRepository<Faculty> facultyRepository;
         private readonly IFacultiesService facultyService;
 
         public FacultiesController(IFacultiesService faculties)
@@ -58,7 +60,11 @@
 
         [HttpGet]
         public IActionResult Create()
-            => this.View();
+        {
+            var viewModel = new CreateFacultyInputForm();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
         //[Authorize]
@@ -76,7 +82,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -84,11 +90,12 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.facultyService.GetDetailsById<EditFacultyInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditFacultyInputForm facultyInputForm)
         {
             if (!await this.facultyService.Exists(id))
@@ -108,7 +115,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -116,11 +123,13 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var faculty = this.facultyRepository.All().Where(f => f.Id == id).FirstOrDefault();
+            return this.View(faculty);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
+        [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -130,7 +139,7 @@
 
             await this.facultyService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

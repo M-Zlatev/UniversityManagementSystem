@@ -72,7 +72,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.teachersService.Exists(id))
@@ -80,7 +80,8 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.teachersService.GetDetailsById<EditTeacherInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]

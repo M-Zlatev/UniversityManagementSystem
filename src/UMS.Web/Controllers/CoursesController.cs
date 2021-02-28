@@ -90,7 +90,7 @@
                 return this.NotFound();
             }
 
-            var inputModel = this.coursesService.GetDetailsById<CourseEditParametersModel>(id);
+            var inputModel = this.coursesService.GetDetailsById<EditCourseInputForm>(id);
             return this.View(inputModel);
         }
 

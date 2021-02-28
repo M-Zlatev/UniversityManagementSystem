@@ -50,10 +50,13 @@
         public async Task<bool> Exists(int id)
             => await this.departmentRepository.All().AnyAsync(d => d.Id == id);
 
+        public Department FindDepartmentById(int id)
+            => this.departmentRepository.All().Where(d => d.Id == id).FirstOrDefault();
+
         public async Task<int> Create(DepartmentCreateParametersModel model)
         {
             var facultyId = this.facultyRepository.All()
-                .Where(f => f.Name == model.BelongsToFaculty)
+                .Where(f => f.Id == model.FacultyId)
                 .Select(f => f.Id)
                 .FirstOrDefault();
 
@@ -95,7 +98,7 @@
 
         public async Task<bool> Delete(int id)
         {
-            var department = this.departmentRepository.AllAsNoTracking().FirstOrDefault(d => d.Id == id);
+            var department = this.departmentRepository.All().FirstOrDefault(d => d.Id == id);
 
             if (department == null)
             {
@@ -108,5 +111,14 @@
 
             return true;
         }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+           => this.facultyRepository.AllAsNoTracking()
+           .Select(c => new
+           {
+               c.Id,
+               c.Name,
+           }).ToList()
+           .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

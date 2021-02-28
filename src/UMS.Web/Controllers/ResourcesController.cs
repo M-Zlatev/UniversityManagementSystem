@@ -69,7 +69,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.resourcesService.Exists(id))
@@ -77,11 +77,12 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.resourcesService.GetDetailsById<EditResourceInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditResourceInputForm inputForm)
         {
             if (!await this.resourcesService.Exists(id))

@@ -24,7 +24,5 @@
         [Required]
         [StringLength(MaxFaxNumberLength, MinimumLength = MinFaxNumberLength)]
         public string Fax { get; set; }
-
-        public string BelongsToFaculty { get; set; }
     }
 }

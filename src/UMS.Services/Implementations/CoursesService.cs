@@ -9,8 +9,8 @@
 
     using Common.Mapping;
     using Contracts;
+    using Data;
     using Data.Models.CoursesParametersModels;
-    using UMS.Data;
     using UMS.Data.Common.Contracts;
     using UMS.Data.Models;
     using UMS.Data.Repositories;

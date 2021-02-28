@@ -1,11 +1,14 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
     using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.DepartmentsParametersModels;
@@ -14,10 +17,14 @@
 
     public class DepartmentsController : Controller
     {
+        private readonly IDeletableEntityRepository<Department> departmentRepository;
         private readonly IDepartmentsService departmentService;
 
-        public DepartmentsController(IDepartmentsService departments)
-            => this.departmentService = departments;
+        public DepartmentsController(IDepartmentsService departments, IDeletableEntityRepository<Department> departmentRepository)
+        {
+            this.departmentService = departments;
+            this.departmentRepository = departmentRepository;
+        }
 
         public IActionResult All(int id = 1)
         {
@@ -52,7 +59,12 @@
 
         [HttpGet]
         public IActionResult Create()
-            => this.View();
+        {
+            var viewModel = new CreateDepartmentInputForm();
+            viewModel.FacultyItems = this.departmentService.GetAllAsKeyValuePairs();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
         //[Authorize]
@@ -60,6 +72,7 @@
         {
             if (this.ModelState.IsValid)
             {
+                departmentFormInput.FacultyItems = this.departmentService.GetAllAsKeyValuePairs();
                 var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentCreateParametersModel>(departmentFormInput);
                 var departmentId = await this.departmentService.Create(parameters);
 
@@ -78,7 +91,8 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.departmentService.GetDetailsById<EditDepartmentInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -110,11 +124,17 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var department = this.departmentRepository.All()
+                .Where(d => d.Id == id)
+                .FirstOrDefault();
+
+            return this.View(department);
         }
 
         [HttpPost]
         //[Authorize]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.departmentService.Exists(id))
@@ -124,7 +144,7 @@
 
             await this.departmentService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.DepartmentsParametersModels;
+    using UMS.Data.Models;
 
     public interface IDepartmentsService : ITransientService
     {
@@ -20,5 +21,9 @@
         Task<bool> Edit(int id, DepartmentEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+
+        Department FindDepartmentById(int id);
     }
 }

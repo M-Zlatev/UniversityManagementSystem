@@ -54,7 +54,7 @@
             => this.View();
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateHomeworkInputForm inputForm)
         {
             if (this.ModelState.IsValid)
@@ -68,7 +68,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.homeworksService.Exists(id))
@@ -76,7 +76,8 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.homeworksService.GetDetailsById<EditHomeworkInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]

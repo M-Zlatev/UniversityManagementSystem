@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels.Resources
 {
-    public class EditResourceInputForm : ResourceBaseForm
+    using Common.Mapping;
+    using Data.Models;
+
+    public class EditResourceInputForm : ResourceBaseForm, IMapFrom<Resource>
     {
         public int Id { get; set; }
     }

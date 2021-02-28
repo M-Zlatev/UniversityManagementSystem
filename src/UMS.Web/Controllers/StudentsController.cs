@@ -76,7 +76,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.studentService.Exists(id))
@@ -84,7 +84,8 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.studentService.GetDetailsById<EditStudentInputForm>(id);
+            return this.View(inputModel);
         }
 
         [HttpPost]

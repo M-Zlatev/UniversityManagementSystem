@@ -54,7 +54,7 @@
         public async Task<int> Create(MajorCreateParametersModel model)
         {
             var departmentId = this.departmentRepository.All()
-                .Where(d => d.Name == model.BelongsToDepartment)
+                .Where(d => d.Id == model.DepartmentId)
                 .Select(d => d.Id)
                 .FirstOrDefault();
 
@@ -84,7 +84,7 @@
             }
 
             var departmentId = this.departmentRepository.All()
-                .Where(d => d.Name == model.BelongsToDepartment)
+                .Where(d => d.Id == model.DepartmentId)
                 .Select(d => d.Id)
                 .FirstOrDefault();
 
@@ -114,5 +114,14 @@
 
             return true;
         }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+             => this.departmentRepository.AllAsNoTracking()
+             .Select(c => new
+             {
+                 c.Id,
+                 c.Name,
+             }).ToList()
+             .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

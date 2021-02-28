@@ -53,10 +53,15 @@
 
         [HttpGet]
         public IActionResult Create()
-            => this.View();
+        {
+            var viewModel = new CreateMajorInputForm();
+            viewModel.DepartmentItems = this.majorService.GetAllAsKeyValuePairs();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateMajorInputForm majorInputForm)
         {
             if (this.ModelState.IsValid)
@@ -71,7 +76,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.majorService.Exists(id))
@@ -79,11 +84,13 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var inputModel = this.majorService.GetDetailsById<EditMajorInputForm>(id);
+            inputModel.DepartmentItems = this.majorService.GetAllAsKeyValuePairs();
+            return this.View(inputModel);
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditMajorInputForm majorInputForm)
         {
             if (!await this.majorService.Exists(id))
@@ -103,7 +110,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.majorService.Exists(id))
@@ -115,7 +122,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.majorService.Exists(id))
