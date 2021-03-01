@@ -1,4 +1,7 @@
-﻿@model UMS.Web.ViewModels.Majors.CreateMajorInputForm
+﻿@using UMS.Data.Common.Enumerations
+
+@model UMS.Web.ViewModels.Majors.CreateMajorInputForm
+
 @{
     this.ViewData["Title"] = "Add new major";
     var departmentItems = this.Model.DepartmentItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key));
@@ -15,21 +18,21 @@
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <textarea asp-for="Description" class="form-control"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="MajorType"></label>
-        <input asp-for="MajorType" class="form-control" rows="5" />
+        <label asp-for="MajorType">Major type</label>
+        <select asp-for="MajorType" class="form-control" asp-items="@Html.GetEnumSelectList<MajorType>()"></select>
         <span asp-validation-for="MajorType" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Duration"></label>
-        <input asp-for="Duration" class="form-control" rows="5" />
+        <input asp-for="Duration" placeholder="" class="form-control" />
         <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="DepartmentId"></label>
+        <label asp-for="DepartmentId">Department</label>
         <select asp-for="DepartmentId" class="form-control" asp-items="departmentItems"></select>
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>

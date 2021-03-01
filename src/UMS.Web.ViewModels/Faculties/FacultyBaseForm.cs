@@ -33,7 +33,7 @@
         [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
         public string AddressCountryName { get; set; }
 
-        public Continent Continent { get; set; }
+        public Continent AddressContinent { get; set; }
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]

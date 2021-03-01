@@ -50,9 +50,6 @@
         public async Task<bool> Exists(int id)
             => await this.departmentRepository.All().AnyAsync(d => d.Id == id);
 
-        public Department FindDepartmentById(int id)
-            => this.departmentRepository.All().Where(d => d.Id == id).FirstOrDefault();
-
         public async Task<int> Create(DepartmentCreateParametersModel model)
         {
             var facultyId = this.facultyRepository.All()

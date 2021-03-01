@@ -54,7 +54,7 @@
                 Town = model.AddressTownName,
                 PostalCode = model.AddressPostalCode,
                 Country = model.AddressCountryName,
-                Continent = model.Continent,
+                Continent = model.AddressContinent,
             };
 
             var faculty = new Faculty
@@ -90,7 +90,7 @@
             faculty.Address.Town = model.AddressTownName;
             faculty.Address.PostalCode = model.AddressPostalCode;
             faculty.Address.Country = model.AddressCountryName;
-            faculty.Address.Continent = model.Continent;
+            faculty.Address.Continent = model.AddressContinent;
             faculty.Email = model.Email;
             faculty.PhoneNumber = model.PhoneNumber;
             faculty.Fax = model.Fax;

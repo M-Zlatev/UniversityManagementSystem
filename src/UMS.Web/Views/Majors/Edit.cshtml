@@ -1,4 +1,6 @@
-﻿@model UMS.Web.ViewModels.Majors.EditMajorInputForm
+﻿@using UMS.Data.Common.Enumerations
+ 
+@model UMS.Web.ViewModels.Majors.EditMajorInputForm
 @{ 
     ViewData["Title"] = "Edit major"; 
     var departmentItems = this.Model.DepartmentItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key));
@@ -18,8 +20,8 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="MajorType"></label>
-        <input asp-for="MajorType" class="form-control" />
+        <label asp-for="MajorType">Major type</label>
+        <select asp-for="MajorType" class="form-control" asp-items="@Html.GetEnumSelectList<MajorType>()"></select>
         <span asp-validation-for="MajorType" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -28,8 +30,8 @@
         <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="DepartmentId"></label>
-        <select asp-for="DepartmentId" class="form-control" asp-items="departmentItems" />
+        <label asp-for="DepartmentId">Department</label>
+        <select asp-for="DepartmentId" class="form-control" asp-items="departmentItems"></select>
         <span asp-validation-for="DepartmentId" class="text-danger"></span>
     </div>
     <hr />

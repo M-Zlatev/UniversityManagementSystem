@@ -1,4 +1,6 @@
-﻿@model UMS.Web.ViewModels.Faculties.EditFacultyInputForm
+﻿@using UMS.Data.Common.Enumerations 
+
+@model UMS.Web.ViewModels.Faculties.EditFacultyInputForm
 @{ 
     ViewData["Title"] = "Edit faculty"; 
 }
@@ -17,20 +19,51 @@
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
+        <label asp-for="AddressStreetName"></label>
+        <input asp-for="AddressStreetName" class="form-control" />
+        <span asp-validation-for="AddressStreetName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressDistrictName"></label>
+        <input asp-for="AddressDistrictName" class="form-control" />
+        <span asp-validation-for="AddressDistrictName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressTownName"></label>
+        <input asp-for="AddressTownName" class="form-control" />
+        <span asp-validation-for="AddressTownName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressPostalCode"></label>
+        <input asp-for="AddressPostalCode" class="form-control" />
+        <span asp-validation-for="AddressPostalCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressCountryName"></label>
+        <input asp-for="AddressCountryName" class="form-control" />
+        <span asp-validation-for="AddressCountryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressContinent"></label>
+        <select asp-for="AddressContinent" class="form-control" asp-items="@Html.GetEnumSelectList<Continent>()"></select>
+        <span asp-validation-for="AddressContinent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" rows="5" />
+        <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="PhoneNumber"></label>
-        <input asp-for="PhoneNumber" class="form-control" rows="5" />
+        <input asp-for="PhoneNumber" class="form-control" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Fax"></label>
-        <input asp-for="Fax" class="form-control" rows="5" />
+        <input asp-for="Fax" class="form-control" />
         <span asp-validation-for="Fax" class="text-danger"></span>
     </div>
+
     <hr />
     <input type="hidden" asp-for="Id" />
 </form>

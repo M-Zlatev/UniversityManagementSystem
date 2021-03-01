@@ -22,8 +22,9 @@
         private readonly IDeletableEntityRepository<Faculty> facultyRepository;
         private readonly IFacultiesService facultyService;
 
-        public FacultiesController(IFacultiesService faculties)
+        public FacultiesController(IFacultiesService faculties, IDeletableEntityRepository<Faculty> facultyRepository)
         {
+            this.facultyRepository = facultyRepository;
             this.facultyService = faculties;
         }
 

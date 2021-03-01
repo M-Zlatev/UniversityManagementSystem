@@ -56,7 +56,7 @@
         public async Task<int> Create(StudentCreateParametersModel model)
         {
             var major = this.majorRepository.All()
-                        .Where(m => m.Name == model.MajorName)
+                        .Where(m => m.Id == model.MajorId)
                         .FirstOrDefault();
 
             var studentAddress = new StudentAddress()
@@ -146,5 +146,14 @@
 
             return true;
         }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+            => this.majorRepository.AllAsNoTracking()
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+            }).ToList()
+            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

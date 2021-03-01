@@ -17,6 +17,8 @@
 
         int GetCount();
 
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+
         Task<int> Create(StudentCreateParametersModel createParametersModel);
 
         Task<bool> Edit(int id, StudentEditParametersModel editParametersModel);

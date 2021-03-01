@@ -1,4 +1,4 @@
-﻿@model UMS.Web.ViewModels.Teachers.TeacherGetAllViewModel;
+﻿@model UMS.Web.ViewModels.Teachers.TeacherGetAllViewModel
 @{
     this.ViewData["Title"] = "All Teachers, page " + Model.PageNumber;
 }
@@ -9,15 +9,46 @@
 
 <h1>@this.ViewData["Title"]</h1>
 
-<div class="row">
-    @foreach (var teacher in this.Model.Teachers)
-    {
-        @teacher.Id @:&nbsp;
-        @teacher.FirstName @:&nbsp;
-        @teacher.LastName @:&nbsp;
-        @teacher.Email
-        <br />
-    }
+<div>
+    <h2 class="float-left">@this.ViewData["Title"]</h2>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary float-right">Back to Home page</a>
+    <a asp-action="Create" class="btn btn-primary float-right" style="margin-right:1.2%">Create new teacher</a>
 </div>
+
+<br />
+
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Id")
+            </th>
+            <th>
+                @Html.DisplayName("Teacher name")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var teacher in Model.Teachers)
+        {
+            var fullName = teacher.FirstName + " " + teacher.LastName;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => teacher.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => fullName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = teacher.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Details", "ById", new { id = teacher.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = teacher.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <hr />
 <partial name="_PagingPartial" model="@Model" />

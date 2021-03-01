@@ -18,7 +18,7 @@
 
         public string AddressCountryName { get; set; }
 
-        public Continent Continent { get; set; }
+        public Continent AddressContinent { get; set; }
 
         public string Email { get; set; }
 

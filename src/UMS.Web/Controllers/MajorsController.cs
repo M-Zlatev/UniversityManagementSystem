@@ -1,11 +1,14 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
     using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.MajorsParametersModels;
@@ -15,10 +18,14 @@
 
     public class MajorsController : Controller
     {
+        private readonly IDeletableEntityRepository<Major> majorRepository;
         private readonly IMajorsService majorService;
 
-        public MajorsController(IMajorsService majors)
-            => this.majorService = majors;
+        public MajorsController(IMajorsService majorService, IDeletableEntityRepository<Major> majorRepository)
+        {
+            this.majorService = majorService;
+            this.majorRepository = majorRepository;
+        }
 
         public IActionResult All(int id = 1)
         {
@@ -66,6 +73,7 @@
         {
             if (this.ModelState.IsValid)
             {
+                majorInputForm.DepartmentItems = this.majorService.GetAllAsKeyValuePairs();
                 var parameters = AutoMapperConfig.MapperInstance.Map<MajorCreateParametersModel>(majorInputForm);
                 var majorId = await this.majorService.Create(parameters);
 
@@ -118,11 +126,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var major = this.majorRepository.All()
+                .Where(m => m.Id == id)
+                .FirstOrDefault();
+
+            return this.View(major);
         }
 
         [HttpPost]
         //[Authorize]
+        [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.majorService.Exists(id))
@@ -132,7 +145,7 @@
 
             await this.majorService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

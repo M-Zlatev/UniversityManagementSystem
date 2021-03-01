@@ -1,11 +1,14 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
     using Data.Common.Enumerations;
     using Infrastructure;
     using Services.Contracts;
@@ -14,10 +17,14 @@
 
     public class ResourcesController : Controller
     {
+        private readonly IRepository<Resource> resourceRepository;
         private readonly IResourcesService resourcesService;
 
-        public ResourcesController(IResourcesService resourceService)
-            => this.resourcesService = resourceService;
+        public ResourcesController(IResourcesService resourceService, IRepository<Resource> resourceRepository)
+        {
+            this.resourcesService = resourceService;
+            this.resourceRepository = resourceRepository;
+        }
 
         public IActionResult All(int id = 1)
         {
@@ -101,7 +108,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.resourcesService.Exists(id))
@@ -109,11 +116,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var resource = this.resourceRepository.All()
+                 .Where(d => d.Id == id)
+                 .FirstOrDefault();
+
+            return this.View(resource);
         }
 
         [HttpPost]
-        [Authorize]
+        [ActionName("Delete")]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.resourcesService.Exists(id))
@@ -123,7 +135,7 @@
 
             await this.resourcesService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

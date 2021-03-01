@@ -1,1 +1,92 @@
-﻿
+﻿@using UMS.Data.Common.Enumerations
+
+@model UMS.Web.ViewModels.Teachers.CreateTeacherInputForm
+@{
+    this.ViewData["Title"] = "Add new teacher";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FirstName">First name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MiddleName">Middle name</label>
+        <input asp-for="MiddleName" class="form-control" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">Last name</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control" asp-items="@Html.GetEnumSelectList<Gender>()"></select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressStreetName">Address street name</label>
+        <input asp-for="AddressStreetName" class="form-control" />
+        <span asp-validation-for="AddressStreetName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressDistrictName">Address district name</label>
+        <input asp-for="AddressDistrictName" class="form-control" />
+        <span asp-validation-for="AddressDistrictName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressTownName">Address town name</label>
+        <input asp-for="AddressTownName" class="form-control" />
+        <span asp-validation-for="AddressTownName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressPostalCode">Address postal code</label>
+        <input asp-for="AddressPostalCode" class="form-control" />
+        <span asp-validation-for="AddressPostalCode" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AddressCountryName">Address country name</label>
+        <input asp-for="AddressCountryName" class="form-control" />
+        <span asp-validation-for="AddressCountryName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Continent">Address continent name</label>
+        <select asp-for="Continent" class="form-control" asp-items="@Html.GetEnumSelectList<Continent>()"></select>
+        <span asp-validation-for="Continent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber">Phone number</label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AcademicDegree"></label>
+        <select asp-for="AcademicDegree" class="form-control" asp-items="@Html.GetEnumSelectList<AcademicDegree>()"></select>
+        <span asp-validation-for="AcademicDegree" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AcademicRank"></label>
+        <select asp-for="AcademicRank" class="form-control" asp-items="@Html.GetEnumSelectList<AcademicRank>()"></select>
+        <span asp-validation-for="AcademicRank" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl">Phone number</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Create" class="btn btn-success" />
+        <a asp-action="All" class="btn btn-info">Back to all teachers</a>
+    </div>
+</form>

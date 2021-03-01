@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Repositories;
     using Data.Models;
     using Infrastructure;
     using Services.Contracts;
@@ -18,11 +19,13 @@
 
     public class StudentsController : Controller
     {
+        private readonly IDeletableEntityRepository<Student> studentRepository;
         private readonly IStudentsService studentService;
 
-        public StudentsController(IStudentsService studentService)
+        public StudentsController(IStudentsService studentService, IDeletableEntityRepository<Student> studentRepository)
         {
             this.studentService = studentService;
+            this.studentRepository = studentRepository;
         }
 
         public IActionResult All(int id = 1)
@@ -58,14 +61,20 @@
 
         [HttpGet]
         public IActionResult Create()
-            => this.View();
+        {
+            var viewModel = new CreateStudentInputForm();
+            viewModel.MajorItems = this.studentService.GetAllAsKeyValuePairs();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateStudentInputForm studentInputForm)
         {
             if (this.ModelState.IsValid)
             {
+                studentInputForm.MajorItems = this.studentService.GetAllAsKeyValuePairs();
                 var parameters = AutoMapperConfig.MapperInstance.Map<StudentCreateParametersModel>(studentInputForm);
                 var studentId = await this.studentService.Create(parameters);
 
@@ -89,7 +98,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditStudentInputForm studentInputForm)
         {
             if (!await this.studentService.Exists(id))
@@ -109,7 +118,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.studentService.Exists(id))
@@ -117,11 +126,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var student = this.studentRepository.All()
+                .Where(d => d.Id == id)
+                .FirstOrDefault();
+
+            return this.View(student);
         }
 
         [HttpPost]
-        [Authorize]
+        [ActionName("Delete")]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.studentService.Exists(id))
@@ -131,7 +145,7 @@
 
             await this.studentService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

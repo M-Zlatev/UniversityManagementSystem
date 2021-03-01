@@ -1,1 +1,37 @@
-﻿
+﻿@using UMS.Data.Common.Enumerations
+
+@model UMS.Web.ViewModels.Homeworks.CreateHomeworkInputForm
+@{
+    this.ViewData["Title"] = "Add new homework";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <input asp-for="Content" class="form-control" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="HomeworkType"></label>
+        <select asp-for="HomeworkType" class="form-control" asp-items="@Html.GetEnumSelectList<HomeworkType>()"></select>
+        <span asp-validation-for="HomeworkType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AssignmentTime">Start date of the course</label>
+        <input asp-for="AssignmentTime" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+        <span asp-validation-for="AssignmentTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OpenForSubmissionTime">End date of the course</label>
+        <input asp-for="OpenForSubmissionTime" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+        <span asp-validation-for="OpenForSubmissionTime" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Create" class="btn btn-success" />
+        <a asp-action="All" class="btn btn-info">Back to all homeworks</a>
+    </div>
+</form>

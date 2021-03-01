@@ -48,7 +48,7 @@
         [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
         public string AddressCountryName { get; set; }
 
-        public Continent Continent { get; set; }
+        public Continent AddressContinentName { get; set; }
 
         [Required]
         [StringLength(MaxPhoneNumberLength, MinimumLength = MinPhoneNumberLength)]
@@ -63,7 +63,5 @@
         public bool HasScholarship { get; set; }
 
         public DateTime? RegistrationDate { get; set; }
-
-        public string MajorName { get; set; }
     }
 }

@@ -9,6 +9,8 @@
 
     public abstract class HomeworkBaseForm
     {
+        public int Id { get; set; }
+
         [MaxLength(MaxContentLength)]
         public string Content { get; set; }
 

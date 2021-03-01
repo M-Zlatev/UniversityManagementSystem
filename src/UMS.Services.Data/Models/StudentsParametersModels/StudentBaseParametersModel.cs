@@ -35,7 +35,5 @@
         public string ImageUrl { get; set; }
 
         public bool HasScholarship { get; set; }
-
-        public string MajorName { get; set; }
     }
 }

@@ -1,11 +1,14 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
     using Infrastructure;
     using Services.Contracts;
     using ViewModels;
@@ -13,10 +16,14 @@
 
     public class HomeworksController : Controller
     {
+        private readonly IRepository<Homework> homeworkRepository;
         private readonly IHomeworksService homeworksService;
 
-        public HomeworksController(IHomeworksService homeworksService)
-            => this.homeworksService = homeworksService;
+        public HomeworksController(IHomeworksService homeworksService, IRepository<Homework> homeworkRepository)
+        {
+            this.homeworksService = homeworksService;
+            this.homeworkRepository = homeworkRepository;
+        }
 
         public IActionResult All(int id = 1)
         {
@@ -81,7 +88,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditHomeworkInputForm inputForm)
         {
             if (!await this.homeworksService.Exists(id))
@@ -100,7 +107,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.homeworksService.Exists(id))
@@ -108,11 +115,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var homework = this.homeworkRepository.All()
+                .Where(d => d.Id == id)
+                .FirstOrDefault();
+
+            return this.View(homework);
         }
 
         [HttpPost]
-        [Authorize]
+        [ActionName("Delete")]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.homeworksService.Exists(id))
@@ -122,7 +134,7 @@
 
             await this.homeworksService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

@@ -67,7 +67,7 @@
                 StudentId = studentId,
             };
 
-            var student = this.studentRepository.AllAsNoTracking()
+            var student = this.studentRepository.All()
                 .Where(s => s.FirstName == doneByStudent)
                 .FirstOrDefault();
 

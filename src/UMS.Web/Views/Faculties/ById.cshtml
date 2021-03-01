@@ -6,11 +6,20 @@
 <h1>@this.ViewData["Title"]@Model.Name</h1>
 
 <div>
+    @{ 
+        var district = Model.AddressDistrictName == string.Empty ? Model.AddressDistrictName : "Not specified";
+        var postalCode = Model.AddressPostalCode == string.Empty ? Model.AddressPostalCode : "Not specified";
+        var continent = Model.AddressContinent.GetType().Name == "NotSpecified" 
+            ? Model.AddressContinent.GetType().Name : "Not specified";
+    }
     <p style="white-space: pre-line"><b>Faculty name: </b>@Model.Name</p>
     <p style="white-space: pre-line"><b>Faculty description: </b>@Model.Description</p>
     <p style="white-space: pre-line"><b>Faculty adress street: </b>@Model.AddressStreetName</p> 
+    <p style="white-space: pre-line"><b>Faculty adress district: </b>@district</p> 
     <p style="white-space: pre-line"><b>Faculty address town: </b>@Model.AddressTownName</p>
+    <p style="white-space: pre-line"><b>Faculty address postal code: </b>@postalCode</p>
     <p style="white-space: pre-line"><b>Faculty address country: </b>@Model.AddressCountryName</p> 
+    <p style="white-space: pre-line"><b>Faculty address continent: </b>@continent</p> 
     <p style="white-space: pre-line"><b>Faculty email: </b>@Model.Email</p>
     <p style="white-space: pre-line"><b>Faculty phone number: </b>@Model.PhoneNumber</p>
     <p style="white-space: pre-line"><b>Faculty fax: </b>@Model.Fax</p>

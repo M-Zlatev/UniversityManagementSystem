@@ -23,7 +23,5 @@
         Task<bool> Delete(int id);
 
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
-
-        Department FindDepartmentById(int id);
     }
 }

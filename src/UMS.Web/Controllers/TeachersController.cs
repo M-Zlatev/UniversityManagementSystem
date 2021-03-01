@@ -1,12 +1,15 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Infrastructure;
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
+    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.TeachersParametersModels;
     using ViewModels;
@@ -14,11 +17,13 @@
 
     public class TeachersController : Controller
     {
+        private readonly IDeletableEntityRepository<Teacher> teacherRepository;
         private readonly ITeachersService teachersService;
 
-        public TeachersController(ITeachersService teachersService)
+        public TeachersController(ITeachersService teachersService, IDeletableEntityRepository<Teacher> teacherRepository)
         {
             this.teachersService = teachersService;
+            this.teacherRepository = teacherRepository;
         }
 
         public IActionResult All(int id = 1)
@@ -54,10 +59,14 @@
 
         [HttpGet]
         public IActionResult Create()
-            => this.View();
+        {
+            var viewModel = new CreateTeacherInputForm();
+
+            return this.View(viewModel);
+        }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateTeacherInputForm teacherInputForm)
         {
             if (this.ModelState.IsValid)
@@ -85,7 +94,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditTeacherInputForm teacherInputForm)
         {
             if (!await this.teachersService.Exists(id))
@@ -113,11 +122,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var teacher = this.teacherRepository.All()
+                .Where(d => d.Id == id)
+                .FirstOrDefault();
+
+            return this.View(teacher);
         }
 
         [HttpPost]
-        [Authorize]
+        [ActionName("Delete")]
+        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.teachersService.Exists(id))
@@ -127,7 +141,7 @@
 
             await this.teachersService.Delete(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }
