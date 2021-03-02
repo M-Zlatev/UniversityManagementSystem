@@ -40,16 +40,16 @@
         [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
         public string AddressCountryName { get; set; }
 
-        public Continent Continent { get; set; }
+        public Continent AddressContinentName { get; set; }
 
         public Gender Gender { get; set; }
 
         [Required]
-        [Range(MinEmailAddressLength, MaxEmailAdressLength)]
+        [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
         public string Email { get; set; }
 
         [Required]
-        [Range(MinPhoneNumberLength, MaxPhoneNumberLength)]
+        [StringLength(MaxPhoneNumberLength, MinimumLength = MinPhoneNumberLength)]
         public string PhoneNumber { get; set; }
 
         [Required]

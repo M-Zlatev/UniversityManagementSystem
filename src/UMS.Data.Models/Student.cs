@@ -34,7 +34,8 @@
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "This field must contains 10 digits")]
+        [MinLength(MinUCNLength, ErrorMessage = UCNErrorMessage)]
+        [MaxLength(MaxUCNLength, ErrorMessage = UCNErrorMessage)]
         public int UniformCivilNumber { get; set; }
 
         public DateTime? DateofBirth { get; set; }

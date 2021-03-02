@@ -19,10 +19,16 @@
     {
         private const int TeachersPageSize = 20;
 
+        private readonly IRepository<TeacherAddress> teacherAddressRepository;
         private readonly IDeletableEntityRepository<Teacher> teacherRepository;
 
-        public TeachersService(IDeletableEntityRepository<Teacher> teacherRepository)
-            => this.teacherRepository = teacherRepository;
+        public TeachersService(
+            IDeletableEntityRepository<Teacher> teacherRepository,
+            IRepository<TeacherAddress> teacherAddressRepository)
+        {
+            this.teacherRepository = teacherRepository;
+            this.teacherAddressRepository = teacherAddressRepository;
+        }
 
         public IEnumerable<T> GetAll<T>(int page, int teachersPerPage)
             => this.teacherRepository.AllAsNoTracking()
@@ -75,6 +81,7 @@
         public async Task<bool> Edit(int id, TeacherEditParametersModel model)
         {
             var teacher = this.teacherRepository.All().FirstOrDefault(m => m.Id == id);
+            var teacherAddress = this.teacherAddressRepository.All().Where(t => t.TeacherId == id).FirstOrDefault();
 
             if (teacher == null)
             {
@@ -85,10 +92,13 @@
             teacher.MiddleName = model.MiddleName;
             teacher.LastName = model.LastName;
             teacher.Gender = model.Gender;
-            teacher.Address.StreetName = model.AddressStreetName;
-            teacher.Address.Town = model.AddressTownName;
-            teacher.Address.District = model.AddressDistrictName;
-            teacher.Address.Country = model.AddressCountryName;
+
+            teacherAddress.StreetName = model.AddressStreetName;
+            teacherAddress.Town = model.AddressTownName;
+            teacherAddress.District = model.AddressDistrictName;
+            teacherAddress.Country = model.AddressCountryName;
+            teacherAddress.Continent = model.AddressContinentName;
+
             teacher.PhoneNumber = model.PhoneNumber;
             teacher.Email = model.Email;
             teacher.ImageUrl = model.ImageUrl;

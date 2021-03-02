@@ -1,5 +1,6 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -8,6 +9,8 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models;
+    using Data.Repositories;
     using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.CoursesParametersModels;
@@ -16,11 +19,13 @@
 
     public class CoursesController : Controller
     {
+        private readonly IDeletableEntityRepository<Course> courseRepository;
         private readonly ICoursesService coursesService;
 
-        public CoursesController(ICoursesService coursesService)
+        public CoursesController(ICoursesService coursesService, IDeletableEntityRepository<Course> courseRepository)
         {
             this.coursesService = coursesService;
+            this.courseRepository = courseRepository;
         }
 
         public IActionResult All(int id = 1)
@@ -123,11 +128,16 @@
                 return this.NotFound();
             }
 
-            return this.View();
+            var course = this.courseRepository.All()
+                .Where(c => c.Id == id)
+                .FirstOrDefault();
+
+            return this.View(course);
         }
 
         [HttpPost]
         //[Authorize]
+        [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.coursesService.Exists(id))
@@ -137,7 +147,7 @@
 
             await this.coursesService.DeleteAsync(id);
 
-            return this.Redirect(nameof(this.All));
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

@@ -1085,7 +1085,7 @@
 
         public static class CorporateGovernance
         {
-            public const string Name = "BCorporate governance";
+            public const string Name = "Corporate governance";
             public const decimal Price = 476;
             public const int MajorId = 76;
         }

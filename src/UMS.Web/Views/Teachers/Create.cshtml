@@ -55,9 +55,9 @@
         <span asp-validation-for="AddressCountryName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Continent">Address continent name</label>
-        <select asp-for="Continent" class="form-control" asp-items="@Html.GetEnumSelectList<Continent>()"></select>
-        <span asp-validation-for="Continent" class="text-danger"></span>
+        <label asp-for="AddressContinentName">Address continent name</label>
+        <select asp-for="AddressContinentName" class="form-control" asp-items="@Html.GetEnumSelectList<Continent>()"></select>
+        <span asp-validation-for="AddressContinentName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Email"></label>
@@ -80,7 +80,7 @@
         <span asp-validation-for="AcademicRank" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ImageUrl">Phone number</label>
+        <label asp-for="ImageUrl"></label>
         <input asp-for="ImageUrl" class="form-control" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>

@@ -26,7 +26,7 @@
 
         public string AddressCountryName { get; set; }
 
-        public string AddressContinentName { get; set; }
+        public Continent AddressContinentName { get; set; }
 
         public string PhoneNumber { get; set; }
 

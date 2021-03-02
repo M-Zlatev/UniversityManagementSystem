@@ -20,10 +20,16 @@
     {
         private const int FacultyPageSize = 10;
 
+        private readonly IRepository<FacultyAddress> facultyAddressRepository;
         private readonly IDeletableEntityRepository<Faculty> facultyRepository;
 
-        public FacultiesService(IDeletableEntityRepository<Faculty> facultyRepository)
-            => this.facultyRepository = facultyRepository;
+        public FacultiesService(
+            IDeletableEntityRepository<Faculty> facultyRepository, 
+            IRepository<FacultyAddress> facultyAddressRepository)
+        {
+            this.facultyRepository = facultyRepository;
+            this.facultyAddressRepository = facultyAddressRepository;
+        }
 
         public IEnumerable<T> GetAll<T>(int page, int facultiesPerPage = FacultyPageSize)
             => this.facultyRepository.AllAsNoTracking()
@@ -77,6 +83,9 @@
         public async Task<bool> Edit(int id, FacultyEditParametersModel model)
         {
             var faculty = this.facultyRepository.All().FirstOrDefault(f => f.Id == id);
+            var facultyAddress = this.facultyAddressRepository.All()
+                .Where(f => f.FacultyId == id)
+                .FirstOrDefault();
 
             if (faculty == null)
             {
@@ -85,12 +94,14 @@
 
             faculty.Name = model.Name;
             faculty.Description = model.Description;
-            faculty.Address.StreetName = model.AddressStreetName;
-            faculty.Address.District = model.AddressDistrictName;
-            faculty.Address.Town = model.AddressTownName;
-            faculty.Address.PostalCode = model.AddressPostalCode;
-            faculty.Address.Country = model.AddressCountryName;
-            faculty.Address.Continent = model.AddressContinent;
+
+            facultyAddress.StreetName = model.AddressStreetName;
+            facultyAddress.District = model.AddressDistrictName;
+            facultyAddress.Town = model.AddressTownName;
+            facultyAddress.PostalCode = model.AddressPostalCode;
+            facultyAddress.Country = model.AddressCountryName;
+            facultyAddress.Continent = model.AddressContinent;
+
             faculty.Email = model.Email;
             faculty.PhoneNumber = model.PhoneNumber;
             faculty.Fax = model.Fax;

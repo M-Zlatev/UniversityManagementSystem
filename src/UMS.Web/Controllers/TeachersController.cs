@@ -114,7 +114,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.teachersService.Exists(id))

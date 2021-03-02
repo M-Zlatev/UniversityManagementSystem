@@ -1,10 +1,8 @@
 ﻿@using UMS.Data.Common.Enumerations
 
 @model UMS.Web.ViewModels.Students.EditStudentInputForm
-@{ 
-    ViewData["Title"] = "Edit student";
-    var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key));
-}
+@{ ViewData["Title"] = "Edit student";
+                var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); }
 
 <h2>@ViewData["Title"]</h2>
 
@@ -81,12 +79,12 @@
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ImageUrl">Phone number</label>
+        <label asp-for="ImageUrl"></label>
         <input asp-for="ImageUrl" class="form-control" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="HasScholarship">Phone number</label>
+        <label asp-for="HasScholarship"></label>
         <input asp-for="HasScholarship" class="form-control" />
         <span asp-validation-for="HasScholarship" class="text-danger"></span>
     </div>

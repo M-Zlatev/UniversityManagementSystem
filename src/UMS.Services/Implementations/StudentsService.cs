@@ -20,17 +20,20 @@
         private const int StudentsPageSize = 20;
 
         private readonly IDeletableEntityRepository<Student> studentRepository;
-        private readonly IRepository<StudentMajor> studentMajorsRepository;
+        private readonly IRepository<StudentAddress> studentAddressRepository;
         private readonly IDeletableEntityRepository<Major> majorRepository;
+        private readonly IRepository<StudentMajor> studentMajorsRepository;
 
         public StudentsService(
             IDeletableEntityRepository<Student> studentRepository,
-            IRepository<StudentMajor> studentMajorsRepository,
-            IDeletableEntityRepository<Major> majorRepository)
+            IRepository<StudentAddress> studentAddressRepository,
+            IDeletableEntityRepository<Major> majorRepository,
+            IRepository<StudentMajor> studentMajorsRepository)
         {
             this.studentRepository = studentRepository;
-            this.studentMajorsRepository = studentMajorsRepository;
+            this.studentAddressRepository = studentAddressRepository;
             this.majorRepository = majorRepository;
+            this.studentMajorsRepository = studentMajorsRepository;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int studentsPerPage)
@@ -105,6 +108,7 @@
         public async Task<bool> Edit(int id, StudentEditParametersModel model)
         {
             var student = this.studentRepository.All().FirstOrDefault(st => st.Id == id);
+            var studentAddress = this.studentAddressRepository.All().Where(st => st.StudentId == id).FirstOrDefault();
 
             if (student == null)
             {
@@ -117,10 +121,13 @@
             student.UniformCivilNumber = model.UniformCivilNumber;
             student.DateofBirth = model.DateOfBirth;
             student.Gender = model.Gender;
-            student.Address.StreetName = model.AddressStreetName;
-            student.Address.Town = model.AddressTownName;
-            student.Address.District = model.AddressDistrictName;
-            student.Address.Country = model.AddressCountryName;
+
+            studentAddress.StreetName = model.AddressStreetName;
+            studentAddress.District = model.AddressDistrictName;
+            studentAddress.Town = model.AddressTownName;
+            studentAddress.Country = model.AddressCountryName;
+            studentAddress.Continent = model.AddressContinentName;
+
             student.PhoneNumber = model.PhoneNumber;
             student.Email = model.Email;
             student.ImageUrl = model.ImageUrl;

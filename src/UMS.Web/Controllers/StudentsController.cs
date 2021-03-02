@@ -94,6 +94,7 @@
             }
 
             var inputModel = this.studentService.GetDetailsById<EditStudentInputForm>(id);
+            inputModel.MajorItems = this.studentService.GetAllAsKeyValuePairs();
             return this.View(inputModel);
         }
 
