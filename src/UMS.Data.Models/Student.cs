@@ -34,9 +34,9 @@
         public string LastName { get; set; }
 
         [Required]
-        [MinLength(MinUCNLength, ErrorMessage = UCNErrorMessage)]
-        [MaxLength(MaxUCNLength, ErrorMessage = UCNErrorMessage)]
-        public int UniformCivilNumber { get; set; }
+        [StringLength(MaxUCNLength, MinimumLength = MinUCNLength, ErrorMessage = UCNErrorMessage)]
+        [RegularExpression("[0-9]{10}", ErrorMessage = UCNErrorMessage)]
+        public string UniformCivilNumber { get; set; }
 
         public DateTime? DateofBirth { get; set; }
 

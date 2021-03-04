@@ -55,9 +55,10 @@
             var teacherAddress = new TeacherAddress()
             {
                 StreetName = model.AddressStreetName,
-                Town = model.AddressTownName,
                 District = model.AddressDistrictName,
+                Town = model.AddressTownName,
                 Country = model.AddressCountryName,
+                Continent = model.AddressContinentName,
             };
 
             var teacher = new Teacher()
@@ -67,6 +68,8 @@
                 LastName = model.LastName,
                 Gender = model.Gender,
                 Address = teacherAddress,
+                AcademicRank = model.AcademicRank,
+                AcademicDegree = model.AcademicDegree,
                 PhoneNumber = model.PhoneNumber,
                 Email = model.Email,
                 ImageUrl = model.ImageUrl,
@@ -99,6 +102,8 @@
             teacherAddress.Country = model.AddressCountryName;
             teacherAddress.Continent = model.AddressContinentName;
 
+            teacher.AcademicDegree = model.AcademicDegree;
+            teacher.AcademicRank = model.AcademicRank;
             teacher.PhoneNumber = model.PhoneNumber;
             teacher.Email = model.Email;
             teacher.ImageUrl = model.ImageUrl;

@@ -1,8 +1,10 @@
 ﻿@using UMS.Data.Common.Enumerations
 
 @model UMS.Web.ViewModels.Students.EditStudentInputForm
-@{ ViewData["Title"] = "Edit student";
-                var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); }
+@{ 
+    ViewData["Title"] = "Edit student";
+    var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); 
+}
 
 <h2>@ViewData["Title"]</h2>
 
@@ -52,11 +54,6 @@
         <label asp-for="AddressTownName">Address town name</label>
         <input asp-for="AddressTownName" class="form-control" />
         <span asp-validation-for="AddressTownName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="AddressPostalCode">Address postal code</label>
-        <input asp-for="AddressPostalCode" class="form-control" />
-        <span asp-validation-for="AddressPostalCode" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="AddressCountryName">Address country name</label>

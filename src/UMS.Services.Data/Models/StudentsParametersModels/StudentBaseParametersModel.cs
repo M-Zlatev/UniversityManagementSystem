@@ -12,7 +12,7 @@
 
         public string LastName { get; set; }
 
-        public int UniformCivilNumber { get; set; }
+        public string UniformCivilNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
 

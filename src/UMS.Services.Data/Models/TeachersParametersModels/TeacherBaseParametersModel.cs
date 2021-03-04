@@ -26,6 +26,10 @@
 
         public Continent AddressContinentName { get; set; }
 
+        public AcademicDegree AcademicDegree { get; set; }
+
+        public AcademicRank AcademicRank { get; set; }
+
         public string ImageUrl { get; set; }
     }
 }

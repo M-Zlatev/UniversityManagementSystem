@@ -68,6 +68,7 @@
                 Town = model.AddressTownName,
                 District = model.AddressDistrictName,
                 Country = model.AddressCountryName,
+                Continent = model.AddressContinentName,
             };
 
             var student = new Student()
