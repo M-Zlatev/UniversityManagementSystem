@@ -6,7 +6,7 @@
     var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key));
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<h1 style="text-align:center">@this.ViewData["Title"]</h1>
 
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
         <label asp-for="DateOfBirth">Date of birth</label>
-        <input asp-for="DateOfBirth" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+        <input asp-for="DateOfBirth" type="date" asp-format="{0:dd-MM-yyyy}" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" class="form-control" />
         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -80,9 +80,9 @@
         <input asp-for="ImageUrl" class="form-control" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="HasScholarship"></label>
-        <input asp-for="HasScholarship" class="form-control" />
+    <div class="form-inline">
+        <label class="my-1 mr-2" asp-for="HasScholarship">Scholarship</label>
+        <input class="mb-0 mr-sm-0" asp-for="HasScholarship" />
         <span asp-validation-for="HasScholarship" class="text-danger"></span>
     </div>
     <div class="form-group">

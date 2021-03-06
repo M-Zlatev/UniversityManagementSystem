@@ -1,14 +1,12 @@
 ﻿@using UMS.Data.Common.Enumerations
 
 @model UMS.Web.ViewModels.Students.EditStudentInputForm
-@{ 
-    ViewData["Title"] = "Edit student";
-    var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); 
-}
+@{ ViewData["Title"] = "Edit student";
+                var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); }
 
-<h2>@ViewData["Title"]</h2>
+<h2 style="text-align:center">@ViewData["Title"]</h2>
 
-<form method="post" id="editForm">
+<form method="post" id="editForm" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="FirstName">First name</label>
@@ -32,7 +30,7 @@
     </div>
     <div class="form-group">
         <label asp-for="DateOfBirth">Date of birth</label>
-        <input asp-for="DateOfBirth" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+        <input asp-for="DateOfBirth" type="date" class="form-control" />
         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -80,9 +78,9 @@
         <input asp-for="ImageUrl" class="form-control" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="HasScholarship"></label>
-        <input asp-for="HasScholarship" class="form-control" />
+    <div class="form-inline">
+        <label class="my-1 mr-2" asp-for="HasScholarship">Scholarship</label>
+        <input class="mb-0 mr-sm-0" asp-for="HasScholarship" />
         <span asp-validation-for="HasScholarship" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -94,7 +92,9 @@
     <input type="hidden" asp-for="Id" />
 </form>
 
-<button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+<div style="text-align:center">
+    <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+</div>
 
 <!-- Modal -->
 <div class="modal" id="modalEdit" tabindex="-1" role="dialog">
