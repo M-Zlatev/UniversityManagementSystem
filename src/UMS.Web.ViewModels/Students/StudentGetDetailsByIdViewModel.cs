@@ -1,6 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Students
 {
     using System;
+    using System.Linq;
 
     using AutoMapper;
 
@@ -52,7 +53,9 @@
                 .ForMember(s => s.AddressTownName, cfg => cfg.MapFrom(s => s.Address.Town))
                 .ForMember(s => s.AddressDistrictName, cfg => cfg.MapFrom(s => s.Address.District))
                 .ForMember(s => s.AddressCountryName, cfg => cfg.MapFrom(s => s.Address.Country))
-                .ForMember(s => s.AddressContinentName, cfg => cfg.MapFrom(s => s.Address.Continent));
+                .ForMember(s => s.AddressContinentName, cfg => cfg.MapFrom(s => s.Address.Continent))
+                .ForMember(s => s.InMajor, cfg => cfg.MapFrom(
+                    s => s.Majors.Select(sm => sm.Major.Name).FirstOrDefault()));
         }
     }
 }

@@ -3,10 +3,9 @@
     using System.ComponentModel.DataAnnotations;
 
     using Data.Common.Enumerations;
-    using static Data.Common.DataValidation.Address;
     using static Data.Common.DataValidation.Faculty;
 
-    public abstract class FacultyBaseForm
+    public abstract class FacultyBaseForm : BaseAddress
     {
         [Required]
         [MaxLength(MaxNameLength)]
@@ -14,26 +13,6 @@
 
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
-
-        [Required]
-        [StringLength(MaxStreetNameLength, MinimumLength = MinStreetNameLength)]
-        public string AddressStreetName { get; set; }
-
-        [MaxLength(MaxDistrictNameLength)]
-        public string AddressDistrictName { get; set; }
-
-        [Required]
-        [StringLength(MaxTownNameLength, MinimumLength = MinTownNameLength)]
-        public string AddressTownName { get; set; }
-
-        [StringLength(MaxPostalCodeLength, MinimumLength = MinPostalCodeLength)]
-        public string AddressPostalCode { get; set; }
-
-        [Required]
-        [StringLength(MaxCountryNameLength, MinimumLength = MinCountryNameLength)]
-        public string AddressCountryName { get; set; }
-
-        public Continent AddressContinent { get; set; }
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]

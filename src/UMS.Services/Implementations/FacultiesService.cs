@@ -24,7 +24,7 @@
         private readonly IDeletableEntityRepository<Faculty> facultyRepository;
 
         public FacultiesService(
-            IDeletableEntityRepository<Faculty> facultyRepository, 
+            IDeletableEntityRepository<Faculty> facultyRepository,
             IRepository<FacultyAddress> facultyAddressRepository)
         {
             this.facultyRepository = facultyRepository;
@@ -60,7 +60,7 @@
                 Town = model.AddressTownName,
                 PostalCode = model.AddressPostalCode,
                 Country = model.AddressCountryName,
-                Continent = model.AddressContinent,
+                Continent = model.AddressContinentName,
             };
 
             var faculty = new Faculty
@@ -100,7 +100,7 @@
             facultyAddress.Town = model.AddressTownName;
             facultyAddress.PostalCode = model.AddressPostalCode;
             facultyAddress.Country = model.AddressCountryName;
-            facultyAddress.Continent = model.AddressContinent;
+            facultyAddress.Continent = model.AddressContinentName;
 
             faculty.Email = model.Email;
             faculty.PhoneNumber = model.PhoneNumber;

@@ -11,7 +11,5 @@
         public string PhoneNumber { get; set; }
 
         public string Fax { get; set; }
-
-        public string BelongsToFaculty { get; set; }
     }
 }

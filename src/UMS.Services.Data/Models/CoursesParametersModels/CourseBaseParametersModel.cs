@@ -13,7 +13,5 @@
         public DateTime EndDate { get; set; }
 
         public decimal Price { get; set; }
-
-        public string BelongsToMajor { get; set; }
     }
 }

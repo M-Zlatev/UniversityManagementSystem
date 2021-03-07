@@ -11,7 +11,5 @@
         public MajorType MajorType { get; set; }
 
         public double Duration { get; set; }
-
-        public string BelongsToDepartment { get; set; }
     }
 }

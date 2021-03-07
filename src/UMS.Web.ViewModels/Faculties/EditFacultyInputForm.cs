@@ -17,7 +17,7 @@
                  .ForMember(f => f.AddressTownName, cfg => cfg.MapFrom(f => f.Address.Town))
                  .ForMember(f => f.AddressPostalCode, cfg => cfg.MapFrom(f => f.Address.PostalCode))
                  .ForMember(f => f.AddressCountryName, cfg => cfg.MapFrom(f => f.Address.Country))
-                 .ForMember(f => f.AddressContinent, cfg => cfg.MapFrom(f => f.Address.Continent));
+                 .ForMember(f => f.AddressContinentName, cfg => cfg.MapFrom(f => f.Address.Continent));
         }
     }
 }

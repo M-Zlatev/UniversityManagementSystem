@@ -136,12 +136,12 @@
 
         private static void CheckIfUserEnterDate(DateTime startDate, DateTime endDate)
         {
-            if (startDate == default)
+            if (startDate == DateTime.UtcNow)
             {
                 startDate = DateTime.UtcNow;
             }
 
-            if (endDate == default)
+            if (endDate == DateTime.UtcNow)
             {
                 startDate = DateTime.UtcNow.AddMonths(6);
             }
