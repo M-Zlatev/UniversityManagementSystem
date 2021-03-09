@@ -28,6 +28,7 @@
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
+        [EmailAddress(ErrorMessage = "Invalid Email")]
         public string Email { get; set; }
 
         [Required]

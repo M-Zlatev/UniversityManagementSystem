@@ -25,6 +25,7 @@
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

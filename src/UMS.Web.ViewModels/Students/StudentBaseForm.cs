@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Students
 {
     using System;
-
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using Data.Common.Enumerations;
@@ -22,9 +22,8 @@
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Uniform civil number")]
         [StringLength(MaxUCNLength, MinimumLength = MinUCNLength, ErrorMessage = UCNErrorMessage)]
-        [RegularExpression("[0-9]{10}", ErrorMessage = UCNErrorMessage)]
+        [Display(Name = DisplayName)]
         public string UniformCivilNumber { get; set; }
 
         public DateTime DateOfBirth { get; set; }
@@ -37,6 +36,7 @@
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
+        [EmailAddress]
         public string Email { get; set; }
 
         public string ImageUrl { get; set; }

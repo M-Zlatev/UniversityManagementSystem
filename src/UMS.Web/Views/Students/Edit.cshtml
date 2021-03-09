@@ -2,7 +2,8 @@
 
 @model UMS.Web.ViewModels.Students.EditStudentInputForm
 @{ ViewData["Title"] = "Edit student";
-                var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); }
+   var majorItems = this.Model.MajorItems.Select(kvp => new SelectListItem(kvp.Value, kvp.Key)); 
+}
 
 <h2 style="text-align:center">@ViewData["Title"]</h2>
 

@@ -35,7 +35,6 @@
 
         [Required]
         [StringLength(MaxUCNLength, MinimumLength = MinUCNLength, ErrorMessage = UCNErrorMessage)]
-        [RegularExpression("[0-9]{10}", ErrorMessage = UCNErrorMessage)]
         public string UniformCivilNumber { get; set; }
 
         public DateTime? DateofBirth { get; set; }
@@ -51,6 +50,7 @@
 
         [Required]
         [StringLength(MaxEmailAdressLength, MinimumLength = MinEmailAddressLength)]
+        [EmailAddress]
         public string Email { get; set; }
 
         public string ImageUrl { get; set; }
