@@ -14,6 +14,7 @@
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Resource type")]
         public ResourceType ResourceType { get; set; }
 
         [Required]

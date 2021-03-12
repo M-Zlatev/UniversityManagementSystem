@@ -17,9 +17,11 @@
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Start date of the course")]
         public DateTime StartDate { get; set; }
 
         [Required]
+        [Display(Name = "End date of the course")]
         public DateTime EndDate { get; set; }
 
         [Required]

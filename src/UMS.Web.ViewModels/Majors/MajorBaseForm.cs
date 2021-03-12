@@ -15,6 +15,7 @@
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Major type")]
         public MajorType MajorType { get; set; }
 
         [Required]

@@ -24,17 +24,17 @@
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="StartDate">Start date of the course</label>
+        <label asp-for="StartDate"></label>
         <input asp-for="StartDate" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
         <span asp-validation-for="StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="EndDate">End date of the course</label>
+        <label asp-for="EndDate"></label>
         <input asp-for="EndDate" type="date" asp-format="{0:dd-MM-yyyy}" placeholder="Enter datetime" class="form-control" />
         <span asp-validation-for="EndDate" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="MajorId">Major</label>
+        <label asp-for="MajorId"></label>
         <select asp-for="MajorId" class="form-control" asp-items="majorItems"></select>
         <span asp-validation-for="MajorId" class="text-danger"></span>
     </div>

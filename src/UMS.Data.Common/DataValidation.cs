@@ -63,7 +63,6 @@
             public const int MinEmailAddressLength = 3;
             public const int MaxEmailAdressLength = 100;
             public const string UCNErrorMessage = "This field must contains 10 digits";
-            public const string DisplayName = "Uniform civil number";
         }
 
         public static class Address
