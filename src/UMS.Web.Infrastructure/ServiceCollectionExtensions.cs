@@ -9,6 +9,8 @@
     using Microsoft.Extensions.DependencyInjection;
 
     using Common.Mapping;
+    using Data;
+    using Data.Contracts;
     using Data.Repositories;
     using Services;
     using Services.Data.Models.CoursesParametersModels;
@@ -53,6 +55,7 @@
 
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             return services;
         }
