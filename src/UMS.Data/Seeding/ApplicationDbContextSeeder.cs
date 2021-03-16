@@ -29,6 +29,7 @@
                 new DepartmentSeeder(),
                 new MajorSeeder(),
                 new CourseSeeder(),
+                new RolesSeeder(),
             };
 
             foreach (var seeder in seeders)

@@ -28,6 +28,10 @@
 
         public DateTime OpenForSubmissionTime { get; set; }
 
+        public string AddedByUserId { get; set; }
+
+        public virtual ApplicationUser AddedByUser { get; set; }
+
         public int? StudentId { get; set; }
 
         public Student Student { get; set; }

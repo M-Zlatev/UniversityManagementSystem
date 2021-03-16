@@ -21,6 +21,10 @@
         [Required]
         public string Url { get; set; }
 
+        public string AddedByUserId { get; set; }
+
+        public virtual ApplicationUser AddedByUser { get; set; }
+
         public int CourseId { get; set; }
 
         public Course Course { get; set; }

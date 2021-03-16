@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UMS.Data;
 
 namespace UMS.Data.Migrations
 {
     [DbContext(typeof(UmsDbContext))]
-    partial class UmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316165937_AddApplicationUserInStudentsTeachersHomeworksAndResources")]
+    partial class AddApplicationUserInStudentsTeachersHomeworksAndResources
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
