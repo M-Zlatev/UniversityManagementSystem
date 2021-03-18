@@ -11,6 +11,7 @@
     using Data.Repositories;
     using Data.Common.Enumerations;
     using Infrastructure;
+    using Services.Data.Models.ResourcesParametersModels;
     using Services.Contracts;
     using ViewModels;
     using ViewModels.Resources;
@@ -62,12 +63,13 @@
             => this.View();
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateResourceInputForm inputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var resourceId = await this.resourcesService.Create(inputForm.Name, inputForm.ResourceType, inputForm.Url, inputForm.BelongToCourse);
+                var parameters = AutoMapperConfig.MapperInstance.Map<ResourceCreateParametersModel>(inputForm);
+                var resourceId = await this.resourcesService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = resourceId });
             }
@@ -99,7 +101,8 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.resourcesService.Edit(id, inputForm.Name, inputForm.ResourceType, inputForm.Url, inputForm.BelongToCourse);
+                var parameters = AutoMapperConfig.MapperInstance.Map<ResourceEditParametersModel>(inputForm);
+                await this.resourcesService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }

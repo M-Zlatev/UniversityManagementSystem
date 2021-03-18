@@ -8,6 +8,7 @@
 
     using Common.Mapping;
     using Contracts;
+    using Data.Models.ResourcesParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
@@ -49,15 +50,15 @@
         public int GetCount()
             => this.resourceRepository.All().Count();
 
-        public async Task<int> Create(string name, ResourceType resourceType, string url, string belongToCourse)
+        public async Task<int> Create(ResourceCreateParametersModel model)
         {
-            int courseId = this.FindCourseIdByCourseName(belongToCourse);
+            int courseId = this.FindCourseIdByCourseName(model.BelongToCourse);
 
             var resource = new Resource
             {
-                Name = name,
-                ResourceType = resourceType,
-                Url = url,
+                Name = model.Name,
+                ResourceType = model.ResourceType,
+                Url = model.Url,
                 CourseId = courseId,
             };
 
@@ -68,7 +69,7 @@
             return resource.Id;
         }
 
-        public async Task<bool> Edit(int id, string name, ResourceType resourceType, string url, string belongToCourse)
+        public async Task<bool> Edit(int id, ResourceEditParametersModel model)
         {
             var resource = this.resourceRepository.All().FirstOrDefault(m => m.Id == id);
 
@@ -77,11 +78,11 @@
                 return false;
             }
 
-            int courseId = this.FindCourseIdByCourseName(belongToCourse);
+            int courseId = this.FindCourseIdByCourseName(model.BelongToCourse);
 
-            resource.Name = name;
-            resource.ResourceType = resourceType;
-            resource.Url = url;
+            resource.Name = model.Name;
+            resource.ResourceType = model.ResourceType;
+            resource.Url = model.Url;
             resource.CourseId = courseId;
 
             await this.resourceRepository.SaveChangesAsync();

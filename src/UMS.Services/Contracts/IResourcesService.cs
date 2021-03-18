@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using UMS.Data.Common.Enumerations;
+    using UMS.Services.Data.Models.ResourcesParametersModels;
 
     public interface IResourcesService : ITransientService
     {
@@ -16,9 +17,9 @@
 
         int GetCount();
 
-        Task<int> Create(string name, ResourceType resourceType, string url, string belongToCourse);
+        Task<int> Create(ResourceCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string name, ResourceType resourceType, string url, string belongToCourse);
+        Task<bool> Edit(int id, ResourceEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

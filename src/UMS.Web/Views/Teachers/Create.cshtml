@@ -10,17 +10,17 @@
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="FirstName">First name</label>
+        <label asp-for="FirstName"></label>
         <input asp-for="FirstName" class="form-control" />
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="MiddleName">Middle name</label>
+        <label asp-for="MiddleName"></label>
         <input asp-for="MiddleName" class="form-control" />
         <span asp-validation-for="MiddleName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="LastName">Last name</label>
+        <label asp-for="LastName"></label>
         <input asp-for="LastName" class="form-control" />
         <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
@@ -30,27 +30,27 @@
         <span asp-validation-for="Gender" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AddressStreetName">Address street name</label>
+        <label asp-for="AddressStreetName"></label>
         <input asp-for="AddressStreetName" class="form-control" />
         <span asp-validation-for="AddressStreetName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AddressDistrictName">Address district name</label>
+        <label asp-for="AddressDistrictName"></label>
         <input asp-for="AddressDistrictName" class="form-control" />
         <span asp-validation-for="AddressDistrictName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AddressTownName">Address town name</label>
+        <label asp-for="AddressTownName"></label>
         <input asp-for="AddressTownName" class="form-control" />
         <span asp-validation-for="AddressTownName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AddressCountryName">Address country name</label>
+        <label asp-for="AddressCountryName"></label>
         <input asp-for="AddressCountryName" class="form-control" />
         <span asp-validation-for="AddressCountryName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AddressContinentName">Address continent name</label>
+        <label asp-for="AddressContinentName"></label>
         <select asp-for="AddressContinentName" class="form-control" asp-items="@Html.GetEnumSelectList<Continent>()"></select>
         <span asp-validation-for="AddressContinentName" class="text-danger"></span>
     </div>
@@ -60,7 +60,7 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="PhoneNumber">Phone number</label>
+        <label asp-for="PhoneNumber"></label>
         <input asp-for="PhoneNumber" class="form-control" />
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>

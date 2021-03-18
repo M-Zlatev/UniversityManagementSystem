@@ -9,6 +9,7 @@
 
     using Common.Mapping;
     using Contracts;
+    using Services.Data.Models.HomeworksParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
     using UMS.Data.Models;
@@ -49,26 +50,24 @@
         public int GetCount()
             => this.homeworkRepository.All().Count();
 
-        public async Task<int> Create(string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime, string doneByStudent)
+        public async Task<int> Create(HomeworkCreateParametersModel model)
         {
-            var studentId = this.studentRepository.All()
-                .Where(s => s.FirstName == doneByStudent)
-                .Select(s => s.Id)
-                .FirstOrDefault();
-
-            CheckDate(assignmentTime, openForSubmissionTime);
-
             var homework = new Homework
             {
-                Content = content,
-                HomeworkType = homeworkType,
-                AssignmentTime = assignmentTime,
-                OpenForSubmissionTime = openForSubmissionTime,
-                StudentId = studentId,
+                Content = model.Content,
+                HomeworkType = model.HomeworkType,
+                AssignmentTime = model.AssingmentTime,
+                OpenForSubmissionTime = model.OpenForSubmissionTime,
+                AddedByUserId = model.UserId,
             };
 
+            var studentName = this.homeworkRepository.AllAsNoTracking()
+                .Where(h => h.AddedByUserId == model.UserId)
+                .Select(s => s.Student.FirstName)
+                .FirstOrDefault();
+
             var student = this.studentRepository.All()
-                .Where(s => s.FirstName == doneByStudent)
+                .Where(s => s.FirstName == studentName)
                 .FirstOrDefault();
 
             student.Homeworks.Add(homework);
@@ -81,7 +80,7 @@
             return homework.Id;
         }
 
-        public async Task<bool> Edit(int id, string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime)
+        public async Task<bool> Edit(int id, HomeworkEditParametersModel model)
         {
             var homework = this.homeworkRepository.All().FirstOrDefault(h => h.Id == id);
 
@@ -90,12 +89,9 @@
                 return false;
             }
 
-            CheckDate(assignmentTime, openForSubmissionTime);
-
-            homework.Content = content;
-            homework.HomeworkType = homeworkType;
-            homework.AssignmentTime = assignmentTime;
-            homework.OpenForSubmissionTime = openForSubmissionTime;
+            homework.Content = model.Content;
+            homework.HomeworkType = model.HomeworkType;
+            homework.OpenForSubmissionTime = model.OpenForSubmissionTime;
 
             await this.homeworkRepository.SaveChangesAsync();
 
@@ -116,19 +112,6 @@
             await this.homeworkRepository.SaveChangesAsync();
 
             return true;
-        }
-
-        private static void CheckDate(DateTime assignmentTime, DateTime openForSubmissionTime)
-        {
-            if (assignmentTime == null)
-            {
-                assignmentTime = DateTime.UtcNow;
-            }
-
-            if (openForSubmissionTime == null)
-            {
-                openForSubmissionTime = DateTime.UtcNow.AddDays(7);
-            }
         }
     }
 }

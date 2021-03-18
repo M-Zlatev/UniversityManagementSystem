@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using UMS.Data.Common.Enumerations;
+    using UMS.Services.Data.Models.HomeworksParametersModels;
 
     public interface IHomeworksService : ITransientService
     {
@@ -16,9 +17,9 @@
 
         int GetCount();
 
-        Task<int> Create(string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime, string doneByStudent);
+        Task<int> Create(HomeworkCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, string content, HomeworkType homeworkType, DateTime assignmentTime, DateTime openForSubmissionTime);
+        Task<bool> Edit(int id, HomeworkEditParametersModel editParametersModel);
 
         Task<bool> Delete(int id);
     }

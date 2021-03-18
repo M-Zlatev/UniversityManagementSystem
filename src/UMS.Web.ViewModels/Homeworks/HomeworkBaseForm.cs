@@ -9,8 +9,6 @@
 
     public abstract class HomeworkBaseForm
     {
-        public int Id { get; set; }
-
         [MaxLength(MaxContentLength)]
         public string Content { get; set; }
 
@@ -18,11 +16,9 @@
         [Display(Name = "Homework type")]
         public HomeworkType HomeworkType { get; set; }
 
-        [Required]
-        [Display(Name = "Assignment time")]
-        public DateTime AssignmentTime { get; set; }
-
         [Display(Name = "Open for submission time")]
         public DateTime OpenForSubmissionTime { get; set; }
+
+        public string UserId { get; set; }
     }
 }

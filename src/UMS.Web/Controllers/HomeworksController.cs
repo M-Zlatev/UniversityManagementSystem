@@ -10,6 +10,7 @@
     using Data.Models;
     using Data.Repositories;
     using Infrastructure;
+    using Services.Data.Models.HomeworksParametersModels;
     using Services.Contracts;
     using ViewModels;
     using ViewModels.Homeworks;
@@ -66,7 +67,8 @@
         {
             if (this.ModelState.IsValid)
             {
-                var homeworkId = await this.homeworksService.Create(inputForm.Content, inputForm.HomeworkType, inputForm.AssignmentTime, inputForm.OpenForSubmissionTime, inputForm.UserId);
+                var parameters = AutoMapperConfig.MapperInstance.Map<HomeworkCreateParametersModel>(inputForm);
+                var homeworkId = await this.homeworksService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = homeworkId });
             }
@@ -98,7 +100,8 @@
 
             if (this.ModelState.IsValid)
             {
-                await this.homeworksService.Edit(id, inputForm.Content, inputForm.HomeworkType, inputForm.AssignmentTime, inputForm.OpenForSubmissionTime);
+                var parameters = AutoMapperConfig.MapperInstance.Map<HomeworkEditParametersModel>(inputForm);
+                await this.homeworksService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }

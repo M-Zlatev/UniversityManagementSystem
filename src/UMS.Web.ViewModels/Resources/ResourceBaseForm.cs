@@ -21,5 +21,7 @@
         public string Url { get; set; }
 
         public string BelongToCourse { get; set; }
+
+        public string UserId { get; set; }
     }
 }
