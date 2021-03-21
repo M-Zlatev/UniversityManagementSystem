@@ -68,7 +68,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Create(CreateMajorInputForm majorInputForm)
         {
             if (this.ModelState.IsValid)
@@ -84,7 +84,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.majorService.Exists(id))
@@ -98,7 +98,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditMajorInputForm majorInputForm)
         {
             if (!await this.majorService.Exists(id))
@@ -118,7 +118,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.majorService.Exists(id))
@@ -134,7 +134,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {

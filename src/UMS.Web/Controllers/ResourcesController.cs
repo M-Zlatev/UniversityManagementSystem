@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
@@ -20,11 +21,16 @@
     {
         private readonly IRepository<Resource> resourceRepository;
         private readonly IResourcesService resourcesService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ResourcesController(IResourcesService resourceService, IRepository<Resource> resourceRepository)
+        public ResourcesController(
+            IResourcesService resourceService,
+            IRepository<Resource> resourceRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.resourcesService = resourceService;
             this.resourceRepository = resourceRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult All(int id = 1)
@@ -63,12 +69,14 @@
             => this.View();
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Create(CreateResourceInputForm inputForm)
         {
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<ResourceCreateParametersModel>(inputForm);
+                var user = await this.userManager.GetUserAsync(this.User);
+                parameters.UserId = user.Id;
                 var resourceId = await this.resourcesService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = resourceId });
@@ -78,7 +86,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.resourcesService.Exists(id))
@@ -91,7 +99,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditResourceInputForm inputForm)
         {
             if (!await this.resourcesService.Exists(id))
@@ -102,6 +110,8 @@
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<ResourceEditParametersModel>(inputForm);
+                var user = await this.userManager.GetUserAsync(this.User);
+                parameters.UserId = user.Id;
                 await this.resourcesService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
@@ -111,7 +121,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.resourcesService.Exists(id))
@@ -127,8 +137,8 @@
         }
 
         [HttpPost]
+        [Authorize]
         [ActionName("Delete")]
-        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.resourcesService.Exists(id))

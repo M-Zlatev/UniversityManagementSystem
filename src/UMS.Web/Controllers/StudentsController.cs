@@ -69,7 +69,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Create(CreateStudentInputForm studentInputForm)
         {
             if (this.ModelState.IsValid)
@@ -85,7 +85,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.studentService.Exists(id))
@@ -99,7 +99,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditStudentInputForm studentInputForm)
         {
             if (!await this.studentService.Exists(id))
@@ -119,7 +119,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.studentService.Exists(id))
@@ -135,8 +135,8 @@
         }
 
         [HttpPost]
+        [Authorize]
         [ActionName("Delete")]
-        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.studentService.Exists(id))

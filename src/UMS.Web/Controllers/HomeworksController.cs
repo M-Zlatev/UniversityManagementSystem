@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
@@ -19,11 +20,16 @@
     {
         private readonly IRepository<Homework> homeworkRepository;
         private readonly IHomeworksService homeworksService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public HomeworksController(IHomeworksService homeworksService, IRepository<Homework> homeworkRepository)
+        public HomeworksController(
+            IHomeworksService homeworksService,
+            IRepository<Homework> homeworkRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.homeworksService = homeworksService;
             this.homeworkRepository = homeworkRepository;
+            this.userManager = userManager;
         }
 
         public IActionResult All(int id = 1)
@@ -62,12 +68,14 @@
             => this.View();
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Create(CreateHomeworkInputForm inputForm)
         {
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<HomeworkCreateParametersModel>(inputForm);
+                var user = await this.userManager.GetUserAsync(this.User);
+                parameters.UserId = user.Id;
                 var homeworkId = await this.homeworksService.Create(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = homeworkId });
@@ -77,7 +85,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.homeworksService.Exists(id))
@@ -90,7 +98,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditHomeworkInputForm inputForm)
         {
             if (!await this.homeworksService.Exists(id))
@@ -101,6 +109,8 @@
             if (this.ModelState.IsValid)
             {
                 var parameters = AutoMapperConfig.MapperInstance.Map<HomeworkEditParametersModel>(inputForm);
+                var user = await this.userManager.GetUserAsync(this.User);
+                parameters.UserId = user.Id;
                 await this.homeworksService.Edit(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
@@ -110,7 +120,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.homeworksService.Exists(id))
@@ -126,8 +136,8 @@
         }
 
         [HttpPost]
+        [Authorize]
         [ActionName("Delete")]
-        //[Authorize]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
             if (!await this.homeworksService.Exists(id))
