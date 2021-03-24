@@ -60,6 +60,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateFacultyInputForm();

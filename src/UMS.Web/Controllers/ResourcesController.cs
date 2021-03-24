@@ -65,6 +65,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create(int id)
             => this.View();
 
