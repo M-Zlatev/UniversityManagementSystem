@@ -12,8 +12,10 @@
     using Data;
     using Data.Models.CoursesParametersModels;
     using UMS.Data.Common.Contracts;
-    using UMS.Data.Models;
+    using UMS.Data.Models.Majors;
+    using UMS.Data.Models.Courses;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class CoursesService : ICoursesService
     {

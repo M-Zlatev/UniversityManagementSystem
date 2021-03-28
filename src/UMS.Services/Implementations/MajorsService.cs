@@ -13,8 +13,10 @@
     using Data.Models.MajorsParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
+    using UMS.Data.Models.Majors;
+    using UMS.Data.Models.Departments;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class MajorsService : IMajorsService
     {

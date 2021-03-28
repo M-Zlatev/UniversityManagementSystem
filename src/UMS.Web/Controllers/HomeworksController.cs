@@ -8,8 +8,9 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
+    using Data.Models.Homeworks;
     using Data.Models;
-    using Data.Repositories;
+    using Data.Repositories.Contracts;
     using Infrastructure;
     using Services.Data.Models.HomeworksParametersModels;
     using Services.Contracts;

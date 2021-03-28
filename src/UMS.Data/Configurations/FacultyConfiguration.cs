@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using Models;
+    using Models.Faculties;
 
     public class FacultyConfiguration : IEntityTypeConfiguration<Faculty>
     {

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace UMS.Data.Migrations
+﻿namespace UMS.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddApplicationUserInStudentsTeachersHomeworksAndResources : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

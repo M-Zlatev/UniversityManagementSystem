@@ -12,8 +12,8 @@
     using Data.Models.TeachersParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
-    using UMS.Data.Repositories;
+    using UMS.Data.Models.Teachers;
+    using UMS.Data.Repositories.Contracts;
 
     public class TeachersService : ITeachersService
     {

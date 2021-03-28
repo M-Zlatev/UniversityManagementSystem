@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Majors;
 
     public class EditMajorInputForm : MajorBaseForm, IMapFrom<Major>
     {

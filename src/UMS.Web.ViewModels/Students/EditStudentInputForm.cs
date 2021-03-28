@@ -6,7 +6,7 @@
     using AutoMapper;
 
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Students;
 
     public class EditStudentInputForm : StudentBaseForm, IMapFrom<Student>, IMapExplicitly
     {

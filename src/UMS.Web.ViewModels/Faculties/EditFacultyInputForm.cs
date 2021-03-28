@@ -3,7 +3,7 @@
     using AutoMapper;
 
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Faculties;
 
     public class EditFacultyInputForm : FacultyBaseForm, IMapFrom<Faculty>, IMapExplicitly
     {

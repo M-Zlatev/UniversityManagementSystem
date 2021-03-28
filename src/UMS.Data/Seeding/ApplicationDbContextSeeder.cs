@@ -7,6 +7,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using Seeders.Seeding;
+
     public class ApplicationDbContextSeeder : ISeeder
     {
         public async Task SeedAsync(UmsDbContext dbContext, IServiceProvider serviceProvider)

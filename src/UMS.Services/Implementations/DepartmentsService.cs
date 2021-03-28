@@ -13,7 +13,10 @@
     using Data.Models.DepartmentsParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Data.Models.Departments;
+    using UMS.Data.Models.Faculties;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class DepartmentsService : IDepartmentsService
     {

@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.MajorsParametersModels;
+    using ServicesLifetimeContracts;
     using UMS.Data.Common.Enumerations;
 
     public interface IMajorsService : ITransientService

@@ -9,8 +9,9 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
-    using Data.Repositories;
     using Data.Models;
+    using Data.Models.Faculties;
+    using Data.Repositories.Contracts;
     using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.FacultiesParametersModels;

@@ -3,7 +3,7 @@
     using AutoMapper;
 
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Departments;
 
     public class DepartmentListingViewModel : IMapFrom<Department>, IMapExplicitly
     {

@@ -6,7 +6,7 @@
     using AutoMapper;
 
     using UMS.Common.Mapping;
-    using UMS.Data.Models;
+    using UMS.Data.Models.Courses;
 
     public class CourseGetDetailsByIdViewModel : IMapFrom<Course>, IMapExplicitly
     {

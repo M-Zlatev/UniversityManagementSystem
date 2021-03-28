@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     using Models;
+    using Models.Students;
 
     public class StudentConfiguration : IEntityTypeConfiguration<Student>
     {

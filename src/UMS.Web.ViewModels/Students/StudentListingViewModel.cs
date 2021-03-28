@@ -6,6 +6,7 @@
 
     using Common.Mapping;
     using Data.Models;
+    using UMS.Data.Models.Students;
 
     public class StudentListingViewModel : IMapFrom<Student>, IMapExplicitly
     {

@@ -7,7 +7,7 @@
 
     using Common.Mapping;
     using Data.Common.Enumerations;
-    using Data.Models;
+    using Data.Models.Homeworks;
 
     public class HomeworkGetDetailsByIdViewModel : IMapFrom<Homework>, IMapExplicitly
     {

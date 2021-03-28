@@ -11,9 +11,11 @@
     using Common.Mapping;
     using Data;
     using Data.Contracts;
-    using Data.Repositories;
+    using Data.Repositories.Contracts;
+    using Data.Repositories.Implementations;
     using Services;
     using Services.Data.Models.CoursesParametersModels;
+    using Services.ServicesLifetimeContracts;
     using ViewModels;
     using ViewModels.Courses;
 

@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.CoursesParametersModels;
+    using ServicesLifetimeContracts;
 
     public interface ICoursesService : ITransientService
     {

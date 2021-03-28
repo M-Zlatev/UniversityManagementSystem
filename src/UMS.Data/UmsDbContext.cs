@@ -15,6 +15,14 @@
     using Common.Contracts;
     using Infrastructure;
     using Models;
+    using Models.Courses;
+    using Models.Departments;
+    using Models.Homeworks;
+    using Models.Majors;
+    using Models.Resources;
+    using Models.Students;
+    using Models.Teachers;
+    using Models.Faculties;
 
     public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

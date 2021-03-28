@@ -7,8 +7,8 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Common.Mapping;
-    using Data.Models;
-    using Data.Repositories;
+    using Data.Models.Departments;
+    using Data.Repositories.Contracts;
     using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.DepartmentsParametersModels;

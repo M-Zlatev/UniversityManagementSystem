@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.DepartmentsParametersModels;
+    using ServicesLifetimeContracts;
     using UMS.Data.Models;
 
     public interface IDepartmentsService : ITransientService

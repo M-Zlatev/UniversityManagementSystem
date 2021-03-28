@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Courses
 {
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Courses;
 
     public class CourseListingViewModel : IMapFrom<Course>
     {

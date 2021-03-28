@@ -8,6 +8,7 @@
     using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models;
+    using UMS.Data.Models.Students;
 
     public class StudentGetDetailsByIdViewModel : IMapFrom<Student>, IMapExplicitly
     {

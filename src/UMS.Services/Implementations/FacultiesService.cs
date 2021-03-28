@@ -14,7 +14,9 @@
     using Data.Models.FacultiesParametersModels;
     using UMS.Data;
     using UMS.Data.Models;
+    using UMS.Data.Models.Faculties;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class FacultiesService : IFacultiesService
     {

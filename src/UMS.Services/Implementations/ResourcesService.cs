@@ -11,8 +11,10 @@
     using Data.Models.ResourcesParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
+    using UMS.Data.Models.Resources;
+    using UMS.Data.Models.Courses;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class ResourcesService : IResourcesService
     {

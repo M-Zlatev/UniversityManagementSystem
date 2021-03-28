@@ -12,8 +12,10 @@
     using Services.Data.Models.HomeworksParametersModels;
     using UMS.Data;
     using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
+    using UMS.Data.Models.Homeworks;
+    using UMS.Data.Models.Students;
     using UMS.Data.Repositories;
+    using UMS.Data.Repositories.Contracts;
 
     public class HomeworksService : IHomeworksService
     {

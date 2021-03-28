@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.TeachersParametersModels;
+    using ServicesLifetimeContracts;
     using UMS.Data.Common.Enumerations;
 
     public interface ITeachersService : ITransientService

@@ -6,6 +6,7 @@
 
     using UMS.Data.Common.Enumerations;
     using UMS.Services.Data.Models.HomeworksParametersModels;
+    using ServicesLifetimeContracts;
 
     public interface IHomeworksService : ITransientService
     {

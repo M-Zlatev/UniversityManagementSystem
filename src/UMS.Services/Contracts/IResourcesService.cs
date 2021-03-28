@@ -6,6 +6,7 @@
 
     using UMS.Data.Common.Enumerations;
     using UMS.Services.Data.Models.ResourcesParametersModels;
+    using ServicesLifetimeContracts;
 
     public interface IResourcesService : ITransientService
     {

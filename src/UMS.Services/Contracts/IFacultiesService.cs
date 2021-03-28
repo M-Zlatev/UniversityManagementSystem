@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using Data.Models.FacultiesParametersModels;
+    using ServicesLifetimeContracts;
 
     public interface IFacultiesService : ITransientService
     {

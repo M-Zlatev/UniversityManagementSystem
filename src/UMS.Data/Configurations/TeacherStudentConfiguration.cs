@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using Models;
+    using Models.Teachers;
 
     public class TeacherStudentConfiguration : IEntityTypeConfiguration<TeacherStudent>
     {

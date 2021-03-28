@@ -4,7 +4,7 @@
 
     using Common.Mapping;
     using Data.Common.Enumerations;
-    using Data.Models;
+    using Data.Models.Majors;
 
     public class MajorGetDetailsByIdViewModel : IMapFrom<Major>, IMapExplicitly
     {

@@ -3,7 +3,7 @@
     using AutoMapper;
 
     using Common.Mapping;
-    using Data.Models;
+    using Data.Models.Teachers;
 
     public class EditTeacherInputForm : TeacherBaseForm, IMapFrom<Teacher>, IMapExplicitly
     {

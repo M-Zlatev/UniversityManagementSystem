@@ -6,6 +6,7 @@
 
     using Data.Models.StudentsParametersModels;
     using UMS.Data.Common.Enumerations;
+    using ServicesLifetimeContracts;
 
     public interface IStudentsService : ITransientService
     {

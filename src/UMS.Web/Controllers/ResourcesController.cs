@@ -9,7 +9,8 @@
 
     using Common.Mapping;
     using Data.Models;
-    using Data.Repositories;
+    using Data.Models.Resources;
+    using Data.Repositories.Contracts;
     using Data.Common.Enumerations;
     using Infrastructure;
     using Services.Data.Models.ResourcesParametersModels;
