@@ -1,20 +1,16 @@
 ﻿namespace UMS.Services.Implementations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
-    using Services.Data.Models.HomeworksParametersModels;
-    using UMS.Data;
-    using UMS.Data.Common.Enumerations;
+    using Data.Models.HomeworksParametersModels;
+    using Mapping.Infrastructure;
     using UMS.Data.Models.Homeworks;
     using UMS.Data.Models.Students;
-    using UMS.Data.Repositories;
     using UMS.Data.Repositories.Contracts;
 
     public class HomeworksService : IHomeworksService
@@ -52,7 +48,7 @@
         public int GetCount()
             => this.homeworkRepository.All().Count();
 
-        public async Task<int> Create(HomeworkCreateParametersModel model)
+        public async Task<int> CreateAsync(HomeworkCreateParametersModel model)
         {
             var homework = new Homework
             {
@@ -82,7 +78,7 @@
             return homework.Id;
         }
 
-        public async Task<bool> Edit(int id, HomeworkEditParametersModel model)
+        public async Task<bool> EditAsync(int id, HomeworkEditParametersModel model)
         {
             var homework = this.homeworkRepository.All().FirstOrDefault(h => h.Id == id);
 
@@ -100,7 +96,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var homework = this.homeworkRepository.All().FirstOrDefault(h => h.Id == id);
 

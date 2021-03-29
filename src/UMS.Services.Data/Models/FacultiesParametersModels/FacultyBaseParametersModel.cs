@@ -2,6 +2,8 @@
 {
     using UMS.Data.Common.Enumerations;
 
+    using Additional;
+
     public abstract class FacultyBaseParametersModel : BaseAddress
     {
         public string Name { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace UMS.Web.ViewModels.Faculties
 {
-    using Common.Mapping;
+    using Services.Mapping.Contracts;
 
     public class CreateFacultyInputForm : FacultyBaseForm
     {

@@ -4,18 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
     using Data.Models.MajorsParametersModels;
-    using UMS.Data;
-    using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models.Majors;
+    using Services.Mapping.Infrastructure;
     using UMS.Data.Models.Departments;
-    using UMS.Data.Repositories;
+    using UMS.Data.Models.Majors;
     using UMS.Data.Repositories.Contracts;
 
     public class MajorsService : IMajorsService
@@ -41,19 +36,28 @@
              .To<T>()
              .ToList();
 
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+             => this.departmentRepository.AllAsNoTracking()
+             .Select(c => new
+             {
+                 c.Id,
+                 c.Name,
+             }).ToList()
+             .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+
         public T GetDetailsById<T>(int id)
             => this.majorRepository.AllAsNoTracking()
                 .Where(m => m.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetCount()
-            => this.majorRepository.All().Count();
-
         public async Task<bool> Exists(int id)
             => await this.majorRepository.All().AnyAsync(m => m.Id == id);
 
-        public async Task<int> Create(MajorCreateParametersModel model)
+        public int GetCount()
+            => this.majorRepository.All().Count();
+
+        public async Task<int> CreateAsync(MajorCreateParametersModel model)
         {
             var departmentId = this.departmentRepository.All()
                 .Where(d => d.Id == model.DepartmentId)
@@ -76,7 +80,7 @@
             return major.Id;
         }
 
-        public async Task<bool> Edit(int id, MajorEditParametersModel model)
+        public async Task<bool> EditAsync(int id, MajorEditParametersModel model)
         {
             var major = this.majorRepository.All().FirstOrDefault(m => m.Id == id);
 
@@ -101,7 +105,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var major = this.majorRepository.All().FirstOrDefault(m => m.Id == id);
 
@@ -116,14 +120,5 @@
 
             return true;
         }
-
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
-             => this.departmentRepository.AllAsNoTracking()
-             .Select(c => new
-             {
-                 c.Id,
-                 c.Name,
-             }).ToList()
-             .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

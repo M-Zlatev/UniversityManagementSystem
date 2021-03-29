@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Teachers
 {
-    using Common.Mapping;
     using Data.Models.Teachers;
+    using Services.Mapping.Contracts;
 
     public class TeacherListingViewModel : IMapFrom<Teacher>
     {

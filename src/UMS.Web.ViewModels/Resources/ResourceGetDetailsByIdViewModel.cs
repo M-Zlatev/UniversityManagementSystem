@@ -2,9 +2,9 @@
 {
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models.Resources;
+    using Services.Mapping.Contracts;
 
     public class ResourceGetDetailsByIdViewModel : IMapFrom<Resource>, IMapExplicitly
     {
@@ -18,7 +18,7 @@
 
         public string BelongsToCourse { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Resource, ResourceGetDetailsByIdViewModel>()

@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels
 {
-    using Common.Mapping;
     using Data.Models.Majors;
+    using Services.Mapping.Contracts;
 
     public class MajorListingViewModel : IMapFrom<Major>
     {

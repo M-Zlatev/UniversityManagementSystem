@@ -4,8 +4,8 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using Common.Mapping;
     using Data.Models.Majors;
+    using Services.Mapping.Contracts;
 
     public class EditMajorInputForm : MajorBaseForm, IMapFrom<Major>
     {

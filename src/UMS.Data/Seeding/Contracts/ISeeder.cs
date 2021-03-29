@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Seeding
+﻿namespace UMS.Data.Seeding.Contracts
 {
     using System;
     using System.Threading.Tasks;

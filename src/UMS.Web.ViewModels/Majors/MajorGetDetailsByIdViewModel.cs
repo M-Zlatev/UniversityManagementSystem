@@ -2,9 +2,9 @@
 {
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models.Majors;
+    using Services.Mapping.Contracts;
 
     public class MajorGetDetailsByIdViewModel : IMapFrom<Major>, IMapExplicitly
     {
@@ -20,7 +20,7 @@
 
         public string BelongsToDepartment { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Major, MajorGetDetailsByIdViewModel>()

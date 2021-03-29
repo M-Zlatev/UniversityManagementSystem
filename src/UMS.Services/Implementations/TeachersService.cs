@@ -1,17 +1,14 @@
 ﻿namespace UMS.Services.Implementations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
     using Data.Models.TeachersParametersModels;
-    using UMS.Data;
-    using UMS.Data.Common.Enumerations;
+    using Mapping.Infrastructure;
     using UMS.Data.Models.Teachers;
     using UMS.Data.Repositories.Contracts;
 
@@ -44,13 +41,13 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetCount()
-            => this.teacherRepository.All().Count();
-
         public async Task<bool> Exists(int id)
             => await this.teacherRepository.All().AnyAsync(t => t.Id == id);
 
-        public async Task<int> Create(TeacherCreateParametersModel model)
+        public int GetCount()
+            => this.teacherRepository.All().Count();
+
+        public async Task<int> CreateAsync(TeacherCreateParametersModel model)
         {
             var teacherAddress = new TeacherAddress()
             {
@@ -81,7 +78,7 @@
             return teacher.Id;
         }
 
-        public async Task<bool> Edit(int id, TeacherEditParametersModel model)
+        public async Task<bool> EditAsync(int id, TeacherEditParametersModel model)
         {
             var teacher = this.teacherRepository.All().FirstOrDefault(m => m.Id == id);
             var teacherAddress = this.teacherAddressRepository.All().Where(t => t.TeacherId == id).FirstOrDefault();
@@ -113,7 +110,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var teacher = this.teacherRepository.All().FirstOrDefault(m => m.Id == id);
 

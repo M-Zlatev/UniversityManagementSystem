@@ -6,14 +6,12 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
     using Data.Models.Teachers;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.TeachersParametersModels;
-    using ViewModels;
     using ViewModels.Teachers;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class TeachersController : Controller
     {
@@ -72,8 +70,8 @@
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<TeacherCreateParametersModel>(teacherInputForm);
-                var teacherId = await this.teachersService.Create(parameters);
+                var parameters = Mapper.Map<TeacherCreateParametersModel>(teacherInputForm);
+                var teacherId = await this.teachersService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = teacherId });
             }
@@ -105,8 +103,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<TeacherEditParametersModel>(teacherInputForm);
-                await this.teachersService.Edit(id, parameters);
+                var parameters = Mapper.Map<TeacherEditParametersModel>(teacherInputForm);
+                await this.teachersService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -140,7 +138,7 @@
                 return this.NotFound();
             }
 
-            await this.teachersService.Delete(id);
+            await this.teachersService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

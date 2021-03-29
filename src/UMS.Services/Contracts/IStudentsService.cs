@@ -5,12 +5,14 @@
     using System.Threading.Tasks;
 
     using Data.Models.StudentsParametersModels;
-    using UMS.Data.Common.Enumerations;
     using ServicesLifetimeContracts;
+    using UMS.Data.Common.Enumerations;
 
     public interface IStudentsService : ITransientService
     {
         public IEnumerable<T> GetAll<T>(int id, int studentsPerPage);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         public T GetDetailsById<T>(int id);
 
@@ -18,12 +20,10 @@
 
         int GetCount();
 
-        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+        Task<int> CreateAsync(StudentCreateParametersModel createParametersModel);
 
-        Task<int> Create(StudentCreateParametersModel createParametersModel);
+        Task<bool> EditAsync(int id, StudentEditParametersModel editParametersModel);
 
-        Task<bool> Edit(int id, StudentEditParametersModel editParametersModel);
-
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

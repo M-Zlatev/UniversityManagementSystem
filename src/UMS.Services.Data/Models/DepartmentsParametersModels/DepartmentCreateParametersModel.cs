@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using Web.ViewModels.Departments;
 
     public class DepartmentCreateParametersModel : DepartmentBaseParametersModel, IMapFrom<CreateDepartmentInputForm>

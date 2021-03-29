@@ -1,8 +1,8 @@
 ﻿namespace UMS.Web.ViewModels.Homeworks
 {
-    using Common.Mapping;
     using Data.Models.Homeworks;
     using Data.Common.Enumerations;
+    using Services.Mapping.Contracts;
 
     public class HomeworkListingViewModel : IMapFrom<Homework>
     {

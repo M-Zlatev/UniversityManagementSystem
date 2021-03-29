@@ -5,9 +5,9 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models.Homeworks;
+    using Services.Mapping.Contracts;
 
     public class HomeworkGetDetailsByIdViewModel : IMapFrom<Homework>, IMapExplicitly
     {
@@ -21,7 +21,7 @@
 
         public string DoneByStudent { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Homework, HomeworkGetDetailsByIdViewModel>()

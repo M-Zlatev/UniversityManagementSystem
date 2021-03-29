@@ -3,18 +3,14 @@
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Security.Claims;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Implementations;
     using Common.Contracts;
     using Infrastructure;
-    using Models;
     using Models.Courses;
     using Models.Departments;
     using Models.Homeworks;
@@ -23,6 +19,7 @@
     using Models.Students;
     using Models.Teachers;
     using Models.Faculties;
+    using Models.UserDefinedPrincipal;
 
     public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

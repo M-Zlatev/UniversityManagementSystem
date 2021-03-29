@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Data.Models
+﻿namespace UMS.Services.Data.Models.Additional
 {
     using UMS.Data.Common.Enumerations;
 

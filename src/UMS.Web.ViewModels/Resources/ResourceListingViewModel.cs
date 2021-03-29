@@ -1,9 +1,8 @@
 ﻿namespace UMS.Web.ViewModels.Resources
 {
-    using UMS.Data.Common.Enumerations;
-
-    using UMS.Common.Mapping;
-    using UMS.Data.Models.Resources;
+    using Data.Common.Enumerations;
+    using Data.Models.Resources;
+    using Services.Mapping.Contracts;
 
     public class ResourceListingViewModel : IMapFrom<Resource>
     {

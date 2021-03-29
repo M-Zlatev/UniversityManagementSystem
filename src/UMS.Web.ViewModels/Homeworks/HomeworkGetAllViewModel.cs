@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Additional;
+
     public class HomeworkGetAllViewModel : PagingViewModel
     {
         public IEnumerable<HomeworkListingViewModel> Homeworks { get; set; }

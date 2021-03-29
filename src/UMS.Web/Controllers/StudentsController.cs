@@ -1,21 +1,17 @@
 ﻿namespace UMS.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Linq;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
     using Data.Models.Students;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.StudentsParametersModels;
-    using ViewModels;
     using ViewModels.Students;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class StudentsController : Controller
     {
@@ -76,8 +72,8 @@
             if (this.ModelState.IsValid)
             {
                 studentInputForm.MajorItems = this.studentService.GetAllAsKeyValuePairs();
-                var parameters = AutoMapperConfig.MapperInstance.Map<StudentCreateParametersModel>(studentInputForm);
-                var studentId = await this.studentService.Create(parameters);
+                var parameters = Mapper.Map<StudentCreateParametersModel>(studentInputForm);
+                var studentId = await this.studentService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = studentId });
             }
@@ -110,8 +106,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<StudentEditParametersModel>(studentInputForm);
-                await this.studentService.Edit(id, parameters);
+                var parameters = Mapper.Map<StudentEditParametersModel>(studentInputForm);
+                await this.studentService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -145,7 +141,7 @@
                 return this.NotFound();
             }
 
-            await this.studentService.Delete(id);
+            await this.studentService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

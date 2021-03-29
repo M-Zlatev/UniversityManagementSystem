@@ -2,20 +2,14 @@ namespace UMS.Web
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Common.Mapping;
-    using Controllers;
     using Data;
-    using Data.Models;
-    using Infrastructure;
-    using Services.Contracts;
-    using Services.Implementations;
-    using ViewModels;
+    using Data.Models.UserDefinedPrincipal;
+    using Infrastructure.Additional;
+    using Infrastructure.Extensions;
 
     public class Startup
     {

@@ -5,10 +5,10 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models;
-    using UMS.Data.Models.Students;
+    using Data.Models.Students;
+    using Services.Mapping.Contracts;
 
     public class StudentGetDetailsByIdViewModel : IMapFrom<Student>, IMapExplicitly
     {
@@ -46,7 +46,7 @@
 
         public string InMajor { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Student, StudentGetDetailsByIdViewModel>()

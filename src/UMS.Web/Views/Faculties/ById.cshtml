@@ -7,10 +7,10 @@
 
 <div>
     @{ 
-        var district = Model.AddressDistrictName == string.Empty ? Model.AddressDistrictName : "Not specified";
-        var postalCode = Model.AddressPostalCode == string.Empty ? Model.AddressPostalCode : "Not specified";
-        var continent = Model.AddressContinent.GetType().Name == "NotSpecified" 
-            ? Model.AddressContinent.GetType().Name : "Not specified";
+        var district = Model.AddressDistrictName == string.Empty ? "Not specified" : Model.AddressDistrictName;
+        var postalCode = Model.AddressPostalCode == string.Empty ? "Not specified" : Model.AddressPostalCode;
+        var continent = Model.AddressContinent.ToString() == "NotSpecified"
+            ? "Not specified": Model.AddressContinent.ToString();
     }
     <p style="white-space: pre-line"><b>Faculty name: </b>@Model.Name</p>
     <p style="white-space: pre-line"><b>Faculty description: </b>@Model.Description</p>

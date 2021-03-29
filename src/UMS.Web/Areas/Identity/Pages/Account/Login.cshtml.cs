@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
 
-    using UMS.Data.Models;
+    using UMS.Data.Models.UserDefinedPrincipal;
 
     [AllowAnonymous]
     public class Login : PageModel

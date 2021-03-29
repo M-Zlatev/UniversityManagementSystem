@@ -2,7 +2,7 @@
 {
     using System;
 
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using UMS.Web.ViewModels.Homeworks;
 
     public class HomeworkCreateParametersModel : HomeworkBaseParametersModel, IMapFrom<CreateHomeworkInputForm>

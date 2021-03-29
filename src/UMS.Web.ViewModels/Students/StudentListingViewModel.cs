@@ -4,9 +4,9 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Models;
-    using UMS.Data.Models.Students;
+    using Data.Models.Students;
+    using Services.Mapping.Contracts;
 
     public class StudentListingViewModel : IMapFrom<Student>, IMapExplicitly
     {
@@ -18,7 +18,7 @@
 
         public string Major { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Student, StudentListingViewModel>()

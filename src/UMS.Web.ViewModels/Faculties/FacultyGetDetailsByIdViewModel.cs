@@ -2,9 +2,9 @@
 {
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models.Faculties;
+    using Services.Mapping.Contracts;
 
     public class FacultyGetDetailsByIdViewModel : IMapFrom<Faculty>, IMapExplicitly
     {
@@ -32,7 +32,7 @@
 
         public string Fax { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Faculty, FacultyGetDetailsByIdViewModel>()

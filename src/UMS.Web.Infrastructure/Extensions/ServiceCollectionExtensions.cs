@@ -1,4 +1,4 @@
-﻿namespace UMS.Web.Infrastructure
+﻿namespace UMS.Web.Infrastructure.Extensions
 {
     using System.Linq;
     using System.Reflection;
@@ -8,16 +8,14 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Common.Mapping;
-    using Data;
     using Data.Contracts;
+    using Data.Infrastructure;
     using Data.Repositories.Contracts;
     using Data.Repositories.Implementations;
-    using Services;
-    using Services.Data.Models.CoursesParametersModels;
+    using Services.Data.Models.Contracts;
+    using Services.Mapping;
     using Services.ServicesLifetimeContracts;
-    using ViewModels;
-    using ViewModels.Courses;
+    using ViewModels.Contracts;
 
     public static class ServiceCollectionExtensions
     {
@@ -76,9 +74,9 @@
 
         public static IServiceCollection AddAutoMapper(this IServiceCollection services)
         {
-            AutoMapperConfig.RegisterMappings(
-                typeof(ErrorViewModel).GetTypeInfo().Assembly,
-                typeof(CourseCreateParametersModel).GetTypeInfo().Assembly);
+            CustomAutoMapper.Initialize(
+                typeof(IViewModel).GetTypeInfo().Assembly,
+                typeof(IParametersModel).GetTypeInfo().Assembly);
 
             return services;
         }

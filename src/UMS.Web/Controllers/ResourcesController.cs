@@ -7,16 +7,13 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
-    using Data.Models;
+    using Data.Models.UserDefinedPrincipal;
     using Data.Models.Resources;
     using Data.Repositories.Contracts;
-    using Data.Common.Enumerations;
-    using Infrastructure;
-    using Services.Data.Models.ResourcesParametersModels;
     using Services.Contracts;
-    using ViewModels;
+    using Services.Data.Models.ResourcesParametersModels;
     using ViewModels.Resources;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class ResourcesController : Controller
     {
@@ -76,10 +73,10 @@
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<ResourceCreateParametersModel>(inputForm);
+                var parameters = Mapper.Map<ResourceCreateParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
                 parameters.UserId = user.Id;
-                var resourceId = await this.resourcesService.Create(parameters);
+                var resourceId = await this.resourcesService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = resourceId });
             }
@@ -111,10 +108,10 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<ResourceEditParametersModel>(inputForm);
+                var parameters = Mapper.Map<ResourceEditParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
                 parameters.UserId = user.Id;
-                await this.resourcesService.Edit(id, parameters);
+                await this.resourcesService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -148,7 +145,7 @@
                 return this.NotFound();
             }
 
-            await this.resourcesService.Delete(id);
+            await this.resourcesService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

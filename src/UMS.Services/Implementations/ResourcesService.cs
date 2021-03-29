@@ -6,14 +6,12 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
     using Data.Models.ResourcesParametersModels;
+    using Mapping.Infrastructure;
     using UMS.Data;
-    using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models.Resources;
     using UMS.Data.Models.Courses;
-    using UMS.Data.Repositories;
+    using UMS.Data.Models.Resources;
     using UMS.Data.Repositories.Contracts;
 
     public class ResourcesService : IResourcesService
@@ -52,7 +50,7 @@
         public int GetCount()
             => this.resourceRepository.All().Count();
 
-        public async Task<int> Create(ResourceCreateParametersModel model)
+        public async Task<int> CreateAsync(ResourceCreateParametersModel model)
         {
             int courseId = this.FindCourseIdByCourseName(model.BelongToCourse);
 
@@ -71,7 +69,7 @@
             return resource.Id;
         }
 
-        public async Task<bool> Edit(int id, ResourceEditParametersModel model)
+        public async Task<bool> EditAsync(int id, ResourceEditParametersModel model)
         {
             var resource = this.resourceRepository.All().FirstOrDefault(m => m.Id == id);
 
@@ -92,7 +90,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var resource = this.resourceRepository.All().FirstOrDefault(m => m.Id == id);
 

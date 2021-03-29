@@ -1,7 +1,9 @@
-﻿namespace UMS.Services.Messaging
+﻿namespace UMS.Services.Messaging.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using Infrastructure;
 
     public interface IEmailSender
     {

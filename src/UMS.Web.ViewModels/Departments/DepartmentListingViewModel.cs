@@ -2,8 +2,8 @@
 {
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Models.Departments;
+    using Services.Mapping.Contracts;
 
     public class DepartmentListingViewModel : IMapFrom<Department>, IMapExplicitly
     {
@@ -15,7 +15,7 @@
 
         public string BelongsToFaculty { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                 .CreateMap<Department, DepartmentListingViewModel>()

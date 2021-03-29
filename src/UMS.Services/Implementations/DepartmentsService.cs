@@ -4,18 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
     using Data.Models.DepartmentsParametersModels;
-    using UMS.Data;
-    using UMS.Data.Models;
+    using Services.Mapping.Infrastructure;
     using UMS.Data.Models.Departments;
     using UMS.Data.Models.Faculties;
-    using UMS.Data.Repositories;
     using UMS.Data.Repositories.Contracts;
 
     public class DepartmentsService : IDepartmentsService
@@ -41,19 +36,28 @@
              .To<T>()
              .ToList();
 
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+           => this.facultyRepository.AllAsNoTracking()
+           .Select(c => new
+           {
+               c.Id,
+               c.Name,
+           }).ToList()
+           .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+
         public T GetDetailsById<T>(int id)
             => this.departmentRepository.AllAsNoTracking()
                 .Where(d => d.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetCount()
-            => this.departmentRepository.All().Count();
-
         public async Task<bool> Exists(int id)
             => await this.departmentRepository.All().AnyAsync(d => d.Id == id);
 
-        public async Task<int> Create(DepartmentCreateParametersModel model)
+        public int GetCount()
+            => this.departmentRepository.All().Count();
+
+        public async Task<int> CreateAsync(DepartmentCreateParametersModel model)
         {
             var facultyId = this.facultyRepository.All()
                 .Where(f => f.Id == model.FacultyId)
@@ -76,7 +80,7 @@
             return department.Id;
         }
 
-        public async Task<bool> Edit(int id, DepartmentEditParametersModel model)
+        public async Task<bool> EditAsync(int id, DepartmentEditParametersModel model)
         {
             var department = this.departmentRepository.All().FirstOrDefault(d => d.Id == id);
 
@@ -96,7 +100,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var department = this.departmentRepository.All().FirstOrDefault(d => d.Id == id);
 
@@ -111,14 +115,5 @@
 
             return true;
         }
-
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
-           => this.facultyRepository.AllAsNoTracking()
-           .Select(c => new
-           {
-               c.Id,
-               c.Name,
-           }).ToList()
-           .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

@@ -7,7 +7,7 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Data.Seeding;
+    using Data.Seeding.Contracts;
     using Common.Enumerations;
     using Models.Majors;
     using UMS.Data.Seeding.Factories;

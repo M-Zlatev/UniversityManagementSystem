@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Departments
 {
-    using Common.Mapping;
     using Data.Models.Departments;
+    using Services.Mapping.Contracts;
 
     public class EditDepartmentInputForm : DepartmentBaseForm, IMapFrom<Department>
     {

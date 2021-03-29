@@ -1,4 +1,4 @@
-﻿namespace UMS.Common.Mapping
+﻿namespace UMS.Services.Mapping
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,9 @@
     using AutoMapper;
     using AutoMapper.Configuration;
 
-    public static class AutoMapperConfig
+    using Contracts;
+
+    public static class CustomAutoMapper
     {
         private static bool initialized;
 
@@ -25,7 +27,7 @@
             }
         }
 
-        public static void RegisterMappings(params Assembly[] assemblies)
+        public static void Initialize(params Assembly[] assemblies)
         {
             if (initialized)
             {
@@ -68,9 +70,10 @@
                             configuration.CreateMap(modelRegistration.Type, modelRegistration.MapTo);
                         }
 
-                        modelRegistration.ExplicitMap?.RegisterMappings(configuration);
+                        modelRegistration.ExplicitMap?.CreateMappings(configuration);
                     }
                 });
+
             MapperInstance = new Mapper(new MapperConfiguration(config));
         }
 

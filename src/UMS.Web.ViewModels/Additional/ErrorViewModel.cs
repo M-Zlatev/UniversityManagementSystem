@@ -1,4 +1,4 @@
-﻿namespace UMS.Web.ViewModels
+﻿namespace UMS.Web.ViewModels.Additional
 {
     public class ErrorViewModel
     {

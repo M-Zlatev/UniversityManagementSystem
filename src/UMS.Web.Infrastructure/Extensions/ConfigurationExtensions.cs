@@ -1,4 +1,4 @@
-﻿namespace UMS.Web.Infrastructure
+﻿namespace UMS.Web.Infrastructure.Extensions
 {
     using Microsoft.Extensions.Configuration;
 

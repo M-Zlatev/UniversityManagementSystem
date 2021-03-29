@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using UMS.Data.Common.Enumerations;
-    using UMS.Services.Data.Models.ResourcesParametersModels;
+    using Data.Models.ResourcesParametersModels;
     using ServicesLifetimeContracts;
+    using UMS.Data.Common.Enumerations;
 
     public interface IResourcesService : ITransientService
     {
@@ -18,10 +18,10 @@
 
         int GetCount();
 
-        Task<int> Create(ResourceCreateParametersModel createParametersModel);
+        Task<int> CreateAsync(ResourceCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, ResourceEditParametersModel editParametersModel);
+        Task<bool> EditAsync(int id, ResourceEditParametersModel editParametersModel);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

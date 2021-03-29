@@ -4,7 +4,7 @@
 
     using System.ComponentModel.DataAnnotations;
 
-    using UMS.Data.Common.Enumerations;
+    using Data.Common.Enumerations;
     using static Data.Common.DataValidation.Resource;
 
     public abstract class ResourceBaseForm

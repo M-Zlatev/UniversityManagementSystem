@@ -5,8 +5,8 @@
 
     using AutoMapper;
 
-    using UMS.Common.Mapping;
-    using UMS.Data.Models.Courses;
+    using Data.Models.Courses;
+    using Services.Mapping.Contracts;
 
     public class CourseGetDetailsByIdViewModel : IMapFrom<Course>, IMapExplicitly
     {
@@ -24,7 +24,7 @@
 
         public string BelongsToMajor { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                .CreateMap<Course, CourseGetDetailsByIdViewModel>()

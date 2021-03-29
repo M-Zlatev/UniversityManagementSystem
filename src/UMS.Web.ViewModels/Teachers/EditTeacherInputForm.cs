@@ -2,14 +2,14 @@
 {
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Models.Teachers;
+    using Services.Mapping.Contracts;
 
     public class EditTeacherInputForm : TeacherBaseForm, IMapFrom<Teacher>, IMapExplicitly
     {
         public int Id { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile.CreateMap<Teacher, EditTeacherInputForm>()
                 .ForMember(t => t.AddressStreetName, cfg => cfg.MapFrom(t => t.Address.StreetName))

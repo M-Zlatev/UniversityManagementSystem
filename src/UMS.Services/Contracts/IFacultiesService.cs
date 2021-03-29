@@ -16,10 +16,10 @@
 
         int GetCount();
 
-        Task<int> Create(FacultyCreateParametersModel createParametersModel);
+        Task<int> CreateAsync(FacultyCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, FacultyEditParametersModel editParametersModel);
+        Task<bool> EditAsync(int id, FacultyEditParametersModel editParametersModel);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

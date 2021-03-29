@@ -1,6 +1,6 @@
 ﻿namespace UMS.Services.Data.Models.TeachersParametersModels
 {
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using Web.ViewModels.Teachers;
 
     public class TeacherEditParametersModel : TeacherBaseParametersModel, IMapFrom<EditTeacherInputForm>

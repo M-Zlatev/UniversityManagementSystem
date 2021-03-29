@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Seeding.Factories
+﻿namespace UMS.Data.Seeding.Contracts
 {
     using System.Collections;
 

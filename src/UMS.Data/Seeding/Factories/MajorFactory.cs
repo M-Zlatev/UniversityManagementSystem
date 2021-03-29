@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Common.Enumerations;
+    using Contracts;
     using static SeedingConstants.MajorSeedingConstants;
 
     public class MajorFactory : IFactory

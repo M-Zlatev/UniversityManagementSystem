@@ -1,4 +1,4 @@
-﻿namespace UMS.Data
+﻿namespace UMS.Data.Infrastructure
 {
     using System;
     using System.Threading.Tasks;

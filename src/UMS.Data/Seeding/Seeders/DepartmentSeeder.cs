@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Data.Seeding;
+    using Data.Seeding.Contracts;
     using Data.Seeding.Factories;
     using Models.Departments;
 

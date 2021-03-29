@@ -1,6 +1,6 @@
 ﻿namespace UMS.Services.Data.Models.CoursesParametersModels
 {
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using UMS.Data.Models;
     using Web.ViewModels.Courses;
 

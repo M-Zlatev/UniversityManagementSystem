@@ -1,6 +1,6 @@
 ﻿namespace UMS.Services.Data.Models.FacultiesParametersModels
 {
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using Web.ViewModels.Faculties;
 
     public class FacultyEditParametersModel : FacultyBaseParametersModel, IMapFrom<EditFacultyInputForm>

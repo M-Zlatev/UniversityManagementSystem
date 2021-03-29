@@ -1,4 +1,4 @@
-﻿namespace UMS.Services.Messaging
+﻿namespace UMS.Services.Messaging.Infrastructure
 {
     public class EmailAttachment
     {

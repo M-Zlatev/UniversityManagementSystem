@@ -7,8 +7,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Data.Seeding;
-    using Models;
+    using Data.Seeding.Contracts;
+    using Models.UserDefinedPrincipal;
     using UMS.Common;
 
     internal class RolesSeeder : ISeeder

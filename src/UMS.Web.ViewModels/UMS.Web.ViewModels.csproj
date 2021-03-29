@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\ClassLibrary1\UMS.Services.Mapping.csproj" />
 	  <ProjectReference Include="..\UMS.Common\UMS.Common.csproj" />
 	  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
 	</ItemGroup>

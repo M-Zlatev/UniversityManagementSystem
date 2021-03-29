@@ -7,14 +7,11 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
-    using Data;
     using Data.Models.CoursesParametersModels;
-    using UMS.Data.Common.Contracts;
-    using UMS.Data.Models.Majors;
+    using Services.Mapping.Infrastructure;
     using UMS.Data.Models.Courses;
-    using UMS.Data.Repositories;
+    using UMS.Data.Models.Majors;
     using UMS.Data.Repositories.Contracts;
 
     public class CoursesService : ICoursesService
@@ -43,11 +40,26 @@
             .To<T>()
             .ToList();
 
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+            => this.majorsRepository.AllAsNoTracking()
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+            }).ToList()
+            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+
         public T GetDetailsById<T>(int id)
             => this.coursesRepository.AllAsNoTracking()
             .Where(c => c.Id == id)
             .To<T>()
             .FirstOrDefault();
+
+        public int GetCount()
+            => this.coursesRepository.All().Count();
+
+        public async Task<bool> Exists(int id)
+            => await this.coursesRepository.All().AnyAsync(c => c.Id == id);
 
         public async Task<int> CreateAsync(CourseCreateParametersModel model)
         {
@@ -120,21 +132,6 @@
 
             return true;
         }
-
-        public int GetCount()
-            => this.coursesRepository.All().Count();
-
-        public async Task<bool> Exists(int id)
-            => await this.coursesRepository.All().AnyAsync(c => c.Id == id);
-
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
-            => this.majorsRepository.AllAsNoTracking()
-            .Select(c => new
-            {
-                c.Id,
-                c.Name,
-            }).ToList()
-            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
 
         private static void CheckIfUserEnterDate(DateTime startDate, DateTime endDate)
         {

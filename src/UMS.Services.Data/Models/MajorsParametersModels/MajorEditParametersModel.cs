@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using Web.ViewModels.Majors;
 
     public class MajorEditParametersModel : MajorBaseParametersModel, IMapFrom<EditMajorInputForm>

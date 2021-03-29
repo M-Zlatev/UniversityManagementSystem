@@ -9,6 +9,7 @@
     using Common.Implementations;
     using Teachers;
     using Homeworks;
+    using UserDefinedPrincipal;
     using static Common.DataValidation.Student;
 
     public class Student : BaseDeletableModel

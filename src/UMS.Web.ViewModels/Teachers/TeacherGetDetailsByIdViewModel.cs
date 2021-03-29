@@ -4,9 +4,9 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Common.Enumerations;
     using Data.Models.Teachers;
+    using Services.Mapping.Contracts;
 
     public class TeacherGetDetailsByIdViewModel : IMapFrom<Teacher>, IMapExplicitly
     {
@@ -40,7 +40,7 @@
 
         public string ImageUrl { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile
                  .CreateMap<Teacher, TeacherGetDetailsByIdViewModel>()

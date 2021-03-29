@@ -6,15 +6,13 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
     using Data.Models.Majors;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.MajorsParametersModels;
-    using Services.Implementations;
     using ViewModels;
     using ViewModels.Majors;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class MajorsController : Controller
     {
@@ -75,8 +73,8 @@
             if (this.ModelState.IsValid)
             {
                 majorInputForm.DepartmentItems = this.majorService.GetAllAsKeyValuePairs();
-                var parameters = AutoMapperConfig.MapperInstance.Map<MajorCreateParametersModel>(majorInputForm);
-                var majorId = await this.majorService.Create(parameters);
+                var parameters = Mapper.Map<MajorCreateParametersModel>(majorInputForm);
+                var majorId = await this.majorService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = majorId });
             }
@@ -109,8 +107,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<MajorEditParametersModel>(majorInputForm);
-                await this.majorService.Edit(id, parameters);
+                var parameters = Mapper.Map<MajorEditParametersModel>(majorInputForm);
+                await this.majorService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -144,7 +142,7 @@
                 return this.NotFound();
             }
 
-            await this.majorService.Delete(id);
+            await this.majorService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

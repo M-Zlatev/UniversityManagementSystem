@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Additional;
     using UMS.Data.Common.Enumerations;
 
     public abstract class StudentBaseParametersModel : BaseAddress

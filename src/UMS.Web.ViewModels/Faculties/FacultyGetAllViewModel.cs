@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
 
+    using Additional;
+
     public class FacultyGetAllViewModel : PagingViewModel
     {
         public IEnumerable<FacultyListingViewModel> Faculties { get; set; }

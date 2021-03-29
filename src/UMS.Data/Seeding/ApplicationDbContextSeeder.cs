@@ -7,6 +7,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using Seeding.Contracts;
     using Seeders.Seeding;
 
     public class ApplicationDbContextSeeder : ISeeder

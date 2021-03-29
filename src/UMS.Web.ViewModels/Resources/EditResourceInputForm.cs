@@ -1,7 +1,7 @@
 ﻿namespace UMS.Web.ViewModels.Resources
 {
-    using Common.Mapping;
     using Data.Models.Resources;
+    using Services.Mapping.Contracts;
 
     public class EditResourceInputForm : ResourceBaseForm, IMapFrom<Resource>
     {

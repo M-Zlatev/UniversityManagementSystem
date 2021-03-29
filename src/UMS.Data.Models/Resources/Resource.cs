@@ -6,6 +6,7 @@
     using Common.Enumerations;
     using Courses;
     using Common.Implementations;
+    using UserDefinedPrincipal;
     using static Common.DataValidation.Resource;
 
     public class Resource : BaseAuditInfoModel

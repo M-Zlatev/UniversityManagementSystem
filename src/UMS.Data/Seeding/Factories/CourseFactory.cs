@@ -3,6 +3,7 @@
     using System.Collections;
     using System.Collections.Generic;
 
+    using Contracts;
     using static SeedingConstants.CourseSeedingConstants;
 
     public class CourseFactory : IFactory

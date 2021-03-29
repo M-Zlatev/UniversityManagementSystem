@@ -3,19 +3,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using AutoMapper.Configuration;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
     using Data.Models.Courses;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.CoursesParametersModels;
-    using ViewModels;
     using ViewModels.Courses;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class CoursesController : Controller
     {
@@ -77,7 +73,7 @@
             {
                 courseInputForm.MajorItems = this.coursesService.GetAllAsKeyValuePairs();
 
-                var parameters = AutoMapperConfig.MapperInstance.Map<CourseCreateParametersModel>(courseInputForm);
+                var parameters = Mapper.Map<CourseCreateParametersModel>(courseInputForm);
 
                 var courseId = await this.coursesService.CreateAsync(parameters);
 
@@ -111,7 +107,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<CourseEditParametersModel>(courseInputForm);
+                var parameters = Mapper.Map<CourseEditParametersModel>(courseInputForm);
                 await this.coursesService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });

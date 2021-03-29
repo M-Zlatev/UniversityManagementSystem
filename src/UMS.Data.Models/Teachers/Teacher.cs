@@ -7,6 +7,7 @@
 
     using Common.Enumerations;
     using Common.Implementations;
+    using UserDefinedPrincipal;
     using static Common.DataValidation.Teacher;
 
     public class Teacher : BaseDeletableModel

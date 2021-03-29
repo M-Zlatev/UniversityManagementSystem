@@ -4,18 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-    using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
-    using Common.Mapping;
-    using UMS.Data.Common.Contracts;
     using Data.Models.FacultiesParametersModels;
-    using UMS.Data;
-    using UMS.Data.Models;
+    using Services.Mapping.Infrastructure;
     using UMS.Data.Models.Faculties;
-    using UMS.Data.Repositories;
     using UMS.Data.Repositories.Contracts;
 
     public class FacultiesService : IFacultiesService
@@ -47,13 +41,13 @@
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetCount()
-            => this.facultyRepository.All().Count();
-
         public async Task<bool> Exists(int id)
             => await this.facultyRepository.All().AnyAsync(f => f.Id == id);
 
-        public async Task<int> Create(FacultyCreateParametersModel model)
+        public int GetCount()
+            => this.facultyRepository.All().Count();
+
+        public async Task<int> CreateAsync(FacultyCreateParametersModel model)
         {
             var facultyAddress = new FacultyAddress()
             {
@@ -82,7 +76,7 @@
             return faculty.Id;
         }
 
-        public async Task<bool> Edit(int id, FacultyEditParametersModel model)
+        public async Task<bool> EditAsync(int id, FacultyEditParametersModel model)
         {
             var faculty = this.facultyRepository.All().FirstOrDefault(f => f.Id == id);
             var facultyAddress = this.facultyAddressRepository.All()
@@ -113,7 +107,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var faculty = this.facultyRepository.All().FirstOrDefault(f => f.Id == id);
 

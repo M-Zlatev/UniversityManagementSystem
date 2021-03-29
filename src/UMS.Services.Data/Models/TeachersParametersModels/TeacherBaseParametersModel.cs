@@ -1,5 +1,6 @@
 ﻿namespace UMS.Services.Data.Models.TeachersParametersModels
 {
+    using Additional;
     using UMS.Data.Common.Enumerations;
 
     public abstract class TeacherBaseParametersModel : BaseAddress

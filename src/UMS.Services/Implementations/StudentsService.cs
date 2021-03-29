@@ -1,18 +1,14 @@
 ﻿namespace UMS.Services.Implementations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
 
-    using Common.Mapping;
     using Contracts;
     using Data.Models.StudentsParametersModels;
-    using UMS.Data;
-    using UMS.Data.Common.Enumerations;
-    using UMS.Data.Models;
+    using Mapping.Infrastructure;
     using UMS.Data.Models.Majors;
     using UMS.Data.Models.Students;
     using UMS.Data.Repositories.Contracts;
@@ -46,19 +42,28 @@
                 .To<T>()
                 .ToList();
 
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+            => this.majorRepository.AllAsNoTracking()
+            .Select(c => new
+            {
+                c.Id,
+                c.Name,
+            }).ToList()
+            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+
         public T GetDetailsById<T>(int id)
             => this.studentRepository.AllAsNoTracking()
                 .Where(s => s.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-        public int GetCount()
-            => this.studentRepository.All().Count();
-
         public async Task<bool> Exists(int id)
             => await this.studentRepository.All().AnyAsync(d => d.Id == id);
 
-        public async Task<int> Create(StudentCreateParametersModel model)
+        public int GetCount()
+            => this.studentRepository.All().Count();
+
+        public async Task<int> CreateAsync(StudentCreateParametersModel model)
         {
             var major = this.majorRepository.All()
                         .Where(m => m.Id == model.MajorId)
@@ -108,7 +113,7 @@
             return student.Id;
         }
 
-        public async Task<bool> Edit(int id, StudentEditParametersModel model)
+        public async Task<bool> EditAsync(int id, StudentEditParametersModel model)
         {
             var student = this.studentRepository.All().FirstOrDefault(st => st.Id == id);
             var studentAddress = this.studentAddressRepository.All().Where(st => st.StudentId == id).FirstOrDefault();
@@ -141,7 +146,7 @@
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var student = this.studentRepository.All().FirstOrDefault(st => st.Id == id);
 
@@ -156,14 +161,5 @@
 
             return true;
         }
-
-        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
-            => this.majorRepository.AllAsNoTracking()
-            .Select(c => new
-            {
-                c.Id,
-                c.Name,
-            }).ToList()
-            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
     }
 }

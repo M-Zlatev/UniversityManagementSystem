@@ -6,14 +6,13 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    using Common.Mapping;
     using Data.Models.Departments;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.DepartmentsParametersModels;
     using ViewModels;
     using ViewModels.Departments;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class DepartmentsController : Controller
     {
@@ -74,8 +73,8 @@
             if (this.ModelState.IsValid)
             {
                 departmentFormInput.FacultyItems = this.departmentService.GetAllAsKeyValuePairs();
-                var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentCreateParametersModel>(departmentFormInput);
-                var departmentId = await this.departmentService.Create(parameters);
+                var parameters = Mapper.Map<DepartmentCreateParametersModel>(departmentFormInput);
+                var departmentId = await this.departmentService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = departmentId });
             }
@@ -107,8 +106,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<DepartmentEditParametersModel>(departmentFormInput);
-                await this.departmentService.Edit(id, parameters);
+                var parameters = Mapper.Map<DepartmentEditParametersModel>(departmentFormInput);
+                await this.departmentService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -143,7 +142,7 @@
                 return this.NotFound();
             }
 
-            await this.departmentService.Delete(id);
+            await this.departmentService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }

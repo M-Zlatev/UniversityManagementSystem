@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Additional;
     using Data.Common.Enumerations;
     using static Data.Common.DataValidation.Faculty;
 

@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Models
+﻿namespace UMS.Data.Models.UserDefinedPrincipal
 {
     using System;
     using System.Collections.Generic;

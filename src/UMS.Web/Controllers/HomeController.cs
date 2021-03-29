@@ -4,7 +4,7 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using ViewModels;
+    using ViewModels.Additional;
 
     public class HomeController : Controller
     {

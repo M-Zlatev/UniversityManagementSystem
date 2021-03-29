@@ -11,18 +11,18 @@
     {
         public IEnumerable<T> GetAll<T>(int page, int majorsPerPage);
 
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+
         public T GetDetailsById<T>(int id);
 
         Task<bool> Exists(int id);
 
         int GetCount();
 
-        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+        Task<int> CreateAsync(MajorCreateParametersModel createParametersModel);
 
-        Task<int> Create(MajorCreateParametersModel createParametersModel);
+        Task<bool> EditAsync(int id, MajorEditParametersModel editParametersModel);
 
-        Task<bool> Edit(int id, MajorEditParametersModel editParametersModel);
-
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

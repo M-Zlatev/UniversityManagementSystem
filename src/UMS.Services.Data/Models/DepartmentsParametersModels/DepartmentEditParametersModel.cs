@@ -1,6 +1,6 @@
 ﻿namespace UMS.Services.Data.Models.DepartmentsParametersModels
 {
-    using Common.Mapping;
+    using UMS.Services.Mapping.Contracts;
     using Web.ViewModels.Departments;
 
     public class DepartmentEditParametersModel : DepartmentBaseParametersModel, IMapFrom<EditDepartmentInputForm>

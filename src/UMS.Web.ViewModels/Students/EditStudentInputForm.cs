@@ -5,8 +5,8 @@
 
     using AutoMapper;
 
-    using Common.Mapping;
     using Data.Models.Students;
+    using Services.Mapping.Contracts;
 
     public class EditStudentInputForm : StudentBaseForm, IMapFrom<Student>, IMapExplicitly
     {
@@ -17,7 +17,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> MajorItems { get; set; }
 
-        public void RegisterMappings(IProfileExpression profile)
+        public void CreateMappings(IProfileExpression profile)
         {
             profile.CreateMap<Student, EditStudentInputForm>()
                 .ForMember(s => s.AddressStreetName, cfg => cfg.MapFrom(s => s.Address.StreetName))

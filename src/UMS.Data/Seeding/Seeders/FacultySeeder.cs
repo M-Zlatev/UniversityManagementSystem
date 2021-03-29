@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Data.Seeding;
+    using Data.Seeding.Contracts;
     using Models.Faculties;
     using UMS.Data.Seeding.Factories;
 

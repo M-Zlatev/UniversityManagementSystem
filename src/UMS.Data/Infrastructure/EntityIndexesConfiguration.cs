@@ -3,6 +3,7 @@
     using System.Linq;
 
     using Microsoft.EntityFrameworkCore;
+
     using Common.Contracts;
 
     internal static class EntityIndexesConfiguration

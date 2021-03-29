@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using UMS.Data.Common.Enumerations;
-    using UMS.Services.Data.Models.HomeworksParametersModels;
+    using Data.Models.HomeworksParametersModels;
     using ServicesLifetimeContracts;
+    using UMS.Data.Common.Enumerations;
 
     public interface IHomeworksService : ITransientService
     {
@@ -18,10 +18,10 @@
 
         int GetCount();
 
-        Task<int> Create(HomeworkCreateParametersModel createParametersModel);
+        Task<int> CreateAsync(HomeworkCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, HomeworkEditParametersModel editParametersModel);
+        Task<bool> EditAsync(int id, HomeworkEditParametersModel editParametersModel);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

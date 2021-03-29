@@ -4,8 +4,8 @@
     using System.Threading.Tasks;
 
     using Data.Models.TeachersParametersModels;
-    using ServicesLifetimeContracts;
     using UMS.Data.Common.Enumerations;
+    using ServicesLifetimeContracts;
 
     public interface ITeachersService : ITransientService
     {
@@ -17,10 +17,10 @@
 
         int GetCount();
 
-        Task<int> Create(TeacherCreateParametersModel createParametersModel);
+        Task<int> CreateAsync(TeacherCreateParametersModel createParametersModel);
 
-        Task<bool> Edit(int id, TeacherEditParametersModel editParametersModel);
+        Task<bool> EditAsync(int id, TeacherEditParametersModel editParametersModel);
 
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

@@ -1,22 +1,17 @@
 ﻿namespace UMS.Web.Controllers
 {
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Linq;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using Common.Mapping;
-    using Data.Models;
     using Data.Models.Faculties;
     using Data.Repositories.Contracts;
-    using Infrastructure;
     using Services.Contracts;
     using Services.Data.Models.FacultiesParametersModels;
     using ViewModels;
     using ViewModels.Faculties;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class FacultiesController : Controller
     {
@@ -61,7 +56,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateFacultyInputForm();
@@ -70,13 +65,13 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Create(CreateFacultyInputForm facultyInputForm)
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<FacultyCreateParametersModel>(facultyInputForm);
-                var facultyId = await this.facultyService.Create(parameters);
+                var parameters = Mapper.Map<FacultyCreateParametersModel>(facultyInputForm);
+                var facultyId = await this.facultyService.CreateAsync(parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = facultyId });
             }
@@ -85,7 +80,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -98,7 +93,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Edit(int id, EditFacultyInputForm facultyInputForm)
         {
             if (!await this.facultyService.Exists(id))
@@ -108,8 +103,8 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = AutoMapperConfig.MapperInstance.Map<FacultyEditParametersModel>(facultyInputForm);
-                await this.facultyService.Edit(id, parameters);
+                var parameters = Mapper.Map<FacultyEditParametersModel>(facultyInputForm);
+                await this.facultyService.EditAsync(id, parameters);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
@@ -118,7 +113,7 @@
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -131,7 +126,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
@@ -140,7 +135,7 @@
                 return this.NotFound();
             }
 
-            await this.facultyService.Delete(id);
+            await this.facultyService.DeleteAsync(id);
 
             return this.RedirectToAction(nameof(this.All));
         }
