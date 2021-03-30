@@ -27,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\UMS.Common\UMS.Common.csproj" />
 		<ProjectReference Include="..\UMS.Data.Common\UMS.Data.Common.csproj" />
 	</ItemGroup>
 

@@ -22,4 +22,8 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\UMS.Common\UMS.Common.csproj" />
+	</ItemGroup>
+
 </Project>

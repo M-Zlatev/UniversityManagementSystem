@@ -33,9 +33,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\UMS.Common\UMS.Common.csproj" />
 		<ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
 		<ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
 		<ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
+		<ProjectReference Include="..\UMS.Services.Mapping\UMS.Services.Mapping.csproj" />
+		<ProjectReference Include="..\UMS.Services.Messaging\UMS.Services.Messaging.csproj" />
 		<ProjectReference Include="..\UMS.Services\UMS.Services.csproj" />
 		<ProjectReference Include="..\UMS.Web.Infrastructure\UMS.Web.Infrastructure.csproj" />
 		<ProjectReference Include="..\UMS.Web.ViewModels\UMS.Web.ViewModels.csproj" />

@@ -56,7 +56,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateFacultyInputForm();
@@ -65,7 +65,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Create(CreateFacultyInputForm facultyInputForm)
         {
             if (this.ModelState.IsValid)
@@ -80,7 +80,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -93,7 +93,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, EditFacultyInputForm facultyInputForm)
         {
             if (!await this.facultyService.Exists(id))
@@ -113,7 +113,7 @@
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             if (!await this.facultyService.Exists(id))
@@ -126,7 +126,7 @@
         }
 
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         [ActionName("Delete")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
