@@ -43,5 +43,11 @@
 		<ProjectReference Include="..\UMS.Web.Infrastructure\UMS.Web.Infrastructure.csproj" />
 		<ProjectReference Include="..\UMS.Web.ViewModels\UMS.Web.ViewModels.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\images\s960_university-campus.jpg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 	
 </Project>

@@ -97,3 +97,12 @@ div.card-content {
 div.login-form-icon {
     text-align: center;
 }
+
+/*Home page body*/
+.img-holder{
+    background-image: url(../images/s960_university-campus.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
