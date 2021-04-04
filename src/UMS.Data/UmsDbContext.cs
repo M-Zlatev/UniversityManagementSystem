@@ -13,6 +13,7 @@
     using Infrastructure;
     using Models.Courses;
     using Models.Departments;
+    using Models.Forum;
     using Models.Homeworks;
     using Models.Majors;
     using Models.Resources;
@@ -57,6 +58,14 @@
         public DbSet<Resource> Resources { get; set; }
 
         public DbSet<Homework> Homeworks { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Vote> Votes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
