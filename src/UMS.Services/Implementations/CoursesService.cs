@@ -63,8 +63,6 @@
 
         public async Task<int> CreateAsync(CourseCreateParametersModel model)
         {
-            CheckIfUserEnterDate(model.StartDate, model.EndDate);
-
             var major = this.majorsRepository.All()
                 .Where(m => m.Id == model.MajorId)
                 .FirstOrDefault();
@@ -104,8 +102,6 @@
                 return false;
             }
 
-            CheckIfUserEnterDate(model.StartDate, model.EndDate);
-
             course.Name = model.Name;
             course.Description = model.Description;
             course.StartDate = model.StartDate;
@@ -131,19 +127,6 @@
             await this.coursesRepository.SaveChangesAsync();
 
             return true;
-        }
-
-        private static void CheckIfUserEnterDate(DateTime startDate, DateTime endDate)
-        {
-            if (startDate == DateTime.UtcNow)
-            {
-                startDate = DateTime.UtcNow;
-            }
-
-            if (endDate == DateTime.UtcNow)
-            {
-                startDate = DateTime.UtcNow.AddMonths(6);
-            }
         }
     }
 }
