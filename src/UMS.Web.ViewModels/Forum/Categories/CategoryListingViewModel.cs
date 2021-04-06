@@ -1,0 +1,11 @@
+﻿namespace UMS.Web.ViewModels.Forum.Categories
+{
+    public class CategoryListingViewModel
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+    }
+}

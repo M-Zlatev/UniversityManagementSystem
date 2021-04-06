@@ -6,8 +6,12 @@
 
     public interface ICategoriesService : ITransientService
     {
-        IEnumerable<T> GetAll<T>(int? count = null);
+        public IEnumerable<T> GetAll<T>(int page, int categoriesPerPage);
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
         T GetByName<T>(string name);
+
+        int GetCount();
     }
 }
