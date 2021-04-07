@@ -10,6 +10,8 @@
     using ViewModels.Forum.Posts;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
+    [Area("Forum")]
+    [Route("Categories")]
     public class CategoriesController : Controller
     {
         private readonly ICategoriesService categoriesService;
@@ -23,6 +25,7 @@
             this.postsService = postsService;
         }
 
+        [HttpGet("{id}")]
         public IActionResult All(int id = 1)
         {
             if (id <= 0)

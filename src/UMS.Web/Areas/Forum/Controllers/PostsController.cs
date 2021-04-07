@@ -12,6 +12,7 @@
     using ViewModels.Forum.Posts;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
+    [Area("Forum")]
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;

@@ -12,6 +12,7 @@
     using ViewModels.Forum.Votes;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
+    [Area("Forum")]
     [ApiController]
     [Route("api/[controller]")]
     public class VotesController : Controller
