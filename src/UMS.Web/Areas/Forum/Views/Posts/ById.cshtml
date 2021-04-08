@@ -39,7 +39,7 @@
                         </div>
                         <div class="card-body">
                             <article>
-                                @Html.Raw(comment.Content)
+                                @Html.Raw(comment.SanitizedContent)
                             </article>
                             @{ DisplayComments(comment.Id); }
                         </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="card-body">
                     <article>
-                        @Html.Raw(Model.Content)
+                        @Html.Raw(Model.SanitizedContent)
                     </article>
 
                     @if (this.User.Identity.IsAuthenticated)

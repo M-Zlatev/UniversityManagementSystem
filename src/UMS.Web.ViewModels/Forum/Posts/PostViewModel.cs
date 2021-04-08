@@ -5,6 +5,7 @@
     using System.Linq;
 
     using AutoMapper;
+    using Ganss.XSS;
 
     using Data.Models.Forum;
     using Services.Mapping.Contracts;
@@ -18,6 +19,8 @@
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public string UserUserName { get; set; }
 
