@@ -1,6 +1,9 @@
 ﻿namespace UMS.Services.Data.Models.CommentsParametersModels
 {
-    public class CommentCreateParametersModel
+    using Mapping.Contracts;
+    using Web.ViewModels.Forum.Comments;
+
+    public class CommentCreateParametersModel : IMapFrom<CreateCommentInputForm>
     {
         public string Content { get; set; }
 

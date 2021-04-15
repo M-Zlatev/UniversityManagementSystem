@@ -60,12 +60,17 @@
             => app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "forumCategory",
+                    pattern: "f/{name:minlength(3)}",
+                    new { controller = "Categories", action = "ByName" });
 
                 endpoints.MapControllerRoute(
                     name: "areaRoute",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages();
             });

@@ -3,8 +3,10 @@
     using System.Collections.Generic;
 
     using Additional;
+    using Data.Models.Forum;
+    using Services.Mapping.Contracts;
 
-    public class CategoryViewModel : PagingViewModel
+    public class CategoryViewModel : PagingViewModel, IMapFrom<Category>
     {
         public int Id { get; set; }
 

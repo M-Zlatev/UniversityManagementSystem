@@ -1,6 +1,9 @@
 ﻿namespace UMS.Web.ViewModels.Forum.Categories
 {
-    public class CategoryListingViewModel
+    using Data.Models.Forum;
+    using Services.Mapping.Contracts;
+
+    public class CategoryListingViewModel : IMapFrom<Category>
     {
         public int Id { get; set; }
 
