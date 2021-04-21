@@ -23,17 +23,11 @@
                     .To<T>()
                     .FirstOrDefault();
 
-        public IEnumerable<T> GetByCategoryId<T>(GetByCategoryIdParametersModel model)
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId)
         {
             var query = this.postsRepository.All()
                 .OrderByDescending(x => x.CreatedOn)
-                .Where(x => x.CategoryId == model.CategoryId)
-                .Skip(model.Skip);
-
-            if (model.Take.HasValue)
-            {
-                query = query.Take(model.Take.Value);
-            }
+                .Where(x => x.CategoryId == categoryId);
 
             return query.To<T>().ToList();
         }

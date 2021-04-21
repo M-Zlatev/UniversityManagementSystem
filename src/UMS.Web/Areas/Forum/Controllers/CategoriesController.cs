@@ -11,7 +11,6 @@
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     [Area("Forum")]
-    [Route("Categories")]
     public class CategoriesController : Controller
     {
         private readonly ICategoriesService categoriesService;
@@ -25,27 +24,6 @@
             this.postsService = postsService;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult All(int id = 1)
-        {
-            if (id <= 0)
-            {
-                return this.NotFound();
-            }
-
-            const int CategoryPerPage = 10;
-
-            var viewModel = new CategoryGetAllViewModel
-            {
-                ItemsPerPage = CategoryPerPage,
-                Count = this.categoriesService.GetCount(),
-                PageNumber = id,
-                Categories = this.categoriesService.GetAll<CategoryListingViewModel>(id, CategoryPerPage),
-            };
-
-            return this.View(viewModel);
-        }
-
         public IActionResult ByName(string name)
         {
             var viewModel = this.categoriesService.GetByName<CategoryViewModel>(name);
@@ -55,8 +33,14 @@
                 return this.NotFound();
             }
 
-            var parameters = Mapper.Map<GetByCategoryIdParametersModel>(viewModel);
-            viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(parameters);
+            const int PageNumber = 1;
+            const int PostsPerPage = 10;
+            int categoryId = viewModel.Id;
+
+            viewModel.Count = this.postsService.GetCountByCategoryId(categoryId);
+            viewModel.ItemsPerPage = PostsPerPage;
+            viewModel.PageNumber = PageNumber;
+            viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(categoryId);
 
             return this.View(viewModel);
         }

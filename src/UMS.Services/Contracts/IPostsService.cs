@@ -10,7 +10,7 @@
     {
         T GetById<T>(int id);
 
-        IEnumerable<T> GetByCategoryId<T>(GetByCategoryIdParametersModel getByCategoryIdParametersModel);
+        IEnumerable<T> GetByCategoryId<T>(int categoryId);
 
         int GetCountByCategoryId(int categoryId);
 

@@ -62,7 +62,7 @@
                 endpoints.MapControllerRoute(
                     name: "forumCategory",
                     pattern: "f/{name:minlength(3)}",
-                    new { controller = "Categories", action = "ByName" });
+                    new { area = "Forum", controller = "Categories", action = "ByName" });
 
                 endpoints.MapControllerRoute(
                     name: "areaRoute",
