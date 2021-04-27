@@ -25,7 +25,7 @@
         {
             profile
                 .CreateMap<Homework, HomeworkGetDetailsByIdViewModel>()
-                .ForMember(h => h.DoneByStudent, cfg => cfg.MapFrom(h => h.Student.FirstName));
+                .ForMember(h => h.DoneByStudent, cfg => cfg.MapFrom(h => h.AddedByUser.FirstName));
         }
     }
 }

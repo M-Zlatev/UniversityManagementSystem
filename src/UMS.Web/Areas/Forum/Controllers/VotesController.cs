@@ -32,10 +32,10 @@
         [HttpPost]
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputForm inputModel)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            var user = this.userManager.GetUserAsync(this.User);
 
             var parameters = Mapper.Map<VoteParametersModel>(inputModel);
-            parameters.UserId = userId;
+            parameters.UserId = user.Id;
 
             await this.votesService.VoteAsync(parameters);
 

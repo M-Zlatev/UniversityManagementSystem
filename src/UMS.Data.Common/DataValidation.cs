@@ -44,16 +44,7 @@
             public const int MaxGrade = 6;
         }
 
-        public static class Teacher
-        {
-            public const int MaxNameLength = 50;
-            public const int MinPhoneNumberLength = 4;
-            public const int MaxPhoneNumberLength = 20;
-            public const int MinEmailAddressLength = 3;
-            public const int MaxEmailAdressLength = 100;
-        }
-
-        public static class Student
+        public static class ApplicationUser
         {
             public const int MaxNameLength = 50;
             public const int MinUCNLength = 10;

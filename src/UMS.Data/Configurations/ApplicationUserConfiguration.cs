@@ -10,6 +10,12 @@
         public void Configure(EntityTypeBuilder<ApplicationUser> appUser)
         {
             appUser
+                .HasOne(u => u.Address)
+                .WithOne(a => a.User)
+                .HasForeignKey<ApplicationUserAddress>(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            appUser
                 .HasMany(e => e.Roles)
                 .WithOne()
                 .HasForeignKey(e => e.UserId)

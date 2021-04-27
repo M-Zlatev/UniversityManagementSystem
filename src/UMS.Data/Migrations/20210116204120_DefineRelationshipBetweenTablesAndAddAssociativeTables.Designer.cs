@@ -10,8 +10,8 @@ namespace UMS.Data.Migrations
     using UMS.Data;
 
     [DbContext(typeof(UmsDbContext))]
-    [Migration("20210116041823_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210116204120_DefineRelationshipBetweenTablesAndAddAssociativeTables")]
+    partial class DefineRelationshipBetweenTablesAndAddAssociativeTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +63,21 @@ namespace UMS.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Courses.CourseMajor", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseId", "MajorId");
+
+                    b.HasIndex("MajorId");
+
+                    b.ToTable("CourseMajors");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Departments.Department", b =>
@@ -168,6 +183,39 @@ namespace UMS.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Faculties");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Faculties.FacultyAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(56)
+                        .HasColumnType("nvarchar(56)");
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasMaxLength(85)
+                        .HasColumnType("nvarchar(85)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId")
+                        .IsUnique();
+
+                    b.ToTable("FacultyAddresses");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Majors.Major", b =>
@@ -283,6 +331,72 @@ namespace UMS.Data.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(56)
+                        .HasColumnType("nvarchar(56)");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasMaxLength(85)
+                        .HasColumnType("nvarchar(85)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("StudentAddress");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentCourse", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Grade")
+                        .HasColumnType("float");
+
+                    b.HasKey("StudentId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("StudentCourses");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentMajor", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MajorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId", "MajorId");
+
+                    b.HasIndex("MajorId");
+
+                    b.ToTable("StudentMajors");
+                });
+
             modelBuilder.Entity("UMS.Data.Models.Teachers.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -342,12 +456,105 @@ namespace UMS.Data.Migrations
                     b.ToTable("Teachers");
                 });
 
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(56)
+                        .HasColumnType("nvarchar(56)");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasMaxLength(85)
+                        .HasColumnType("nvarchar(85)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeacherId")
+                        .IsUnique();
+
+                    b.ToTable("TeacherAddress");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherCourse", b =>
+                {
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeacherId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("TeacherCourses");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherStudent", b =>
+                {
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeacherId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("TeacherStudents");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Courses.CourseMajor", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Courses.Course", "Course")
+                        .WithMany("Majors")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("UMS.Data.Models.Majors.Major", "Major")
+                        .WithMany("Courses")
+                        .HasForeignKey("MajorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Major");
+                });
+
             modelBuilder.Entity("UMS.Data.Models.Departments.Department", b =>
                 {
                     b.HasOne("UMS.Data.Models.Faculties.Faculty", "Faculty")
                         .WithMany("Departments")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Faculties.FacultyAddress", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Faculties.Faculty", "Faculty")
+                        .WithOne("Address")
+                        .HasForeignKey("UMS.Data.Models.Faculties.FacultyAddress", "FacultyId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Faculty");
@@ -356,17 +563,161 @@ namespace UMS.Data.Migrations
             modelBuilder.Entity("UMS.Data.Models.Majors.Major", b =>
                 {
                     b.HasOne("UMS.Data.Models.Departments.Department", "Department")
-                        .WithMany()
+                        .WithMany("Majors")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentAddress", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Students.Student", "Student")
+                        .WithOne("Address")
+                        .HasForeignKey("UMS.Data.Models.Students.StudentAddress", "StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentCourse", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Courses.Course", "Course")
+                        .WithMany("StudentsEnrolled")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("UMS.Data.Models.Students.Student", "Student")
+                        .WithMany("CourseEnrollments")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Students.StudentMajor", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Majors.Major", "Major")
+                        .WithMany("Students")
+                        .HasForeignKey("MajorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("UMS.Data.Models.Students.Student", "Student")
+                        .WithMany("Majors")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Major");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherAddress", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Teachers.Teacher", "Teacher")
+                        .WithOne("Address")
+                        .HasForeignKey("UMS.Data.Models.Teachers.TeacherAddress", "TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherCourse", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Courses.Course", "Course")
+                        .WithMany("Teachers")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("UMS.Data.Models.Teachers.Teacher", "Teacher")
+                        .WithMany("Courses")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.TeacherStudent", b =>
+                {
+                    b.HasOne("UMS.Data.Models.Students.Student", "Student")
+                        .WithMany("Teachers")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("UMS.Data.Models.Teachers.Teacher", "Teacher")
+                        .WithMany("Students")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Courses.Course", b =>
+                {
+                    b.Navigation("Majors");
+
+                    b.Navigation("StudentsEnrolled");
+
+                    b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Departments.Department", b =>
+                {
+                    b.Navigation("Majors");
+                });
+
             modelBuilder.Entity("UMS.Data.Models.Faculties.Faculty", b =>
                 {
+                    b.Navigation("Address")
+                        .IsRequired();
+
                     b.Navigation("Departments");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Majors.Major", b =>
+                {
+                    b.Navigation("Courses");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Students.Student", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("CourseEnrollments");
+
+                    b.Navigation("Majors");
+
+                    b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("UMS.Data.Models.Teachers.Teacher", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

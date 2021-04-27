@@ -8,7 +8,7 @@
     using Common.Implementations;
     using Courses;
     using Departments;
-    using Students;
+    using UserDefinedPrincipal;
     using static Common.DataValidation.Major;
 
     public class Major : BaseDeletableModel
@@ -16,7 +16,7 @@
         public Major()
         {
             this.Courses = new HashSet<CourseMajor>();
-            this.Students = new HashSet<StudentMajor>();
+            this.User = new HashSet<ApplicationUserMajor>();
         }
 
         public int Id { get; set; }
@@ -43,6 +43,6 @@
 
         public virtual ICollection<CourseMajor> Courses { get; set; }
 
-        public virtual ICollection<StudentMajor> Students { get; set; }
+        public virtual ICollection<ApplicationUserMajor> User { get; set; }
     }
 }

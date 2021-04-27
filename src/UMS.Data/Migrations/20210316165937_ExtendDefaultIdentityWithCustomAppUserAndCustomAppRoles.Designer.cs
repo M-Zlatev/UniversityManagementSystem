@@ -5,13 +5,15 @@ namespace UMS.Data.Migrations
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
+    using Microsoft.EntityFrameworkCore.Migrations;
 
     using UMS.Data;
 
     [DbContext(typeof(UmsDbContext))]
-    partial class UmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210316165937_ExtendDefaultIdentityWithCustomAppUserAndCustomAppRoles")]
+    partial class ExtendDefaultIdentityWithCustomAppUserAndCustomAppRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,9 +409,6 @@ namespace UMS.Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -417,8 +416,6 @@ namespace UMS.Data.Migrations
                     b.HasIndex("ParentId");
 
                     b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -451,16 +448,11 @@ namespace UMS.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -484,14 +476,9 @@ namespace UMS.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Votes");
                 });
@@ -503,7 +490,7 @@ namespace UMS.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AddedByUserId")
+                    b.Property<int?>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("AssignmentTime")
@@ -527,7 +514,7 @@ namespace UMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddedByUserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Homeworks");
                 });
@@ -588,9 +575,6 @@ namespace UMS.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AddedByUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
@@ -613,8 +597,6 @@ namespace UMS.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddedByUserId");
 
                     b.HasIndex("CourseId");
 
@@ -953,17 +935,9 @@ namespace UMS.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Parent");
 
                     b.Navigation("Post");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Forum.Post", b =>
@@ -974,15 +948,7 @@ namespace UMS.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Category");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Forum.Vote", b =>
@@ -993,26 +959,14 @@ namespace UMS.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Post");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Homeworks.Homework", b =>
                 {
-                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", "AddedByUser")
+                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", null)
                         .WithMany("Homeworks")
-                        .HasForeignKey("AddedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AddedByUser");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("UMS.Data.Models.Majors.Major", b =>
@@ -1028,19 +982,11 @@ namespace UMS.Data.Migrations
 
             modelBuilder.Entity("UMS.Data.Models.Resources.Resource", b =>
                 {
-                    b.HasOne("UMS.Data.Models.UserDefinedPrincipal.ApplicationUser", "AddedByUser")
-                        .WithMany()
-                        .HasForeignKey("AddedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("UMS.Data.Models.Courses.Course", "Course")
                         .WithMany("Resources")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("AddedByUser");
 
                     b.Navigation("Course");
                 });

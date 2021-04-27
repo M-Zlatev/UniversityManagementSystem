@@ -6,7 +6,7 @@
 
     using Common.Contracts;
 
-    public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
+    public class ApplicationRole : IdentityRole<int>, IAuditInfo, IDeletableEntity
     {
         public ApplicationRole()
             : this(null)
@@ -16,7 +16,6 @@
         public ApplicationRole(string name)
             : base(name)
         {
-            this.Id = Guid.NewGuid().ToString();
         }
 
         public DateTime CreatedOn { get; set; }

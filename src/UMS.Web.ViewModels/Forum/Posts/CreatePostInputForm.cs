@@ -15,7 +15,7 @@
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }
     }

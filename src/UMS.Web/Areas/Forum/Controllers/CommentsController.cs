@@ -43,9 +43,9 @@
                 }
             }
 
-            var userId = this.userManager.GetUserId(this.User);
+            var user = this.userManager.GetUserAsync(this.User);
             model.ParentId = parentId;
-            model.UserId = userId;
+            model.UserId = user.Id;
 
             var parameters = Mapper.Map<CommentCreateParametersModel>(model);
 

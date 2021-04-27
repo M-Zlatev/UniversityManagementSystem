@@ -6,7 +6,6 @@
 
     using Common.Enumerations;
     using Common.Implementations;
-    using Students;
     using UserDefinedPrincipal;
     using static Common.DataValidation.Homework;
 
@@ -30,12 +29,8 @@
 
         public DateTime OpenForSubmissionTime { get; set; }
 
-        public string AddedByUserId { get; set; }
+        public int AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
-
-        public int? StudentId { get; set; }
-
-        public Student Student { get; set; }
     }
 }

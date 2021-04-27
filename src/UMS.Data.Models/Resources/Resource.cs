@@ -23,7 +23,7 @@
         [Required]
         public string Url { get; set; }
 
-        public string AddedByUserId { get; set; }
+        public int AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
 

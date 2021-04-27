@@ -8,19 +8,15 @@
 
     using Common.Implementations;
     using Resources;
-    using Students;
-    using Teachers;
+    using UserDefinedPrincipal;
     using static Common.DataValidation.Course;
 
     public class Course : BaseDeletableModel
     {
         public Course()
         {
-            this.StartDate = DateTime.UtcNow;
-            this.EndDate = DateTime.UtcNow.AddMonths(6);
             this.Majors = new HashSet<CourseMajor>();
-            this.Teachers = new HashSet<TeacherCourse>();
-            this.StudentsEnrolled = new HashSet<StudentCourse>();
+            this.User = new HashSet<ApplicationUserCourse>();
             this.Resources = new HashSet<Resource>();
         }
 
@@ -47,9 +43,7 @@
 
         public virtual ICollection<CourseMajor> Majors { get; set; }
 
-        public virtual ICollection<TeacherCourse> Teachers { get; set; }
-
-        public virtual ICollection<StudentCourse> StudentsEnrolled { get; set; }
+        public virtual ICollection<ApplicationUserCourse> User { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
     }

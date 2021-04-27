@@ -17,12 +17,10 @@
     using Models.Homeworks;
     using Models.Majors;
     using Models.Resources;
-    using Models.Students;
-    using Models.Teachers;
     using Models.Faculties;
     using Models.UserDefinedPrincipal;
 
-    public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class UmsDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
         public UmsDbContext(DbContextOptions<UmsDbContext> options)
             : base(options)
@@ -40,20 +38,6 @@
         public DbSet<Course> Courses { get; set; }
 
         public DbSet<CourseMajor> CourseMajors { get; set; }
-
-        public DbSet<Teacher> Teachers { get; set; }
-
-        public DbSet<TeacherAddress> TeacherAddresses { get; set; }
-
-        public DbSet<TeacherCourse> TeacherCourses { get; set; }
-
-        public DbSet<Student> Students { get; set; }
-
-        public DbSet<StudentAddress> StudentAddresses { get; set; }
-
-        public DbSet<StudentCourse> StudentCourses { get; set; }
-
-        public DbSet<StudentMajor> StudentMajors { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
 
