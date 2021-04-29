@@ -7,7 +7,7 @@
 
     public class DepartmentCreateParametersModel : DepartmentBaseParametersModel, IMapFrom<CreateDepartmentInputForm>
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public int FacultyId { get; set; }
 

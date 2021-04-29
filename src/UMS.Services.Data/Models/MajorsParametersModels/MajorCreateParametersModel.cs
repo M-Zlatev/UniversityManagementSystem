@@ -7,7 +7,7 @@
 
     public class MajorCreateParametersModel : MajorBaseParametersModel, IMapFrom<CreateMajorInputForm>
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public int DepartmentId { get; set; }
 

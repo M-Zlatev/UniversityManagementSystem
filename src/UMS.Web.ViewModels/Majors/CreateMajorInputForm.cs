@@ -6,7 +6,7 @@
 
     public class CreateMajorInputForm : MajorBaseForm
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }

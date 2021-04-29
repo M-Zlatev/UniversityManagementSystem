@@ -5,7 +5,7 @@
 
     public class CreateDepartmentInputForm : DepartmentBaseForm
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Display(Name = "Faculty")]
         public int FacultyId { get; set; }

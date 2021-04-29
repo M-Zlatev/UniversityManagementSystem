@@ -6,7 +6,7 @@
 
     public class CreateCourseInputForm : CourseBaseForm
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Display(Name = "Major")]
         public int MajorId { get; set; }

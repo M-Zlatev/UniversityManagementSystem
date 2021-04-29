@@ -4,27 +4,29 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
     using Contracts;
     using Data.Models.HomeworksParametersModels;
     using Mapping.Infrastructure;
     using UMS.Data.Models.Homeworks;
+    using UMS.Data.Models.UserDefinedPrincipal;
     using UMS.Data.Repositories.Contracts;
 
-    public class HomeworksService //: IHomeworksService
+    public class HomeworksService : IHomeworksService
     {
         private const int HomeworksPageSize = 10;
 
         private readonly IRepository<Homework> homeworkRepository;
-        //private readonly IDeletableEntityRepository<Student> studentRepository;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public HomeworksService(
-            IRepository<Homework> homeworkRepository)
-            //IDeletableEntityRepository<Student> studentRepository)
+            IRepository<Homework> homeworkRepository,
+            UserManager<ApplicationUser> userManager)
         {
             this.homeworkRepository = homeworkRepository;
-            //this.studentRepository = studentRepository;
+            this.userManager = userManager;
         }
 
         public IEnumerable<T> GetAll<T>(int page, int homeworksPerPage = HomeworksPageSize)
@@ -47,35 +49,32 @@
         public int GetCount()
             => this.homeworkRepository.All().Count();
 
-        //public async Task<int> CreateAsync(HomeworkCreateParametersModel model)
-        //{
-        //    var homework = new Homework
-        //    {
-        //        Content = model.Content,
-        //        HomeworkType = model.HomeworkType,
-        //        AssignmentTime = model.AssingmentTime,
-        //        OpenForSubmissionTime = model.OpenForSubmissionTime,
-        //        AddedByUserId = model.UserId,
-        //    };
+        public async Task<int> CreateAsync(HomeworkCreateParametersModel model)
+        {
+            var homework = new Homework
+            {
+                Content = model.Content,
+                HomeworkType = model.HomeworkType,
+                AssignmentTime = model.AssingmentTime,
+                OpenForSubmissionTime = model.OpenForSubmissionTime,
+                AddedByUserId = model.UserId,
+            };
 
-        //    var studentName = this.homeworkRepository.AllAsNoTracking()
-        //        .Where(h => h.AddedByUserId == model.UserId)
-        //        .Select(s => s.Student.FirstName)
-        //        .FirstOrDefault();
+            var listOfAllUsers = this.userManager
+                .Users
+                .ToList();
 
-        //    var student = this.studentRepository.All()
-        //        .Where(s => s.FirstName == studentName)
-        //        .FirstOrDefault();
+            var currentUser = listOfAllUsers
+                .Where(u => u.Id == model.UserId)
+                .FirstOrDefault();
 
-        //    student.Homeworks.Add(homework);
+            currentUser.Homeworks.Add(homework);
+            await this.homeworkRepository.AddAsync(homework);
 
-        //    await this.homeworkRepository.AddAsync(homework);
+            await this.homeworkRepository.SaveChangesAsync();
 
-        //    await this.homeworkRepository.SaveChangesAsync();
-        //    await this.studentRepository.SaveChangesAsync();
-
-        //    return homework.Id;
-        //}
+            return homework.Id;
+        }
 
         public async Task<bool> EditAsync(int id, HomeworkEditParametersModel model)
         {

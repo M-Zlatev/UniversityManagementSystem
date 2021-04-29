@@ -4,6 +4,6 @@
 
     public class CreateFacultyInputForm : FacultyBaseForm
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

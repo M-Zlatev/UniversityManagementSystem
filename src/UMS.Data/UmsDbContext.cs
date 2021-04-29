@@ -51,6 +51,12 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<ApplicationUserAddress> ApplicationUserAddresses { get; set; }
+
+        public DbSet<ApplicationUserMajor> ApplicationUserMajors { get; set; }
+
+        public DbSet<ApplicationUserCourse> ApplicationUserCourses { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

@@ -7,7 +7,7 @@
 
     public class CourseCreateParametersModel : CourseBaseParametersModel, IMapFrom<CreateCourseInputForm>
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public int MajorId { get; set; }
 

@@ -19,6 +19,6 @@
         [Display(Name = "Open for submission time")]
         public DateTime OpenForSubmissionTime { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

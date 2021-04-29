@@ -5,6 +5,6 @@
 
     public class FacultyCreateParametersModel : FacultyBaseParametersModel, IMapFrom<CreateFacultyInputForm>
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }
