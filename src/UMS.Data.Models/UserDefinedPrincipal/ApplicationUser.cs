@@ -38,7 +38,11 @@
 
         public Gender Gender { get; set; }
 
+        public DateTime? DateOfBirth { get; set; }
+
         public ApplicationUserAddress Address { get; set; }
+
+        public DateTime? LoginTime { get; set; }
 
         public string ImageUrl { get; set; }
 
@@ -48,9 +52,7 @@
         public AcademicRank AcademicRank { get; set; }
 
         // User in role - Student properties
-        [Required]
-        [StringLength(MaxUCNLength, MinimumLength = MinUCNLength, ErrorMessage = UCNErrorMessage)]
-        public string UniformCivilNumber { get; set; }
+        public string FacultyNumber { get; set; }
 
         public bool HasScholarship { get; set; }
 
@@ -64,7 +66,7 @@
 
         public DateTime? DeletedOn { get; set; }
 
-        // Additional Application user properties
+        // Additional Application user properties concerning table relationships
         public virtual ICollection<ApplicationUserMajor> Majors { get; set; }
 
         public virtual ICollection<ApplicationUserCourse> Courses { get; set; }

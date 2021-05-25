@@ -1,31 +1,122 @@
 ﻿@page
+@using UMS.Data.Common.Enumerations;
 @model Register
-@{
-    ViewData["Title"] = "Register";
-    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
-}
 
-<form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+@{ ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml"; }
+
+<link rel="stylesheet" href="~/css/multiStepWizard.css" />
+
+<form asp-route-returnUrl="@Model.ReturnUrl" method="post" id="regForm">
     <h4>Create a new account.</h4>
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Input.Email"></label>
-        <input asp-for="Input.Email" class="form-control" />
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+    <div class="tab">
+        <div class="form-group">
+            <b>Register as:</b>
+            <label asp-for="Input.AppRole"></label>
+            <select asp-for="Input.AppRole" asp-items="@Html.GetEnumSelectList<AppRole>()" oninput="this.className = ''"></select>
+            <span asp-validation-for="Input.AppRole" class="text-danger"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Input.Password"></label>
-        <input asp-for="Input.Password" class="form-control" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    <div class="tab">
+        <div>
+            <p><input asp-for="Input.Username" placeholder="Username" class="form-control" oninput="this.className = ''" /></p>
+            <p><span asp-validation-for="Input.Username" class="text-danger"></span></p>
+        </div>
+
+        <div class="form-group">
+            <p><input asp-for="Input.Email" placeholder="Email" class="form-control" oninput="this.className = ''" /></p>
+            <p><span asp-validation-for="Input.Email" class="text-danger"></span></p>
+        </div>
+        <div class="form-group">
+            <p><input asp-for="Input.Password" class="form-control" placeholder="Password" oninput="this.className = ''" /></p>
+            <p><span asp-validation-for="Input.Password" class="text-danger"></span></p>
+        </div>
+
+        <div class="form-group">
+            <p><input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm password" oninput="this.className = ''" /></p>
+            <p><span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span></p>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Input.ConfirmPassword"></label>
-        <input asp-for="Input.ConfirmPassword" class="form-control" />
-        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+
+    <div class="tab">
+        <b>Personal Info:</b>
+        <div class="form-group">
+            <p><input asp-for="Input.FirstName" placeholder="First name" class="form-control" oninput="this.className = ''" /></p>
+            <p><span asp-validation-for="Input.FirstName" class="text-danger"></span></p>
+
+            <p><input asp-for="Input.MiddleName" placeholder="Middle name" class="form-control" oninput="this.className = ''" /><p>
+            <p><span asp-validation-for="Input.MiddleName" class="text-danger"></span></p>
+
+            <p><input asp-for="Input.LastName" placeholder="Last name" class="form-control" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <p><input asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone number" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Input.Gender"></label>
+            <select asp-for="Input.Gender" asp-items="@Html.GetEnumSelectList<Gender>()" oninput="this.className = ''"></select>
+            <span asp-validation-for="Input.Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Input.DateOfBirth"></label>
+            <input asp-for="Input.DateOfBirth" type="date" asp-format="{0:dd-MM-yyyy}" placeholder="Date of birth" class="form-control" oninput="this.className = ''" />
+            <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+
+    <div class="tab">
+        <div class="form-group">
+            <p><input asp-for="Input.Address.StreetName" class="form-control" placeholder="Street name" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.Address.StreetName" class="text-danger"></span>
+
+            <p><input asp-for="Input.Address.District" class="form-control" placeholder="District" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.Address.District" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <p><input asp-for="Input.Address.Town" class="form-control" placeholder="Town" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.Address.Town" class="text-danger"></span>
+
+            <p><input asp-for="Input.Address.PostalCode" class="form-control" placeholder="Postal code" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.Address.PostalCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <p><input asp-for="Input.Address.Country" class="form-control" placeholder="Country" oninput="this.className = ''" /></p>
+            <span asp-validation-for="Input.Address.Country" class="text-danger"></span>
+            </div>
+        <div class="form-group">
+            <label asp-for="Input.Address.Continent"></label>
+            <select asp-for="Input.Address.Continent" asp-items="@Html.GetEnumSelectList<Continent>()" oninput="this.className = ''"></select>
+            <span asp-validation-for="Input.Address.Continent" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+        </div>
+    </div>
+
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+    @*<button type="submit" class="btn btn-primary">Register</button>*@
 </form>
+
+<script src="~/js/multiStepWizard.js" asp-append-version="true"></script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

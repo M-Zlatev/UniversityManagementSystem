@@ -18,6 +18,8 @@
     using Microsoft.Extensions.Logging;
 
     using Data.Models.UserDefinedPrincipal;
+    using Data.Common.Enumerations;
+    using static Data.Common.DataValidation.ApplicationUser;
 
     [AllowAnonymous]
     public class Register : PageModel
@@ -56,12 +58,42 @@
         {
             returnUrl ??= this.Url.Content("~/");
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (this.ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = this.Input.Username,
+                    Email = this.Input.Email,
+                    FirstName = this.Input.FirstName,
+                    MiddleName = this.Input.MiddleName,
+                    LastName = this.Input.LastName,
+                    Gender = this.Input.Gender,
+                    DateOfBirth = this.Input.DateOfBirth,
+                    PhoneNumber = this.Input.PhoneNumber,
+                };
+
+                var userAddress = new ApplicationUserAddress()
+                {
+                    StreetName = this.Input.Address.StreetName,
+                    District = this.Input.Address.District,
+                    Town = this.Input.Address.Town,
+                    PostalCode = this.Input.Address.PostalCode,
+                    Country = this.Input.Address.Country,
+                    Continent = this.Input.Address.Continent,
+                    User = user,
+                    UserId = user.Id,
+                };
+
+                user.Address = userAddress;
+
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
                 if (result.Succeeded)
                 {
+                    // Add role to user
+                    var role = await this.userManager.AddToRoleAsync(user, this.Input.AppRole.ToString());
+
                     this.logger.LogInformation("User created a new account with password.");
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -115,6 +147,42 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            public string Username { get; set; }
+
+            [Display(Name = "")]
+            public AppRole AppRole { get; set; }
+
+            [Display(Name="First name")]
+            public string FirstName { get; set; }
+
+            [Display(Name = "Middle name")]
+            public string MiddleName { get; set; }
+
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            public Gender Gender { get; set; }
+
+            [Display(Name = "Date of birth")]
+            public DateTime DateOfBirth { get; set; }
+
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
+
+            public ApplicationUserAddress Address { get; set; }
+
+            [Display(Name = "Faculty number")]
+            public string FacultyNumber { get; set; }
+
+            [Display(Name = "Scholarship")]
+            public bool HasScholarship { get; set; }
+
+            [Display(Name = "Academic degree")]
+            public AcademicDegree AcademicDegree { get; set; }
+
+            [Display(Name = "Academic rank")]
+            public AcademicRank AcademicRank { get; set; }
         }
     }
 }
