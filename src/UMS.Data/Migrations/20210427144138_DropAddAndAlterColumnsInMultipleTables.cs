@@ -1,5 +1,7 @@
 ﻿namespace UMS.Data.Migrations
 {
+    using System;
+
     using Microsoft.EntityFrameworkCore.Migrations;
 
     public partial class DropAddAndAlterColumnsInMultipleTables : Migration
@@ -49,6 +51,10 @@
             migrationBuilder.DropColumn(
                 name: "ApplicationUserId",
                 table: "Homeworks");
+
+            migrationBuilder.DropColumn(
+                name: "UniformCivilNumber",
+                table: "AspNetUsers");
 
             migrationBuilder.RenameTable(
                 name: "ApplicationUserMajor",
@@ -101,6 +107,18 @@
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "DateOfBirth",
+                table: "AspNetUsers",
+                type: "datetime2",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "FacultyNumber",
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_ApplicationUserMajors",
@@ -317,6 +335,14 @@
                 name: "UserId",
                 table: "Comments");
 
+            migrationBuilder.DropColumn(
+                name: "DateOfBirth",
+                table: "AspNetUsers");
+
+            migrationBuilder.DropColumn(
+                name: "FacultyNumber",
+                table: "AspNetUsers");
+
             migrationBuilder.RenameTable(
                 name: "ApplicationUserMajors",
                 newName: "ApplicationUserMajor");
@@ -339,6 +365,14 @@
                 table: "Homeworks",
                 type: "int",
                 nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "UniformCivilNumber",
+                table: "AspNetUsers",
+                type: "nvarchar(10)",
+                maxLength: 10,
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_ApplicationUserMajor",

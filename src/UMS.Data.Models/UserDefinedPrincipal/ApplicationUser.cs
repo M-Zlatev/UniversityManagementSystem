@@ -42,7 +42,11 @@
 
         public ApplicationUserAddress Address { get; set; }
 
-        public DateTime? LoginTime { get; set; }
+        // Store current time the user log in the web
+        public DateTime? CurrentLoginTime { get; set; }
+
+        // Store last time the user visited the page
+        public DateTime? LastVisitedLoginTime { get; set; }
 
         public string ImageUrl { get; set; }
 

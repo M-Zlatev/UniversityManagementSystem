@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
 
-    using UMS.Data.Models.UserDefinedPrincipal;
+    using Data.Models.UserDefinedPrincipal;
 
     [AllowAnonymous]
     public class Login : PageModel
@@ -72,9 +72,25 @@
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
+
+                    // Find current logged in user and update last login time on every successful sign in
+                    var user = this.userManager
+                        .Users
+                        .Where(e => e.UserName == this.Input.Username)
+                        .FirstOrDefault();
+
+                    // Store the last time when the user was logged in, before losing the values after saving the current login time
+                    user.LastVisitedLoginTime = user.CurrentLoginTime;
+
+                    // Save the current login time of the user
+                    user.CurrentLoginTime = DateTime.Now;
+
+                    // Update the user data in order the changes to take effect
+                    await this.userManager.UpdateAsync(user);
 
                     return this.LocalRedirect(returnUrl);
                 }

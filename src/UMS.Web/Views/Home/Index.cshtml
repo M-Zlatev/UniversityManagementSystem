@@ -1,6 +1,20 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model UMS.Data.Models.UserDefinedPrincipal.ApplicationUser
+
+@{ 
+    ViewData["Title"] = "Home Page"; 
 }
 
 <body class="img-holder" id="img-holder">
+    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Student") || this.User.IsInRole("Teacher"))
+    {
+        if (Model.LastVisitedLoginTime == null)
+        {
+            <h3 class="text-light">Logged in: You log in for the first time</h3> 
+        }
+        else
+        {
+            <h3 class="text-dark">Current logged in: @Model.CurrentLoginTime</h3>
+            <h3 class="text-dark">Last time you visit the page: @Model.LastVisitedLoginTime</h3>
+        }
+     }
 </body>

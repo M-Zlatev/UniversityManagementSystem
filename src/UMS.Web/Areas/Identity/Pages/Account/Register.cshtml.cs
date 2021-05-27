@@ -115,6 +115,11 @@
                     }
                     else
                     {
+                        // prevent showing twice in a row - "You log in for the first time" message in "last time you visit the page"
+                        // shows the correct time after the second time we log in (the first time is done automatically after the registration)
+                        user.CurrentLoginTime = DateTime.Now;
+                        await this.userManager.UpdateAsync(user);
+
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }

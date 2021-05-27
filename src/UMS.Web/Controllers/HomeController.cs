@@ -1,16 +1,35 @@
 ﻿namespace UMS.Web.Controllers
 {
+    using System;
     using System.Diagnostics;
+    using System.Linq;
+    using System.Security.Claims;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    using Data.Models.UserDefinedPrincipal;
     using ViewModels.Additional;
 
     public class HomeController : Controller
     {
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public HomeController(UserManager<ApplicationUser> userManager)
+        {
+            this.userManager = userManager;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var user = this.userManager.GetUserAsync(this.HttpContext.User).Result;
+
+            if (user == null)
+            {
+                return this.View();
+            }
+
+            return this.View(user);
         }
 
         public IActionResult Privacy()
