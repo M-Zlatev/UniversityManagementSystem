@@ -12,6 +12,7 @@
 
     using Data.Common.Enumerations;
     using Data.Models.UserDefinedPrincipal;
+    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public partial class IndexModel : PageModel
     {
@@ -71,6 +72,8 @@
                 }
             }
 
+            await this.UpdateUserAsync(user);
+
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();
@@ -83,6 +86,11 @@
 
             this.Username = userName;
 
+            this.LoadUserAsync(user, phoneNumber);
+        }
+
+        private void LoadUserAsync(ApplicationUser user, string phoneNumber)
+        {
             // If we user directly user.Address in the InputModel down below we have got 'Null Reference Exception', because user.Address is still 'Null', probably due to async operations in this method
             var userAddress = this.userManager.Users
                 .Where(u => u.Id == user.Id)
@@ -104,6 +112,30 @@
                 AcademicRank = user.AcademicRank,
                 Address = userAddress,
             };
+        }
+
+        private async Task UpdateUserAsync(ApplicationUser user)
+        {
+            var userAddress = this.userManager.Users
+                .Where(u => u.Id == user.Id)
+                .Select(ua => ua.Address)
+                .FirstOrDefault();
+
+            user.FirstName = this.Input.FirstName;
+            user.MiddleName = this.Input.MiddleName;
+            user.LastName = this.Input.LastName;
+            user.DateOfBirth = this.Input.Birthdate;
+            user.Gender = this.Input.Gender;
+            user.PhoneNumber = this.Input.PhoneNumber;
+            userAddress.StreetName = this.Input.Address.StreetName;
+            userAddress.District = this.Input.Address.District;
+            userAddress.Town = this.Input.Address.Town;
+            userAddress.PostalCode = this.Input.Address.PostalCode;
+            userAddress.Country = this.Input.Address.Country;
+            userAddress.Continent = this.Input.Address.Continent;
+            user.ImageUrl = this.Input.ImageUrl;
+
+            await this.userManager.UpdateAsync(user);
         }
 
         public class InputModel
