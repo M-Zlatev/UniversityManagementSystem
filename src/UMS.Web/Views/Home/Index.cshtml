@@ -4,17 +4,62 @@
     ViewData["Title"] = "Home Page"; 
 }
 
-<body class="img-holder" id="img-holder">
-    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Student") || this.User.IsInRole("Teacher"))
-    {
-        if (Model.LastVisitedLoginTime == null)
-        {
-            <h3 class="text-light">Logged in: You log in for the first time</h3> 
-        }
-        else
-        {
-            <h3 class="text-dark">Current logged in: @Model.CurrentLoginTime</h3>
-            <h3 class="text-dark">Last time you visit the page: @Model.LastVisitedLoginTime</h3>
-        }
-     }
-</body>
+
+    <div style="float:right; margin-right: -204.5px; margin-top: -17px; margin-bottom: 50px">
+          <img src="~/images/51150084425_0f3a7d084e_o-scaled.jpg" class="img" alt="University image" style="height: 800px; width: 1600px;"/>
+    </div>
+        
+    <div class="clearfix">
+        <hr class="bg-dark mx-4" style="height: 6px;" />
+    </div>
+
+    <div>
+        @await Component.InvokeAsync("UniversityDivisionsCount") 
+    </div>
+
+
+     <div style="margin-top: 50px">
+           @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Student") || this.User.IsInRole("Teacher"))
+           {
+               <h3 style="text-align:center">Personal information</h3>
+
+               if (Model.LastVisitedLoginTime == null)
+               {
+                   <table class="table table-bordered">
+                       <tbody>
+                           <tr>
+                               <td>
+                                    Logged in:
+                               </td>
+                               <td>
+                                   You log in for the first time
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               }
+               else
+               {                   
+                   <table class="table table-bordered">
+                       <tbody>
+                           <tr>
+                               <td>
+                                   Current logged in:
+                               </td>
+                               <td>
+                                   @Model.CurrentLoginTime
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   Last time you visit the page:
+                               </td>
+                               <td>
+                                   @Model.LastVisitedLoginTime
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               }
+            }
+     </div>

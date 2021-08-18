@@ -105,8 +105,15 @@ div.login-form-icon {
 /*Home page body
 -------------------------------------------------- */
 
-.img-holder{
-    background-image: url(../images/s960_university-campus.jpg);
+.img-holder {
+    background-image: url(../images/51150084425_0f3a7d084e_o-scaled.jpeg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#img {
+    background-image: url(../images/51150084425_0f3a7d084e_o-scaled.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

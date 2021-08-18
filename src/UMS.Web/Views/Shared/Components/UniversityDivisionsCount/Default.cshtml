@@ -1,0 +1,30 @@
+﻿@model UMS.Services.Dtos.UniversityDivisionsCount
+
+<h3 style="text-align:center">University information</h3>
+
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Division</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Faculties</td>
+            <td>@Model.FacultiesCount</td>
+        </tr>
+        <tr>
+            <td>Departments</td>
+            <td>@Model.DepartmentsCount</td>
+        </tr>
+        <tr>
+            <td>Majors</td>
+            <td>@Model.MajorsCount</td>
+        </tr>
+        <tr>
+            <td>Courses</td>
+            <td>@Model.CoursesCount</td>
+        </tr>
+    </tbody>
+</table>
