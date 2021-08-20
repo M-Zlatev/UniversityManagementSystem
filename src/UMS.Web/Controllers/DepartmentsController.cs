@@ -8,8 +8,7 @@
 
     using Data.Models.Departments;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
-    using Services.Data.Models.DepartmentsParametersModels;
+    using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Departments;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
@@ -68,18 +67,17 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateDepartmentInputForm departmentFormInput)
+        public async Task<IActionResult> Create(CreateDepartmentInputForm createDepartmentForm)
         {
             if (this.ModelState.IsValid)
             {
-                departmentFormInput.FacultyItems = this.departmentService.GetAllAsKeyValuePairs();
-                var parameters = Mapper.Map<DepartmentCreateParametersModel>(departmentFormInput);
-                var departmentId = await this.departmentService.CreateAsync(parameters);
+                createDepartmentForm.FacultyItems = this.departmentService.GetAllAsKeyValuePairs();
+                var departmentId = await this.departmentService.CreateAsync(createDepartmentForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = departmentId });
             }
 
-            return this.View(departmentFormInput);
+            return this.View(createDepartmentForm);
         }
 
         [HttpGet]
@@ -97,7 +95,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, EditDepartmentInputForm departmentFormInput)
+        public async Task<IActionResult> Edit(int id, EditDepartmentInputForm editDepartmentForm)
         {
             if (!await this.departmentService.Exists(id))
             {
@@ -106,13 +104,11 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<DepartmentEditParametersModel>(departmentFormInput);
-                await this.departmentService.EditAsync(id, parameters);
-
+                await this.departmentService.EditAsync(id, editDepartmentForm);
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
-            return this.View(departmentFormInput);
+            return this.View(editDepartmentForm);
         }
 
         [HttpGet]

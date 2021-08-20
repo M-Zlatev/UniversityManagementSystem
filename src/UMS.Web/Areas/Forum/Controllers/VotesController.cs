@@ -7,8 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Data.Models.UserDefinedPrincipal;
-    using Services.Contracts;
-    using Services.Data.Models.VotesParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Forum.Votes;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -33,11 +32,9 @@
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputForm inputModel)
         {
             var user = this.userManager.GetUserAsync(this.User);
+            inputModel.UserId = user.Id;
 
-            var parameters = Mapper.Map<VoteParametersModel>(inputModel);
-            parameters.UserId = user.Id;
-
-            await this.votesService.VoteAsync(parameters);
+            await this.votesService.VoteAsync(inputModel);
 
             var votes = this.votesService.GetVotes(inputModel.PostId);
             return new VoteResponseModel { VotesCount = votes };

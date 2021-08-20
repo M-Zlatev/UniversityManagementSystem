@@ -26,6 +26,7 @@
 	  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
 	  <ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
 	  <ProjectReference Include="..\UMS.Services.Mapping\UMS.Services.Mapping.csproj" />
+	  <ProjectReference Include="..\UMS.Services\UMS.Services.csproj" />
 	  <ProjectReference Include="..\UMS.Web.ViewModels\UMS.Web.ViewModels.csproj" />
 	</ItemGroup>
 

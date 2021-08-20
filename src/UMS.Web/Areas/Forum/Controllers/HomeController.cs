@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    using Services.Contracts;
+    using Services.Data.Contracts;
     using ViewModels.Additional;
     using ViewModels.Forum.Home;
 

@@ -10,8 +10,7 @@
     using Data.Models.UserDefinedPrincipal;
     using Data.Models.Resources;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
-    using Services.Data.Models.ResourcesParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Resources;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -73,10 +72,9 @@
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<ResourceCreateParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
-                parameters.UserId = user.Id;
-                var resourceId = await this.resourcesService.CreateAsync(parameters);
+                inputForm.UserId = user.Id;
+                var resourceId = await this.resourcesService.CreateAsync(inputForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = resourceId });
             }
@@ -108,10 +106,9 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<ResourceEditParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
-                parameters.UserId = user.Id;
-                await this.resourcesService.EditAsync(id, parameters);
+                inputForm.UserId = user.Id;
+                await this.resourcesService.EditAsync(id, inputForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }

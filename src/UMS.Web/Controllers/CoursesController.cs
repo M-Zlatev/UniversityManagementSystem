@@ -8,8 +8,7 @@
 
     using Data.Models.Courses;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
-    using Services.Data.Models.CoursesParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Courses;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -73,10 +72,7 @@
             {
                 courseInputForm.MajorItems = this.coursesService.GetAllAsKeyValuePairs();
 
-                var parameters = Mapper.Map<CourseCreateParametersModel>(courseInputForm);
-
-                var courseId = await this.coursesService.CreateAsync(parameters);
-
+                var courseId = await this.coursesService.CreateAsync(courseInputForm);
                 return this.RedirectToAction(nameof(this.ById), new { id = courseId });
             }
 
@@ -107,9 +103,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<CourseEditParametersModel>(courseInputForm);
-                await this.coursesService.EditAsync(id, parameters);
-
+                await this.coursesService.EditAsync(id, courseInputForm);
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
 

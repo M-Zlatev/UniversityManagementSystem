@@ -8,8 +8,7 @@
 
     using Data.Models.Majors;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
-    using Services.Data.Models.MajorsParametersModels;
+    using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Majors;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
@@ -73,8 +72,7 @@
             if (this.ModelState.IsValid)
             {
                 majorInputForm.DepartmentItems = this.majorService.GetAllAsKeyValuePairs();
-                var parameters = Mapper.Map<MajorCreateParametersModel>(majorInputForm);
-                var majorId = await this.majorService.CreateAsync(parameters);
+                var majorId = await this.majorService.CreateAsync(majorInputForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = majorId });
             }
@@ -107,8 +105,7 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<MajorEditParametersModel>(majorInputForm);
-                await this.majorService.EditAsync(id, parameters);
+                await this.majorService.EditAsync(id, majorInputForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }

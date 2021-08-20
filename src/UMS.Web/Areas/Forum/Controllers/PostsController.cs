@@ -7,8 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Data.Models.UserDefinedPrincipal;
-    using Services.Contracts;
-    using Services.Data.Models.PostsParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Forum.Posts;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -52,19 +51,18 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreatePostInputForm input)
+        public async Task<IActionResult> Create(CreatePostInputForm createForm)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (!this.ModelState.IsValid)
             {
-                return this.View(input);
+                return this.View(createForm);
             }
 
-            input.UserId = user.Id;
-            var parameters = Mapper.Map<PostCreateParametersModel>(input);
+            createForm.UserId = user.Id;
+            var postId = await this.postsService.CreateAsync(createForm);
 
-            var postId = await this.postsService.CreateAsync(parameters);
             this.TempData["InfoMessage"] = "Forum post created!";
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }

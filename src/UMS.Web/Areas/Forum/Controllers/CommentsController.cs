@@ -7,8 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Data.Models.UserDefinedPrincipal;
-    using Services.Contracts;
-    using Services.Data.Models.CommentsParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Forum.Comments;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -28,30 +27,28 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateCommentInputForm model)
+        public async Task<IActionResult> Create(CreateCommentInputForm createForm)
         {
             var parentId =
-                model.ParentId == 0 ?
+                createForm.ParentId == 0 ?
                     (int?)null :
-                    model.ParentId;
+                    createForm.ParentId;
 
             if (parentId.HasValue)
             {
-                if (!this.commentsService.IsInPostId(parentId.Value, model.PostId))
+                if (!this.commentsService.IsInPostId(parentId.Value, createForm.PostId))
                 {
                     return this.BadRequest();
                 }
             }
 
+            createForm.ParentId = parentId;
+
             var user = this.userManager.GetUserAsync(this.User);
-            model.ParentId = parentId;
-            model.UserId = user.Id;
+            createForm.UserId = user.Id;
 
-            var parameters = Mapper.Map<CommentCreateParametersModel>(model);
-
-            await this.commentsService.Create(parameters);
-
-            return this.RedirectToAction("ById", "Posts", new { id = model.PostId });
+            await this.commentsService.Create(createForm);
+            return this.RedirectToAction("ById", "Posts", new { id = createForm.PostId });
         }
     }
 }

@@ -8,7 +8,7 @@
     using Data.Models.Faculties;
     using Data.Repositories.Contracts;
     using Services.Contracts;
-    using Services.Data.Models.FacultiesParametersModels;
+    using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Faculties;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
@@ -70,9 +70,7 @@
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<FacultyCreateParametersModel>(facultyInputForm);
-                var facultyId = await this.facultyService.CreateAsync(parameters);
-
+                var facultyId = await this.facultyService.CreateAsync(facultyInputForm);
                 return this.RedirectToAction(nameof(this.ById), new { id = facultyId });
             }
 
@@ -94,7 +92,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, EditFacultyInputForm facultyInputForm)
+        public async Task<IActionResult> Edit(int id, EditFacultyInputForm editFacultyForm)
         {
             if (!await this.facultyService.Exists(id))
             {
@@ -103,13 +101,11 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<FacultyEditParametersModel>(facultyInputForm);
-                await this.facultyService.EditAsync(id, parameters);
-
+                await this.facultyService.EditAsync(id, editFacultyForm);
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
-            return this.View(facultyInputForm);
+            return this.View(editFacultyForm);
         }
 
         [HttpGet]

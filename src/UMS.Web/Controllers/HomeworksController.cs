@@ -10,8 +10,7 @@
     using Data.Models.Homeworks;
     using Data.Models.UserDefinedPrincipal;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
-    using Services.Data.Models.HomeworksParametersModels;
+    using Services.Data.Contracts;
     using ViewModels.Homeworks;
     using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
@@ -69,19 +68,18 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateHomeworkInputForm inputForm)
+        public async Task<IActionResult> Create(CreateHomeworkInputForm createForm)
         {
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<HomeworkCreateParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
-                parameters.UserId = user.Id;
-                var homeworkId = await this.homeworksService.CreateAsync(parameters);
+                createForm.UserId = user.Id;
+                var homeworkId = await this.homeworksService.CreateAsync(createForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id = homeworkId });
             }
 
-            return this.View(inputForm);
+            return this.View(createForm);
         }
 
         [HttpGet]
@@ -99,7 +97,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Edit(int id, EditHomeworkInputForm inputForm)
+        public async Task<IActionResult> Edit(int id, EditHomeworkInputForm editForm)
         {
             if (!await this.homeworksService.Exists(id))
             {
@@ -108,15 +106,14 @@
 
             if (this.ModelState.IsValid)
             {
-                var parameters = Mapper.Map<HomeworkEditParametersModel>(inputForm);
                 var user = await this.userManager.GetUserAsync(this.User);
-                parameters.UserId = user.Id;
-                await this.homeworksService.EditAsync(id, parameters);
+                editForm.UserId = user.Id;
+                await this.homeworksService.EditAsync(id, editForm);
 
                 return this.RedirectToAction(nameof(this.ById), new { id });
             }
 
-            return this.View(inputForm);
+            return this.View(editForm);
         }
 
         [HttpGet]

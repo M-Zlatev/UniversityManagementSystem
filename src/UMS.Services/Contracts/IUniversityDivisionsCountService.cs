@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using Dtos;
-    using ServicesLifetimeContracts;
+    using Contracts.ServicesLifetimeContracts;
 
     public interface IUniversityDivisionsCountService : ITransientService
     {
