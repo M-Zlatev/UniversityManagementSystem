@@ -1,13 +1,9 @@
 ﻿namespace UMS.Web.Areas.Forum.Controllers
 {
-    using System;
-
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Data.Contracts;
     using ViewModels.Forum.Categories;
-    using ViewModels.Forum.Posts;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     [Area("Forum")]
     public class CategoriesController : Controller

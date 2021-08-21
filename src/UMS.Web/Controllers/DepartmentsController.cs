@@ -11,7 +11,6 @@
     using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Departments;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class DepartmentsController : Controller
     {

@@ -1,11 +1,9 @@
 ﻿namespace UMS.Services.Data.Contracts
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Services.Contracts.ServicesLifetimeContracts;
-    using UMS.Data.Common.Enumerations;
     using UMS.Web.ViewModels.Resources;
 
     public interface IResourcesService : ITransientService

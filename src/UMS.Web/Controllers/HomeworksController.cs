@@ -12,7 +12,6 @@
     using Data.Repositories.Contracts;
     using Services.Data.Contracts;
     using ViewModels.Homeworks;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class HomeworksController : Controller
     {

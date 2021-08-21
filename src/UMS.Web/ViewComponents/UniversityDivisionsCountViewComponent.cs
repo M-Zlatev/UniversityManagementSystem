@@ -6,16 +6,16 @@
 
     public class UniversityDivisionsCountViewComponent : ViewComponent
     {
-        private readonly IUniversityDivisionsCountService universityDivisions;
+        private readonly IGetCountsService getCountsService;
 
-        public UniversityDivisionsCountViewComponent(IUniversityDivisionsCountService universityDivisions)
+        public UniversityDivisionsCountViewComponent(IGetCountsService getCountsService)
         {
-            this.universityDivisions = universityDivisions;
+            this.getCountsService = getCountsService;
         }
 
         public IViewComponentResult Invoke()
         {
-            var result = this.universityDivisions.GetUniversityDivisionsCount();
+            var result = this.getCountsService.GetUniversityDivisionsCount();
             return this.View(result);
         }
     }

@@ -1,6 +1,6 @@
-﻿namespace UMS.Services.Dtos
+﻿namespace UMS.Services.Models
 {
-    public class UniversityDivisionsCount
+    public class CountsDto
     {
         public int FacultiesCount { get; set; }
 

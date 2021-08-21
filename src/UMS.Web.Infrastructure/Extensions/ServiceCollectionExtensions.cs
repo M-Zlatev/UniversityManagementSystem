@@ -1,8 +1,6 @@
 ﻿namespace UMS.Web.Infrastructure.Extensions
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
@@ -26,13 +24,13 @@
         public static IServiceCollection AddConventionalServices(
             this IServiceCollection services)
         {
-            // Add all the services from UMS.Services
+            // Add all services from UMS.Services
             AddServices(services, typeof(IService));
 
-            // Add all the services from UMS.Services.Data
+            // Add all services from UMS.Services.Data
             AddServices(services, typeof(IServiceData));
 
-            // Additional services addition
+            // Additional services
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();

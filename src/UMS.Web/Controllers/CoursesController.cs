@@ -10,7 +10,6 @@
     using Data.Repositories.Contracts;
     using Services.Data.Contracts;
     using ViewModels.Courses;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class CoursesController : Controller
     {

@@ -1,9 +1,6 @@
 ﻿namespace UMS.Web.Controllers
 {
-    using System;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Security.Claims;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;

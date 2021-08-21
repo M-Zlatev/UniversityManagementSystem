@@ -9,7 +9,6 @@
     using Data.Models.UserDefinedPrincipal;
     using Services.Data.Contracts;
     using ViewModels.Forum.Comments;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     [Area("Forum")]
     public class CommentsController : Controller

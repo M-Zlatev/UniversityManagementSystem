@@ -5,13 +5,12 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+
     using Data.Models.Faculties;
     using Data.Repositories.Contracts;
-    using Services.Contracts;
     using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Faculties;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class FacultiesController : Controller
     {

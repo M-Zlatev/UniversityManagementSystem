@@ -1,24 +1,23 @@
 ﻿namespace UMS.Services.Implementations
 {
-    using System.Collections.Generic;
     using System.Linq;
 
     using Contracts;
-    using Dtos;
+    using Models;
     using UMS.Data.Models.Courses;
     using UMS.Data.Models.Departments;
     using UMS.Data.Models.Faculties;
     using UMS.Data.Models.Majors;
     using UMS.Data.Repositories.Contracts;
 
-    public class UniversityDivisionsCountService : IUniversityDivisionsCountService
+    public class GetCountsService : IGetCountsService
     {
         private IDeletableEntityRepository<Faculty> facultyRepository;
         private IDeletableEntityRepository<Department> departmentRepository;
         private IDeletableEntityRepository<Major> majorRepository;
         private IDeletableEntityRepository<Course> courseRepository;
 
-        public UniversityDivisionsCountService(
+        public GetCountsService(
             IDeletableEntityRepository<Faculty> facultyRepository,
             IDeletableEntityRepository<Department> departmentRepository,
             IDeletableEntityRepository<Major> majorRepository,
@@ -30,9 +29,9 @@
             this.courseRepository = courseRepository;
         }
 
-        public UniversityDivisionsCount GetUniversityDivisionsCount()
+        public CountsDto GetUniversityDivisionsCount()
         {
-            var data = new UniversityDivisionsCount()
+            var data = new CountsDto()
             {
                 FacultiesCount = this.facultyRepository.All().Count(),
                 DepartmentsCount = this.departmentRepository.All().Count(),

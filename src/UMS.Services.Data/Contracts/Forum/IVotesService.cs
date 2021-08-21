@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
 
     using Services.Contracts.ServicesLifetimeContracts;
-    using UMS.Web.ViewModels.Forum.Votes;
+    using Web.ViewModels.Forum.Votes;
 
     public interface IVotesService : ITransientService
     {

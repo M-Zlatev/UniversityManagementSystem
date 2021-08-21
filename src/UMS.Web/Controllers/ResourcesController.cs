@@ -12,7 +12,6 @@
     using Data.Repositories.Contracts;
     using Services.Data.Contracts;
     using ViewModels.Resources;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class ResourcesController : Controller
     {

@@ -11,7 +11,6 @@
     using Services.Data.Contracts;
     using ViewModels;
     using ViewModels.Majors;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     public class MajorsController : Controller
     {

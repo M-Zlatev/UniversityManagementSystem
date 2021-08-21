@@ -9,7 +9,6 @@
     using Data.Models.UserDefinedPrincipal;
     using Services.Data.Contracts;
     using ViewModels.Forum.Votes;
-    using static Infrastructure.Extensions.CustomAutoMapperExtension;
 
     [Area("Forum")]
     [ApiController]
