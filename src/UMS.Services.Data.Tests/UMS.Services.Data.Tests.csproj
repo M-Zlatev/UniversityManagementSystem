@@ -17,7 +17,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-		<PackageReference Include="Moq" Version="4.13.1" />
+		<PackageReference Include="Moq" Version="4.15.1" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -32,6 +32,13 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\UMS.Data.Models\UMS.Data.Models.csproj" />
+	  <ProjectReference Include="..\UMS.Data\UMS.Data.csproj" />
+	  <ProjectReference Include="..\UMS.Services.Data\UMS.Services.Data.csproj" />
+	  <ProjectReference Include="..\UMS.Web.Infrastructure\UMS.Web.Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>

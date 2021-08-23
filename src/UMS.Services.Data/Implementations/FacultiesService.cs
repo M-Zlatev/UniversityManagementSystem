@@ -19,6 +19,12 @@
         private readonly IRepository<FacultyAddress> facultyAddressRepository;
         private readonly IDeletableEntityRepository<Faculty> facultyRepository;
 
+        // this constructor was created for easier mocking and testing
+        public FacultiesService(IDeletableEntityRepository<Faculty> facultyRepository)
+        {
+            this.facultyRepository = facultyRepository;
+        }
+
         public FacultiesService(
             IDeletableEntityRepository<Faculty> facultyRepository,
             IRepository<FacultyAddress> facultyAddressRepository)
