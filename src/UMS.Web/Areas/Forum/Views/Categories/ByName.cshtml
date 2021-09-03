@@ -5,8 +5,19 @@
 
 <h1 class="display-3">@Model.Title</h1>
 <div class="alert alert-info">
-    @Model.Description
+    @if (!Model.ForumPosts.Any())
+    {
+        <div class="media-heading">
+            Unfortunately there aren't any posts in that category yet. Create new post from <a asp-controller="Posts" asp-action="Create">here</a>:
+        </div>
+    }
+    else
+    {
+        @Model.Description
+    }
 </div>
+
+
 
 @foreach (var post in Model.ForumPosts)
 {

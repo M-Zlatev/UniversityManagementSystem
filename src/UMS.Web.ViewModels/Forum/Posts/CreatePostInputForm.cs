@@ -18,5 +18,7 @@
         public int UserId { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }
+
+        public bool RedirectFromCategory { get; set; }
     }
 }

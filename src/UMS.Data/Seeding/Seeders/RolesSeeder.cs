@@ -1,4 +1,4 @@
-﻿namespace UMS.Data.Seeders.Seeding
+﻿namespace UMS.Data.Seeding.Seeders
 {
     using System;
     using System.Linq;
@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
 
-    using Data.Seeding.Contracts;
+    using Contracts;
     using Models.UserDefinedPrincipal;
     using UMS.Common;
 

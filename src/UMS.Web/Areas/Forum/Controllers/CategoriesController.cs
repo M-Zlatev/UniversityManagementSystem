@@ -1,5 +1,7 @@
 ﻿namespace UMS.Web.Areas.Forum.Controllers
 {
+    using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Data.Contracts;
@@ -36,6 +38,11 @@
             viewModel.ItemsPerPage = PostsPerPage;
             viewModel.PageNumber = PageNumber;
             viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(categoryId);
+
+            if (viewModel.ForumPosts.Any())
+            {
+
+            }
 
             return this.View(viewModel);
         }

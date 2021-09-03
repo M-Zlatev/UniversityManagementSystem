@@ -1,15 +1,13 @@
-﻿namespace UMS.Data.Seeders.Seeding
+﻿namespace UMS.Data.Seeding.Seeders
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Data.Seeding.Contracts;
-    using Models;
-    using UMS.Data.Models.Courses;
-    using UMS.Data.Seeding.Factories;
+    using Models.Courses;
+    using Factories;
 
     public class CourseSeeder : ISeeder
     {

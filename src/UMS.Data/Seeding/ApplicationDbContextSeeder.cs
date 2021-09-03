@@ -7,8 +7,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
+    using Seeders;
     using Seeding.Contracts;
-    using Seeders.Seeding;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
@@ -32,6 +32,7 @@
                 new DepartmentSeeder(),
                 new MajorSeeder(),
                 new CourseSeeder(),
+                new CategorySeeder(),
                 new RolesSeeder(),
             };
 

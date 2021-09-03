@@ -1,16 +1,14 @@
-﻿namespace UMS.Data.Seeders.Seeding
+﻿namespace UMS.Data.Seeding.Seeders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
-    using Data.Seeding.Contracts;
+    using Contracts;
     using Common.Enumerations;
     using Models.Majors;
-    using UMS.Data.Seeding.Factories;
+    using Factories;
 
     public class MajorSeeder : ISeeder
     {

@@ -1,12 +1,12 @@
-﻿namespace UMS.Data.Seeders.Seeding
+﻿namespace UMS.Data.Seeding.Seeders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Data.Seeding.Contracts;
-    using Data.Seeding.Factories;
+    using Contracts;
+    using Factories;
     using Models.Departments;
 
     public class DepartmentSeeder : ISeeder

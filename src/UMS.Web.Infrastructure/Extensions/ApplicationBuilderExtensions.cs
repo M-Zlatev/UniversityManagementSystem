@@ -59,6 +59,10 @@
         public static IApplicationBuilder UseEndpoints(this IApplicationBuilder app)
             => app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "administrator",
+                //    pattern: "admin/{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                     name: "forumCategory",
                     pattern: "f/{name:minlength(3)}",
