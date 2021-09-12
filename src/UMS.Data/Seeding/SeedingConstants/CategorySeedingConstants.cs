@@ -26,7 +26,7 @@
         public static class General
         {
             public const string Name = "General";
-            public const string ImageUrl = "https://lh3.googleusercontent.com/proxy/nDjcDOVn72-5ZpVQpA0g9ZNVst7K9YreSYfRdrhi8QX0xR2CxJkDufzIiA6rcrLlQQ-_tLp_DvIR5UHxdpDfcq_byfjn223VigupJIy-cKBXH-K1UJRnRByS6qIgw6G-V-A-Q_Bcru89opw9OymJBhVsF5gapHusaZC2uAA";
+            public const string ImageUrl = "https://lh3.googleusercontent.com/proxy/y3fzXM2Jj0z8yUBGboTEsouITCGX5TZ21esUpQ8jxOJk9SH2XgdgaL7F6aJvt-_w_zBmVOIuV3AO9Wln98dS0VmQDR0kr3w29VGeEOgxXDcKJxsrd4Kys1TfAfTzNcCoA-_yZexgWAWue2_bpxPwtizVX42hsXQ8cBY7ej0";
             public static readonly string Description = "This is the place for general conversations";
         }
 

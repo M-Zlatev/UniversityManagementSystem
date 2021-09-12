@@ -11,14 +11,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Areas\Administrator\**" />
-	  <Content Remove="Areas\Administrator\**" />
-	  <EmbeddedResource Remove="Areas\Administrator\**" />
-	  <None Remove="Areas\Administrator\**" />
+		<AdditionalFiles Include="..\stylecop.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<AdditionalFiles Include="..\stylecop.json" />
+	  <None Include="Areas\Administration\Views\Home\Index.cshtml" />
+	  <None Include="Areas\Administration\Views\_ViewImports.cshtml" />
+	  <None Include="Areas\Administration\Views\_ViewStart.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>

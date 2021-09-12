@@ -2,11 +2,11 @@
 @model UMS.Web.ViewModels.Forum.Home.IndexViewModel
 
 @{ 
-    this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemNameAsAbbreviation} Forum!"; 
+    this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName} forum!"; 
 }
 
 <div class="text-center">
-    <h1 class="display-3">@this.ViewData["Title"]</h1>
+    <h1 class="display-5">@this.ViewData["Title"]</h1>
     <a asp-controller="Posts" asp-action="Create" class="btn btn-primary btn-lg">Create new forum post</a>
 </div>
 
