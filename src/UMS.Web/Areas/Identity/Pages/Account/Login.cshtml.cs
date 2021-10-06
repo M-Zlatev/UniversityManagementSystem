@@ -16,6 +16,7 @@
     using Microsoft.Extensions.Logging;
 
     using Data.Models.UserDefinedPrincipal;
+    using Common;
 
     [AllowAnonymous]
     public class Login : PageModel
@@ -77,7 +78,7 @@
                 {
                     this.logger.LogInformation("User logged in.");
 
-                    // Find current logged in user and update last login time on every successful sign in
+                    // Find current logged in user in order to update last login time on every successful sign in
                     var user = this.userManager
                         .Users
                         .Where(e => e.UserName == this.Input.Username)
@@ -91,6 +92,12 @@
 
                     // Update the user data in order the changes to take effect
                     await this.userManager.UpdateAsync(user);
+
+                    // Redirect to Administrator Home page if user is in role "Administrator"
+                    if (await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName))
+                    {
+                        return this.LocalRedirect("~/Administration/Home/Index");
+                    }
 
                     return this.LocalRedirect(returnUrl);
                 }

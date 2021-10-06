@@ -17,7 +17,6 @@
         @await Component.InvokeAsync("UniversityDivisionsCount") 
     </div>
 
-
      <div style="margin-top: 50px">
            @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Student") || this.User.IsInRole("Teacher"))
            {
@@ -32,7 +31,7 @@
                                     Logged in:
                                </td>
                                <td>
-                                   You log in for the first time
+                                   Logging in for the first time
                                </td>
                            </tr>
                        </tbody>
@@ -52,7 +51,7 @@
                            </tr>
                            <tr>
                                <td>
-                                   Last time you visit the page:
+                                   Last time you visited the page:
                                </td>
                                <td>
                                    @Model.LastVisitedLoginTime

@@ -1,0 +1,49 @@
+﻿@inject SignInManager<ApplicationUser> signInManager
+
+<link rel="stylesheet" href="~/css/navBarControl.css">
+
+
+@if (this.signInManager.IsSignedIn(this.User) && this.User.IsInRole(AdministratorRoleName))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-light" href="#" id="navBarDropdownMenuLink"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Admin Panel
+        </a>
+
+        <div class="dropdown-menu dropright" aria-labelledby="navBarDropdownMenuLink">
+            <a class="dropdown-item" asp-area="Administration" asp-controller="Administrator"
+               asp-action="Index">Dashboard</a>
+
+            <div class="nav-item dropdown">
+                <a class="dropdown-item icon-arrow text-dark" href="#" id="listDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    List
+                </a>
+                <div class="dropdown-menu" aria-labelledby="listDropdownMenuLink">
+                    <a class="dropdown-item" asp-area="Administration" asp-controller="Administrator"
+                       asp-action="ListUsers">All Users</a>
+                    <a class="dropdown-item" asp-area="Administration" asp-controller="Administrator"
+                       asp-action="ListRoles">All Roles</a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a class="dropdown-item icon-arrow text-dark" href="#" id="listDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Create
+                </a>
+                <div class="dropdown-menu" aria-labelledby="listDropdownMenuLink">
+                    <a class="dropdown-item" asp-area="Administration" asp-controller="Administrator"
+                       asp-action="CreateUser">User</a>
+                    <a class="dropdown-item" asp-area="Administration" asp-controller="Administrator"
+                       asp-action="CreateRole">Role</a>
+                </div>
+            </div>
+
+        </div>
+
+    </li>
+}
+
+

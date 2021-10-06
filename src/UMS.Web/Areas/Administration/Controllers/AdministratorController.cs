@@ -22,6 +22,11 @@
             this.userManager = userManager;
         }
 
+        public IActionResult Index()
+        {
+            return this.View();
+        }
+
         [HttpGet]
         public IActionResult ListUsers()
         {

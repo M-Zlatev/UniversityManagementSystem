@@ -5,12 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     using Data.Models.UserDefinedPrincipal;
     using ViewModels.Administration;
+    using static Common.GlobalConstants;
 
+    [Authorize(Roles = AdministratorRoleName)]
     [Area("Administration")]
     public class HomeController : Controller
     {
@@ -22,6 +25,11 @@
         }
 
         public IActionResult Index()
+        {
+            return this.View();
+        }
+
+        public IActionResult Dashboard()
         {
             return this.View();
         }
