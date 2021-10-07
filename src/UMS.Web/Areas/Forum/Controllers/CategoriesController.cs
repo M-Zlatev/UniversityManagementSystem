@@ -41,7 +41,6 @@
 
             if (viewModel.ForumPosts.Any())
             {
-
             }
 
             return this.View(viewModel);
