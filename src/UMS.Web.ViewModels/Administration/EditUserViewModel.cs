@@ -66,6 +66,7 @@
 
         // Store last time the user visited the page
         [Display(Name = "Last visited login time")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? LastVisitedLoginTime { get; set; }
 
         [Display(Name = "Image Url")]

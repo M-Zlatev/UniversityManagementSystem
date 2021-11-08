@@ -1,8 +1,3 @@
 ﻿@inject SignInManager<ApplicationUser> signInManager
 
 <h1> Hello from Admin Home page</h1>
-
-@if (this.signInManager.IsSignedIn(User) && this.User.IsInRole(AdministratorRoleName))
- {
-
- }

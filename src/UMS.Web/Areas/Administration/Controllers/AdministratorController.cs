@@ -38,13 +38,14 @@
         public IActionResult ListUsers()
         {
             var users = this.userManager.Users;
+
             return this.View(users);
         }
 
         [HttpGet]
         public IActionResult CreateUser()
         {
-            return this.RedirectToAction("Register", "Account", new { area = "Identity"});
+            return this.RedirectToAction("Register", "Account", new { area = "Identity" });
         }
 
         [HttpGet]
@@ -62,6 +63,11 @@
 
             var userRoles = await this.userManager.GetRolesAsync(user);
             viewModel.Roles = userRoles;
+
+            if (user.LastVisitedLoginTime == null && user.CurrentLoginTime != null)
+            {
+                viewModel.LastVisitedLoginTime = user.CurrentLoginTime;
+            }
 
             return this.View(viewModel);
         }

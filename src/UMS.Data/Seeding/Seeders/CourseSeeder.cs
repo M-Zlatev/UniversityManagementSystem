@@ -35,6 +35,8 @@
                 {
                     Name = currentCourse.Name,
                     Price = currentCourse.Price,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddMonths(6),
                 };
 
                 await dbContext.Courses.AddAsync(course);

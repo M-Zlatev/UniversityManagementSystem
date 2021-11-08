@@ -59,6 +59,9 @@
 	  <Content Update="wwwroot\images\s960_university-campus.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
+	  <Content Update="wwwroot\images\system-administrator-holding-white-business-card-word-admin.jpg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>
