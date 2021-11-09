@@ -283,7 +283,7 @@
                 {
                     result = await this.userManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (model[i].IsSelected && await this.userManager.IsInRoleAsync(user, role.Name))
+                else if (!model[i].IsSelected && await this.userManager.IsInRoleAsync(user, role.Name))
                 {
                     result = await this.userManager.RemoveFromRoleAsync(user, role.Name);
                 }

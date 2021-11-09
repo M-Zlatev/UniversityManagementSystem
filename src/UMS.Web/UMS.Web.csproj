@@ -56,9 +56,6 @@
 	  <Content Update="wwwroot\images\51150084425_0f3a7d084e_o-scaled.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Update="wwwroot\images\s960_university-campus.jpg">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
 	  <Content Update="wwwroot\images\system-administrator-holding-white-business-card-word-admin.jpg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
