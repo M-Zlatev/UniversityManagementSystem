@@ -308,6 +308,76 @@
             return this.RedirectToAction("EditRole", new { Id = roleId });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(int userId)
+        {
+            this.ViewBag.userId = userId;
+
+            var user = await this.userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                this.ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return this.View("NotFound");
+            }
+
+            var model = new List<UserRolesViewModel>();
+
+            foreach (var role in this.roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel()
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name,
+                };
+
+                if (await this.userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+
+                model.Add(userRolesViewModel);
+            }
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, int userId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                this.ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return this.View("NotFound");
+            }
+
+            var roles = await this.userManager.GetRolesAsync(user);
+            var result = await this.userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                this.ModelState.AddModelError("", "Cannot remove user existing roles");
+                return this.View(model);
+            }
+
+            result = await this.userManager.AddToRolesAsync(
+                user, model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            if (!result.Succeeded)
+            {
+                this.ModelState.AddModelError("", "Cannot add selected roles to user");
+                return this.View(model);
+            }
+
+            return this.RedirectToAction("EditUser", new { Id = userId });
+        }
+
         public async Task<IActionResult> DeleteRole(int id)
         {
             var role = await this.roleManager.FindByIdAsync(id.ToString());
