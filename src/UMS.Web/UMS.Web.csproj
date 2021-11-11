@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>aspnet-UMS.Web-99636707-4A45-431F-BCA1-5168DCD226F5</UserSecretsId>
-		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
